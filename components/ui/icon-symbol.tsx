@@ -25,6 +25,13 @@ const MAPPING = {
   'trash': 'delete',
   'star.fill': 'star',
   'star': 'star-border',
+  'square.and.arrow.up': 'share',
+  'square.and.arrow.down': 'file-download',
+  'arrow.up.doc': 'file-upload',
+  'sun.max.fill': 'light-mode',
+  'moon.fill': 'dark-mode',
+  'chart.bar.fill': 'bar-chart',
+  'gearshape.fill': 'settings',
   'chevron.left.forwardslash.chevron.right': 'code',
   'chevron.right': 'chevron-right',
 } as IconMapping;

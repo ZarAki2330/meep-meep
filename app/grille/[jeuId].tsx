@@ -13,16 +13,28 @@ import {
   View,
 } from "react-native";
 
+import { DialogueEgalite } from "@/components/dialogue-egalite";
 import { type AppColors } from "@/constants/theme-colors";
 import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
 import { type CategorieScore } from "@/data/jeux";
 import { listerJoueurs } from "@/db/joueurs";
+import { chargerEtat, effacerEtat, sauvegarderEtat } from "@/db/partie-en-cours";
 import { enregistrerPartie } from "@/db/parties";
 
 type Joueur = { id: string; nom: string };
 type Scores = Record<string, Record<string, string>>;
 type Styles = ReturnType<typeof makeStyles>;
+type EtatSauve = { joueurs: Joueur[]; scores: Scores };
+
+function grilleVierge(joueurs: Joueur[], scores: Scores) {
+  const aucunScore = Object.values(scores).every((c) => Object.values(c).every((v) => v === ""));
+  return (
+    aucunScore &&
+    joueurs.length === 2 &&
+    joueurs.every((j, i) => j.nom === `Joueur ${i + 1}`)
+  );
+}
 
 const LARGEUR_LABEL = 130;
 const LARGEUR_COL = 68;
@@ -45,12 +57,32 @@ export default function FeuilleGrille() {
   const [termine, setTermine] = useState(false);
   const [dejaEnregistre, setDejaEnregistre] = useState(false);
   const [joueursSauvegardes, setJoueursSauvegardes] = useState<string[]>([]);
+  const [charge, setCharge] = useState(false);
+  const [reprise, setReprise] = useState(false);
 
   useEffect(() => {
     listerJoueurs()
       .then((js) => setJoueursSauvegardes(js.map((j) => j.nom)))
       .catch(() => {});
   }, []);
+
+  useEffect(() => {
+    chargerEtat<EtatSauve>(jeuId ?? "")
+      .then((e) => {
+        if (e?.joueurs?.length) {
+          setJoueurs(e.joueurs);
+          setScores(e.scores ?? {});
+          setReprise(true);
+        }
+      })
+      .finally(() => setCharge(true));
+  }, [jeuId]);
+
+  useEffect(() => {
+    if (!charge || termine) return;
+    if (grilleVierge(joueurs, scores)) effacerEtat(jeuId ?? "").catch(() => {});
+    else sauvegarderEtat(jeuId ?? "", { joueurs, scores }).catch(() => {});
+  }, [charge, termine, joueurs, scores, jeuId]);
 
   function valeur(joueurId: string, cle: string): number {
     const n = parseInt(scores[joueurId]?.[cle] ?? "", 10);
@@ -102,17 +134,31 @@ export default function FeuilleGrille() {
   const totaux = joueurs.map((j) => total(j.id));
   const meilleurTotal = totaux.length ? Math.max(...totaux) : 0;
   const tousEgaux = totaux.every((t) => t === totaux[0]);
-  const gagnant = [...joueurs].sort((a, b) => total(b.id) - total(a.id))[0];
+  const gagnants = joueurs.filter((j) => total(j.id) === meilleurTotal);
+  const [egaliteOuverte, setEgaliteOuverte] = useState(false);
+  const [resultat, setResultat] = useState<string | null>(null);
 
   function terminer() {
+    if (gagnants.length > 1) {
+      setEgaliteOuverte(true);
+      return;
+    }
+    finaliser(gagnants[0]?.nom ?? "");
+  }
+
+  function finaliser(nomGagnant: string) {
+    setEgaliteOuverte(false);
+    setResultat(nomGagnant);
     setTermine(true);
-    if (!dejaEnregistre && gagnant) {
+    setReprise(false);
+    effacerEtat(jeuId ?? "").catch(() => {});
+    if (!dejaEnregistre) {
       enregistrerPartie({
         jeuId: jeuId ?? "",
         jeuNom: jeu ? jeu.nom : "Partie",
         joueurs: joueurs.map((j) => ({ nom: j.nom, score: total(j.id) })),
-        gagnant: gagnant.nom,
-        scoreGagnant: total(gagnant.id),
+        gagnant: nomGagnant,
+        scoreGagnant: meilleurTotal,
       }).catch(() => {});
       setDejaEnregistre(true);
     }
@@ -135,10 +181,18 @@ export default function FeuilleGrille() {
     <View style={styles.page}>
       <Stack.Screen options={{ title: jeu ? jeu.nom : "Feuille de score" }} />
 
-      {termine && gagnant && (
+      {reprise && !termine && (
+        <View style={styles.reprise}>
+          <Text style={styles.repriseTexte}>Partie reprise là où tu t&apos;étais arrêté</Text>
+        </View>
+      )}
+
+      {termine && resultat !== null && (
         <View style={styles.banniere}>
           <Text style={styles.banniereTexte}>
-            🏆 {gagnant.nom} gagne avec {total(gagnant.id)} points !
+            {resultat
+              ? `🏆 ${resultat} gagne avec ${meilleurTotal} points !`
+              : `🤝 Égalité à ${meilleurTotal} points entre ${gagnants.map((g) => g.nom).join(", ")}`}
           </Text>
         </View>
       )}
@@ -258,6 +312,14 @@ export default function FeuilleGrille() {
           </TouchableOpacity>
         )}
       </View>
+
+      <DialogueEgalite
+        visible={egaliteOuverte}
+        noms={gagnants.map((g) => g.nom)}
+        onDepartager={finaliser}
+        onEgalite={() => finaliser("")}
+        onAnnuler={() => setEgaliteOuverte(false)}
+      />
     </View>
   );
 }
@@ -373,6 +435,8 @@ function makeStyles(c: AppColors) {
     grille: { padding: 12 },
     banniere: { backgroundColor: c.success, padding: 14, alignItems: "center" },
     banniereTexte: { color: c.onSuccess, fontSize: 16, fontWeight: "600" },
+    reprise: { backgroundColor: c.successSoft, paddingVertical: 8, paddingHorizontal: 16, alignItems: "center" },
+    repriseTexte: { color: c.textSecondary, fontSize: 13, fontWeight: "600" },
     chips: { maxHeight: 48, marginTop: 8, flexGrow: 0 },
     chipsContenu: { gap: 8, paddingHorizontal: 12, alignItems: "center" },
     chip: {

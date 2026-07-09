@@ -1,7 +1,8 @@
 // app/jeu/[id].tsx — fiche d'un jeu
 
+import { useFocusEffect } from "@react-navigation/native";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import { DialogueConfirmation } from "@/components/dialogue-confirmation";
@@ -10,6 +11,7 @@ import { VisuelJeu } from "@/components/visuel-jeu";
 import { type AppColors } from "@/constants/theme-colors";
 import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
+import { effacerEtat, partieEnCours } from "@/db/partie-en-cours";
 
 export default function FicheJeu() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -34,6 +36,37 @@ export default function FicheJeu() {
   );
 
   const [confirmationOuverte, setConfirmationOuverte] = useState(false);
+  const [enCours, setEnCours] = useState(false);
+
+  // Y a-t-il une partie non terminée pour ce jeu ?
+  useFocusEffect(
+    useCallback(() => {
+      if (!jeu) return;
+      partieEnCours(jeu.id)
+        .then(setEnCours)
+        .catch(() => setEnCours(false));
+    }, [jeu]),
+  );
+
+  function ouvrirPartie() {
+    if (!jeu) return;
+    router.push({
+      pathname:
+        jeu.scoreMode === "grille"
+          ? "/grille/[jeuId]"
+          : jeu.scoreMode === "objectif"
+            ? "/objectif/[jeuId]"
+            : "/partie/[jeuId]",
+      params: { jeuId: jeu.id, extensions: extensionsActives.join("|") },
+    });
+  }
+
+  async function nouvellePartie() {
+    if (!jeu) return;
+    await effacerEtat(jeu.id).catch(() => {});
+    setEnCours(false);
+    ouvrirPartie();
+  }
 
   async function supprimer() {
     if (!jeu) return;
@@ -98,23 +131,17 @@ export default function FicheJeu() {
         </View>
       )}
 
-      <TouchableOpacity
-        style={styles.boutonJouer}
-        activeOpacity={0.8}
-        onPress={() =>
-          router.push({
-            pathname:
-              jeu.scoreMode === "grille"
-                ? "/grille/[jeuId]"
-                : jeu.scoreMode === "objectif"
-                  ? "/objectif/[jeuId]"
-                  : "/partie/[jeuId]",
-            params: { jeuId: jeu.id, extensions: extensionsActives.join("|") },
-          })
-        }
-      >
-        <Text style={styles.boutonJouerTexte}>▶  Lancer une partie</Text>
+      <TouchableOpacity style={styles.boutonJouer} activeOpacity={0.8} onPress={ouvrirPartie}>
+        <Text style={styles.boutonJouerTexte}>
+          {enCours ? "▶  Reprendre la partie" : "▶  Lancer une partie"}
+        </Text>
       </TouchableOpacity>
+
+      {enCours && (
+        <TouchableOpacity style={styles.boutonSecondaire} activeOpacity={0.8} onPress={nouvellePartie}>
+          <Text style={styles.boutonSecondaireTexte}>Repartir de zéro</Text>
+        </TouchableOpacity>
+      )}
 
       <TouchableOpacity
         style={styles.sectionRepliable}
@@ -239,6 +266,15 @@ function makeStyles(c: AppColors) {
       marginTop: 20,
     },
     boutonJouerTexte: { color: c.onAccent, fontSize: 16, fontWeight: "600" },
+    boutonSecondaire: {
+      borderWidth: 1,
+      borderColor: c.borderStrong,
+      borderRadius: 12,
+      paddingVertical: 12,
+      alignItems: "center",
+      marginTop: 10,
+    },
+    boutonSecondaireTexte: { color: c.textSecondary, fontSize: 14, fontWeight: "600" },
     sectionTitre: { fontSize: 18, fontWeight: "600", color: c.textPrimary, marginTop: 24, marginBottom: 8 },
     sectionRepliable: {
       flexDirection: "row",

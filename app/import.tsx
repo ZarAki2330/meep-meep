@@ -208,6 +208,13 @@ export default function AjouterJeu() {
           options={{ title: modeEdition ? "Modifier le jeu" : "Ajouter un jeu" }}
         />
 
+        {!modeEdition && (
+          <TouchableOpacity style={styles.bggBouton} onPress={() => router.push("/bgg")}>
+            <Text style={styles.bggTexte}>Chercher sur BoardGameGeek</Text>
+            <Text style={styles.bggChevron}>▸</Text>
+          </TouchableOpacity>
+        )}
+
         <Champ label="Nom du jeu" styles={styles} obligatoire>
           <TextInput
             style={[styles.input, erreurNom ? styles.inputErreur : null]}
@@ -537,6 +544,18 @@ function makeStyles(c: AppColors) {
   return StyleSheet.create({
     page: { flex: 1, backgroundColor: c.page },
     contenu: { padding: 16, paddingBottom: 40 },
+    bggBouton: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      backgroundColor: c.accentSoft,
+      borderRadius: 12,
+      paddingVertical: 13,
+      paddingHorizontal: 14,
+      marginBottom: 18,
+    },
+    bggTexte: { fontSize: 14, fontWeight: "600", color: c.accentText },
+    bggChevron: { fontSize: 14, color: c.accentText },
     champ: { marginBottom: 14 },
     ligne: { flexDirection: "row", gap: 12 },
     label: { fontSize: 13, fontWeight: "600", color: c.textSecondary, marginBottom: 6 },

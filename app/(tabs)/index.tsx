@@ -21,7 +21,7 @@ const DUREES: { cle: DureeCle; label: string }[] = [
 const JOUEURS_OPTIONS = [2, 3, 4, 5, 6];
 
 export default function Catalogue() {
-  const { colors, mode, toggle } = useTheme();
+  const { colors, mode } = useTheme();
   const { jeux, estFavori, basculerFavori } = useJeux();
   const styles = makeStyles(colors);
   const router = useRouter();
@@ -87,8 +87,12 @@ export default function Catalogue() {
           >
             <IconSymbol name="plus" size={22} color={colors.accentText} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.themeBouton} activeOpacity={0.7} onPress={toggle}>
-            <Text style={styles.themeIcone}>{mode === "dark" ? "☀" : "☾"}</Text>
+          <TouchableOpacity
+            style={styles.themeBouton}
+            activeOpacity={0.7}
+            onPress={() => router.push("/reglages")}
+          >
+            <IconSymbol name="gearshape.fill" size={20} color={colors.accentText} />
           </TouchableOpacity>
         </View>
       </View>
@@ -190,6 +194,13 @@ export default function Catalogue() {
           <View style={styles.vide}>
             <Text style={styles.videTexte}>Aucun jeu ne correspond à ta recherche.</Text>
           </View>
+        }
+        ListFooterComponent={
+          jeuxFiltres.length > 0 ? (
+            <View style={styles.signature}>
+              <Text style={styles.signatureTexte}>Meep Meep · créé par Zaraki</Text>
+            </View>
+          ) : null
         }
         renderItem={({ item }) => (
           <TouchableOpacity
@@ -365,5 +376,7 @@ function makeStyles(c: AppColors) {
     description: { fontSize: 14, color: c.textSecondary, lineHeight: 20 },
     vide: { alignItems: "center", paddingTop: 60, paddingHorizontal: 24 },
     videTexte: { fontSize: 15, color: c.textMuted, textAlign: "center" },
+    signature: { alignItems: "center", paddingTop: 8, paddingBottom: 4 },
+    signatureTexte: { fontSize: 12, color: c.textFaint, letterSpacing: 0.3 },
   });
 }

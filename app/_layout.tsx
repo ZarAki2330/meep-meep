@@ -41,6 +41,8 @@ function Navigation() {
       >
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="import" options={{ title: "Ajouter un jeu" }} />
+        <Stack.Screen name="bgg" options={{ title: "BoardGameGeek" }} />
+        <Stack.Screen name="reglages" options={{ title: "Réglages" }} />
         <Stack.Screen name="modal" options={{ presentation: "modal", title: "Modal" }} />
       </Stack>
       <StatusBar style={mode === "dark" ? "light" : "dark"} />

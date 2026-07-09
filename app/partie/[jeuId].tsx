@@ -12,11 +12,22 @@ import {
   View,
 } from "react-native";
 
+import { DialogueEgalite } from "@/components/dialogue-egalite";
 import { type AppColors } from "@/constants/theme-colors";
 import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
 import { listerJoueurs } from "@/db/joueurs";
+import { chargerEtat, effacerEtat, sauvegarderEtat } from "@/db/partie-en-cours";
 import { enregistrerPartie } from "@/db/parties";
+
+type EtatSauve = { joueurs: Joueur[] };
+
+function estVierge(joueurs: Joueur[]) {
+  return (
+    joueurs.length === 2 &&
+    joueurs.every((j, i) => j.score === 0 && j.nom === `Joueur ${i + 1}`)
+  );
+}
 
 type Joueur = {
   id: string;
@@ -41,12 +52,33 @@ export default function Partie() {
   ]);
   const [termine, setTermine] = useState(false);
   const [joueursSauvegardes, setJoueursSauvegardes] = useState<string[]>([]);
+  const [charge, setCharge] = useState(false);
+  const [reprise, setReprise] = useState(false);
 
   useEffect(() => {
     listerJoueurs()
       .then((js) => setJoueursSauvegardes(js.map((j) => j.nom)))
       .catch(() => {});
   }, []);
+
+  // Reprise d'une partie non terminée.
+  useEffect(() => {
+    chargerEtat<EtatSauve>(jeuId ?? "")
+      .then((e) => {
+        if (e?.joueurs?.length) {
+          setJoueurs(e.joueurs);
+          setReprise(true);
+        }
+      })
+      .finally(() => setCharge(true));
+  }, [jeuId]);
+
+  // Sauvegarde automatique tant que la partie n'est pas terminée.
+  useEffect(() => {
+    if (!charge || termine) return;
+    if (estVierge(joueurs)) effacerEtat(jeuId ?? "").catch(() => {});
+    else sauvegarderEtat(jeuId ?? "", { joueurs }).catch(() => {});
+  }, [charge, termine, joueurs, jeuId]);
 
   const sens = jeu?.scoreVictoire ?? "max";
   const seuilFin = jeu?.seuilFin;
@@ -92,27 +124,48 @@ export default function Partie() {
 
   function nouvellePartie() {
     setJoueurs((prev) => prev.map((j) => ({ ...j, score: 0 })));
+    setResultat(null);
     setTermine(false);
   }
 
-  const gagnant = [...joueurs].sort((a, b) =>
-    sens === "min" ? a.score - b.score : b.score - a.score,
-  )[0];
+  // Tous les joueurs au meilleur score : plus d'un = égalité.
+  const gagnants = joueurs.filter((j) => j.score === meilleur);
+  const [egaliteOuverte, setEgaliteOuverte] = useState(false);
+  // "" signifie une égalité enregistrée.
+  const [resultat, setResultat] = useState<string | null>(null);
 
   function terminer() {
+    if (gagnants.length > 1) {
+      setEgaliteOuverte(true);
+      return;
+    }
+    finaliser(gagnants[0]?.nom ?? "");
+  }
+
+  function finaliser(nomGagnant: string) {
+    setEgaliteOuverte(false);
+    setResultat(nomGagnant);
     setTermine(true);
+    setReprise(false);
+    effacerEtat(jeuId ?? "").catch(() => {});
     enregistrerPartie({
       jeuId: jeuId ?? "",
       jeuNom: jeu ? jeu.nom : "Partie",
       joueurs: joueurs.map((j) => ({ nom: j.nom, score: j.score })),
-      gagnant: gagnant.nom,
-      scoreGagnant: gagnant.score,
+      gagnant: nomGagnant,
+      scoreGagnant: meilleur,
     }).catch(() => {});
   }
 
   return (
     <View style={styles.page}>
       <Stack.Screen options={{ title: jeu ? jeu.nom : "Partie" }} />
+
+      {reprise && !termine && (
+        <View style={styles.reprise}>
+          <Text style={styles.repriseTexte}>Partie reprise là où tu t&apos;étais arrêté</Text>
+        </View>
+      )}
 
       {extensionsChoisies.length > 0 && (
         <View style={styles.extensions}>
@@ -137,11 +190,15 @@ export default function Partie() {
         </View>
       )}
 
-      {termine && gagnant && (
+      {termine && resultat !== null && (
         <View style={styles.banniere}>
-          <Text style={styles.banniereTexte}>🏆 {gagnant.nom} remporte la partie !</Text>
+          <Text style={styles.banniereTexte}>
+            {resultat
+              ? `🏆 ${resultat} remporte la partie !`
+              : `🤝 Égalité entre ${gagnants.map((g) => g.nom).join(", ")}`}
+          </Text>
           <Text style={styles.banniereScore}>
-            {gagnant.score} points{sens === "min" ? " (le moins)" : ""}
+            {meilleur} points{sens === "min" ? " (le moins)" : ""}
           </Text>
         </View>
       )}
@@ -238,6 +295,14 @@ export default function Partie() {
           </TouchableOpacity>
         )}
       </View>
+
+      <DialogueEgalite
+        visible={egaliteOuverte}
+        noms={gagnants.map((g) => g.nom)}
+        onDepartager={finaliser}
+        onEgalite={() => finaliser("")}
+        onAnnuler={() => setEgaliteOuverte(false)}
+      />
     </View>
   );
 }
@@ -257,6 +322,8 @@ function makeStyles(c: AppColors) {
       paddingVertical: 6,
     },
     chipTexte: { color: c.accentText, fontSize: 13, fontWeight: "600" },
+    reprise: { backgroundColor: c.successSoft, paddingVertical: 8, paddingHorizontal: 16, alignItems: "center" },
+    repriseTexte: { color: c.textSecondary, fontSize: 13, fontWeight: "600" },
     extensions: { backgroundColor: c.surfaceAlt, paddingVertical: 8, paddingHorizontal: 16 },
     extensionsTexte: { color: c.textSecondary, fontSize: 13, fontWeight: "600" },
     info: { backgroundColor: c.accentSoft, paddingVertical: 8, paddingHorizontal: 16, alignItems: "center" },

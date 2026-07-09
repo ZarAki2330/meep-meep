@@ -1,45 +1,48 @@
 // lib/bgg.ts
-// Recherche et import de jeux depuis l'API publique BoardGameGeek (XML).
-// BoardGameGeek bloque les requêtes directes hors navigateur (401), donc on
-// passe par un relais qui récupère la page côté serveur.
+// Recherche et import de jeux depuis l'API XML de BoardGameGeek.
+//
+// Depuis juillet 2025, BGG exige une inscription et un jeton Bearer.
+// 1. Enregistre une application (non commerciale, gratuite) sur
+//    https://boardgamegeek.com/applications
+// 2. Génère un jeton, puis place-le dans un fichier .env.local à la racine :
+//    EXPO_PUBLIC_BGG_TOKEN=ton-jeton-ici
+// 3. Relance Expo (npx expo start -c).
 
 import { type Jeu } from "@/data/jeux";
 
 export type BggResultat = { id: string; nom: string; annee?: string };
 
-type Relais = { url: (u: string) => string; json?: boolean };
+const JETON = process.env.EXPO_PUBLIC_BGG_TOKEN ?? "";
 
-const RELAIS: Relais[] = [
-  { url: (u) => `https://api.allorigins.win/get?url=${encodeURIComponent(u)}`, json: true },
-  { url: (u) => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}` },
-  { url: (u) => `https://thingproxy.freeboard.io/fetch/${u}` },
-  { url: (u) => `https://api.codetabs.com/v1/proxy/?quest=${encodeURIComponent(u)}` },
-];
+export function jetonConfigure() {
+  return JETON.trim().length > 0;
+}
 
-async function recupererXml(bggUrl: string): Promise<string> {
-  let derniereErreur = "réseau indisponible";
-  for (const relais of RELAIS) {
-    try {
-      const res = await fetch(relais.url(bggUrl), { headers: { Accept: "*/*" } });
-      if (!res.ok) {
-        derniereErreur = `relais ${res.status}`;
-        continue;
-      }
-      let texte = await res.text();
-      if (relais.json) {
-        try {
-          texte = JSON.parse(texte).contents ?? "";
-        } catch {
-          texte = "";
-        }
-      }
-      if (texte.includes("<items")) return texte;
-      derniereErreur = "réponse inattendue";
-    } catch (e) {
-      derniereErreur = e instanceof Error ? e.message : String(e);
-    }
+// Attention : le domaine doit être boardgamegeek.com, sans "www".
+const BASE = "https://boardgamegeek.com/xmlapi2";
+
+async function recupererXml(url: string): Promise<string> {
+  if (!jetonConfigure()) {
+    throw new Error(
+      "Aucun jeton BoardGameGeek configuré. Ajoute EXPO_PUBLIC_BGG_TOKEN dans .env.local.",
+    );
   }
-  throw new Error(`Impossible de joindre BoardGameGeek (${derniereErreur}).`);
+  const res = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${JETON}`,
+      Accept: "application/xml, text/xml, */*",
+    },
+  });
+  if (res.status === 401 || res.status === 403) {
+    throw new Error("Jeton refusé par BoardGameGeek. Vérifie qu'il est valide et approuvé.");
+  }
+  if (res.status === 429) {
+    throw new Error("Trop de requêtes vers BoardGameGeek. Réessaie dans un instant.");
+  }
+  if (!res.ok) {
+    throw new Error(`BoardGameGeek a répondu ${res.status}.`);
+  }
+  return res.text();
 }
 
 function decoder(s: string): string {
@@ -74,8 +77,9 @@ function nombre(v: string | undefined, defaut: number): number {
 }
 
 export async function rechercherBgg(query: string): Promise<BggResultat[]> {
-  const url = `https://boardgamegeek.com/xmlapi2/search?type=boardgame&query=${encodeURIComponent(query)}`;
-  const xml = await recupererXml(url);
+  const xml = await recupererXml(
+    `${BASE}/search?type=boardgame&query=${encodeURIComponent(query)}`,
+  );
   const items = [...xml.matchAll(/<item[^>]*\bid="(\d+)"[\s\S]*?<\/item>/g)];
   const resultats: BggResultat[] = items.map((m) => {
     const bloc = m[0];
@@ -88,8 +92,7 @@ export async function rechercherBgg(query: string): Promise<BggResultat[]> {
 }
 
 export async function importerDepuisBgg(id: string): Promise<Jeu> {
-  const url = `https://boardgamegeek.com/xmlapi2/thing?id=${id}`;
-  const xml = await recupererXml(url);
+  const xml = await recupererXml(`${BASE}/thing?id=${id}`);
 
   const nom = /<name[^>]*type="primary"[^>]*value="([^"]*)"/.exec(xml)?.[1] ?? "Jeu importé";
   const image = /<image>([\s\S]*?)<\/image>/.exec(xml)?.[1]?.trim() ?? "";
@@ -112,5 +115,6 @@ export async function importerDepuisBgg(id: string): Promise<Jeu> {
     image,
     regles: desc ? [tronquer(desc, 600)] : [],
     scoreVictoire: "max",
+    scoreMode: "compteur",
   };
 }

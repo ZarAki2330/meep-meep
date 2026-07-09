@@ -17,9 +17,19 @@ import { type AppColors } from "@/constants/theme-colors";
 import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
 import { listerJoueurs } from "@/db/joueurs";
+import { chargerEtat, effacerEtat, sauvegarderEtat } from "@/db/partie-en-cours";
 import { enregistrerPartie } from "@/db/parties";
 
 type Joueur = { id: string; nom: string; role?: string };
+type EtatSauve = { joueurs: Joueur[]; gagnantId: string | null };
+
+function objectifVierge(joueurs: Joueur[], gagnantId: string | null) {
+  return (
+    gagnantId === null &&
+    joueurs.length === 2 &&
+    joueurs.every((j, i) => !j.role && j.nom === `Joueur ${i + 1}`)
+  );
+}
 
 const COULEURS = ["#7a5195", "#1d9e75", "#378add", "#d85a30", "#c4457e"];
 
@@ -51,11 +61,32 @@ export default function PartieObjectif() {
     setChoixPourJoueur(null);
   }
 
+  const [charge, setCharge] = useState(false);
+  const [reprise, setReprise] = useState(false);
+
   useEffect(() => {
     listerJoueurs()
       .then((js) => setJoueursSauvegardes(js.map((j) => j.nom)))
       .catch(() => {});
   }, []);
+
+  useEffect(() => {
+    chargerEtat<EtatSauve>(jeuId ?? "")
+      .then((e) => {
+        if (e?.joueurs?.length) {
+          setJoueurs(e.joueurs);
+          setGagnantId(e.gagnantId ?? null);
+          setReprise(true);
+        }
+      })
+      .finally(() => setCharge(true));
+  }, [jeuId]);
+
+  useEffect(() => {
+    if (!charge || termine) return;
+    if (objectifVierge(joueurs, gagnantId)) effacerEtat(jeuId ?? "").catch(() => {});
+    else sauvegarderEtat(jeuId ?? "", { joueurs, gagnantId }).catch(() => {});
+  }, [charge, termine, joueurs, gagnantId, jeuId]);
 
   function renommer(id: string, nom: string) {
     setJoueurs((prev) => prev.map((j) => (j.id === id ? { ...j, nom } : j)));
@@ -76,6 +107,8 @@ export default function PartieObjectif() {
   function terminer() {
     if (!gagnant) return;
     setTermine(true);
+    setReprise(false);
+    effacerEtat(jeuId ?? "").catch(() => {});
     enregistrerPartie({
       jeuId: jeuId ?? "",
       jeuNom: jeu ? jeu.nom : "Partie",
@@ -236,9 +269,14 @@ export default function PartieObjectif() {
                     disabled={!!prisPar}
                     onPress={() => choixPourJoueur && definirRole(choixPourJoueur, r.nom)}
                   >
-                    <View style={{ flex: 1 }}>
+                    <View style={{ flex: 1, paddingRight: 8 }}>
                       <Text style={[styles.roleLigneNom, prisPar && styles.rolePris]}>{r.nom}</Text>
                       {r.origine && <Text style={styles.roleLigneOrigine}>{r.origine}</Text>}
+                      {r.objectif && (
+                        <Text style={styles.roleLigneObjectif} numberOfLines={2}>
+                          {r.objectif}
+                        </Text>
+                      )}
                     </View>
                     {prisPar && <Text style={styles.rolePrisTexte}>{prisPar.nom}</Text>}
                   </TouchableOpacity>
@@ -324,6 +362,7 @@ function makeStyles(c: AppColors) {
     },
     roleLigneNom: { fontSize: 15, fontWeight: "600", color: c.textPrimary },
     roleLigneOrigine: { fontSize: 12, color: c.textMuted, marginTop: 2 },
+    roleLigneObjectif: { fontSize: 12, color: c.textSecondary, marginTop: 4, lineHeight: 16 },
     rolePris: { color: c.textFaint },
     rolePrisTexte: { fontSize: 12, color: c.textFaint, fontStyle: "italic" },
     pastille: { width: 36, height: 36, borderRadius: 18, alignItems: "center", justifyContent: "center" },

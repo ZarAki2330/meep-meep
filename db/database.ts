@@ -42,6 +42,11 @@ export function getDb() {
         CREATE TABLE IF NOT EXISTS favoris (
           jeu_id TEXT PRIMARY KEY
         );
+        CREATE TABLE IF NOT EXISTS partie_en_cours (
+          jeu_id TEXT PRIMARY KEY,
+          date TEXT,
+          etat TEXT
+        );
       `);
 
       // Migrations : ajout des colonnes si la base existait déjà.

@@ -2,13 +2,15 @@
 
 import { useFocusEffect } from "@react-navigation/native";
 import { useCallback, useState } from "react";
-import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, Modal, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { DialogueConfirmation } from "@/components/dialogue-confirmation";
 import { POLICE_TITRE } from "@/constants/fonts";
 import { type AppColors } from "@/constants/theme-colors";
+import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
+import { type Jeu } from "@/data/jeux";
 import {
   listerParties,
   supprimerPartie,
@@ -18,8 +20,10 @@ import {
 
 export default function Historique() {
   const { colors } = useTheme();
+  const { jeux } = useJeux();
   const styles = makeStyles(colors);
   const [parties, setParties] = useState<PartieEnregistree[]>([]);
+  const [detail, setDetail] = useState<PartieEnregistree | null>(null);
 
   const charger = useCallback(() => {
     listerParties()
@@ -86,7 +90,11 @@ export default function Historique() {
           </View>
         }
         renderItem={({ item }) => (
-          <View style={styles.carte}>
+          <TouchableOpacity
+            style={styles.carte}
+            activeOpacity={0.7}
+            onPress={() => setDetail(item)}
+          >
             <View style={{ flex: 1 }}>
               <Text style={styles.jeuNom}>{item.jeu_nom}</Text>
               <Text style={styles.meta}>
@@ -97,7 +105,9 @@ export default function Historique() {
               </Text>
             </View>
             <View style={styles.droite}>
-              <Text style={styles.gagnant}>🏆 {item.gagnant}</Text>
+              <Text style={styles.gagnant}>
+                {item.gagnant ? `🏆 ${item.gagnant}` : "🤝 Égalité"}
+              </Text>
               {item.score_gagnant > 0 && (
                 <Text style={styles.score}>{item.score_gagnant} pts</Text>
               )}
@@ -105,9 +115,26 @@ export default function Historique() {
             <TouchableOpacity style={styles.effacer} onPress={() => setASupprimer(item)}>
               <Text style={styles.effacerTexte}>✕</Text>
             </TouchableOpacity>
-          </View>
+          </TouchableOpacity>
         )}
       />
+
+      <Modal
+        visible={detail !== null}
+        transparent
+        animationType="fade"
+        statusBarTranslucent
+        onRequestClose={() => setDetail(null)}
+      >
+        <TouchableOpacity style={styles.fond} activeOpacity={1} onPress={() => setDetail(null)}>
+          <TouchableOpacity style={styles.feuille} activeOpacity={1}>
+            {detail && <DetailPartie partie={detail} jeux={jeux} styles={styles} />}
+            <TouchableOpacity style={styles.fermer} onPress={() => setDetail(null)}>
+              <Text style={styles.fermerTexte}>Fermer</Text>
+            </TouchableOpacity>
+          </TouchableOpacity>
+        </TouchableOpacity>
+      </Modal>
 
       <DialogueConfirmation
         visible={aSupprimer !== null}
@@ -125,6 +152,81 @@ export default function Historique() {
 function formatDate(iso: string) {
   const d = new Date(iso);
   return d.toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
+}
+
+function formatDateLongue(iso: string) {
+  const d = new Date(iso);
+  return d.toLocaleDateString("fr-FR", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
+
+function DetailPartie({
+  partie,
+  jeux,
+  styles,
+}: {
+  partie: PartieEnregistree;
+  jeux: Jeu[];
+  styles: ReturnType<typeof makeStyles>;
+}) {
+  const jeu = jeux.find((j) => j.id === partie.jeu_id);
+  const sens = jeu?.scoreVictoire ?? "max";
+  const objectif = jeu?.scoreMode === "objectif";
+
+  const joueurs = [...joueursDe(partie)];
+  if (objectif) {
+    joueurs.sort((a, b) => (a.nom === partie.gagnant ? -1 : b.nom === partie.gagnant ? 1 : 0));
+  } else {
+    joueurs.sort((a, b) => (sens === "min" ? a.score - b.score : b.score - a.score));
+  }
+
+  // Égalité : aucun gagnant enregistré, on met en avant tous ceux au meilleur score.
+  const egalite = !partie.gagnant;
+
+  return (
+    <>
+      <Text style={styles.detailTitre}>{partie.jeu_nom}</Text>
+      <Text style={styles.detailDate}>{formatDateLongue(partie.date)}</Text>
+      {egalite && <Text style={styles.detailEgalite}>🤝 Partie terminée sur une égalité</Text>}
+      {!objectif && (
+        <Text style={styles.detailSens}>
+          {sens === "min" ? "Le moins de points gagne" : "Le plus de points gagne"}
+        </Text>
+      )}
+
+      <ScrollView style={{ maxHeight: 340 }}>
+        {joueurs.map((j, i) => {
+          const estGagnant = egalite
+            ? j.score === partie.score_gagnant
+            : j.nom === partie.gagnant;
+          return (
+            <View key={`${j.nom}-${i}`} style={[styles.detailLigne, estGagnant && styles.detailGagnant]}>
+              <Text style={[styles.detailRang, estGagnant && styles.detailRangGagnant]}>
+                {estGagnant ? (egalite ? "🤝" : "🏆") : i + 1}
+              </Text>
+              <View style={{ flex: 1 }}>
+                <Text style={styles.detailNom}>{j.nom}</Text>
+                {j.role && <Text style={styles.detailRole}>{j.role}</Text>}
+              </View>
+              {!objectif && <Text style={styles.detailScore}>{j.score}</Text>}
+            </View>
+          );
+        })}
+      </ScrollView>
+    </>
+  );
+}
+
+function joueursDe(p: PartieEnregistree): JoueurScore[] {
+  try {
+    return JSON.parse(p.details) as JoueurScore[];
+  } catch {
+    return [];
+  }
 }
 
 function nomsJoueurs(p: PartieEnregistree) {
@@ -168,5 +270,44 @@ function makeStyles(c: AppColors) {
     vide: { alignItems: "center", justifyContent: "center", paddingTop: 80, paddingHorizontal: 24 },
     videTitre: { fontSize: 17, fontWeight: "600", color: c.textPrimary, marginBottom: 6 },
     videTexte: { fontSize: 14, color: c.textMuted, textAlign: "center", lineHeight: 20 },
+
+    fond: {
+      flex: 1,
+      backgroundColor: c.ombre,
+      alignItems: "center",
+      justifyContent: "center",
+      paddingHorizontal: 24,
+    },
+    feuille: {
+      width: "100%",
+      maxWidth: 420,
+      backgroundColor: c.surface,
+      borderRadius: 18,
+      paddingHorizontal: 18,
+      paddingTop: 20,
+      paddingBottom: 12,
+    },
+    detailTitre: { fontSize: 20, fontWeight: "700", color: c.textPrimary },
+    detailDate: { fontSize: 13, color: c.textMuted, marginTop: 2, textTransform: "capitalize" },
+    detailSens: { fontSize: 12, color: c.accentText, fontWeight: "600", marginTop: 8 },
+    detailEgalite: { fontSize: 13, color: c.textSecondary, fontWeight: "600", marginTop: 8 },
+    detailLigne: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 12,
+      paddingVertical: 12,
+      paddingHorizontal: 10,
+      borderRadius: 10,
+      marginTop: 8,
+      backgroundColor: c.surfaceAlt,
+    },
+    detailGagnant: { backgroundColor: c.successSoft },
+    detailRang: { width: 24, textAlign: "center", fontSize: 14, fontWeight: "700", color: c.textFaint },
+    detailRangGagnant: { fontSize: 16 },
+    detailNom: { fontSize: 15, fontWeight: "600", color: c.textPrimary },
+    detailRole: { fontSize: 12, color: c.textMuted, marginTop: 2 },
+    detailScore: { fontSize: 18, fontWeight: "700", color: c.textPrimary },
+    fermer: { alignItems: "center", paddingVertical: 14, marginTop: 6 },
+    fermerTexte: { fontSize: 15, fontWeight: "600", color: c.accentText },
   });
 }

@@ -114,6 +114,7 @@ export const JEUX: Jeu[] = [
     extensions: [
       "Mauvais jusqu'à l'os",
       "La Fin est Proche",
+      "Cruellement Infects",
       "Monstrueusement Malsains",
       "Plus Grands, Plus Méchants",
       "Larmes de Fond",
@@ -149,18 +150,103 @@ export const JEUX: Jeu[] = [
         origine: "La Petite Sirène",
         objectif: "Posséder le Trident et la Couronne à son Palais en début de tour.",
       },
-      { nom: "La Méchante Reine", origine: "Blanche-Neige", extension: "Mauvais jusqu'à l'os" },
-      { nom: "Hadès", origine: "Hercule", extension: "Mauvais jusqu'à l'os" },
-      { nom: "Dr Facilier", origine: "La Princesse et la Grenouille", extension: "Mauvais jusqu'à l'os" },
-      { nom: "Scar", origine: "Le Roi Lion", extension: "La Fin est Proche" },
-      { nom: "Yzma", origine: "Kuzco, l'empereur mégalo", extension: "La Fin est Proche" },
-      { nom: "Ratigan", origine: "Basil, détective privé", extension: "La Fin est Proche" },
-      { nom: "Cruella d'Enfer", origine: "Les 101 Dalmatiens", extension: "Monstrueusement Malsains" },
-      { nom: "Mère Gothel", origine: "Raiponce", extension: "Monstrueusement Malsains" },
-      { nom: "Capitaine Pat (Pete)", origine: "Mickey Mouse", extension: "Monstrueusement Malsains" },
-      { nom: "Syndrome", origine: "Les Indestructibles", extension: "Plus Grands, Plus Méchants" },
-      { nom: "Lotso", origine: "Toy Story 3", extension: "Plus Grands, Plus Méchants" },
-      { nom: "Madame Mim", origine: "Merlin l'Enchanteur", extension: "Plus Grands, Plus Méchants" },
+      {
+        nom: "La Méchante Reine",
+        origine: "Blanche-Neige",
+        objectif:
+          "Préparer la pomme empoisonnée en jouant 4 ingrédients différents, retrouver Blanche-Neige et l'éliminer avec la carte « Croque ! ».",
+        extension: "Mauvais jusqu'à l'os",
+      },
+      {
+        nom: "Hadès",
+        origine: "Hercule",
+        objectif: "Commencer son tour avec au moins 3 Titans non entravés sur le Mont Olympe.",
+        extension: "Mauvais jusqu'à l'os",
+      },
+      {
+        nom: "Dr Facilier",
+        origine: "La Princesse et la Grenouille",
+        objectif: "Contrôler le Talisman et jouer la carte « Régner sur la Nouvelle-Orléans ».",
+        extension: "Mauvais jusqu'à l'os",
+      },
+      {
+        nom: "Scar",
+        origine: "Le Roi Lion",
+        objectif:
+          "Trouver et vaincre Mufasa, puis vaincre d'autres héros jusqu'à totaliser 15 points de force dans sa pile Succession.",
+        extension: "La Fin est Proche",
+      },
+      {
+        nom: "Yzma",
+        origine: "Kuzco, l'empereur mégalo",
+        objectif:
+          "Débusquer Kuzco dans ses pioches du Destin, le jouer, puis l'éliminer grâce à Kronk.",
+        extension: "La Fin est Proche",
+      },
+      {
+        nom: "Ratigan",
+        origine: "Basil, détective privé",
+        objectif:
+          "Jouer la Reine robot et la conduire à Buckingham Palace, où elle doit rester jusqu'au début de son tour.",
+        extension: "La Fin est Proche",
+      },
+      {
+        nom: "Cruella d'Enfer",
+        origine: "Les 101 Dalmatiens",
+        objectif: "Réunir 99 chiots pour confectionner son manteau de fourrure.",
+        extension: "Cruellement Infects",
+      },
+      {
+        nom: "Capitaine Pat",
+        origine: "Mickey Mouse",
+        objectif:
+          "Accomplir l'objectif du lieu où se trouve son pion : il change au fil de la partie.",
+        extension: "Cruellement Infects",
+      },
+      {
+        nom: "Mère Gothel",
+        origine: "Raiponce",
+        objectif: "Gagner la confiance de Raiponce afin de la garder sous son emprise.",
+        extension: "Cruellement Infects",
+      },
+      {
+        nom: "Gaston",
+        origine: "La Belle et la Bête",
+        objectif: "Courtiser Belle et la convaincre qu'il est l'homme à épouser.",
+        extension: "Monstrueusement Malsains",
+      },
+      {
+        nom: "Lady Tremaine",
+        origine: "Cendrillon",
+        objectif: "Convaincre le Prince d'épouser l'une de ses filles plutôt que Cendrillon.",
+        extension: "Monstrueusement Malsains",
+      },
+      {
+        nom: "Le Roi Cornu",
+        origine: "Taram et le Chaudron magique",
+        objectif:
+          "Lever une armée de morts-vivants en réanimant des guerriers sur plusieurs lieux de son royaume.",
+        extension: "Monstrueusement Malsains",
+      },
+      {
+        nom: "Syndrome",
+        origine: "Les Indestructibles",
+        objectif: "Vaincre un Omnidroïde amélioré ainsi que tous les héros présents dans son royaume.",
+        extension: "Plus Grands, Plus Méchants",
+      },
+      {
+        nom: "Lotso",
+        origine: "Toy Story 3",
+        objectif:
+          "Piéger quatre héros réduits à 0 point de force, ainsi que Buzz l'Éclair, dans la salle des Chenilles.",
+        extension: "Plus Grands, Plus Méchants",
+      },
+      {
+        nom: "Madame Mim",
+        origine: "Merlin l'Enchanteur",
+        objectif: "Surpasser Merlin en magie et l'emporter lors du duel de sorciers.",
+        extension: "Plus Grands, Plus Méchants",
+      },
       {
         nom: "Davy Jones",
         origine: "Pirates des Caraïbes",
