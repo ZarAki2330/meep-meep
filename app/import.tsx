@@ -1,6 +1,6 @@
 // app/import.tsx — ajouter un jeu manuellement (hors-ligne)
 
-import { Stack, useLocalSearchParams, useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState, type ReactNode } from "react";
 import {
   KeyboardAvoidingView,
@@ -13,13 +13,14 @@ import {
   View,
 } from "react-native";
 
+import { Entete } from "@/components/entete";
 import { type AppColors } from "@/constants/theme-colors";
 import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
 import { type BonusGrille, type CategorieScore, type Jeu } from "@/data/jeux";
 import { ajouterJeu } from "@/db/jeux";
 
-type Mode = "compteur" | "objectif" | "grille";
+type Mode = "compteur" | "objectif" | "grille" | "manches";
 
 function nombre(s: string, defaut: number): number {
   const n = parseInt(s, 10);
@@ -86,6 +87,8 @@ export default function AjouterJeu() {
   const [description, setDescription] = useState("");
   const [regles, setRegles] = useState("");
   const [sens, setSens] = useState<"max" | "min">("max");
+  const [seuil, setSeuil] = useState("");
+  const [equipes, setEquipes] = useState(false);
   const [mode, setMode] = useState<Mode>("compteur");
   const [categoriesTexte, setCategoriesTexte] = useState("");
   const [bonusActif, setBonusActif] = useState(false);
@@ -110,6 +113,8 @@ export default function AjouterJeu() {
     setDescription(jeuExistant.description);
     setRegles(jeuExistant.regles.join("\n"));
     setSens(jeuExistant.scoreVictoire);
+    setSeuil(jeuExistant.seuilFin ? String(jeuExistant.seuilFin) : "");
+    setEquipes(jeuExistant.equipes === true);
     setMode(jeuExistant.scoreMode ?? "compteur");
 
     const cats = jeuExistant.categories ?? [];
@@ -188,7 +193,9 @@ export default function AjouterJeu() {
         .split("\n")
         .map((l) => l.trim())
         .filter(Boolean),
-      scoreVictoire: mode === "compteur" ? sens : "max",
+      scoreVictoire: mode === "compteur" || mode === "manches" ? sens : "max",
+      seuilFin: nombre(seuil, 0) > 0 ? nombre(seuil, 0) : undefined,
+      equipes,
       scoreMode: mode,
       categories: cats,
       bonus,
@@ -203,11 +210,8 @@ export default function AjouterJeu() {
       style={{ flex: 1 }}
       behavior={Platform.OS === "ios" ? "padding" : undefined}
     >
+      <Entete titre={modeEdition ? "Modifier le jeu" : "Ajouter un jeu"} />
       <ScrollView style={styles.page} contentContainerStyle={styles.contenu}>
-        <Stack.Screen
-          options={{ title: modeEdition ? "Modifier le jeu" : "Ajouter un jeu" }}
-        />
-
         {!modeEdition && (
           <TouchableOpacity style={styles.bggBouton} onPress={() => router.push("/bgg")}>
             <Text style={styles.bggTexte}>Chercher sur BoardGameGeek</Text>
@@ -273,6 +277,22 @@ export default function AjouterJeu() {
             />
           </Champ>
         </View>
+
+        <Champ label="Jeu en équipes ?" styles={styles}>
+          <TouchableOpacity
+            style={styles.bonusBascule}
+            activeOpacity={0.7}
+            onPress={() => setEquipes((e) => !e)}
+          >
+            <View style={[styles.case, equipes && styles.caseActive]}>
+              {equipes && <Text style={styles.caseCoche}>✓</Text>}
+            </View>
+            <Text style={styles.bonusTexte}>
+              Le score se compte par équipe (belote, Codenames…). Le nombre de joueurs ci-dessus
+              correspond alors au nombre d&apos;équipes.
+            </Text>
+          </TouchableOpacity>
+        </Champ>
 
         <View style={styles.ligne}>
           <Champ label="Durée (min)" styles={styles} style={{ flex: 1 }}>
@@ -343,6 +363,13 @@ export default function AjouterJeu() {
               styles={styles}
             />
             <ModeChoix
+              titre="Manches"
+              detail="Une ligne par manche, total calculé automatiquement."
+              actif={mode === "manches"}
+              onPress={() => setMode("manches")}
+              styles={styles}
+            />
+            <ModeChoix
               titre="Feuille de score"
               detail="Une grille avec tes propres cases (type Yams)."
               actif={mode === "grille"}
@@ -352,7 +379,7 @@ export default function AjouterJeu() {
           </View>
         </Champ>
 
-        {mode === "compteur" && (
+        {(mode === "compteur" || mode === "manches") && (
           <Champ label="Qui gagne ?" styles={styles}>
             <View style={styles.sensLigne}>
               <TouchableOpacity
@@ -371,6 +398,22 @@ export default function AjouterJeu() {
                   Le moins de points
                 </Text>
               </TouchableOpacity>
+            </View>
+
+            <View style={{ marginTop: 14 }}>
+              <Text style={styles.label}>Partie gagnée à (optionnel)</Text>
+              <Text style={styles.aide}>
+                Score qui déclenche la fin de la partie. Ex. 1000 à la belote, 66 au 6 qui prend.
+                Laisse vide s&apos;il n&apos;y en a pas.
+              </Text>
+              <TextInput
+                style={styles.input}
+                value={seuil}
+                onChangeText={setSeuil}
+                keyboardType="number-pad"
+                placeholder="1000"
+                placeholderTextColor={colors.placeholder}
+              />
             </View>
           </Champ>
         )}

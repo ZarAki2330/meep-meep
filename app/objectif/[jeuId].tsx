@@ -1,7 +1,8 @@
 // app/objectif/[jeuId].tsx — partie sans points : on désigne simplement le vainqueur
 
-import { Stack, useLocalSearchParams } from "expo-router";
-import { useEffect, useState } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import { useLocalSearchParams } from "expo-router";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   FlatList,
   Modal,
@@ -12,16 +13,20 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
+import { Entete } from "@/components/entete";
 import { type AppColors } from "@/constants/theme-colors";
 import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
 import { listerJoueurs } from "@/db/joueurs";
 import { chargerEtat, effacerEtat, sauvegarderEtat } from "@/db/partie-en-cours";
 import { enregistrerPartie } from "@/db/parties";
+import { useChrono } from "@/hooks/use-chrono";
+import { formatChrono } from "@/lib/duree";
 
 type Joueur = { id: string; nom: string; role?: string };
-type EtatSauve = { joueurs: Joueur[]; gagnantId: string | null };
+type EtatSauve = { joueurs: Joueur[]; gagnantId: string | null; duree?: number };
 
 function objectifVierge(joueurs: Joueur[], gagnantId: string | null) {
   return (
@@ -37,6 +42,7 @@ export default function PartieObjectif() {
   const { jeuId, extensions } = useLocalSearchParams<{ jeuId: string; extensions?: string }>();
   const { colors } = useTheme();
   const { jeux } = useJeux();
+  const insets = useSafeAreaInsets();
   const styles = makeStyles(colors);
   const jeu = jeux.find((j) => j.id === jeuId);
 
@@ -70,22 +76,46 @@ export default function PartieObjectif() {
       .catch(() => {});
   }, []);
 
+  const { secondes, demarrer, pause, initialiser } = useChrono();
+  const secondesRef = useRef(0);
+  secondesRef.current = secondes;
+  const termineRef = useRef(false);
+  termineRef.current = termine;
+
   useEffect(() => {
     chargerEtat<EtatSauve>(jeuId ?? "")
       .then((e) => {
         if (e?.joueurs?.length) {
           setJoueurs(e.joueurs);
           setGagnantId(e.gagnantId ?? null);
+          if (e.duree) initialiser(e.duree);
           setReprise(true);
         }
       })
       .finally(() => setCharge(true));
-  }, [jeuId]);
+  }, [jeuId, initialiser]);
+
+  useFocusEffect(
+    useCallback(() => {
+      if (!termineRef.current) demarrer();
+      return () => {
+        pause();
+      };
+    }, [demarrer, pause]),
+  );
+
+  useEffect(() => {
+    if (termine) pause();
+  }, [termine, pause]);
 
   useEffect(() => {
     if (!charge || termine) return;
     if (objectifVierge(joueurs, gagnantId)) effacerEtat(jeuId ?? "").catch(() => {});
-    else sauvegarderEtat(jeuId ?? "", { joueurs, gagnantId }).catch(() => {});
+    else
+      sauvegarderEtat(jeuId ?? "", { joueurs, gagnantId, duree: secondesRef.current }).catch(
+        () => {},
+      );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [charge, termine, joueurs, gagnantId, jeuId]);
 
   function renommer(id: string, nom: string) {
@@ -106,6 +136,7 @@ export default function PartieObjectif() {
 
   function terminer() {
     if (!gagnant) return;
+    const duree = pause();
     setTermine(true);
     setReprise(false);
     effacerEtat(jeuId ?? "").catch(() => {});
@@ -115,6 +146,7 @@ export default function PartieObjectif() {
       joueurs: joueurs.map((j) => ({ nom: j.nom, score: 0, role: j.role })),
       gagnant: gagnant.nom,
       scoreGagnant: 0,
+      duree,
     }).catch(() => {});
   }
 
@@ -127,7 +159,10 @@ export default function PartieObjectif() {
 
   return (
     <View style={styles.page}>
-      <Stack.Screen options={{ title: jeu ? jeu.nom : "Partie" }} />
+      <Entete
+        titre={jeu ? jeu.nom : "Partie"}
+        droite={<Text style={styles.chronoEntete}>⏱ {formatChrono(secondes)}</Text>}
+      />
 
       {extensionsChoisies.length > 0 && (
         <View style={styles.extensions}>
@@ -217,7 +252,7 @@ export default function PartieObjectif() {
         }}
       />
 
-      <View style={styles.barreBas}>
+      <View style={[styles.barreBas, { paddingBottom: 16 + insets.bottom }]}>
         {!termine ? (
           <>
             <TouchableOpacity style={styles.actionSecondaire} onPress={ajouterJoueur}>
@@ -242,7 +277,6 @@ export default function PartieObjectif() {
         visible={choixPourJoueur !== null}
         transparent
         animationType="fade"
-        statusBarTranslucent
         onRequestClose={() => setChoixPourJoueur(null)}
       >
         <TouchableOpacity
@@ -296,21 +330,28 @@ function makeStyles(c: AppColors) {
     liste: { padding: 16, paddingBottom: 24 },
     extensions: { backgroundColor: c.surfaceAlt, paddingVertical: 8, paddingHorizontal: 16 },
     extensionsTexte: { color: c.textSecondary, fontSize: 13, fontWeight: "600" },
+    chronoEntete: {
+      fontSize: 15,
+      fontWeight: "700",
+      color: c.textSecondary,
+      marginRight: 12,
+      fontVariant: ["tabular-nums"],
+    },
     info: { backgroundColor: c.accentSoft, paddingVertical: 8, paddingHorizontal: 16, alignItems: "center" },
     infoTexte: { color: c.accentText, fontSize: 13, fontWeight: "600" },
     banniere: { backgroundColor: c.success, padding: 16, alignItems: "center" },
     banniereTexte: { color: c.onSuccess, fontSize: 18, fontWeight: "600" },
-    chips: { maxHeight: 48, marginTop: 8, flexGrow: 0 },
-    chipsContenu: { gap: 8, paddingHorizontal: 16, alignItems: "center" },
+    chips: { flexGrow: 0 },
+    chipsContenu: { gap: 8, paddingHorizontal: 16, paddingVertical: 10, alignItems: "center" },
     chip: {
       borderWidth: 1,
       borderColor: c.accent,
       backgroundColor: c.accentSoft,
       borderRadius: 20,
       paddingHorizontal: 12,
-      paddingVertical: 6,
+      paddingVertical: 8,
     },
-    chipTexte: { color: c.accentText, fontSize: 13, fontWeight: "600" },
+    chipTexte: { color: c.accentText, fontSize: 13, fontWeight: "600", lineHeight: 18 },
     carte: {
       backgroundColor: c.surface,
       borderRadius: 14,

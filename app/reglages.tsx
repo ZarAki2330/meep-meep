@@ -17,8 +17,9 @@ import {
 } from "react-native";
 
 import { DialogueConfirmation } from "@/components/dialogue-confirmation";
+import { Entete } from "@/components/entete";
 import { IconSymbol } from "@/components/ui/icon-symbol";
-import { type AppColors } from "@/constants/theme-colors";
+import { ACCENTS, CLES_ACCENT, type AppColors } from "@/constants/theme-colors";
 import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
 import {
@@ -34,7 +35,7 @@ const MESSAGE_PARTAGE =
   "consulter les règles et tenir les scores des parties.";
 
 export default function Reglages() {
-  const { colors, mode, toggle } = useTheme();
+  const { colors, mode, toggle, accent, definirAccent } = useTheme();
   const { rafraichir } = useJeux();
   const styles = makeStyles(colors);
 
@@ -111,7 +112,9 @@ export default function Reglages() {
   }
 
   return (
-    <ScrollView style={styles.page} contentContainerStyle={styles.contenu}>
+    <View style={{ flex: 1, backgroundColor: colors.page }}>
+      <Entete titre="Réglages" />
+      <ScrollView style={styles.page} contentContainerStyle={styles.contenu}>
       {message && (
         <View style={styles.succes}>
           <Text style={styles.succesTexte}>{message}</Text>
@@ -132,6 +135,37 @@ export default function Reglages() {
         onPress={toggle}
         styles={styles}
       />
+
+      <View style={styles.couleursBloc}>
+        <Text style={styles.couleursTitre}>Couleur de l&apos;application</Text>
+        <Text style={styles.couleursDetail}>
+          S&apos;applique à toute l&apos;app et au logo, dans les deux thèmes.
+        </Text>
+        <View style={styles.pastilles}>
+          {CLES_ACCENT.map((cle) => {
+            const actif = accent === cle;
+            const teinte =
+              mode === "dark" ? ACCENTS[cle].sombre.accent : ACCENTS[cle].clair.accent;
+            return (
+              <TouchableOpacity
+                key={cle}
+                style={[styles.pastilleCouleur, actif && { borderColor: colors.accentText }]}
+                activeOpacity={0.7}
+                onPress={() => definirAccent(cle)}
+              >
+                <View style={[styles.rond, { backgroundColor: teinte }]}>
+                  {actif && (
+                    <IconSymbol name="checkmark" size={16} color={ACCENTS[cle][mode === "dark" ? "sombre" : "clair"].onAccent} />
+                  )}
+                </View>
+                <Text style={[styles.pastilleNom, actif && styles.pastilleNomActif]}>
+                  {ACCENTS[cle].nom}
+                </Text>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+      </View>
 
       <Text style={styles.section}>Données</Text>
       <Ligne
@@ -164,13 +198,10 @@ export default function Reglages() {
 
       <View style={styles.apropos}>
         <Image
-          source={
-            mode === "dark"
-              ? require("@/assets/images/logo-header-dark.png")
-              : require("@/assets/images/logo-header.png")
-          }
+          source={require("@/assets/images/logo-header.png")}
           style={styles.logo}
           resizeMode="contain"
+          tintColor={colors.accentText}
         />
         <Text style={styles.version}>Version 1.0.0</Text>
         <Text style={styles.signature}>créé par Zaraki</Text>
@@ -188,7 +219,8 @@ export default function Reglages() {
         onConfirmer={restaurer}
         onAnnuler={() => setARestaurer(null)}
       />
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 }
 
@@ -257,6 +289,28 @@ function makeStyles(c: AppColors) {
       justifyContent: "center",
     },
     pastilleTexte: { fontSize: 16, color: c.accentText, fontWeight: "700" },
+
+    couleursBloc: {
+      backgroundColor: c.surface,
+      borderWidth: 1,
+      borderColor: c.border,
+      borderRadius: 12,
+      padding: 14,
+    },
+    couleursTitre: { fontSize: 15, fontWeight: "600", color: c.textPrimary },
+    couleursDetail: { fontSize: 12, color: c.textMuted, marginTop: 3, marginBottom: 14 },
+    pastilles: { flexDirection: "row", flexWrap: "wrap", gap: 14, justifyContent: "space-between" },
+    pastilleCouleur: {
+      alignItems: "center",
+      width: 82,
+      paddingVertical: 6,
+      borderRadius: 12,
+      borderWidth: 2,
+      borderColor: "transparent",
+    },
+    rond: { width: 40, height: 40, borderRadius: 20, alignItems: "center", justifyContent: "center" },
+    pastilleNom: { fontSize: 12, color: c.textMuted, marginTop: 6 },
+    pastilleNomActif: { color: c.accentText, fontWeight: "700" },
 
     succes: { backgroundColor: c.successSoft, borderRadius: 12, padding: 12, marginBottom: 8 },
     succesTexte: { fontSize: 13, color: c.textPrimary, fontWeight: "600" },

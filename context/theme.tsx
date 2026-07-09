@@ -1,12 +1,17 @@
 // context/theme.tsx
-// Fournit le thème (clair/sombre) à toute l'app + une fonction pour basculer.
-// Le choix manuel est mémorisé sur l'appareil (AsyncStorage).
+// Fournit le thème (clair/sombre) et la couleur d'accent à toute l'app.
+// Les deux choix sont mémorisés sur l'appareil (AsyncStorage).
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import { useColorScheme } from "react-native";
 
-import { darkColors, lightColors, type AppColors } from "@/constants/theme-colors";
+import {
+  ACCENTS,
+  construireCouleurs,
+  type AppColors,
+  type CleAccent,
+} from "@/constants/theme-colors";
 
 type Mode = "light" | "dark";
 
@@ -14,35 +19,48 @@ type ThemeContexte = {
   mode: Mode;
   colors: AppColors;
   toggle: () => void;
+  accent: CleAccent;
+  definirAccent: (cle: CleAccent) => void;
 };
 
-const CLE_STOCKAGE = "meepmeep-theme";
+const CLE_THEME = "meepmeep-theme";
+const CLE_ACCENT = "meepmeep-accent";
 
 const Contexte = createContext<ThemeContexte | null>(null);
 
 export function AppThemeProvider({ children }: { children: ReactNode }) {
   const systeme = useColorScheme();
   const [mode, setMode] = useState<Mode>(systeme === "dark" ? "dark" : "light");
+  const [accent, setAccent] = useState<CleAccent>("violet");
 
-  // Au démarrage, on recharge le choix mémorisé s'il existe.
   useEffect(() => {
-    AsyncStorage.getItem(CLE_STOCKAGE).then((v) => {
+    AsyncStorage.getItem(CLE_THEME).then((v) => {
       if (v === "light" || v === "dark") setMode(v);
+    });
+    AsyncStorage.getItem(CLE_ACCENT).then((v) => {
+      if (v && v in ACCENTS) setAccent(v as CleAccent);
     });
   }, []);
 
-  function appliquer(nouveau: Mode) {
+  function appliquerMode(nouveau: Mode) {
     setMode(nouveau);
-    AsyncStorage.setItem(CLE_STOCKAGE, nouveau).catch(() => {});
+    AsyncStorage.setItem(CLE_THEME, nouveau).catch(() => {});
+  }
+
+  function definirAccent(cle: CleAccent) {
+    setAccent(cle);
+    AsyncStorage.setItem(CLE_ACCENT, cle).catch(() => {});
   }
 
   const valeur = useMemo<ThemeContexte>(
     () => ({
       mode,
-      colors: mode === "dark" ? darkColors : lightColors,
-      toggle: () => appliquer(mode === "dark" ? "light" : "dark"),
+      colors: construireCouleurs(mode, accent),
+      toggle: () => appliquerMode(mode === "dark" ? "light" : "dark"),
+      accent,
+      definirAccent,
     }),
-    [mode],
+    [mode, accent],
   );
 
   return <Contexte.Provider value={valeur}>{children}</Contexte.Provider>;

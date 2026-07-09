@@ -32,6 +32,8 @@ const MAPPING = {
   'moon.fill': 'dark-mode',
   'chart.bar.fill': 'bar-chart',
   'gearshape.fill': 'settings',
+  'checkmark': 'check',
+  'chevron.left': 'arrow-back',
   'chevron.left.forwardslash.chevron.right': 'code',
   'chevron.right': 'chevron-right',
 } as IconMapping;

@@ -9,6 +9,7 @@ import { POLICE_TITRE } from "@/constants/fonts";
 import { type AppColors } from "@/constants/theme-colors";
 import { useTheme } from "@/context/theme";
 import { listerParties, type JoueurScore, type PartieEnregistree } from "@/db/parties";
+import { formatDuree } from "@/lib/duree";
 
 type Styles = ReturnType<typeof makeStyles>;
 type StatJoueur = { nom: string; parties: number; victoires: number; meilleurScore: number };
@@ -59,10 +60,14 @@ export default function Statistiques() {
     parJeu[p.jeu_nom] = (parJeu[p.jeu_nom] ?? 0) + 1;
     sommeJoueurs += p.nb_joueurs;
     for (const j of joueursDe(p)) {
-      const s = (parJoueur[j.nom] ??= { nom: j.nom, parties: 0, victoires: 0, meilleurScore: 0 });
-      s.parties++;
-      if (j.score > s.meilleurScore) s.meilleurScore = j.score;
-      if (p.gagnant === j.nom) s.victoires++;
+      // En mode équipes, la ligne représente une équipe : on crédite chaque membre.
+      const noms = j.membres?.length ? j.membres : [j.nom];
+      for (const nom of noms) {
+        const s = (parJoueur[nom] ??= { nom, parties: 0, victoires: 0, meilleurScore: 0 });
+        s.parties++;
+        if (j.score > s.meilleurScore) s.meilleurScore = j.score;
+        if (p.gagnant === j.nom) s.victoires++;
+      }
     }
   }
 
@@ -73,6 +78,13 @@ export default function Statistiques() {
   const jeuTop = jeuxTries[0];
   const joueurTop = joueursTries[0];
   const moyenneJoueurs = total ? String(Math.round(sommeJoueurs / total)) : "0";
+
+  // Durées : seules les parties chronométrées comptent.
+  const durees = partiesFiltrees.map((p) => p.duree ?? 0).filter((d) => d > 0);
+  const dureeMoyenne = durees.length
+    ? formatDuree(durees.reduce((s, d) => s + d, 0) / durees.length)
+    : "—";
+  const plusLongue = durees.length ? formatDuree(Math.max(...durees)) : "—";
 
   // Meilleurs scores (uniquement pertinent pour les jeux à points)
   const scores = partiesFiltrees
@@ -155,6 +167,8 @@ export default function Statistiques() {
             label={jeuFiltre ? "meilleur score" : "jeux différents"}
             styles={styles}
           />
+          <Metrique valeur={dureeMoyenne} label="durée moyenne" styles={styles} />
+          <Metrique valeur={plusLongue} label="partie la plus longue" styles={styles} />
         </View>
 
         <View style={styles.miseEnAvant}>

@@ -20,6 +20,7 @@ type Row = {
   score_mode: string | null;
   categories: string | null;
   bonus: string | null;
+  equipes: number | null;
 };
 
 function parseJson<T>(texte: string | null, defaut: T): T {
@@ -47,9 +48,16 @@ function rowVersJeu(r: Row): Jeu {
     scoreVictoire: r.score_victoire === "min" ? "min" : "max",
     seuilFin: r.seuil_fin ?? undefined,
     scoreMode:
-      mode === "grille" ? "grille" : mode === "objectif" ? "objectif" : "compteur",
+      mode === "grille"
+        ? "grille"
+        : mode === "objectif"
+          ? "objectif"
+          : mode === "manches"
+            ? "manches"
+            : "compteur",
     categories: parseJson<CategorieScore[] | undefined>(r.categories, undefined),
     bonus: parseJson<BonusGrille | undefined>(r.bonus, undefined),
+    equipes: r.equipes === 1,
   };
 }
 
@@ -63,8 +71,8 @@ export async function ajouterJeu(j: Jeu) {
   const db = await getDb();
   await db.runAsync(
     `INSERT OR REPLACE INTO jeux
-      (id, nom, description, joueurs_min, joueurs_max, duree_min, age_min, categorie, image, regles, score_victoire, seuil_fin, score_mode, categories, bonus)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      (id, nom, description, joueurs_min, joueurs_max, duree_min, age_min, categorie, image, regles, score_victoire, seuil_fin, score_mode, categories, bonus, equipes)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       j.id,
       j.nom,
@@ -81,6 +89,7 @@ export async function ajouterJeu(j: Jeu) {
       j.scoreMode ?? "compteur",
       j.categories ? JSON.stringify(j.categories) : null,
       j.bonus ? JSON.stringify(j.bonus) : null,
+      j.equipes ? 1 : 0,
     ],
   );
 }

@@ -1,7 +1,8 @@
 // app/partie/[jeuId].tsx — gestion des scores d'une partie en cours
 
-import { Stack, useLocalSearchParams } from "expo-router";
-import { useEffect, useState } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import { useLocalSearchParams } from "expo-router";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   FlatList,
   ScrollView,
@@ -11,16 +12,20 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { DialogueEgalite } from "@/components/dialogue-egalite";
+import { Entete } from "@/components/entete";
 import { type AppColors } from "@/constants/theme-colors";
 import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
 import { listerJoueurs } from "@/db/joueurs";
 import { chargerEtat, effacerEtat, sauvegarderEtat } from "@/db/partie-en-cours";
 import { enregistrerPartie } from "@/db/parties";
+import { useChrono } from "@/hooks/use-chrono";
+import { formatChrono } from "@/lib/duree";
 
-type EtatSauve = { joueurs: Joueur[] };
+type EtatSauve = { joueurs: Joueur[]; duree?: number };
 
 function estVierge(joueurs: Joueur[]) {
   return (
@@ -41,6 +46,7 @@ export default function Partie() {
   const { jeuId, extensions } = useLocalSearchParams<{ jeuId: string; extensions?: string }>();
   const { colors } = useTheme();
   const { jeux } = useJeux();
+  const insets = useSafeAreaInsets();
   const styles = makeStyles(colors);
   const jeu = jeux.find((j) => j.id === jeuId);
 
@@ -61,23 +67,48 @@ export default function Partie() {
       .catch(() => {});
   }, []);
 
+  // Les fonctions du chrono sont stables ; "secondes" change chaque seconde.
+  const { secondes, demarrer, pause, initialiser } = useChrono();
+  const secondesRef = useRef(0);
+  secondesRef.current = secondes;
+  const termineRef = useRef(false);
+  termineRef.current = termine;
+
   // Reprise d'une partie non terminée.
   useEffect(() => {
     chargerEtat<EtatSauve>(jeuId ?? "")
       .then((e) => {
         if (e?.joueurs?.length) {
           setJoueurs(e.joueurs);
+          if (e.duree) initialiser(e.duree);
           setReprise(true);
         }
       })
       .finally(() => setCharge(true));
-  }, [jeuId]);
+  }, [jeuId, initialiser]);
+
+  // Le chrono tourne quand l'écran est affiché, se met en pause sinon.
+  useFocusEffect(
+    useCallback(() => {
+      if (!termineRef.current) demarrer();
+      return () => {
+        pause();
+      };
+    }, [demarrer, pause]),
+  );
+
+  useEffect(() => {
+    if (termine) pause();
+  }, [termine, pause]);
 
   // Sauvegarde automatique tant que la partie n'est pas terminée.
   useEffect(() => {
     if (!charge || termine) return;
     if (estVierge(joueurs)) effacerEtat(jeuId ?? "").catch(() => {});
-    else sauvegarderEtat(jeuId ?? "", { joueurs }).catch(() => {});
+    else sauvegarderEtat(jeuId ?? "", { joueurs, duree: secondesRef.current }).catch(() => {});
+    // chrono.secondes est volontairement hors dépendances : on l'enregistre
+    // à chaque changement de score, pas à chaque seconde.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [charge, termine, joueurs, jeuId]);
 
   const sens = jeu?.scoreVictoire ?? "max";
@@ -143,6 +174,7 @@ export default function Partie() {
   }
 
   function finaliser(nomGagnant: string) {
+    const duree = pause();
     setEgaliteOuverte(false);
     setResultat(nomGagnant);
     setTermine(true);
@@ -154,12 +186,16 @@ export default function Partie() {
       joueurs: joueurs.map((j) => ({ nom: j.nom, score: j.score })),
       gagnant: nomGagnant,
       scoreGagnant: meilleur,
+      duree,
     }).catch(() => {});
   }
 
   return (
     <View style={styles.page}>
-      <Stack.Screen options={{ title: jeu ? jeu.nom : "Partie" }} />
+      <Entete
+        titre={jeu ? jeu.nom : "Partie"}
+        droite={<Text style={styles.chronoEntete}>⏱ {formatChrono(secondes)}</Text>}
+      />
 
       {reprise && !termine && (
         <View style={styles.reprise}>
@@ -279,7 +315,7 @@ export default function Partie() {
         }}
       />
 
-      <View style={styles.barreBas}>
+      <View style={[styles.barreBas, { paddingBottom: 16 + insets.bottom }]}>
         {!termine ? (
           <>
             <TouchableOpacity style={styles.actionSecondaire} onPress={ajouterJoueur}>
@@ -311,17 +347,24 @@ function makeStyles(c: AppColors) {
   return StyleSheet.create({
     page: { flex: 1, backgroundColor: c.page },
     liste: { padding: 16, paddingBottom: 24 },
-    chips: { maxHeight: 48, marginTop: 8 },
-    chipsContenu: { gap: 8, paddingHorizontal: 16, alignItems: "center" },
+    chips: { flexGrow: 0 },
+    chipsContenu: { gap: 8, paddingHorizontal: 16, paddingVertical: 10, alignItems: "center" },
     chip: {
       borderWidth: 1,
       borderColor: c.accent,
       backgroundColor: c.accentSoft,
       borderRadius: 20,
       paddingHorizontal: 12,
-      paddingVertical: 6,
+      paddingVertical: 8,
     },
-    chipTexte: { color: c.accentText, fontSize: 13, fontWeight: "600" },
+    chipTexte: { color: c.accentText, fontSize: 13, fontWeight: "600", lineHeight: 18 },
+    chronoEntete: {
+      fontSize: 15,
+      fontWeight: "700",
+      color: c.textSecondary,
+      marginRight: 12,
+      fontVariant: ["tabular-nums"],
+    },
     reprise: { backgroundColor: c.successSoft, paddingVertical: 8, paddingHorizontal: 16, alignItems: "center" },
     repriseTexte: { color: c.textSecondary, fontSize: 13, fontWeight: "600" },
     extensions: { backgroundColor: c.surfaceAlt, paddingVertical: 8, paddingHorizontal: 16 },

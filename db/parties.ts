@@ -3,7 +3,8 @@
 
 import { getDb } from "./database";
 
-export type JoueurScore = { nom: string; score: number; role?: string };
+/** Une ligne de score : un joueur, ou une équipe avec ses membres. */
+export type JoueurScore = { nom: string; score: number; role?: string; membres?: string[] };
 
 export type PartieEnregistree = {
   id: number;
@@ -14,6 +15,7 @@ export type PartieEnregistree = {
   gagnant: string;
   score_gagnant: number;
   details: string; // JSON de JoueurScore[]
+  duree: number | null; // secondes
 };
 
 export async function enregistrerPartie(p: {
@@ -22,10 +24,11 @@ export async function enregistrerPartie(p: {
   joueurs: JoueurScore[];
   gagnant: string;
   scoreGagnant: number;
+  duree?: number;
 }) {
   const db = await getDb();
   await db.runAsync(
-    "INSERT INTO parties (jeu_id, jeu_nom, date, nb_joueurs, gagnant, score_gagnant, details) VALUES (?, ?, ?, ?, ?, ?, ?)",
+    "INSERT INTO parties (jeu_id, jeu_nom, date, nb_joueurs, gagnant, score_gagnant, details, duree) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
     [
       p.jeuId,
       p.jeuNom,
@@ -34,6 +37,7 @@ export async function enregistrerPartie(p: {
       p.gagnant,
       p.scoreGagnant,
       JSON.stringify(p.joueurs),
+      p.duree && p.duree > 0 ? Math.round(p.duree) : null,
     ],
   );
   // Mémorise les noms des joueurs pour les réutiliser ensuite.
@@ -46,6 +50,24 @@ export async function enregistrerPartie(p: {
 export async function listerParties(): Promise<PartieEnregistree[]> {
   const db = await getDb();
   return db.getAllAsync<PartieEnregistree>("SELECT * FROM parties ORDER BY date DESC");
+}
+
+/** Corrige une partie déjà enregistrée (scores et vainqueur). */
+export async function modifierPartie(
+  id: number,
+  joueurs: JoueurScore[],
+  gagnant: string,
+  scoreGagnant: number,
+) {
+  const db = await getDb();
+  await db.runAsync(
+    "UPDATE parties SET details = ?, gagnant = ?, score_gagnant = ?, nb_joueurs = ? WHERE id = ?",
+    [JSON.stringify(joueurs), gagnant, scoreGagnant, joueurs.length, id],
+  );
+  for (const j of joueurs) {
+    const nom = j.nom.trim();
+    if (nom) await db.runAsync("INSERT OR IGNORE INTO joueurs (nom) VALUES (?)", [nom]);
+  }
 }
 
 export async function supprimerPartie(id: number) {

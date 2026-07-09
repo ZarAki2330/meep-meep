@@ -21,6 +21,7 @@ const COLONNES_PARTIES = [
   "gagnant",
   "score_gagnant",
   "details",
+  "duree",
 ];
 
 const COLONNES_JEUX = [
@@ -39,6 +40,7 @@ const COLONNES_JEUX = [
   "score_mode",
   "categories",
   "bonus",
+  "equipes",
 ];
 
 export async function exporterDonnees(): Promise<Sauvegarde> {

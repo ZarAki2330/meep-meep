@@ -21,7 +21,7 @@ const DUREES: { cle: DureeCle; label: string }[] = [
 const JOUEURS_OPTIONS = [2, 3, 4, 5, 6];
 
 export default function Catalogue() {
-  const { colors, mode } = useTheme();
+  const { colors } = useTheme();
   const { jeux, estFavori, basculerFavori } = useJeux();
   const styles = makeStyles(colors);
   const router = useRouter();
@@ -69,13 +69,10 @@ export default function Catalogue() {
       <View style={styles.header}>
         <View style={{ flex: 1 }}>
           <Image
-            source={
-              mode === "dark"
-                ? require("@/assets/images/logo-header-dark.png")
-                : require("@/assets/images/logo-header.png")
-            }
+            source={require("@/assets/images/logo-header.png")}
             style={styles.logo}
             resizeMode="contain"
+            tintColor={colors.accentText}
           />
           <Text style={styles.sousTitre}>Ma ludothèque</Text>
         </View>

@@ -1,8 +1,8 @@
-import { Fredoka_600SemiBold, useFonts } from "@expo-google-fonts/fredoka";
 import { DarkTheme, DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
+import { initialWindowMetrics, SafeAreaProvider } from "react-native-safe-area-context";
 
 import { JeuxProvider } from "@/context/jeux";
 import { AppThemeProvider, useTheme } from "@/context/theme";
@@ -12,18 +12,14 @@ export const unstable_settings = {
 };
 
 export default function RootLayout() {
-  const [policesChargees] = useFonts({ Fredoka_600SemiBold });
-
-  if (!policesChargees) {
-    return null;
-  }
-
   return (
-    <AppThemeProvider>
-      <JeuxProvider>
-        <Navigation />
-      </JeuxProvider>
-    </AppThemeProvider>
+    <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+      <AppThemeProvider>
+        <JeuxProvider>
+          <Navigation />
+        </JeuxProvider>
+      </AppThemeProvider>
+    </SafeAreaProvider>
   );
 }
 
@@ -32,18 +28,19 @@ function Navigation() {
 
   return (
     <ThemeProvider value={mode === "dark" ? DarkTheme : DefaultTheme}>
+      {/* Chaque écran dessine son propre en-tête (composant Entete) : l'en-tête
+          natif se figeait parfois sous la barre d'état sur Android. */}
       <Stack
         screenOptions={{
-          headerStyle: { backgroundColor: colors.surface },
-          headerTintColor: colors.textPrimary,
+          headerShown: false,
           contentStyle: { backgroundColor: colors.page },
         }}
       >
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="import" options={{ title: "Ajouter un jeu" }} />
-        <Stack.Screen name="bgg" options={{ title: "BoardGameGeek" }} />
-        <Stack.Screen name="reglages" options={{ title: "Réglages" }} />
-        <Stack.Screen name="modal" options={{ presentation: "modal", title: "Modal" }} />
+        <Stack.Screen name="(tabs)" />
+        <Stack.Screen name="import" />
+        <Stack.Screen name="bgg" />
+        <Stack.Screen name="reglages" />
+        <Stack.Screen name="modal" options={{ presentation: "modal" }} />
       </Stack>
       <StatusBar style={mode === "dark" ? "light" : "dark"} />
     </ThemeProvider>

@@ -31,7 +31,6 @@ export function DialogueConfirmation({
       visible={visible}
       transparent
       animationType="fade"
-      statusBarTranslucent
       onRequestClose={onAnnuler}
     >
       <TouchableOpacity style={styles.fond} activeOpacity={1} onPress={onAnnuler}>

@@ -1,6 +1,6 @@
 // app/bgg.tsx — recherche et import de jeux depuis BoardGameGeek
 
-import { Stack, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
   ActivityIndicator,
@@ -12,6 +12,7 @@ import {
   View,
 } from "react-native";
 
+import { Entete } from "@/components/entete";
 import { type AppColors } from "@/constants/theme-colors";
 import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
@@ -69,7 +70,7 @@ export default function ImporterBgg() {
   if (!configure) {
     return (
       <View style={styles.page}>
-        <Stack.Screen options={{ title: "BoardGameGeek" }} />
+        <Entete titre="BoardGameGeek" />
         <View style={styles.bloc}>
           <Text style={styles.blocTitre}>Jeton BoardGameGeek manquant</Text>
           <Text style={styles.blocTexte}>
@@ -91,7 +92,7 @@ export default function ImporterBgg() {
 
   return (
     <View style={styles.page}>
-      <Stack.Screen options={{ title: "BoardGameGeek" }} />
+      <Entete titre="BoardGameGeek" />
 
       <View style={styles.rechercheLigne}>
         <TextInput

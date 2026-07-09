@@ -18,6 +18,7 @@ import { listerJeux, supprimerJeu as dbSupprimerJeu } from "@/db/jeux";
 type JeuxContexte = {
   jeux: Jeu[]; // ajoutés + intégrés
   importes: Jeu[];
+  pret: boolean; // les jeux de la base ont été chargés
   estImporte: (id: string) => boolean;
   estFavori: (id: string) => boolean;
   basculerFavori: (id: string) => void;
@@ -30,11 +31,13 @@ const Contexte = createContext<JeuxContexte | null>(null);
 export function JeuxProvider({ children }: { children: ReactNode }) {
   const [importes, setImportes] = useState<Jeu[]>([]);
   const [favoris, setFavoris] = useState<string[]>([]);
+  const [pret, setPret] = useState(false);
 
   const rafraichir = useCallback(() => {
     listerJeux()
       .then(setImportes)
-      .catch(() => setImportes([]));
+      .catch(() => setImportes([]))
+      .finally(() => setPret(true));
     listerFavoris()
       .then(setFavoris)
       .catch(() => setFavoris([]));
@@ -67,13 +70,14 @@ export function JeuxProvider({ children }: { children: ReactNode }) {
     return {
       jeux: [...importes, ...JEUX],
       importes,
+      pret,
       estImporte: (id: string) => idsImportes.has(id),
       estFavori: (id: string) => idsFavoris.has(id),
       basculerFavori,
       rafraichir,
       supprimerJeu,
     };
-  }, [importes, favoris, basculerFavori, rafraichir, supprimerJeu]);
+  }, [importes, favoris, pret, basculerFavori, rafraichir, supprimerJeu]);
 
   return <Contexte.Provider value={valeur}>{children}</Contexte.Provider>;
 }

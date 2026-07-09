@@ -1,4 +1,4 @@
-// app/grille/[jeuId].tsx — feuille de score générique, pilotée par les catégories du jeu
+// app/manches/[jeuId].tsx — score par manches : une ligne par manche, total automatique
 
 import { useFocusEffect } from "@react-navigation/native";
 import { useLocalSearchParams } from "expo-router";
@@ -17,34 +17,38 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { DialogueEgalite } from "@/components/dialogue-egalite";
 import { Entete } from "@/components/entete";
+import { SelecteurMembres } from "@/components/selecteur-membres";
 import { type AppColors } from "@/constants/theme-colors";
 import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
-import { type CategorieScore } from "@/data/jeux";
 import { listerJoueurs } from "@/db/joueurs";
 import { chargerEtat, effacerEtat, sauvegarderEtat } from "@/db/partie-en-cours";
 import { enregistrerPartie } from "@/db/parties";
 import { useChrono } from "@/hooks/use-chrono";
 import { formatChrono } from "@/lib/duree";
 
-type Joueur = { id: string; nom: string };
-type Scores = Record<string, Record<string, string>>;
+type Joueur = { id: string; nom: string; membres?: string[] };
+type Scores = Record<string, Record<number, string>>; // [joueurId][numéro de manche]
 type Styles = ReturnType<typeof makeStyles>;
-type EtatSauve = { joueurs: Joueur[]; scores: Scores; duree?: number };
+type EtatSauve = { joueurs: Joueur[]; scores: Scores; nbManches: number; duree?: number };
 
-function grilleVierge(joueurs: Joueur[], scores: Scores) {
-  const aucunScore = Object.values(scores).every((c) => Object.values(c).every((v) => v === ""));
+const LARGEUR_LABEL = 96;
+const LARGEUR_COL = 78;
+const MANCHES_DEPART = 3;
+
+function estVierge(joueurs: Joueur[], scores: Scores, nbManches: number, prefixe: string) {
+  const aucunScore = Object.values(scores).every((c) =>
+    Object.values(c).every((v) => v === "" || v === undefined),
+  );
   return (
     aucunScore &&
+    nbManches === MANCHES_DEPART &&
     joueurs.length === 2 &&
-    joueurs.every((j, i) => j.nom === `Joueur ${i + 1}`)
+    joueurs.every((j, i) => j.nom === `${prefixe} ${i + 1}` && !j.membres?.length)
   );
 }
 
-const LARGEUR_LABEL = 130;
-const LARGEUR_COL = 68;
-
-export default function FeuilleGrille() {
+export default function PartieManches() {
   const { jeuId } = useLocalSearchParams<{ jeuId: string }>();
   const { colors } = useTheme();
   const { jeux } = useJeux();
@@ -52,25 +56,24 @@ export default function FeuilleGrille() {
   const styles = makeStyles(colors);
   const jeu = jeux.find((j) => j.id === jeuId);
 
-  const categories: CategorieScore[] = jeu?.categories ?? [];
-  const bonus = jeu?.bonus;
+  const sens = jeu?.scoreVictoire ?? "max";
+  const seuilFin = jeu?.seuilFin;
+  const modeEquipes = jeu?.equipes === true;
+  const prefixe = modeEquipes ? "Équipe" : "Joueur";
 
   const [joueurs, setJoueurs] = useState<Joueur[]>([
-    { id: "j1", nom: "Joueur 1" },
-    { id: "j2", nom: "Joueur 2" },
+    { id: "j1", nom: `${modeEquipes ? "Équipe" : "Joueur"} 1` },
+    { id: "j2", nom: `${modeEquipes ? "Équipe" : "Joueur"} 2` },
   ]);
+  const [membresPour, setMembresPour] = useState<string | null>(null);
   const [scores, setScores] = useState<Scores>({});
+  const [nbManches, setNbManches] = useState(MANCHES_DEPART);
   const [termine, setTermine] = useState(false);
-  const [dejaEnregistre, setDejaEnregistre] = useState(false);
+  const [resultat, setResultat] = useState<string | null>(null);
+  const [egaliteOuverte, setEgaliteOuverte] = useState(false);
   const [joueursSauvegardes, setJoueursSauvegardes] = useState<string[]>([]);
   const [charge, setCharge] = useState(false);
   const [reprise, setReprise] = useState(false);
-
-  useEffect(() => {
-    listerJoueurs()
-      .then((js) => setJoueursSauvegardes(js.map((j) => j.nom)))
-      .catch(() => {});
-  }, []);
 
   const { secondes, demarrer, pause, initialiser } = useChrono();
   const secondesRef = useRef(0);
@@ -79,11 +82,18 @@ export default function FeuilleGrille() {
   termineRef.current = termine;
 
   useEffect(() => {
+    listerJoueurs()
+      .then((js) => setJoueursSauvegardes(js.map((j) => j.nom)))
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
     chargerEtat<EtatSauve>(jeuId ?? "")
       .then((e) => {
         if (e?.joueurs?.length) {
           setJoueurs(e.joueurs);
           setScores(e.scores ?? {});
+          setNbManches(e.nbManches ?? MANCHES_DEPART);
           if (e.duree) initialiser(e.duree);
           setReprise(true);
         }
@@ -106,49 +116,49 @@ export default function FeuilleGrille() {
 
   useEffect(() => {
     if (!charge || termine) return;
-    if (grilleVierge(joueurs, scores)) effacerEtat(jeuId ?? "").catch(() => {});
+    if (estVierge(joueurs, scores, nbManches, prefixe)) effacerEtat(jeuId ?? "").catch(() => {});
     else
-      sauvegarderEtat(jeuId ?? "", { joueurs, scores, duree: secondesRef.current }).catch(() => {});
+      sauvegarderEtat(jeuId ?? "", {
+        joueurs,
+        scores,
+        nbManches,
+        duree: secondesRef.current,
+      }).catch(() => {});
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [charge, termine, joueurs, scores, jeuId]);
+  }, [charge, termine, joueurs, scores, nbManches, jeuId]);
 
-  function valeur(joueurId: string, cle: string): number {
-    const n = parseInt(scores[joueurId]?.[cle] ?? "", 10);
+  function valeur(joueurId: string, manche: number): number {
+    const n = parseInt(scores[joueurId]?.[manche] ?? "", 10);
     return isNaN(n) ? 0 : n;
   }
 
-  // Autorise un signe moins en tête (scores négatifs, ex. le militaire à 7 Wonders).
-  function definir(joueurId: string, cle: string, texte: string) {
+  function definir(joueurId: string, manche: number, texte: string) {
     const negatif = texte.trimStart().startsWith("-");
     const propre = (negatif ? "-" : "") + texte.replace(/[^0-9]/g, "");
     setScores((prev) => ({
       ...prev,
-      [joueurId]: { ...(prev[joueurId] ?? {}), [cle]: propre },
+      [joueurId]: { ...(prev[joueurId] ?? {}), [manche]: propre },
     }));
   }
 
-  function sommeCles(joueurId: string, cles: string[]) {
-    return cles.reduce((s, c) => s + valeur(joueurId, c), 0);
-  }
-
-  function bonusGagne(joueurId: string) {
-    if (!bonus) return 0;
-    return sommeCles(joueurId, bonus.surCles) >= bonus.seuil ? bonus.points : 0;
-  }
-
   function total(joueurId: string) {
-    const base = sommeCles(joueurId, categories.map((c) => c.cle));
-    return base + bonusGagne(joueurId);
+    let s = 0;
+    for (let m = 1; m <= nbManches; m++) s += valeur(joueurId, m);
+    return s;
   }
 
   function renommer(id: string, nom: string) {
     setJoueurs((prev) => prev.map((j) => (j.id === id ? { ...j, nom } : j)));
   }
   function ajouterJoueur() {
-    setJoueurs((prev) => [...prev, { id: `j${Date.now()}`, nom: `Joueur ${prev.length + 1}` }]);
+    setJoueurs((prev) => [...prev, { id: `j${Date.now()}`, nom: `${prefixe} ${prev.length + 1}` }]);
   }
   function ajouterJoueurNomme(nom: string) {
     setJoueurs((prev) => [...prev, { id: `j${Date.now()}`, nom }]);
+  }
+  function definirMembres(id: string, membres: string[]) {
+    setJoueurs((prev) => prev.map((j) => (j.id === id ? { ...j, membres } : j)));
+    setMembresPour(null);
   }
   function supprimerJoueur(id: string) {
     setJoueurs((prev) => prev.filter((j) => j.id !== id));
@@ -160,11 +170,15 @@ export default function FeuilleGrille() {
   }
 
   const totaux = joueurs.map((j) => total(j.id));
-  const meilleurTotal = totaux.length ? Math.max(...totaux) : 0;
+  const meilleur = totaux.length
+    ? sens === "min"
+      ? Math.min(...totaux)
+      : Math.max(...totaux)
+    : 0;
+  const pire = totaux.length ? Math.max(...totaux) : 0;
   const tousEgaux = totaux.every((t) => t === totaux[0]);
-  const gagnants = joueurs.filter((j) => total(j.id) === meilleurTotal);
-  const [egaliteOuverte, setEgaliteOuverte] = useState(false);
-  const [resultat, setResultat] = useState<string | null>(null);
+  const gagnants = joueurs.filter((j) => total(j.id) === meilleur);
+  const seuilAtteint = seuilFin !== undefined && pire >= seuilFin;
 
   function terminer() {
     if (gagnants.length > 1) {
@@ -181,36 +195,28 @@ export default function FeuilleGrille() {
     setTermine(true);
     setReprise(false);
     effacerEtat(jeuId ?? "").catch(() => {});
-    if (!dejaEnregistre) {
-      enregistrerPartie({
-        jeuId: jeuId ?? "",
-        jeuNom: jeu ? jeu.nom : "Partie",
-        joueurs: joueurs.map((j) => ({ nom: j.nom, score: total(j.id) })),
-        gagnant: nomGagnant,
-        scoreGagnant: meilleurTotal,
-        duree,
-      }).catch(() => {});
-      setDejaEnregistre(true);
-    }
+    enregistrerPartie({
+      jeuId: jeuId ?? "",
+      jeuNom: jeu ? jeu.nom : "Partie",
+      joueurs: joueurs.map((j) => ({
+        nom: j.nom,
+        score: total(j.id),
+        membres: j.membres?.length ? j.membres : undefined,
+      })),
+      gagnant: nomGagnant,
+      scoreGagnant: meilleur,
+      duree,
+    }).catch(() => {});
   }
 
   const { width } = useWindowDimensions();
   const largeurCol = Math.max(LARGEUR_COL, (width - 24 - LARGEUR_LABEL) / joueurs.length);
   const joueursDispo = joueursSauvegardes.filter((n) => !joueurs.some((j) => j.nom === n));
 
-  // Regroupe les catégories par section, en gardant l'ordre.
-  const sections: { nom: string | null; cats: CategorieScore[] }[] = [];
-  for (const cat of categories) {
-    const nom = cat.section ?? null;
-    const derniere = sections[sections.length - 1];
-    if (derniere && derniere.nom === nom) derniere.cats.push(cat);
-    else sections.push({ nom, cats: [cat] });
-  }
-
   return (
     <View style={styles.page}>
       <Entete
-        titre={jeu ? jeu.nom : "Feuille de score"}
+        titre={jeu ? jeu.nom : "Manches"}
         droite={<Text style={styles.chronoEntete}>⏱ {formatChrono(secondes)}</Text>}
       />
 
@@ -220,12 +226,29 @@ export default function FeuilleGrille() {
         </View>
       )}
 
+      {sens === "min" && (
+        <View style={styles.info}>
+          <Text style={styles.infoTexte}>
+            Points de pénalité — le moins de points gagne
+            {seuilFin ? ` · fin à ${seuilFin}` : ""}
+          </Text>
+        </View>
+      )}
+
+      {seuilAtteint && !termine && (
+        <View style={styles.avertissement}>
+          <Text style={styles.avertissementTexte}>
+            Seuil de {seuilFin} atteint — tu peux terminer la partie.
+          </Text>
+        </View>
+      )}
+
       {termine && resultat !== null && (
         <View style={styles.banniere}>
           <Text style={styles.banniereTexte}>
             {resultat
-              ? `🏆 ${resultat} gagne avec ${meilleurTotal} points !`
-              : `🤝 Égalité à ${meilleurTotal} points entre ${gagnants.map((g) => g.nom).join(", ")}`}
+              ? `🏆 ${resultat} gagne avec ${meilleur} points !`
+              : `🤝 Égalité à ${meilleur} points entre ${gagnants.map((g) => g.nom).join(", ")}`}
           </Text>
         </View>
       )}
@@ -266,6 +289,17 @@ export default function FeuilleGrille() {
                   onChangeText={(t) => renommer(j.id, t)}
                   editable={!termine}
                 />
+                {modeEquipes && (
+                  <TouchableOpacity
+                    disabled={termine}
+                    onPress={() => setMembresPour(j.id)}
+                    style={styles.membresBouton}
+                  >
+                    <Text style={styles.membresTexte} numberOfLines={2}>
+                      {j.membres?.length ? j.membres.join(", ") : "+ membres"}
+                    </Text>
+                  </TouchableOpacity>
+                )}
                 {!termine && joueurs.length > 1 && (
                   <TouchableOpacity onPress={() => supprimerJoueur(j.id)}>
                     <Text style={styles.supprimer}>✕</Text>
@@ -275,66 +309,51 @@ export default function FeuilleGrille() {
             ))}
           </View>
 
-          {sections.map((section, si) => {
-            const clesSection = section.cats.map((c) => c.cle);
-            const bonusIci =
-              bonus && bonus.surCles.every((c) => clesSection.includes(c)) ? bonus : null;
-            return (
-              <View key={si}>
-                {section.nom && (
-                  <SectionLigne
-                    titre={section.nom}
-                    nbJoueurs={joueurs.length}
-                    largeurCol={largeurCol}
-                    styles={styles}
-                  />
-                )}
-                {section.cats.map((cat) => (
-                  <LigneCategorie
-                    key={cat.cle}
-                    label={cat.label}
-                    aide={cat.aide}
-                    joueurs={joueurs}
-                    cle={cat.cle}
-                    scores={scores}
-                    definir={definir}
-                    termine={termine}
-                    largeurCol={largeurCol}
-                    styles={styles}
-                  />
-                ))}
-                {bonusIci && (
-                  <>
-                    <LigneTotal
-                      label={section.nom ? `Total ${section.nom.toLowerCase()}` : "Sous-total"}
-                      joueurs={joueurs}
-                      calcul={(id) => sommeCles(id, clesSection)}
-                      largeurCol={largeurCol}
-                      styles={styles}
-                    />
-                    <LigneTotal
-                      label={bonusIci.label}
-                      joueurs={joueurs}
-                      calcul={bonusGagne}
-                      largeurCol={largeurCol}
-                      styles={styles}
-                    />
-                  </>
-                )}
+          {Array.from({ length: nbManches }, (_, i) => i + 1).map((m) => (
+            <View key={m} style={styles.ligne}>
+              <View style={styles.cellLabel}>
+                <Text style={styles.labelTexte}>Manche {m}</Text>
               </View>
-            );
-          })}
+              {joueurs.map((j) => (
+                <View key={j.id} style={[styles.cell, { width: largeurCol }]}>
+                  <TextInput
+                    style={styles.caseInput}
+                    value={scores[j.id]?.[m] ?? ""}
+                    onChangeText={(t) => definir(j.id, m, t)}
+                    keyboardType={Platform.OS === "ios" ? "numbers-and-punctuation" : "numeric"}
+                    editable={!termine}
+                    textAlign="center"
+                    placeholder="—"
+                    placeholderTextColor={colors.placeholder}
+                  />
+                </View>
+              ))}
+            </View>
+          ))}
 
-            <LigneTotal
-              label="TOTAL"
-              joueurs={joueurs}
-              calcul={total}
-              fort
-              meilleur={meilleurTotal}
-              surligner={!tousEgaux}
-              largeurCol={largeurCol}
-              styles={styles}
-            />
+          {!termine && (
+            <TouchableOpacity style={styles.ajoutManche} onPress={() => setNbManches((n) => n + 1)}>
+              <Text style={styles.ajoutMancheTexte}>+ Ajouter une manche</Text>
+            </TouchableOpacity>
+          )}
+
+            <View style={[styles.ligne, styles.ligneTotal]}>
+              <View style={styles.cellLabel}>
+                <Text style={styles.totalLabel}>TOTAL</Text>
+              </View>
+              {joueurs.map((j) => {
+                const t = total(j.id);
+                const enTete = !tousEgaux && t === meilleur;
+                return (
+                  <View
+                    key={j.id}
+                    style={[styles.cell, { width: largeurCol }, enTete && styles.cellGagnant]}
+                  >
+                    <Text style={styles.totalValeur}>{t}</Text>
+                  </View>
+                );
+              })}
+            </View>
           </View>
         </ScrollView>
       </ScrollView>
@@ -343,7 +362,7 @@ export default function FeuilleGrille() {
         {!termine ? (
           <>
             <TouchableOpacity style={styles.actionSecondaire} onPress={ajouterJoueur}>
-              <Text style={styles.actionSecondaireTexte}>+ Joueur</Text>
+              <Text style={styles.actionSecondaireTexte}>+ {prefixe}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.actionPrincipale} onPress={terminer}>
               <Text style={styles.actionPrincipaleTexte}>Terminer</Text>
@@ -363,111 +382,15 @@ export default function FeuilleGrille() {
         onEgalite={() => finaliser("")}
         onAnnuler={() => setEgaliteOuverte(false)}
       />
-    </View>
-  );
-}
 
-function SectionLigne({
-  titre,
-  nbJoueurs,
-  largeurCol,
-  styles,
-}: {
-  titre: string;
-  nbJoueurs: number;
-  largeurCol: number;
-  styles: Styles;
-}) {
-  return (
-    <View style={styles.ligneSection}>
-      <View style={styles.cellLabel}>
-        <Text style={styles.sectionTexte}>{titre}</Text>
-      </View>
-      {Array.from({ length: nbJoueurs }).map((_, i) => (
-        <View key={i} style={[styles.cell, { width: largeurCol }]} />
-      ))}
-    </View>
-  );
-}
-
-function LigneCategorie({
-  label,
-  aide,
-  joueurs,
-  cle,
-  scores,
-  definir,
-  termine,
-  largeurCol,
-  styles,
-}: {
-  label: string;
-  aide?: string;
-  joueurs: Joueur[];
-  cle: string;
-  scores: Scores;
-  definir: (j: string, c: string, t: string) => void;
-  termine: boolean;
-  largeurCol: number;
-  styles: Styles;
-}) {
-  return (
-    <View style={styles.ligne}>
-      <View style={styles.cellLabel}>
-        <Text style={styles.labelTexte}>{label}</Text>
-        {aide && <Text style={styles.aideTexte}>{aide}</Text>}
-      </View>
-      {joueurs.map((j) => (
-        <View key={j.id} style={[styles.cell, { width: largeurCol }]}>
-          <TextInput
-            style={styles.caseInput}
-            value={scores[j.id]?.[cle] ?? ""}
-            onChangeText={(t) => definir(j.id, cle, t)}
-            keyboardType={Platform.OS === "ios" ? "numbers-and-punctuation" : "numeric"}
-            editable={!termine}
-            textAlign="center"
-            placeholder="—"
-            placeholderTextColor={styles.placeholderColor.color}
-          />
-        </View>
-      ))}
-    </View>
-  );
-}
-
-function LigneTotal({
-  label,
-  joueurs,
-  calcul,
-  fort,
-  meilleur,
-  surligner,
-  largeurCol,
-  styles,
-}: {
-  label: string;
-  joueurs: Joueur[];
-  calcul: (id: string) => number;
-  fort?: boolean;
-  meilleur?: number;
-  surligner?: boolean;
-  largeurCol: number;
-  styles: Styles;
-}) {
-  return (
-    <View style={[styles.ligne, styles.ligneTotal]}>
-      <View style={styles.cellLabel}>
-        <Text style={[styles.totalLabel, fort && styles.totalLabelFort]}>{label}</Text>
-      </View>
-      {joueurs.map((j) => {
-        const v = calcul(j.id);
-        const gagnant = fort && surligner && meilleur !== undefined && v === meilleur;
-        return (
-          <View key={j.id} style={[styles.cell, { width: largeurCol }, gagnant && styles.cellGagnant]}>
-            <Text style={[styles.totalValeur, fort && styles.totalValeurFort]}>{v}</Text>
-          </View>
-        );
-      })}
+      <SelecteurMembres
+        visible={membresPour !== null}
+        equipe={joueurs.find((j) => j.id === membresPour)?.nom ?? ""}
+        membres={joueurs.find((j) => j.id === membresPour)?.membres ?? []}
+        joueursConnus={joueursSauvegardes}
+        onValider={(m) => membresPour && definirMembres(membresPour, m)}
+        onAnnuler={() => setMembresPour(null)}
+      />
     </View>
   );
 }
@@ -477,8 +400,6 @@ function makeStyles(c: AppColors) {
     page: { flex: 1, backgroundColor: c.page },
     zoneTableau: { flex: 1 },
     grille: { padding: 12 },
-    banniere: { backgroundColor: c.success, padding: 14, alignItems: "center" },
-    banniereTexte: { color: c.onSuccess, fontSize: 16, fontWeight: "600" },
     chronoEntete: {
       fontSize: 15,
       fontWeight: "700",
@@ -486,8 +407,14 @@ function makeStyles(c: AppColors) {
       marginRight: 12,
       fontVariant: ["tabular-nums"],
     },
-    reprise: { backgroundColor: c.successSoft, paddingVertical: 8, paddingHorizontal: 16, alignItems: "center" },
+    reprise: { backgroundColor: c.successSoft, paddingVertical: 8, alignItems: "center" },
     repriseTexte: { color: c.textSecondary, fontSize: 13, fontWeight: "600" },
+    info: { backgroundColor: c.accentSoft, paddingVertical: 8, alignItems: "center" },
+    infoTexte: { color: c.accentText, fontSize: 13, fontWeight: "600" },
+    avertissement: { backgroundColor: c.warningSoft, paddingVertical: 8, alignItems: "center" },
+    avertissementTexte: { color: c.warningText, fontSize: 13, fontWeight: "600" },
+    banniere: { backgroundColor: c.success, padding: 14, alignItems: "center" },
+    banniereTexte: { color: c.onSuccess, fontSize: 16, fontWeight: "600" },
     chips: { flexGrow: 0 },
     chipsContenu: { gap: 8, paddingHorizontal: 12, paddingVertical: 10, alignItems: "center" },
     chip: {
@@ -500,8 +427,7 @@ function makeStyles(c: AppColors) {
     },
     chipTexte: { color: c.accentText, fontSize: 13, fontWeight: "600", lineHeight: 18 },
     ligne: { flexDirection: "row", alignItems: "stretch" },
-    ligneSection: { flexDirection: "row", marginTop: 6 },
-    ligneTotal: { marginTop: 2 },
+    ligneTotal: { marginTop: 6, borderTopWidth: 2, borderTopColor: c.borderStrong, paddingTop: 6 },
     cellLabel: { width: LARGEUR_LABEL, paddingVertical: 8, paddingRight: 8, justifyContent: "center" },
     cell: {
       width: LARGEUR_COL,
@@ -516,9 +442,9 @@ function makeStyles(c: AppColors) {
     cellGagnant: { backgroundColor: c.successSoft, borderRadius: 8 },
     nomInput: { fontSize: 13, fontWeight: "600", color: c.textPrimary, textAlign: "center", width: "100%" },
     supprimer: { color: c.textFaint, fontSize: 12, marginTop: 2 },
-    sectionTexte: { fontSize: 13, fontWeight: "700", color: c.accentText },
+    membresBouton: { marginTop: 3, paddingHorizontal: 2 },
+    membresTexte: { fontSize: 10, color: c.accentText, textAlign: "center", fontWeight: "600" },
     labelTexte: { fontSize: 14, color: c.textSecondary },
-    aideTexte: { fontSize: 11, color: c.textFaint },
     caseInput: {
       fontSize: 16,
       color: c.textPrimary,
@@ -529,11 +455,18 @@ function makeStyles(c: AppColors) {
       borderRadius: 6,
       backgroundColor: c.surface,
     },
-    placeholderColor: { color: c.placeholder },
-    totalLabel: { fontSize: 13, fontWeight: "600", color: c.textSecondary },
-    totalLabelFort: { fontSize: 15, fontWeight: "700", color: c.textPrimary },
-    totalValeur: { fontSize: 15, fontWeight: "600", color: c.textSecondary },
-    totalValeurFort: { fontSize: 18, fontWeight: "700", color: c.textPrimary },
+    ajoutManche: {
+      marginTop: 8,
+      paddingVertical: 10,
+      borderRadius: 10,
+      borderWidth: 1,
+      borderStyle: "dashed",
+      borderColor: c.accent,
+      alignItems: "center",
+    },
+    ajoutMancheTexte: { color: c.accentText, fontSize: 13, fontWeight: "600" },
+    totalLabel: { fontSize: 15, fontWeight: "700", color: c.textPrimary },
+    totalValeur: { fontSize: 18, fontWeight: "700", color: c.textPrimary },
     barreBas: {
       flexDirection: "row",
       gap: 10,

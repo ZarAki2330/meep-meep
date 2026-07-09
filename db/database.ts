@@ -50,12 +50,17 @@ export function getDb() {
       `);
 
       // Migrations : ajout des colonnes si la base existait déjà.
-      for (const colonne of ["categories TEXT", "bonus TEXT"]) {
+      for (const colonne of ["categories TEXT", "bonus TEXT", "equipes INTEGER"]) {
         try {
           await db.execAsync(`ALTER TABLE jeux ADD COLUMN ${colonne};`);
         } catch {
           // la colonne existe déjà
         }
+      }
+      try {
+        await db.execAsync("ALTER TABLE parties ADD COLUMN duree INTEGER;");
+      } catch {
+        // la colonne existe déjà
       }
 
       return db;

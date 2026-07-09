@@ -1,30 +1,21 @@
 # Meep Meep — Feuille de route
 
-Liste des fonctionnalités à faire et des améliorations. Les cases cochées sont terminées.
+Liste des fonctionnalités à faire et des améliorations.
 
 ## Priorité haute
 
-- [x] ~~**Export / import des données**~~ — fait : écran Réglages, export dans un fichier JSON partageable, restauration avec confirmation.
-- [x] ~~**Gestion des égalités**~~ — fait : dialogue au moment de terminer, départage manuel ou enregistrement d'une égalité.
 - [ ] **Compiler l'app (EAS build)** — installer l'app pour de vrai sur le téléphone, sans passer par Expo Go. C'est aussi ce qui fera apparaître l'icône Meep Meep.
 
 ## Améliorations des fonctionnalités existantes
 
-- [ ] **Couleur d'accent au choix** — dans les Réglages, proposer 5 pastilles de couleurs prédéfinies (violet, bleu, vert, corail, jaune…). Le choix s'applique à toute l'app **et au logo**, et s'adapte automatiquement au thème clair comme au thème sombre. Mémorisé entre les sessions.
-  - Technique : chaque couleur définit un jeu de teintes (accent, accentText, accentSoft) pour le mode clair et le mode sombre. Le logo étant monochrome avec transparence, il peut être recoloré à la volée avec `tintColor` sur le composant `Image` — inutile de générer un PNG par couleur.
-
-- [ ] **Renommer / fusionner des joueurs** — « Lucie » et « lucie » créent deux joueurs distincts et faussent les statistiques.
-- [ ] **Modifier une partie passée** — aujourd'hui on ne peut que la supprimer si un score est faux.
-- [ ] **Chronomètre de partie** — mesurer la durée réelle, puis l'exploiter dans les statistiques (durée moyenne par jeu, partie la plus longue).
-- [ ] **Recherche et filtres dans l'historique** — retrouver une partie précise quand la liste sera longue.
-- [ ] **Mode « manches »** — un quatrième mode de score, avec une colonne par manche et un total automatique (utile pour le 6 qui prend).
 - [ ] **Image depuis la galerie** — choisir une photo de sa propre boîte de jeu au lieu de coller une URL.
+- [ ] **Tutoriel / aide dans les Réglages** — un écran d'aide expliquant les fonctionnalités : les quatre modes de score (compteur, manches, objectif, feuille de score) et quand utiliser chacun, la syntaxe des cases et du bonus, les extensions et personnages, les favoris, l'export/import, la reprise de partie. Idéalement des sections dépliables, et pourquoi pas de petites bulles d'aide contextuelles là où c'est utile (formulaire d'ajout de jeu).
+- [ ] **Équipes dans les autres modes** — le mode équipes n'existe que pour les manches. À étendre au compteur, à l'objectif et à la feuille de score si le besoin se présente.
 
 ## Petits plus
 
 - [ ] **Tirage au sort du premier joueur**
 - [ ] **Notes sur une partie** — consigner une anecdote
-- [x] ~~**Écran « À propos »**~~ — fait : intégré au bas des Réglages (logo, version, signature)
 
 ## En attente
 
@@ -35,17 +26,26 @@ Liste des fonctionnalités à faire et des améliorations. Les cases cochées so
 
 - [x] Catalogue avec recherche et filtres (favoris, catégorie, joueurs, durée)
 - [x] Fiche de jeu : description, règles dépliables, extensions, personnages
-- [x] Trois modes de score : compteur, objectif, feuille de score
+- [x] Quatre modes de score : compteur, manches, objectif, feuille de score
 - [x] Feuille de score générique (sections, aides, bonus, scores négatifs)
+- [x] Mode équipes (belote) : membres par équipe, victoires créditées à chacun
+- [x] Seuil de fin de partie configurable depuis le formulaire
 - [x] Choix du personnage par joueur (Villainous), filtré par extensions
-- [x] Historique des parties, avec détail au clic
-- [x] Onglet Joueurs : liste, statistiques, sélection rapide en partie
+- [x] Gestion des égalités : départage manuel ou enregistrement d'une égalité
+- [x] Chronomètre de partie, durée enregistrée et exploitée dans les statistiques
+- [x] Reprise d'une partie en cours après fermeture de l'app
+- [x] Historique des parties, avec détail et modification au clic
+- [x] Recherche et filtres dans l'historique (jeu, joueur, période)
+- [x] Onglet Joueurs : liste, statistiques, renommage et fusion
 - [x] Onglet Statistiques : tableau de bord et filtre par jeu
 - [x] Favoris avec étoile cliquable
 - [x] Ajouter, modifier et supprimer ses propres jeux
+- [x] Export et import des données (sauvegarde)
 - [x] Thème clair (crème) et thème sombre, mémorisés
+- [x] Six couleurs d'accent au choix, appliquées à toute l'app et au logo
 - [x] Logo, police Fredoka, icône de l'app
 - [x] Dialogues de confirmation personnalisés
+- [x] Écran Réglages avec « À propos »
 - [x] Bouton partager
-- [x] Reprise d'une partie en cours après fermeture de l'app
+- [x] En-tête maison, corrigeant le chevauchement avec la barre d'état sur Android
 - [x] Projet versionné sur GitHub

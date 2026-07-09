@@ -43,11 +43,14 @@ export type Jeu = {
   //  - "compteur" (défaut) : boutons +/- par joueur
   //  - "objectif" : pas de points, on désigne simplement le vainqueur
   //  - "grille" : feuille de score par catégorie (voir "categories")
-  scoreMode?: "compteur" | "objectif" | "grille";
+  //  - "manches" : une ligne par manche, total automatique
+  scoreMode?: "compteur" | "objectif" | "grille" | "manches";
   // Pour le mode "grille" : les cases de la feuille de score.
   categories?: CategorieScore[];
   // Pour le mode "grille" : bonus optionnel.
   bonus?: BonusGrille;
+  // Le score se compte par équipe et non par joueur (belote, Codenames…).
+  equipes?: boolean;
   // Extensions disponibles pour ce jeu (optionnel).
   // Si renseigné, on peut les cocher sur la fiche du jeu.
   extensions?: string[];

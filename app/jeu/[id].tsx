@@ -1,11 +1,12 @@
 // app/jeu/[id].tsx — fiche d'un jeu
 
 import { useFocusEffect } from "@react-navigation/native";
-import { Stack, useLocalSearchParams, useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { useCallback, useState } from "react";
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import { DialogueConfirmation } from "@/components/dialogue-confirmation";
+import { Entete } from "@/components/entete";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { VisuelJeu } from "@/components/visuel-jeu";
 import { type AppColors } from "@/constants/theme-colors";
@@ -17,7 +18,7 @@ export default function FicheJeu() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
   const { colors } = useTheme();
-  const { jeux, estImporte, supprimerJeu, estFavori, basculerFavori } = useJeux();
+  const { jeux, pret, estImporte, supprimerJeu, estFavori, basculerFavori } = useJeux();
   const styles = makeStyles(colors);
   const jeu = jeux.find((j) => j.id === id);
 
@@ -50,13 +51,14 @@ export default function FicheJeu() {
 
   function ouvrirPartie() {
     if (!jeu) return;
+    const destinations = {
+      grille: "/grille/[jeuId]",
+      objectif: "/objectif/[jeuId]",
+      manches: "/manches/[jeuId]",
+      compteur: "/partie/[jeuId]",
+    } as const;
     router.push({
-      pathname:
-        jeu.scoreMode === "grille"
-          ? "/grille/[jeuId]"
-          : jeu.scoreMode === "objectif"
-            ? "/objectif/[jeuId]"
-            : "/partie/[jeuId]",
+      pathname: destinations[jeu.scoreMode ?? "compteur"],
       params: { jeuId: jeu.id, extensions: extensionsActives.join("|") },
     });
   }
@@ -75,18 +77,26 @@ export default function FicheJeu() {
     router.back();
   }
 
+  // Tant que les jeux ajoutés ne sont pas chargés, on n'affiche pas « introuvable ».
   if (!jeu) {
     return (
-      <View style={styles.centre}>
-        <Text style={{ color: colors.textPrimary }}>Jeu introuvable.</Text>
+      <View style={{ flex: 1 }}>
+        <Entete titre="" />
+        <View style={styles.centre}>
+          {pret ? (
+            <Text style={{ color: colors.textPrimary }}>Jeu introuvable.</Text>
+          ) : (
+            <ActivityIndicator color={colors.accent} />
+          )}
+        </View>
       </View>
     );
   }
 
   return (
-    <ScrollView style={styles.page} contentContainerStyle={styles.contenu}>
-      <Stack.Screen options={{ title: jeu.nom }} />
-
+    <View style={{ flex: 1, backgroundColor: colors.page }}>
+      <Entete titre={jeu.nom} />
+      <ScrollView style={styles.page} contentContainerStyle={styles.contenu}>
       <VisuelJeu jeu={jeu} style={styles.banniere} />
 
       <View style={styles.titreLigne}>
@@ -216,7 +226,8 @@ export default function FicheJeu() {
         onConfirmer={supprimer}
         onAnnuler={() => setConfirmationOuverte(false)}
       />
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 }
 
