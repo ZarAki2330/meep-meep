@@ -18,13 +18,32 @@ const COULEURS_CATEGORIE: Record<string, string> = {
 export function VisuelJeu({ jeu, style }: { jeu: Jeu; style?: StyleProp<ViewStyle> }) {
   const { colors } = useTheme();
   const [erreur, setErreur] = useState(false);
+  // L'initiale suit la taille du visuel : le même composant sert de bannière,
+  // de vignette dans le catalogue et de miniature dans la bibliothèque.
+  const [cote, setCote] = useState(0);
   // Les catégories connues gardent leur couleur ; les autres suivent l'accent choisi.
   const couleur = COULEURS_CATEGORIE[jeu.categorie] ?? colors.accent;
   const montrerImage = !!jeu.image && !erreur;
 
   return (
-    <View style={[styles.base, { backgroundColor: couleur }, style]}>
-      {!montrerImage && <Text style={styles.initiale}>{jeu.nom.charAt(0)}</Text>}
+    <View
+      // Décoratif : le nom du jeu accompagne toujours son visuel.
+      accessible={false}
+      accessibilityElementsHidden
+      importantForAccessibility="no-hide-descendants"
+      style={[styles.base, { backgroundColor: couleur }, style]}
+      onLayout={(e) => setCote(e.nativeEvent.layout.height)}
+    >
+      {!montrerImage && (
+        <Text
+          // Calibrée sur la vignette, et purement décorative : elle ne suit pas
+          // les réglages de taille de police.
+          allowFontScaling={false}
+          style={[styles.initiale, cote > 0 && { fontSize: Math.round(cote * 0.45) }]}
+        >
+          {jeu.nom.charAt(0)}
+        </Text>
+      )}
       {montrerImage && (
         <Image
           source={{ uri: jeu.image }}

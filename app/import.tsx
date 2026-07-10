@@ -1,7 +1,5 @@
 // app/import.tsx — ajouter un jeu manuellement (hors-ligne)
 
-import * as FileSystemLegacy from "expo-file-system/legacy";
-import * as ImagePicker from "expo-image-picker";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useCallback, useEffect, useState, type ReactNode } from "react";
 import {
@@ -19,51 +17,29 @@ import {
 
 import { Entete } from "@/components/entete";
 import { type AppColors } from "@/constants/theme-colors";
+import { type CleAide } from "@/data/aide";
 import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
-import { type BonusGrille, type CategorieScore, type Jeu } from "@/data/jeux";
+import { type BonusGrille, type Jeu } from "@/data/jeux";
 import { ajouterJeu } from "@/db/jeux";
+import { choisirPhoto, DOSSIER_JEUX, supprimerImage } from "@/lib/images";
 import { texteVersJeu, type JeuSansId } from "@/lib/jeu-partage";
+import {
+  categoriesVersTexte,
+  extensionsInconnues,
+  extensionsVersTexte,
+  listeOuRien,
+  parserCategories,
+  parserExtensions,
+  parserRoles,
+  rolesVersTexte,
+} from "@/lib/parse-jeu";
 
 type Mode = "compteur" | "objectif" | "grille" | "manches" | "cooperatif";
 
 function nombre(s: string, defaut: number): number {
   const n = parseInt(s, 10);
   return isNaN(n) ? defaut : n;
-}
-
-// Reconstruit le texte des cases à partir des catégories enregistrées.
-function categoriesVersTexte(cats: CategorieScore[]): string {
-  const lignes: string[] = [];
-  let sectionCourante: string | undefined;
-  for (const c of cats) {
-    if (c.section !== sectionCourante) {
-      sectionCourante = c.section;
-      if (sectionCourante) lignes.push(`# ${sectionCourante}`);
-    }
-    lignes.push(c.aide ? `${c.label} | ${c.aide}` : c.label);
-  }
-  return lignes.join("\n");
-}
-
-// "# Partie haute" ouvre une section ; "Full | 25" définit une case.
-function parserCategories(texte: string): CategorieScore[] {
-  const cats: CategorieScore[] = [];
-  let section: string | undefined;
-  let i = 0;
-  for (const ligne of texte.split("\n")) {
-    const l = ligne.trim();
-    if (!l) continue;
-    if (l.startsWith("#")) {
-      section = l.slice(1).trim() || undefined;
-      continue;
-    }
-    const parts = l.split("|").map((s) => s.trim());
-    const label = parts[0];
-    if (!label) continue;
-    cats.push({ cle: `c${i++}`, label, aide: parts[1] || undefined, section });
-  }
-  return cats;
 }
 
 export default function AjouterJeu() {
@@ -104,6 +80,8 @@ export default function AjouterJeu() {
   const [erreurCategories, setErreurCategories] = useState<string | null>(null);
   const [erreurBonus, setErreurBonus] = useState<string | null>(null);
   const [erreurImage, setErreurImage] = useState<string | null>(null);
+  const [extensionsTexte, setExtensionsTexte] = useState("");
+  const [rolesTexte, setRolesTexte] = useState("");
   const [prerempli, setPrerempli] = useState(false);
   const [collageOuvert, setCollageOuvert] = useState(false);
   const [texteColle, setTexteColle] = useState("");
@@ -114,26 +92,15 @@ export default function AjouterJeu() {
   async function choisirImage() {
     setErreurImage(null);
     try {
-      const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
-      if (!permission.granted) {
-        setErreurImage("Autorise l'accès à tes photos pour choisir une image.");
-        return;
-      }
-      // Pas de recadrage : sur Android, l'écran de recadrage natif masque
-      // parfois son bouton de validation.
-      const res = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ["images"],
-        allowsEditing: false,
-        selectionLimit: 1,
-        quality: 0.8,
-      });
-      if (res.canceled || !res.assets?.[0]) return;
+      const nouvelle = await choisirPhoto(DOSSIER_JEUX);
+      if (!nouvelle) return; // l'utilisateur a renoncé
 
-      const dossier = `${FileSystemLegacy.documentDirectory}images-jeux/`;
-      await FileSystemLegacy.makeDirectoryAsync(dossier, { intermediates: true }).catch(() => {});
-      const destination = `${dossier}${Date.now()}.jpg`;
-      await FileSystemLegacy.copyAsync({ from: res.assets[0].uri, to: destination });
-      setImage(destination);
+      const precedente = image;
+      setImage(nouvelle);
+
+      // On se ravise deux fois de suite : la photo intermédiaire n'a jamais été
+      // enregistrée, personne ne la réclamera. Celle du jeu, elle, attend la validation.
+      if (precedente !== jeuExistant?.image) await supprimerImage(precedente);
     } catch (e) {
       setErreurImage(e instanceof Error ? e.message : String(e));
     }
@@ -154,6 +121,8 @@ export default function AjouterJeu() {
     setSeuil(j.seuilFin ? String(j.seuilFin) : "");
     setEquipes(j.equipes === true);
     setMode(j.scoreMode ?? "compteur");
+    setExtensionsTexte(extensionsVersTexte(j.extensions ?? []));
+    setRolesTexte(rolesVersTexte(j.roles ?? []));
 
     const cats = j.categories ?? [];
     setCategoriesTexte(categoriesVersTexte(cats));
@@ -204,6 +173,10 @@ export default function AjouterJeu() {
   const sectionsDispo = Array.from(
     new Set(catsApercu.map((c) => c.section).filter(Boolean) as string[]),
   );
+
+  // Aperçu des personnages : on prévient tout de suite si l'un réclame une
+  // extension qui n'est pas déclarée — il ne s'afficherait jamais sur la fiche.
+  const inconnues = extensionsInconnues(parserRoles(rolesTexte), parserExtensions(extensionsTexte));
 
   async function enregistrer() {
     if (!nom.trim()) {
@@ -259,8 +232,12 @@ export default function AjouterJeu() {
       scoreMode: mode,
       categories: cats,
       bonus,
+      extensions: listeOuRien(parserExtensions(extensionsTexte)),
+      roles: listeOuRien(parserRoles(rolesTexte)),
     };
     await ajouterJeu(jeu);
+    // La photo qu'on vient de remplacer n'a plus de propriétaire.
+    if (jeuExistant && jeuExistant.image !== jeu.image) await supprimerImage(jeuExistant.image);
     rafraichir();
     router.back();
   }
@@ -274,10 +251,12 @@ export default function AjouterJeu() {
       <ScrollView style={styles.page} contentContainerStyle={styles.contenu}>
         {!modeEdition && (
           <>
-            <TouchableOpacity style={styles.bggBouton} onPress={() => router.push("/bgg")}>
-              <Text style={styles.bggTexte}>Chercher sur BoardGameGeek</Text>
+            <TouchableOpacity style={styles.bggBouton} onPress={() => router.push("/bibliotheque")}>
+              <Text style={styles.bggTexte}>Ajouter un jeu tout prêt</Text>
               <Text style={styles.bggChevron}>▸</Text>
             </TouchableOpacity>
+            {/* Bouton BoardGameGeek retiré le temps d'obtenir le jeton d'API.
+                L'écran /bgg et lib/bgg.ts restent en place. */}
             <TouchableOpacity style={styles.bggBouton} onPress={() => setCollageOuvert(true)}>
               <Text style={styles.bggTexte}>Coller un jeu partagé</Text>
               <Text style={styles.bggChevron}>▸</Text>
@@ -344,13 +323,20 @@ export default function AjouterJeu() {
           </Champ>
         </View>
 
-        <Champ label="Jeu en équipes ?" styles={styles}>
+        <Champ label="Jeu en équipes ?" styles={styles} aide="equipes">
           <TouchableOpacity
             style={styles.bonusBascule}
             activeOpacity={0.7}
+            accessibilityRole="checkbox"
+            accessibilityState={{ checked: equipes }}
+            accessibilityLabel="Le score se compte par équipe"
             onPress={() => setEquipes((e) => !e)}
           >
-            <View style={[styles.case, equipes && styles.caseActive]}>
+            <View
+              style={[styles.case, equipes && styles.caseActive]}
+              accessibilityElementsHidden
+              importantForAccessibility="no-hide-descendants"
+            >
               {equipes && <Text style={styles.caseCoche}>✓</Text>}
             </View>
             <Text style={styles.bonusTexte}>
@@ -438,7 +424,46 @@ export default function AjouterJeu() {
           />
         </Champ>
 
-        <Champ label="Comment se compte le score ?" styles={styles}>
+        <Champ label="Extensions (une par ligne)" styles={styles} aide="extensions">
+          <Text style={styles.aide}>
+            Elles se cochent sur la fiche du jeu, avant de lancer une partie. Laisse vide si le jeu
+            n&apos;en a pas.
+          </Text>
+          <TextInput
+            style={[styles.input, styles.multi]}
+            value={extensionsTexte}
+            onChangeText={setExtensionsTexte}
+            placeholder={"Mauvais jusqu'à l'os\nLa Fin est Proche"}
+            placeholderTextColor={colors.placeholder}
+            multiline
+          />
+        </Champ>
+
+        <Champ label="Personnages (un par ligne)" styles={styles} aide="extensions">
+          <Text style={styles.aide}>
+            Un nom, puis, séparés par une barre verticale : son origine, son objectif, et
+            l&apos;extension qui l&apos;apporte. Seul le nom est obligatoire.
+          </Text>
+          <TextInput
+            style={[styles.input, styles.multiGrand]}
+            value={rolesTexte}
+            onChangeText={setRolesTexte}
+            placeholder={
+              "Maléfique | La Belle au bois dormant | Poser une Malédiction sur ses 4 lieux\nHadès | Hercule | Réunir 3 Titans | Mauvais jusqu'à l'os"
+            }
+            placeholderTextColor={colors.placeholder}
+            multiline
+          />
+          {inconnues.length > 0 && (
+            <Text style={styles.avertissement}>
+              {inconnues.length === 1
+                ? `L'extension « ${inconnues[0]} » n'est pas déclarée ci-dessus : ses personnages ne s'afficheront jamais.`
+                : `Ces extensions ne sont pas déclarées ci-dessus : ${inconnues.map((e) => `« ${e} »`).join(", ")}. Leurs personnages ne s'afficheront jamais.`}
+            </Text>
+          )}
+        </Champ>
+
+        <Champ label="Comment se compte le score ?" styles={styles} aide="modes">
           <View style={styles.modeColonne}>
             <ModeChoix
               titre="Compteur de points"
@@ -483,6 +508,9 @@ export default function AjouterJeu() {
             <View style={styles.sensLigne}>
               <TouchableOpacity
                 style={[styles.sensChip, sens === "max" && styles.sensChipActif]}
+                accessibilityRole="radio"
+                accessibilityState={{ checked: sens === "max" }}
+                accessibilityLabel="Le plus de points gagne"
                 onPress={() => setSens("max")}
               >
                 <Text style={[styles.sensTexte, sens === "max" && styles.sensTexteActif]}>
@@ -491,6 +519,9 @@ export default function AjouterJeu() {
               </TouchableOpacity>
               <TouchableOpacity
                 style={[styles.sensChip, sens === "min" && styles.sensChipActif]}
+                accessibilityRole="radio"
+                accessibilityState={{ checked: sens === "min" }}
+                accessibilityLabel="Le moins de points gagne"
                 onPress={() => setSens("min")}
               >
                 <Text style={[styles.sensTexte, sens === "min" && styles.sensTexteActif]}>
@@ -518,7 +549,7 @@ export default function AjouterJeu() {
         )}
 
         {mode === "grille" && (
-          <Champ label="Cases de la feuille (une par ligne)" styles={styles} obligatoire>
+          <Champ label="Cases de la feuille (une par ligne)" styles={styles} obligatoire aide="feuille">
             <Text style={styles.aide}>
               Une ligne = une case. Ajoute une aide après une barre verticale, et commence une ligne
               par # pour créer une section.
@@ -539,16 +570,23 @@ export default function AjouterJeu() {
         )}
 
         {mode === "grille" && (
-          <Champ label="Bonus (optionnel)" styles={styles}>
+          <Champ label="Bonus (optionnel)" styles={styles} aide="feuille">
             <TouchableOpacity
               style={styles.bonusBascule}
               activeOpacity={0.7}
+              accessibilityRole="checkbox"
+              accessibilityState={{ checked: bonusActif }}
+              accessibilityLabel="Ajouter des points si un total atteint un seuil"
               onPress={() => {
                 setBonusActif((b) => !b);
                 setErreurBonus(null);
               }}
             >
-              <View style={[styles.case, bonusActif && styles.caseActive]}>
+              <View
+                style={[styles.case, bonusActif && styles.caseActive]}
+                accessibilityElementsHidden
+                importantForAccessibility="no-hide-descendants"
+              >
                 {bonusActif && <Text style={styles.caseCoche}>✓</Text>}
               </View>
               <Text style={styles.bonusTexte}>
@@ -685,9 +723,17 @@ function ModeChoix({
     <TouchableOpacity
       style={[styles.modeCarte, actif && styles.modeCarteActive]}
       activeOpacity={0.8}
+      accessibilityRole="radio"
+      accessibilityState={{ checked: actif }}
+      accessibilityLabel={titre}
+      accessibilityHint={detail}
       onPress={onPress}
     >
-      <View style={[styles.radio, actif && styles.radioActif]}>
+      <View
+        style={[styles.radio, actif && styles.radioActif]}
+        accessibilityElementsHidden
+        importantForAccessibility="no-hide-descendants"
+      >
         {actif && <View style={styles.radioPoint} />}
       </View>
       <View style={{ flex: 1 }}>
@@ -704,19 +750,35 @@ function Champ({
   styles,
   style,
   obligatoire,
+  aide,
 }: {
   label: string;
   children: ReactNode;
   styles: ReturnType<typeof makeStyles>;
   style?: object;
   obligatoire?: boolean;
+  /** Section de l'écran d'aide à ouvrir, si ce champ mérite une explication. */
+  aide?: CleAide;
 }) {
+  const router = useRouter();
   return (
     <View style={[styles.champ, style]}>
-      <Text style={styles.label}>
-        {label}
-        {obligatoire && <Text style={styles.asterisque}> *</Text>}
-      </Text>
+      <View style={styles.labelLigne}>
+        <Text style={styles.label}>
+          {label}
+          {obligatoire && <Text style={styles.asterisque}> *</Text>}
+        </Text>
+        {aide && (
+          <TouchableOpacity
+            style={styles.aideBulle}
+            hitSlop={10}
+            accessibilityLabel={`Aide : ${label}`}
+            onPress={() => router.push({ pathname: "/aide", params: { section: aide } })}
+          >
+            <Text style={styles.aideBulleTexte}>?</Text>
+          </TouchableOpacity>
+        )}
+      </View>
       {children}
     </View>
   );
@@ -740,6 +802,17 @@ function makeStyles(c: AppColors) {
     bggChevron: { fontSize: 14, color: c.accentText },
     champ: { marginBottom: 14 },
     ligne: { flexDirection: "row", gap: 12 },
+    labelLigne: { flexDirection: "row", alignItems: "center", gap: 8 },
+    aideBulle: {
+      width: 20,
+      height: 20,
+      borderRadius: 10,
+      backgroundColor: c.accentSoft,
+      alignItems: "center",
+      justifyContent: "center",
+      marginBottom: 6,
+    },
+    aideBulleTexte: { fontSize: 12, fontWeight: "700", color: c.accentText },
     label: { fontSize: 13, fontWeight: "600", color: c.textSecondary, marginBottom: 6 },
     asterisque: { color: c.accentText, fontSize: 14, fontWeight: "700" },
     input: {
@@ -772,6 +845,15 @@ function makeStyles(c: AppColors) {
     imageRetirer: { color: c.danger, fontSize: 13, fontWeight: "600", textAlign: "center" },
     inputErreur: { borderColor: c.danger, borderWidth: 1.5 },
     erreur: { color: c.danger, fontSize: 13, marginTop: 6 },
+    avertissement: {
+      backgroundColor: c.warningSoft,
+      color: c.warningText,
+      fontSize: 12,
+      lineHeight: 17,
+      borderRadius: 10,
+      padding: 10,
+      marginTop: 8,
+    },
     multi: { minHeight: 60, textAlignVertical: "top" },
     multiGrand: { minHeight: 110, textAlignVertical: "top" },
     aide: { fontSize: 12, color: c.textMuted, marginBottom: 8, lineHeight: 17 },

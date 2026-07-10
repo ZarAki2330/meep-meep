@@ -2,9 +2,10 @@
 
 import * as DocumentPicker from "expo-document-picker";
 import { File, Paths } from "expo-file-system";
+import { useRouter } from "expo-router";
 import * as FileSystemLegacy from "expo-file-system/legacy";
 import * as Sharing from "expo-sharing";
-import { useState, type ComponentProps } from "react";
+import { useCallback, useEffect, useState, type ComponentProps } from "react";
 import {
   ActivityIndicator,
   Image,
@@ -22,6 +23,7 @@ import { IconSymbol } from "@/components/ui/icon-symbol";
 import { ACCENTS, CLES_ACCENT, type AppColors } from "@/constants/theme-colors";
 import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
+import { compterParties, viderHistorique } from "@/db/parties";
 import {
   exporterDonnees,
   restaurerDonnees,
@@ -38,11 +40,34 @@ export default function Reglages() {
   const { colors, mode, toggle, accent, definirAccent } = useTheme();
   const { rafraichir } = useJeux();
   const styles = makeStyles(colors);
+  const router = useRouter();
 
   const [occupe, setOccupe] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [erreur, setErreur] = useState<string | null>(null);
   const [aRestaurer, setARestaurer] = useState<Sauvegarde | null>(null);
+  const [nbParties, setNbParties] = useState(0);
+  const [videOuvert, setVideOuvert] = useState(false);
+
+  const compter = useCallback(() => {
+    compterParties()
+      .then(setNbParties)
+      .catch(() => setNbParties(0));
+  }, []);
+
+  useEffect(compter, [compter]);
+
+  async function viderTout() {
+    setVideOuvert(false);
+    setErreur(null);
+    try {
+      await viderHistorique();
+      compter();
+      setMessage("Historique vidé. Tes jeux et tes joueurs sont intacts.");
+    } catch (e) {
+      setErreur(e instanceof Error ? e.message : String(e));
+    }
+  }
 
   async function exporter() {
     setOccupe(true);
@@ -95,6 +120,7 @@ export default function Reglages() {
     try {
       await restaurerDonnees(s);
       rafraichir();
+      compter();
       setMessage("Sauvegarde restaurée. Tes données ont été remplacées.");
     } catch (e) {
       setErreur(e instanceof Error ? e.message : String(e));
@@ -188,12 +214,35 @@ export default function Reglages() {
 
       <Text style={styles.section}>Application</Text>
       <Ligne
+        titre="Aide"
+        detail="Les modes de score, la feuille de score, les extensions, la sauvegarde…"
+        icone="questionmark"
+        couleur={colors.accentText}
+        onPress={() => router.push("/aide")}
+        styles={styles}
+      />
+      <Ligne
         titre="Partager Meep Meep"
         detail="Envoyer l'application à un ami."
         icone="square.and.arrow.up"
         couleur={colors.accentText}
         onPress={partagerApp}
         styles={styles}
+      />
+
+      <Text style={[styles.section, styles.sectionDanger]}>Zone dangereuse</Text>
+      <Ligne
+        titre="Vider l'historique"
+        detail={
+          nbParties === 0
+            ? "Aucune partie enregistrée."
+            : `Efface les ${nbParties} parties enregistrées. Les jeux, les joueurs et les favoris restent.`
+        }
+        icone="trash"
+        couleur={nbParties === 0 ? colors.textFaint : colors.onDanger}
+        onPress={() => nbParties > 0 && setVideOuvert(true)}
+        styles={styles}
+        danger={nbParties > 0}
       />
 
       <View style={styles.apropos}>
@@ -219,6 +268,15 @@ export default function Reglages() {
         onConfirmer={restaurer}
         onAnnuler={() => setARestaurer(null)}
       />
+
+      <DialogueConfirmation
+        visible={videOuvert}
+        titre="Vider tout l'historique ?"
+        message={`Les ${nbParties} parties enregistrées seront effacées, ainsi que les statistiques qui en découlent. C'est sans retour : pense à exporter tes données d'abord.`}
+        texteConfirmer="Tout effacer"
+        onConfirmer={viderTout}
+        onAnnuler={() => setVideOuvert(false)}
+      />
       </ScrollView>
     </View>
   );
@@ -233,6 +291,7 @@ function Ligne({
   couleur,
   onPress,
   styles,
+  danger,
 }: {
   titre: string;
   detail: string;
@@ -240,14 +299,15 @@ function Ligne({
   couleur: string;
   onPress: () => void;
   styles: ReturnType<typeof makeStyles>;
+  danger?: boolean;
 }) {
   return (
     <TouchableOpacity style={styles.ligne} activeOpacity={0.7} onPress={onPress}>
       <View style={{ flex: 1 }}>
-        <Text style={styles.ligneTitre}>{titre}</Text>
+        <Text style={[styles.ligneTitre, danger && styles.ligneTitreDanger]}>{titre}</Text>
         <Text style={styles.ligneDetail}>{detail}</Text>
       </View>
-      <View style={styles.pastille}>
+      <View style={[styles.pastille, danger && styles.pastilleDanger]}>
         <IconSymbol name={icone} size={19} color={couleur} />
       </View>
     </TouchableOpacity>
@@ -267,6 +327,7 @@ function makeStyles(c: AppColors) {
       textTransform: "uppercase",
       letterSpacing: 0.5,
     },
+    sectionDanger: { color: c.danger },
     ligne: {
       flexDirection: "row",
       alignItems: "center",
@@ -279,6 +340,7 @@ function makeStyles(c: AppColors) {
       marginBottom: 10,
     },
     ligneTitre: { fontSize: 15, fontWeight: "600", color: c.textPrimary },
+    ligneTitreDanger: { color: c.danger },
     ligneDetail: { fontSize: 12, color: c.textMuted, marginTop: 3, lineHeight: 17 },
     pastille: {
       width: 34,
@@ -288,7 +350,7 @@ function makeStyles(c: AppColors) {
       alignItems: "center",
       justifyContent: "center",
     },
-    pastilleTexte: { fontSize: 16, color: c.accentText, fontWeight: "700" },
+    pastilleDanger: { backgroundColor: c.danger },
 
     couleursBloc: {
       backgroundColor: c.surface,
@@ -320,6 +382,6 @@ function makeStyles(c: AppColors) {
     apropos: { alignItems: "center", marginTop: 36 },
     logo: { height: 30, aspectRatio: 1428 / 249 },
     version: { fontSize: 12, color: c.textMuted, marginTop: 10 },
-    signature: { fontSize: 12, color: c.textFaint, marginTop: 2 },
+    signature: { fontSize: 12, color: c.textMuted, marginTop: 2 },
   });
 }

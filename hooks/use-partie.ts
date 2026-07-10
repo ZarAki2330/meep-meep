@@ -6,17 +6,20 @@
 // dans l'écran. Ce qui ne change pas vit ici, une seule fois.
 
 import { useFocusEffect } from "@react-navigation/native";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { type Jeu } from "@/data/jeux";
-import { listerJoueurs } from "@/db/joueurs";
+import { listerJoueurs, type JoueurEnregistre } from "@/db/joueurs";
 import { chargerEtat, effacerEtat, sauvegarderEtat } from "@/db/partie-en-cours";
 import {
   enregistrerPartie,
+  modifierPartie,
   noterPartie,
   type JoueurScore,
   type Resultat,
 } from "@/db/parties";
+
+import { nomPropre } from "@/lib/lignes-partie";
 
 import { useChrono } from "./use-chrono";
 
@@ -52,16 +55,29 @@ type Options<E extends object> = {
   extraInitial: E;
   /** Vrai quand rien n'a été saisi : inutile de retenir une partie à reprendre. */
   vierge: (joueurs: JoueurPartie[], extra: E) => boolean;
+  /**
+   * Dernière chance de corriger l'état repris avant de l'afficher.
+   * La feuille de score y jette les cases que le jeu ne connaît plus.
+   */
+  nettoyer?: (extra: E) => E;
 };
 
-export function usePartie<E extends object>({ jeuId, jeu, extraInitial, vierge }: Options<E>) {
+export function usePartie<E extends object>({
+  jeuId,
+  jeu,
+  extraInitial,
+  vierge,
+  nettoyer,
+}: Options<E>) {
   const modeEquipes = jeu?.equipes === true;
   const prefixe = prefixeJoueur(jeu);
+  // Le mode qui a produit l'état sauvegardé. Le changer rend cet état illisible.
+  const mode = jeu?.scoreMode ?? "compteur";
 
   const [joueurs, setJoueurs] = useState<JoueurPartie[]>(() => joueursParDefaut(prefixe));
   const [extra, setExtra] = useState<E>(extraInitial);
 
-  const [joueursSauvegardes, setJoueursSauvegardes] = useState<string[]>([]);
+  const [joueursConnus, setJoueursConnus] = useState<JoueurEnregistre[]>([]);
   const [charge, setCharge] = useState(false);
   const [reprise, setReprise] = useState(false);
   const [termine, setTermine] = useState(false);
@@ -76,6 +92,8 @@ export function usePartie<E extends object>({ jeuId, jeu, extraInitial, vierge }
   const clesExtra = useRef(Object.keys(extraInitial));
   const viergeRef = useRef(vierge);
   viergeRef.current = vierge;
+  const nettoyerRef = useRef(nettoyer);
+  nettoyerRef.current = nettoyer;
   const partieIdRef = useRef<number | null>(null);
 
   const { secondes, demarrer, pause, initialiser } = useChrono();
@@ -86,7 +104,7 @@ export function usePartie<E extends object>({ jeuId, jeu, extraInitial, vierge }
 
   useEffect(() => {
     listerJoueurs()
-      .then((js) => setJoueursSauvegardes(js.map((j) => j.nom)))
+      .then(setJoueursConnus)
       .catch(() => {});
   }, []);
 
@@ -97,21 +115,44 @@ export function usePartie<E extends object>({ jeuId, jeu, extraInitial, vierge }
         const sauves = etat?.joueurs as JoueurPartie[] | undefined;
         if (!sauves?.length) return;
 
+        // Le mode de score du jeu a changé depuis : la grille, les manches ou le
+        // vainqueur désigné n'ont plus de sens. Mieux vaut repartir de zéro que
+        // de rouvrir une partie amputée en la disant « reprise ».
+        const modeSauve = etat?.mode;
+        if (typeof modeSauve === "string" && modeSauve !== mode) {
+          effacerEtat(jeuId).catch(() => {});
+          return;
+        }
+
         setJoueurs(sauves.map((j) => ({ ...j, score: j.score ?? 0 })));
 
         const repris: Record<string, unknown> = {};
         for (const cle of clesExtra.current) {
           if (etat && cle in etat) repris[cle] = etat[cle];
         }
-        if (Object.keys(repris).length) setExtra((prev) => ({ ...prev, ...repris }));
+        if (Object.keys(repris).length) {
+          setExtra((prev) => {
+            const fusion = { ...prev, ...repris } as E;
+            return nettoyerRef.current ? nettoyerRef.current(fusion) : fusion;
+          });
+        }
 
         const duree = etat?.duree;
         if (typeof duree === "number" && duree > 0) initialiser(duree);
+
+        // Une partie déjà enregistrée, rouverte par « continuer à modifier »,
+        // puis quittée : sans cet identifiant, la reprise en créerait une seconde.
+        const idEnregistre = etat?.partieId;
+        if (typeof idEnregistre === "number") {
+          partieIdRef.current = idEnregistre;
+          setPartieId(idEnregistre);
+        }
+
         setReprise(true);
       })
       .catch(() => {})
       .finally(() => setCharge(true));
-  }, [jeuId, initialiser]);
+  }, [jeuId, initialiser, mode]);
 
   // Le chrono tourne quand l'écran est affiché, se met en pause sinon.
   useFocusEffect(
@@ -134,9 +175,15 @@ export function usePartie<E extends object>({ jeuId, jeu, extraInitial, vierge }
     if (viergeRef.current(joueurs, extra)) {
       effacerEtat(jeuId).catch(() => {});
     } else {
-      sauvegarderEtat(jeuId, { joueurs, ...extra, duree: secondesRef.current }).catch(() => {});
+      sauvegarderEtat(jeuId, {
+        joueurs,
+        ...extra,
+        duree: secondesRef.current,
+        partieId: partieIdRef.current,
+        mode,
+      }).catch(() => {});
     }
-  }, [charge, termine, joueurs, extra, jeuId]);
+  }, [charge, termine, joueurs, extra, jeuId, mode]);
 
   function renommer(id: string, nom: string) {
     setJoueurs((prev) => prev.map((j) => (j.id === id ? { ...j, nom } : j)));
@@ -150,7 +197,12 @@ export function usePartie<E extends object>({ jeuId, jeu, extraInitial, vierge }
   }
 
   function ajouterJoueurNomme(nom: string) {
-    setJoueurs((prev) => [...prev, { id: `j${Date.now()}`, nom, score: 0 }]);
+    setJoueurs((prev) => {
+      // Deux lignes du même nom rendraient les statistiques ambiguës :
+      // une seule partie jouée, mais deux scores, et un vainqueur indécidable.
+      if (prev.some((j) => j.nom === nom)) return prev;
+      return [...prev, { id: `j${Date.now()}`, nom, score: 0 }];
+    });
   }
 
   function supprimerJoueur(id: string) {
@@ -167,8 +219,11 @@ export function usePartie<E extends object>({ jeuId, jeu, extraInitial, vierge }
   }
 
   /**
-   * Clôt la partie et l'enregistre. Rappelée une seconde fois (après un
-   * « continuer à modifier »), elle ne crée pas de doublon dans l'historique.
+   * Clôt la partie et l'enregistre.
+   *
+   * Rappelée après un « continuer à modifier », elle CORRIGE la ligne déjà
+   * écrite au lieu d'en créer une seconde. Elle l'ignorait auparavant : les
+   * scores corrigés n'atteignaient jamais l'historique.
    */
   async function terminerPartie(p: {
     joueurs: JoueurScore[];
@@ -182,19 +237,31 @@ export function usePartie<E extends object>({ jeuId, jeu, extraInitial, vierge }
     setReprise(false);
     effacerEtat(jeuId).catch(() => {});
 
-    if (partieIdRef.current !== null) return;
     try {
-      const id = await enregistrerPartie({
-        jeuId,
-        jeuNom: jeu ? jeu.nom : "Partie",
-        joueurs: p.joueurs,
-        gagnant: p.gagnant,
-        scoreGagnant: p.scoreGagnant,
-        resultat: p.resultat,
-        duree,
-      });
-      partieIdRef.current = id;
-      setPartieId(id);
+      if (partieIdRef.current !== null) {
+        await modifierPartie(
+          partieIdRef.current,
+          p.joueurs,
+          p.gagnant,
+          p.scoreGagnant,
+          p.resultat ?? null,
+          duree,
+          modeEquipes,
+        );
+      } else {
+        const id = await enregistrerPartie({
+          jeuId,
+          jeuNom: jeu ? jeu.nom : "Partie",
+          joueurs: p.joueurs,
+          gagnant: p.gagnant,
+          scoreGagnant: p.scoreGagnant,
+          resultat: p.resultat,
+          duree,
+          equipes: modeEquipes,
+        });
+        partieIdRef.current = id;
+        setPartieId(id);
+      }
       setBilanOuvert(true);
     } catch {
       // La partie n'a pas pu être écrite, mais l'écran reste utilisable.
@@ -222,10 +289,44 @@ export function usePartie<E extends object>({ jeuId, jeu, extraInitial, vierge }
     setBilanOuvert(false);
   }
 
+  const joueursSauvegardes = joueursConnus.map((j) => j.nom);
+
+  /**
+   * Le nom d'une ligne, tel qu'il doit être enregistré.
+   *
+   * Le champ du nom se vide librement pendant la saisie. Un vainqueur au nom
+   * vide serait écrit comme une égalité — c'est ce que signifie un `gagnant`
+   * vide partout ailleurs. On lui rend donc son nom par défaut.
+   */
+  const nomDe = useCallback(
+    (j: JoueurPartie) => nomPropre(j.nom, `${prefixe} ${joueurs.indexOf(j) + 1}`),
+    [joueurs, prefixe],
+  );
+
+  /**
+   * Parmi qui tire-t-on le premier joueur ?
+   * En équipes, ce sont les membres qui jouent — « Équipe 1 » ne pose pas de carte.
+   * Une équipe sans membre revient à son nom, faute de mieux.
+   */
+  const nomsPourTirage = useMemo(
+    () =>
+      Array.from(
+        new Set(joueurs.flatMap((j) => (j.membres?.length ? j.membres : [nomDe(j)]))),
+      ),
+    [joueurs, nomDe],
+  );
+
   // En équipes, les joueurs connus se choisissent comme membres, pas comme équipes.
   const joueursDispo = modeEquipes
     ? []
     : joueursSauvegardes.filter((n) => !joueurs.some((j) => j.nom === n));
+
+  /**
+   * Le portrait d'un joueur, s'il en a un.
+   * En équipes, la ligne porte le nom de l'équipe : aucune photo ne lui répond,
+   * et l'initiale colorée reprend sa place. C'est le comportement voulu.
+   */
+  const photoDe = (nom: string) => joueursConnus.find((j) => j.nom === nom)?.photo ?? null;
 
   return {
     // état
@@ -235,6 +336,9 @@ export function usePartie<E extends object>({ jeuId, jeu, extraInitial, vierge }
     setExtra,
     joueursSauvegardes,
     joueursDispo,
+    photoDe,
+    nomDe,
+    nomsPourTirage,
     modeEquipes,
     prefixe,
     charge,

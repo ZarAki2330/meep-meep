@@ -26,6 +26,15 @@ import { useTheme } from "@/context/theme";
 import { type CategorieScore } from "@/data/jeux";
 import { prefixeJoueur, usePartie, type JoueurPartie } from "@/hooks/use-partie";
 import { formatChrono } from "@/lib/duree";
+import {
+  bonusGagne,
+  classer,
+  nettoyerEntierSigne,
+  oublierJoueur,
+  purgerCases,
+  sommeCles,
+  totalGrille,
+} from "@/lib/score";
 
 type Joueur = JoueurPartie;
 type Scores = Record<string, Record<string, string>>;
@@ -50,6 +59,8 @@ export default function FeuilleGrille() {
     joueurs,
     joueursSauvegardes,
     joueursDispo,
+    nomDe,
+    nomsPourTirage,
     modeEquipes,
     reprise,
     termine,
@@ -76,6 +87,9 @@ export default function FeuilleGrille() {
     jeuId: jeuId ?? "",
     jeu,
     extraInitial: { scores: {} as Scores },
+    // Une case supprimée du jeu depuis la dernière partie ne doit ni compter,
+    // ni survivre en mémoire : ses points seraient invisibles et perdus.
+    nettoyer: (e) => ({ ...e, scores: purgerCases(e.scores, categories.map((c) => c.cle)) }),
     vierge: (js, e) => {
       const aucunScore = Object.values(e.scores).every((c) =>
         Object.values(c).every((v) => v === ""),
@@ -93,48 +107,29 @@ export default function FeuilleGrille() {
     setExtra((e) => ({ ...e, scores: maj(e.scores) }));
   }
 
-  function valeur(joueurId: string, cle: string): number {
-    const n = parseInt(scores[joueurId]?.[cle] ?? "", 10);
-    return isNaN(n) ? 0 : n;
-  }
-
   // Autorise un signe moins en tête (scores négatifs, ex. le militaire à 7 Wonders).
   function definir(joueurId: string, cle: string, texte: string) {
-    const negatif = texte.trimStart().startsWith("-");
-    const propre = (negatif ? "-" : "") + texte.replace(/[^0-9]/g, "");
     majScores((prev) => ({
       ...prev,
-      [joueurId]: { ...(prev[joueurId] ?? {}), [cle]: propre },
+      [joueurId]: { ...(prev[joueurId] ?? {}), [cle]: nettoyerEntierSigne(texte) },
     }));
   }
 
-  function sommeCles(joueurId: string, cles: string[]) {
-    return cles.reduce((s, c) => s + valeur(joueurId, c), 0);
-  }
-
-  function bonusGagne(joueurId: string) {
-    if (!bonus) return 0;
-    return sommeCles(joueurId, bonus.surCles) >= bonus.seuil ? bonus.points : 0;
-  }
-
   function total(joueurId: string) {
-    const base = sommeCles(joueurId, categories.map((c) => c.cle));
-    return base + bonusGagne(joueurId);
+    return totalGrille(scores[joueurId], categories, bonus);
   }
 
   function supprimerJoueur(id: string) {
     retirerJoueur(id);
-    majScores((prev) => {
-      const copie = { ...prev };
-      delete copie[id];
-      return copie;
-    });
+    majScores((prev) => oublierJoueur(prev, id));
   }
 
-  const totaux = joueurs.map((j) => total(j.id));
-  const meilleurTotal = totaux.length ? Math.max(...totaux) : 0;
-  const tousEgaux = totaux.every((t) => t === totaux[0]);
-  const gagnants = joueurs.filter((j) => total(j.id) === meilleurTotal);
+  // Une feuille de score se gagne toujours au plus grand total.
+  const {
+    meilleur: meilleurTotal,
+    gagnants,
+    tousEgaux,
+  } = classer(joueurs, (j) => total(j.id), "max");
   const [resultat, setResultat] = useState<string | null>(null);
 
   function terminer() {
@@ -142,7 +137,7 @@ export default function FeuilleGrille() {
       setEgaliteOuverte(true);
       return;
     }
-    finaliser(gagnants[0]?.nom ?? "");
+    finaliser(gagnants[0] ? nomDe(gagnants[0]) : "");
   }
 
   // Rappelée après un « continuer à modifier », elle ne recrée pas de ligne
@@ -151,7 +146,7 @@ export default function FeuilleGrille() {
     setResultat(nomGagnant);
     await terminerPartie({
       joueurs: joueurs.map((j) => ({
-        nom: j.nom,
+        nom: nomDe(j),
         score: total(j.id),
         membres: j.membres?.length ? j.membres : undefined,
       })),
@@ -178,7 +173,12 @@ export default function FeuilleGrille() {
         titre={jeu ? jeu.nom : "Feuille de score"}
         droite={
           <View style={styles.actionsEntete}>
-            <TouchableOpacity hitSlop={8} onPress={() => setTirageOuvert(true)}>
+            <TouchableOpacity
+              hitSlop={8}
+              accessibilityRole="button"
+              accessibilityLabel="Tirer au sort le premier joueur"
+              onPress={() => setTirageOuvert(true)}
+            >
               <IconSymbol name="die.face.5" size={22} color={colors.accentText} />
             </TouchableOpacity>
             <Text style={styles.chronoEntete}>⏱ {formatChrono(secondes)}</Text>
@@ -234,6 +234,7 @@ export default function FeuilleGrille() {
               <View key={j.id} style={[styles.cell, styles.cellEntete, { width: largeurCol }]}>
                 <TextInput
                   style={styles.nomInput}
+                  accessibilityLabel={`Nom : ${j.nom}`}
                   value={j.nom}
                   onChangeText={(t) => renommer(j.id, t)}
                   editable={!termine}
@@ -241,6 +242,8 @@ export default function FeuilleGrille() {
                 {modeEquipes && (
                   <TouchableOpacity
                     disabled={termine}
+                    accessibilityRole="button"
+                    accessibilityLabel={`Membres de ${j.nom}`}
                     onPress={() => setMembresPour(j.id)}
                     style={styles.membresBouton}
                   >
@@ -250,7 +253,11 @@ export default function FeuilleGrille() {
                   </TouchableOpacity>
                 )}
                 {!termine && joueurs.length > 1 && (
-                  <TouchableOpacity onPress={() => supprimerJoueur(j.id)}>
+                  <TouchableOpacity
+                    accessibilityRole="button"
+                    accessibilityLabel={`Retirer ${j.nom}`}
+                    onPress={() => supprimerJoueur(j.id)}
+                  >
                     <Text style={styles.supprimer}>✕</Text>
                   </TouchableOpacity>
                 )}
@@ -291,14 +298,14 @@ export default function FeuilleGrille() {
                     <LigneTotal
                       label={section.nom ? `Total ${section.nom.toLowerCase()}` : "Sous-total"}
                       joueurs={joueurs}
-                      calcul={(id) => sommeCles(id, clesSection)}
+                      calcul={(id) => sommeCles(scores[id], clesSection)}
                       largeurCol={largeurCol}
                       styles={styles}
                     />
                     <LigneTotal
                       label={bonusIci.label}
                       joueurs={joueurs}
-                      calcul={bonusGagne}
+                      calcul={(id) => bonusGagne(scores[id], bonus)}
                       largeurCol={largeurCol}
                       styles={styles}
                     />
@@ -341,7 +348,7 @@ export default function FeuilleGrille() {
 
       <DialogueEgalite
         visible={egaliteOuverte}
-        noms={gagnants.map((g) => g.nom)}
+        noms={gagnants.map(nomDe)}
         onDepartager={finaliser}
         onEgalite={() => finaliser("")}
         onAnnuler={() => setEgaliteOuverte(false)}
@@ -358,7 +365,7 @@ export default function FeuilleGrille() {
 
       <DialoguePremierJoueur
         visible={tirageOuvert}
-        noms={joueurs.map((j) => j.nom)}
+        noms={nomsPourTirage}
         onFermer={() => setTirageOuvert(false)}
       />
 
@@ -421,6 +428,9 @@ function LigneCategorie({
         <View key={j.id} style={[styles.cell, { width: largeurCol }]}>
           <TextInput
             style={styles.caseInput}
+            // « Full, Alice » plutôt qu'un nombre nu dans une grille de nombres.
+            accessibilityLabel={`${label}, ${j.nom}`}
+            accessibilityHint={aide}
             value={scores[j.id]?.[cle] ?? ""}
             onChangeText={(t) => definir(j.id, cle, t)}
             keyboardType={Platform.OS === "ios" ? "numbers-and-punctuation" : "numeric"}
@@ -521,7 +531,7 @@ function makeStyles(c: AppColors) {
     membresTexte: { fontSize: 10, color: c.accentText, textAlign: "center", fontWeight: "600" },
     sectionTexte: { fontSize: 13, fontWeight: "700", color: c.accentText },
     labelTexte: { fontSize: 14, color: c.textSecondary },
-    aideTexte: { fontSize: 11, color: c.textFaint },
+    aideTexte: { fontSize: 11, color: c.textMuted },
     caseInput: {
       fontSize: 16,
       color: c.textPrimary,

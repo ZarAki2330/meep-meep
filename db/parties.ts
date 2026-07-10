@@ -30,6 +30,26 @@ export type PartieEnregistree = {
   resultat: Resultat | null; // renseigné uniquement en coopératif
 };
 
+/**
+ * Mémorise les noms des joueurs, pour les proposer à la partie suivante.
+ *
+ * En équipes, le nom d'une ligne est celui de l'équipe : « Équipe 1 » n'est
+ * pas un joueur. Seuls ses membres le sont — et une équipe sans membre
+ * n'apporte personne.
+ */
+async function memoriserJoueurs(
+  db: Awaited<ReturnType<typeof getDb>>,
+  joueurs: JoueurScore[],
+  equipes: boolean,
+) {
+  for (const j of joueurs) {
+    const noms = j.membres?.length ? j.membres : equipes ? [] : [j.nom];
+    for (const nom of noms.map((n) => n.trim())) {
+      if (nom) await db.runAsync("INSERT OR IGNORE INTO joueurs (nom) VALUES (?)", [nom]);
+    }
+  }
+}
+
 export async function enregistrerPartie(p: {
   jeuId: string;
   jeuNom: string;
@@ -38,6 +58,7 @@ export async function enregistrerPartie(p: {
   scoreGagnant: number;
   duree?: number;
   resultat?: Resultat;
+  equipes?: boolean;
 }): Promise<number> {
   const db = await getDb();
   const res = await db.runAsync(
@@ -54,13 +75,7 @@ export async function enregistrerPartie(p: {
       p.resultat ?? null,
     ],
   );
-  // Mémorise les noms des joueurs pour les réutiliser ensuite.
-  for (const j of p.joueurs) {
-    const noms = j.membres?.length ? j.membres : [j.nom];
-    for (const nom of noms.map((n) => n.trim())) {
-      if (nom) await db.runAsync("INSERT OR IGNORE INTO joueurs (nom) VALUES (?)", [nom]);
-    }
-  }
+  await memoriserJoueurs(db, p.joueurs, p.equipes === true);
 
   return res.lastInsertRowId;
 }
@@ -93,26 +108,54 @@ export async function statistiquesParJeu(): Promise<Record<string, StatsJeu>> {
   return stats;
 }
 
-/** Corrige une partie déjà enregistrée (scores, vainqueur, ou issue en coopératif). */
+/**
+ * Corrige une partie déjà enregistrée (scores, vainqueur, ou issue en coopératif).
+ *
+ * `duree` n'est réécrite que si on la fournit : l'édition d'une partie depuis
+ * l'historique ne connaît pas le chronomètre et ne doit pas l'effacer.
+ */
 export async function modifierPartie(
   id: number,
   joueurs: JoueurScore[],
   gagnant: string,
   scoreGagnant: number,
   resultat: Resultat | null = null,
+  duree?: number,
+  equipes = false,
 ) {
   const db = await getDb();
   await db.runAsync(
     "UPDATE parties SET details = ?, gagnant = ?, score_gagnant = ?, nb_joueurs = ?, resultat = ? WHERE id = ?",
     [JSON.stringify(joueurs), gagnant, scoreGagnant, joueurs.length, resultat, id],
   );
-  for (const j of joueurs) {
-    const nom = j.nom.trim();
-    if (nom) await db.runAsync("INSERT OR IGNORE INTO joueurs (nom) VALUES (?)", [nom]);
+  if (duree && duree > 0) {
+    await db.runAsync("UPDATE parties SET duree = ? WHERE id = ?", [Math.round(duree), id]);
   }
+  // Comme à l'enregistrement : ce sont les membres qui sont des joueurs.
+  await memoriserJoueurs(db, joueurs, equipes);
 }
 
 export async function supprimerPartie(id: number) {
   const db = await getDb();
   await db.runAsync("DELETE FROM parties WHERE id = ?", [id]);
+}
+
+/** Supprime d'un coup les parties cochées dans l'historique. */
+export async function supprimerParties(ids: number[]) {
+  if (ids.length === 0) return;
+  const db = await getDb();
+  const trous = ids.map(() => "?").join(", ");
+  await db.runAsync(`DELETE FROM parties WHERE id IN (${trous})`, ids);
+}
+
+/** Efface tout l'historique. Les joueurs et les jeux, eux, restent. */
+export async function viderHistorique() {
+  const db = await getDb();
+  await db.runAsync("DELETE FROM parties");
+}
+
+export async function compterParties(): Promise<number> {
+  const db = await getDb();
+  const ligne = await db.getFirstAsync<{ n: number }>("SELECT COUNT(*) AS n FROM parties");
+  return ligne?.n ?? 0;
 }

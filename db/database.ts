@@ -47,10 +47,20 @@ export function getDb() {
           date TEXT,
           etat TEXT
         );
+        CREATE TABLE IF NOT EXISTS meta (
+          cle TEXT PRIMARY KEY,
+          valeur TEXT
+        );
       `);
 
       // Migrations : ajout des colonnes si la base existait déjà.
-      for (const colonne of ["categories TEXT", "bonus TEXT", "equipes INTEGER"]) {
+      for (const colonne of [
+        "categories TEXT",
+        "bonus TEXT",
+        "equipes INTEGER",
+        "extensions TEXT",
+        "roles TEXT",
+      ]) {
         try {
           await db.execAsync(`ALTER TABLE jeux ADD COLUMN ${colonne};`);
         } catch {
@@ -64,9 +74,29 @@ export function getDb() {
           // la colonne existe déjà
         }
       }
+      try {
+        await db.execAsync("ALTER TABLE joueurs ADD COLUMN photo TEXT;");
+      } catch {
+        // la colonne existe déjà
+      }
 
       return db;
     });
   }
   return dbPromise;
+}
+
+/** Une valeur de la table meta, ou null si la clé n'existe pas. */
+export async function lireMeta(cle: string): Promise<string | null> {
+  const db = await getDb();
+  const ligne = await db.getFirstAsync<{ valeur: string }>(
+    "SELECT valeur FROM meta WHERE cle = ?",
+    [cle],
+  );
+  return ligne?.valeur ?? null;
+}
+
+export async function ecrireMeta(cle: string, valeur: string) {
+  const db = await getDb();
+  await db.runAsync("INSERT OR REPLACE INTO meta (cle, valeur) VALUES (?, ?)", [cle, valeur]);
 }

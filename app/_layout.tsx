@@ -45,9 +45,10 @@ function Navigation() {
       >
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="import" />
+        <Stack.Screen name="bibliotheque" />
         <Stack.Screen name="bgg" />
         <Stack.Screen name="reglages" />
-        <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+        <Stack.Screen name="aide" />
       </Stack>
       <StatusBar style={mode === "dark" ? "light" : "dark"} />
     </ThemeProvider>

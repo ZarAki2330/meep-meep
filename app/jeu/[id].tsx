@@ -22,17 +22,18 @@ import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
 import { effacerEtat, partieEnCours } from "@/db/partie-en-cours";
 import { jeuVersTexte } from "@/lib/jeu-partage";
+import { cheminPartie } from "@/lib/route-partie";
 
 export default function FicheJeu() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
   const { colors } = useTheme();
-  const { jeux, pret, estImporte, supprimerJeu, estFavori, basculerFavori } = useJeux();
+  const { jeux, pret, supprimerJeu, estFavori, basculerFavori } = useJeux();
   const styles = makeStyles(colors);
   const jeu = jeux.find((j) => j.id === id);
 
   const [extensionsActives, setExtensionsActives] = useState<string[]>([]);
-  const [reglesOuvertes, setReglesOuvertes] = useState(false);
+  const [reglesOuvertes, setReglesOuvertes] = useState(true);
   const [rolesOuverts, setRolesOuverts] = useState(false);
 
   function basculerExtension(nom: string) {
@@ -46,6 +47,7 @@ export default function FicheJeu() {
   );
 
   const [confirmationOuverte, setConfirmationOuverte] = useState(false);
+  const [abandonOuvert, setAbandonOuvert] = useState(false);
   const [enCours, setEnCours] = useState(false);
 
   // Y a-t-il une partie non terminée pour ce jeu ?
@@ -60,15 +62,8 @@ export default function FicheJeu() {
 
   function ouvrirPartie() {
     if (!jeu) return;
-    const destinations = {
-      grille: "/grille/[jeuId]",
-      objectif: "/objectif/[jeuId]",
-      manches: "/manches/[jeuId]",
-      cooperatif: "/coop/[jeuId]",
-      compteur: "/partie/[jeuId]",
-    } as const;
     router.push({
-      pathname: destinations[jeu.scoreMode ?? "compteur"],
+      pathname: cheminPartie(jeu),
       params: { jeuId: jeu.id, extensions: extensionsActives.join("|") },
     });
   }
@@ -78,6 +73,14 @@ export default function FicheJeu() {
     await effacerEtat(jeu.id).catch(() => {});
     setEnCours(false);
     ouvrirPartie();
+  }
+
+  /** Le bandeau du catalogue ne vise que la partie la plus récente : voici l'autre chemin. */
+  async function abandonner() {
+    if (!jeu) return;
+    setAbandonOuvert(false);
+    await effacerEtat(jeu.id).catch(() => {});
+    setEnCours(false);
   }
 
   async function supprimer() {
@@ -120,11 +123,23 @@ export default function FicheJeu() {
         }
       />
       <ScrollView style={styles.page} contentContainerStyle={styles.contenu}>
-      <VisuelJeu jeu={jeu} style={styles.banniere} />
+      <View style={styles.enTete}>
+        <VisuelJeu jeu={jeu} style={styles.vignette} />
 
-      <View style={styles.titreLigne}>
-        <Text style={styles.titre}>{jeu.nom}</Text>
-        <TouchableOpacity hitSlop={10} onPress={() => basculerFavori(jeu.id)}>
+        <View style={styles.enTeteTexte}>
+          <Text style={styles.titre}>{jeu.nom}</Text>
+          <View style={styles.categorie}>
+            <Text style={styles.categorieTexte}>{jeu.categorie}</Text>
+          </View>
+        </View>
+
+        <TouchableOpacity
+          hitSlop={10}
+          accessibilityRole="button"
+          accessibilityLabel="Favori"
+          accessibilityState={{ selected: estFavori(jeu.id) }}
+          onPress={() => basculerFavori(jeu.id)}
+        >
           <IconSymbol
             name={estFavori(jeu.id) ? "star.fill" : "star"}
             size={28}
@@ -152,9 +167,16 @@ export default function FicheJeu() {
                 key={ext}
                 style={styles.extensionLigne}
                 activeOpacity={0.7}
+                accessibilityRole="checkbox"
+                accessibilityState={{ checked: active }}
+                accessibilityLabel={ext}
                 onPress={() => basculerExtension(ext)}
               >
-                <View style={[styles.case, active && styles.caseActive]}>
+                <View
+                  style={[styles.case, active && styles.caseActive]}
+                  accessibilityElementsHidden
+                  importantForAccessibility="no-hide-descendants"
+                >
                   {active && <Text style={styles.caseCoche}>✓</Text>}
                 </View>
                 <Text style={styles.extensionNom}>{ext}</Text>
@@ -171,18 +193,37 @@ export default function FicheJeu() {
       </TouchableOpacity>
 
       {enCours && (
-        <TouchableOpacity style={styles.boutonSecondaire} activeOpacity={0.8} onPress={nouvellePartie}>
-          <Text style={styles.boutonSecondaireTexte}>Repartir de zéro</Text>
-        </TouchableOpacity>
+        <>
+          <TouchableOpacity
+            style={styles.boutonSecondaire}
+            activeOpacity={0.8}
+            accessibilityRole="button"
+            onPress={nouvellePartie}
+          >
+            <Text style={styles.boutonSecondaireTexte}>Repartir de zéro</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.boutonAbandon}
+            activeOpacity={0.8}
+            accessibilityRole="button"
+            accessibilityLabel="Abandonner la partie en cours"
+            onPress={() => setAbandonOuvert(true)}
+          >
+            <Text style={styles.boutonAbandonTexte}>Abandonner la partie</Text>
+          </TouchableOpacity>
+        </>
       )}
 
       <TouchableOpacity
         style={styles.sectionRepliable}
         activeOpacity={0.7}
+        accessibilityRole="button"
+        accessibilityLabel="Règles"
+        accessibilityState={{ expanded: reglesOuvertes }}
         onPress={() => setReglesOuvertes((o) => !o)}
       >
         <Text style={styles.sectionTitreRepliable}>Règles</Text>
-        <View style={styles.chevronBadge}>
+        <View style={styles.chevronBadge} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
           <Text style={styles.chevronTexte}>{reglesOuvertes ? "▾" : "▸"}</Text>
         </View>
       </TouchableOpacity>
@@ -202,10 +243,13 @@ export default function FicheJeu() {
           <TouchableOpacity
             style={styles.sectionRepliable}
             activeOpacity={0.7}
+            accessibilityRole="button"
+            accessibilityLabel={`Personnages, ${rolesVisibles.length}`}
+            accessibilityState={{ expanded: rolesOuverts }}
             onPress={() => setRolesOuverts((o) => !o)}
           >
             <Text style={styles.sectionTitreRepliable}>Personnages ({rolesVisibles.length})</Text>
-            <View style={styles.chevronBadge}>
+            <View style={styles.chevronBadge} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
               <Text style={styles.chevronTexte}>{rolesOuverts ? "▾" : "▸"}</Text>
             </View>
           </TouchableOpacity>
@@ -228,19 +272,26 @@ export default function FicheJeu() {
         </>
       )}
 
-      {estImporte(jeu.id) && (
-        <View style={styles.actionsJeu}>
-          <TouchableOpacity
-            style={styles.modifier}
-            onPress={() => router.push({ pathname: "/import", params: { id: jeu.id } })}
-          >
-            <Text style={styles.modifierTexte}>Modifier ce jeu</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.supprimer} onPress={() => setConfirmationOuverte(true)}>
-            <Text style={styles.supprimerTexte}>Supprimer ce jeu</Text>
-          </TouchableOpacity>
-        </View>
-      )}
+      <View style={styles.actionsJeu}>
+        <TouchableOpacity
+          style={styles.modifier}
+          onPress={() => router.push({ pathname: "/import", params: { id: jeu.id } })}
+        >
+          <Text style={styles.modifierTexte}>Modifier ce jeu</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.supprimer} onPress={() => setConfirmationOuverte(true)}>
+          <Text style={styles.supprimerTexte}>Supprimer ce jeu</Text>
+        </TouchableOpacity>
+      </View>
+
+      <DialogueConfirmation
+        visible={abandonOuvert}
+        titre="Abandonner cette partie ?"
+        message="Elle sera perdue, et n'ira pas dans l'historique."
+        texteConfirmer="Abandonner"
+        onConfirmer={abandonner}
+        onAnnuler={() => setAbandonOuvert(false)}
+      />
 
       <DialogueConfirmation
         visible={confirmationOuverte}
@@ -276,10 +327,20 @@ function makeStyles(c: AppColors) {
     page: { flex: 1, backgroundColor: c.page },
     contenu: { padding: 16, paddingBottom: 40 },
     centre: { flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: c.page },
-    banniere: { width: "100%", height: 180, borderRadius: 14, marginBottom: 16 },
-    titreLigne: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: 12 },
-    titre: { flex: 1, fontSize: 26, fontWeight: "600", color: c.textPrimary },
-    metaLigne: { flexDirection: "row", gap: 12, marginTop: 16 },
+    enTete: { flexDirection: "row", alignItems: "flex-start", gap: 14 },
+    vignette: { width: 96, height: 96, borderRadius: 16 },
+    // La colonne de texte respire mieux si elle s'aligne sur le haut de la vignette.
+    enTeteTexte: { flex: 1, gap: 8, paddingTop: 2 },
+    titre: { fontSize: 24, fontWeight: "600", color: c.textPrimary },
+    categorie: {
+      alignSelf: "flex-start",
+      backgroundColor: c.accentSoft,
+      borderRadius: 20,
+      paddingHorizontal: 10,
+      paddingVertical: 4,
+    },
+    categorieTexte: { fontSize: 12, fontWeight: "600", color: c.accentText },
+    metaLigne: { flexDirection: "row", gap: 12, marginTop: 18 },
     metaBloc: {
       flex: 1,
       backgroundColor: c.surface,
@@ -309,6 +370,8 @@ function makeStyles(c: AppColors) {
       marginTop: 10,
     },
     boutonSecondaireTexte: { color: c.textSecondary, fontSize: 14, fontWeight: "600" },
+    boutonAbandon: { paddingVertical: 12, alignItems: "center", marginTop: 4 },
+    boutonAbandonTexte: { color: c.danger, fontSize: 14, fontWeight: "600" },
     sectionTitre: { fontSize: 18, fontWeight: "600", color: c.textPrimary, marginTop: 24, marginBottom: 8 },
     sectionRepliable: {
       flexDirection: "row",

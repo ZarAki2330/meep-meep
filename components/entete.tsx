@@ -40,7 +40,8 @@ export function Entete({
           <View style={styles.retour} />
         )}
 
-        <Text style={styles.titre} numberOfLines={1}>
+        {/* La barre fait 56 px : au-delà d'une fois et demie, le titre se coupe. */}
+        <Text style={styles.titre} numberOfLines={1} maxFontSizeMultiplier={1.5}>
           {titre}
         </Text>
 

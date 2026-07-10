@@ -14,6 +14,7 @@ import {
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
+import { AvatarJoueur } from "@/components/avatar-joueur";
 import { DialogueBilan } from "@/components/dialogue-bilan";
 import { DialoguePremierJoueur } from "@/components/dialogue-premier-joueur";
 import { Entete } from "@/components/entete";
@@ -42,6 +43,9 @@ export default function PartieObjectif() {
     joueurs,
     joueursSauvegardes,
     joueursDispo,
+    photoDe,
+    nomDe,
+    nomsPourTirage,
     modeEquipes,
     termine,
     secondes,
@@ -98,12 +102,12 @@ export default function PartieObjectif() {
     if (!gagnant) return;
     await terminerPartie({
       joueurs: joueurs.map((j) => ({
-        nom: j.nom,
+        nom: nomDe(j),
         score: 0,
         role: j.role,
         membres: j.membres?.length ? j.membres : undefined,
       })),
-      gagnant: gagnant.nom,
+      gagnant: nomDe(gagnant),
       scoreGagnant: 0,
     });
   }
@@ -171,14 +175,18 @@ export default function PartieObjectif() {
               style={[styles.carte, choisi && styles.carteChoisie]}
               activeOpacity={0.8}
               disabled={termine}
+              accessibilityRole="radio"
+              accessibilityState={{ checked: choisi, disabled: termine }}
+              accessibilityLabel={`${item.nom}, vainqueur`}
               onPress={() => setGagnantId(choisi ? null : item.id)}
             >
               <View style={styles.ligneHaut}>
-                <View
-                  style={[styles.pastille, { backgroundColor: COULEURS[index % COULEURS.length] }]}
-                >
-                  <Text style={styles.pastilleTexte}>{item.nom.charAt(0).toUpperCase()}</Text>
-                </View>
+                <AvatarJoueur
+                  nom={item.nom}
+                  photo={photoDe(item.nom)}
+                  taille={34}
+                  couleur={COULEURS[index % COULEURS.length]}
+                />
                 <TextInput
                   style={styles.nomInput}
                   value={item.nom}
@@ -262,7 +270,7 @@ export default function PartieObjectif() {
 
       <DialoguePremierJoueur
         visible={tirageOuvert}
-        noms={joueurs.map((j) => j.nom)}
+        noms={nomsPourTirage}
         onFermer={() => setTirageOuvert(false)}
       />
 
@@ -400,10 +408,8 @@ function makeStyles(c: AppColors) {
     roleLigneNom: { fontSize: 15, fontWeight: "600", color: c.textPrimary },
     roleLigneOrigine: { fontSize: 12, color: c.textMuted, marginTop: 2 },
     roleLigneObjectif: { fontSize: 12, color: c.textSecondary, marginTop: 4, lineHeight: 16 },
-    rolePris: { color: c.textFaint },
-    rolePrisTexte: { fontSize: 12, color: c.textFaint, fontStyle: "italic" },
-    pastille: { width: 36, height: 36, borderRadius: 18, alignItems: "center", justifyContent: "center" },
-    pastilleTexte: { color: "#fff", fontWeight: "600" },
+    rolePris: { color: c.textMuted },
+    rolePrisTexte: { fontSize: 12, color: c.textMuted, fontStyle: "italic" },
     nomInput: { flex: 1, fontSize: 16, fontWeight: "600", color: c.textPrimary, paddingVertical: 4 },
     coche: { fontSize: 20 },
     supprimer: { color: c.textFaint, fontSize: 16, paddingHorizontal: 6 },

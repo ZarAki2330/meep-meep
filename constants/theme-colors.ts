@@ -1,6 +1,15 @@
 // constants/theme-colors.ts
 // Palette de l'app : des couleurs neutres (crème / sombre) auxquelles on applique
 // une couleur d'accent choisie par l'utilisateur.
+//
+// Toutes les paires texte/fond réellement utilisées atteignent le seuil WCAG AA
+// (4,5:1), dans les deux thèmes et pour les six accents. Deux exceptions assumées :
+//  - `textFaint` ne sert qu'à des icônes inactives (étoile vide, croix) : le seuil
+//    des composants d'interface, 3:1, s'y applique — jamais à du texte ;
+//  - `border` et `borderStrong` sont des séparateurs décoratifs, pas des contours
+//    de contrôles ; ils ne sont soumis à aucun seuil.
+//
+// Si tu touches à une couleur, refais le calcul avant de commiter.
 
 export type ModeTheme = "light" | "dark";
 export type CleAccent = "violet" | "bleu" | "vert" | "ambre" | "rouge" | "encre";
@@ -39,10 +48,10 @@ const baseClair = {
   borderStrong: "#d9d1c4",
   textPrimary: "#241f1c",
   textSecondary: "#5a534d",
-  textMuted: "#8b837b",
-  textFaint: "#bdb5ab",
-  placeholder: "#cec7bd",
-  success: "#1d9e75",
+  textMuted: "#716a63",
+  textFaint: "#948676", // icônes inactives uniquement (3:1)
+  placeholder: "#766958",
+  success: "#198664",
   onSuccess: "#ffffff",
   successSoft: "#e1f5ee",
   warningSoft: "#faeeda",
@@ -61,15 +70,18 @@ const baseSombre = {
   textPrimary: "#f2f0f5",
   textSecondary: "#c3bece",
   textMuted: "#9a94a6",
-  textFaint: "#6b6676",
-  placeholder: "#565061",
+  textFaint: "#726c7d", // icônes inactives uniquement (3:1)
+  placeholder: "#90899d",
   success: "#25b28a",
-  onSuccess: "#ffffff",
+  // Un vert clair : c'est le texte posé dessus qui doit être sombre.
+  onSuccess: "#10241d",
   successSoft: "#173a2e",
   warningSoft: "#3a2f17",
   warningText: "#e8c07a",
-  danger: "#d9534f",
-  onDanger: "#ffffff",
+  // `danger` sert de texte sur fond sombre autant que d'aplat : il doit être
+  // assez clair pour le premier usage, ce qui impose une encre pour le second.
+  danger: "#db5a56",
+  onDanger: "#2a1210",
   ombre: "rgba(0, 0, 0, 0.6)",
 };
 
@@ -94,13 +106,14 @@ export const ACCENTS: Record<CleAccent, DefinitionAccent> = {
     nom: "Violet",
     apercu: "#7a5195",
     clair: { accent: "#7a5195", accentText: "#7a5195", accentSoft: "#f0e9f5", onAccent: "#ffffff" },
-    sombre: { accent: "#9b74b8", accentText: "#c9aede", accentSoft: "#2e2640", onAccent: "#ffffff" },
+    // Un accent clair sur fond sombre : le texte posé dessus est une encre.
+    sombre: { accent: "#9b74b8", accentText: "#c9aede", accentSoft: "#2e2640", onAccent: "#1a181d" },
   },
   bleu: {
     nom: "Bleu",
     apercu: "#2b6cb0",
     clair: { accent: "#2b6cb0", accentText: "#2b6cb0", accentSoft: "#e6eef8", onAccent: "#ffffff" },
-    sombre: { accent: "#5d9ade", accentText: "#a9cbec", accentSoft: "#1c2a3d", onAccent: "#ffffff" },
+    sombre: { accent: "#5d9ade", accentText: "#a9cbec", accentSoft: "#1c2a3d", onAccent: "#1a181d" },
   },
   vert: {
     nom: "Vert",
@@ -108,7 +121,7 @@ export const ACCENTS: Record<CleAccent, DefinitionAccent> = {
     // Le vert de victoire est foncé pour rester distinct de l'accent.
     clair: {
       accent: "#2f7d51",
-      accentText: "#2f7d51",
+      accentText: "#2e794f",
       accentSoft: "#e6f2ea",
       onAccent: "#ffffff",
       success: "#14603f",
@@ -118,15 +131,18 @@ export const ACCENTS: Record<CleAccent, DefinitionAccent> = {
       accent: "#59ab7c",
       accentText: "#a7d6bb",
       accentSoft: "#17301f",
-      onAccent: "#ffffff",
+      onAccent: "#1a181d",
+      // Ce vert-là est foncé : contrairement au vert de base, il porte du blanc.
       success: "#1f6b4a",
+      onSuccess: "#ffffff",
       successSoft: "#12291f",
     },
   },
   ambre: {
     nom: "Ambre",
     apercu: "#c2701c",
-    clair: { accent: "#c2701c", accentText: "#a35d14", accentSoft: "#fbeedc", onAccent: "#ffffff" },
+    // L'ambre est assombri juste assez pour porter du blanc.
+    clair: { accent: "#ae6419", accentText: "#9f5a13", accentSoft: "#fbeedc", onAccent: "#ffffff" },
     // Aplat clair : le texte posé dessus doit être foncé.
     sombre: { accent: "#e0973f", accentText: "#efc48f", accentSoft: "#3a2a14", onAccent: "#2b2116" },
   },
@@ -146,7 +162,10 @@ export const ACCENTS: Record<CleAccent, DefinitionAccent> = {
       accentText: "#f0b3a4",
       accentSoft: "#3a1f19",
       onAccent: "#2b1712",
-      danger: "#8e2b23",
+      // Assombrir ce rouge le rendait illisible sur fond sombre : on le sature
+      // au lieu de le noircir, ce qui suffit à le distinguer de l'accent saumon.
+      danger: "#e2584c",
+      onDanger: "#2a1210",
     },
   },
   encre: {

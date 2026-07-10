@@ -14,6 +14,7 @@ import {
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
+import { AvatarJoueur } from "@/components/avatar-joueur";
 import { DialogueBilan } from "@/components/dialogue-bilan";
 import { DialoguePremierJoueur } from "@/components/dialogue-premier-joueur";
 import { Entete } from "@/components/entete";
@@ -41,6 +42,9 @@ export default function PartieCooperative() {
   const {
     joueurs,
     joueursDispo,
+    photoDe,
+    nomDe,
+    nomsPourTirage,
     termine,
     secondes,
     tirageOuvert,
@@ -79,7 +83,7 @@ export default function PartieCooperative() {
   async function terminer(issue: Resultat) {
     setResultat(issue);
     await terminerPartie({
-      joueurs: joueurs.map((j) => ({ nom: j.nom, score: 0, role: j.role })),
+      joueurs: joueurs.map((j) => ({ nom: nomDe(j), score: 0, role: j.role })),
       // Personne ne l'emporte seul : c'est « resultat » qui porte l'issue.
       gagnant: "",
       scoreGagnant: 0,
@@ -153,11 +157,12 @@ export default function PartieCooperative() {
         renderItem={({ item, index }) => (
           <View style={[styles.carte, resultat === "victoire" && styles.carteGagnante]}>
             <View style={styles.ligneHaut}>
-              <View
-                style={[styles.pastille, { backgroundColor: COULEURS[index % COULEURS.length] }]}
-              >
-                <Text style={styles.pastilleTexte}>{item.nom.charAt(0).toUpperCase()}</Text>
-              </View>
+              <AvatarJoueur
+                nom={item.nom}
+                photo={photoDe(item.nom)}
+                taille={34}
+                couleur={COULEURS[index % COULEURS.length]}
+              />
               <TextInput
                 style={styles.nomInput}
                 value={item.nom}
@@ -200,10 +205,20 @@ export default function PartieCooperative() {
               <Text style={styles.actionSecondaireTexte}>+ Joueur</Text>
             </TouchableOpacity>
             <View style={styles.issues}>
-              <TouchableOpacity style={styles.defaite} onPress={() => terminer("defaite")}>
+              <TouchableOpacity
+                style={styles.defaite}
+                accessibilityRole="button"
+                accessibilityLabel="Terminer sur une défaite"
+                onPress={() => terminer("defaite")}
+              >
                 <Text style={styles.defaiteTexte}>Défaite</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.victoire} onPress={() => terminer("victoire")}>
+              <TouchableOpacity
+                style={styles.victoire}
+                accessibilityRole="button"
+                accessibilityLabel="Terminer sur une victoire"
+                onPress={() => terminer("victoire")}
+              >
                 <Text style={styles.victoireTexte}>🏆 Victoire</Text>
               </TouchableOpacity>
             </View>
@@ -217,7 +232,7 @@ export default function PartieCooperative() {
 
       <DialoguePremierJoueur
         visible={tirageOuvert}
-        noms={joueurs.map((j) => j.nom)}
+        noms={nomsPourTirage}
         onFermer={() => setTirageOuvert(false)}
       />
 
@@ -356,16 +371,8 @@ function makeStyles(c: AppColors) {
     },
     roleLigneNom: { fontSize: 15, fontWeight: "600", color: c.textPrimary },
     roleLigneOrigine: { fontSize: 12, color: c.textMuted, marginTop: 2, lineHeight: 16 },
-    rolePris: { color: c.textFaint },
-    rolePrisTexte: { fontSize: 12, color: c.textFaint, fontStyle: "italic" },
-    pastille: {
-      width: 36,
-      height: 36,
-      borderRadius: 18,
-      alignItems: "center",
-      justifyContent: "center",
-    },
-    pastilleTexte: { color: "#fff", fontWeight: "600" },
+    rolePris: { color: c.textMuted },
+    rolePrisTexte: { fontSize: 12, color: c.textMuted, fontStyle: "italic" },
     nomInput: { flex: 1, fontSize: 16, fontWeight: "600", color: c.textPrimary, paddingVertical: 4 },
     coche: { fontSize: 20 },
     supprimer: { color: c.textFaint, fontSize: 16, paddingHorizontal: 6 },

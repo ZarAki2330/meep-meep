@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
+import { AvatarJoueur } from "@/components/avatar-joueur";
 import { DialogueBilan } from "@/components/dialogue-bilan";
 import { DialogueEgalite } from "@/components/dialogue-egalite";
 import { DialoguePremierJoueur } from "@/components/dialogue-premier-joueur";
@@ -24,6 +25,7 @@ import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
 import { prefixeJoueur, usePartie } from "@/hooks/use-partie";
 import { formatChrono } from "@/lib/duree";
+import { classer, incrementer, lireCase, nettoyerEntier, seuilAtteint } from "@/lib/score";
 
 const COULEURS = ["#7a5195", "#1d9e75", "#378add", "#d85a30", "#c4457e"];
 
@@ -43,6 +45,9 @@ export default function Partie() {
     setJoueurs,
     joueursSauvegardes,
     joueursDispo,
+    photoDe,
+    nomDe,
+    nomsPourTirage,
     modeEquipes,
     reprise,
     termine,
@@ -75,22 +80,18 @@ export default function Partie() {
   const sens = jeu?.scoreVictoire ?? "max";
   const seuilFin = jeu?.seuilFin;
 
-  const scores = joueurs.map((j) => j.score);
-  const min = Math.min(...scores);
-  const max = Math.max(...scores);
-  const tousEgaux = min === max;
-  const meilleur = sens === "min" ? min : max;
-  const seuilAtteint = seuilFin !== undefined && max >= seuilFin;
+  const { meilleur, pire, gagnants, tousEgaux } = classer(joueurs, (j) => j.score, sens);
+  const seuilFranchi = seuilAtteint(pire, seuilFin);
 
   function modifierScore(id: string, delta: number) {
     setJoueurs((prev) =>
-      prev.map((j) => (j.id === id ? { ...j, score: Math.max(0, j.score + delta) } : j)),
+      prev.map((j) => (j.id === id ? { ...j, score: incrementer(j.score, delta) } : j)),
     );
   }
 
   function definirScore(id: string, texte: string) {
-    const n = parseInt(texte.replace(/[^0-9]/g, ""), 10);
-    setJoueurs((prev) => prev.map((j) => (j.id === id ? { ...j, score: isNaN(n) ? 0 : n } : j)));
+    const n = lireCase(nettoyerEntier(texte));
+    setJoueurs((prev) => prev.map((j) => (j.id === id ? { ...j, score: n } : j)));
   }
 
   function nouvellePartie() {
@@ -99,8 +100,6 @@ export default function Partie() {
     reinitialiser();
   }
 
-  // Tous les joueurs au meilleur score : plus d'un = égalité.
-  const gagnants = joueurs.filter((j) => j.score === meilleur);
   // "" signifie une égalité enregistrée.
   const [resultat, setResultat] = useState<string | null>(null);
 
@@ -109,14 +108,14 @@ export default function Partie() {
       setEgaliteOuverte(true);
       return;
     }
-    finaliser(gagnants[0]?.nom ?? "");
+    finaliser(gagnants[0] ? nomDe(gagnants[0]) : "");
   }
 
   async function finaliser(nomGagnant: string) {
     setResultat(nomGagnant);
     await terminerPartie({
       joueurs: joueurs.map((j) => ({
-        nom: j.nom,
+        nom: nomDe(j),
         score: j.score,
         membres: j.membres?.length ? j.membres : undefined,
       })),
@@ -160,7 +159,7 @@ export default function Partie() {
         </View>
       )}
 
-      {seuilAtteint && !termine && (
+      {seuilFranchi && !termine && (
         <View style={styles.avertissement}>
           <Text style={styles.avertissementTexte}>
             Seuil de {seuilFin} atteint — vous pouvez terminer la partie.
@@ -206,17 +205,25 @@ export default function Partie() {
           return (
             <View style={[styles.carte, enTete && styles.carteEnTete]}>
               <View style={styles.ligneHaut}>
-                <View style={[styles.pastille, { backgroundColor: couleur }]}>
-                  <Text style={styles.pastilleTexte}>{item.nom.charAt(0).toUpperCase()}</Text>
-                </View>
+                <AvatarJoueur
+                  nom={item.nom}
+                  photo={photoDe(item.nom)}
+                  taille={34}
+                  couleur={couleur}
+                />
                 <TextInput
                   style={styles.nomInput}
+                  accessibilityLabel={`Nom du ${prefixe.toLowerCase()} ${index + 1}`}
                   value={item.nom}
                   onChangeText={(t) => renommer(item.id, t)}
                   editable={!termine}
                 />
                 {!termine && joueurs.length > 1 && (
-                  <TouchableOpacity onPress={() => supprimerJoueur(item.id)}>
+                  <TouchableOpacity
+                    accessibilityRole="button"
+                    accessibilityLabel={`Retirer ${item.nom}`}
+                    onPress={() => supprimerJoueur(item.id)}
+                  >
                     <Text style={styles.supprimer}>✕</Text>
                   </TouchableOpacity>
                 )}
@@ -240,6 +247,9 @@ export default function Partie() {
               <View style={styles.ligneScore}>
                 <TouchableOpacity
                   style={styles.bouton}
+                  accessibilityRole="button"
+                  accessibilityLabel={`Retirer un point à ${item.nom}`}
+                  accessibilityState={{ disabled: termine }}
                   onPress={() => modifierScore(item.id, -1)}
                   disabled={termine}
                 >
@@ -247,6 +257,7 @@ export default function Partie() {
                 </TouchableOpacity>
                 <TextInput
                   style={styles.score}
+                  accessibilityLabel={`Score de ${item.nom}`}
                   value={String(item.score)}
                   onChangeText={(t) => definirScore(item.id, t)}
                   keyboardType="number-pad"
@@ -255,12 +266,20 @@ export default function Partie() {
                   textAlign="center"
                 />
                 {!termine && (
-                  <TouchableOpacity style={styles.raccourci} onPress={() => modifierScore(item.id, 5)}>
+                  <TouchableOpacity
+                    style={styles.raccourci}
+                    accessibilityRole="button"
+                    accessibilityLabel={`Ajouter cinq points à ${item.nom}`}
+                    onPress={() => modifierScore(item.id, 5)}
+                  >
                     <Text style={styles.raccourciTexte}>+5</Text>
                   </TouchableOpacity>
                 )}
                 <TouchableOpacity
                   style={[styles.bouton, styles.boutonPlus]}
+                  accessibilityRole="button"
+                  accessibilityLabel={`Ajouter un point à ${item.nom}`}
+                  accessibilityState={{ disabled: termine }}
                   onPress={() => modifierScore(item.id, 1)}
                   disabled={termine}
                 >
@@ -291,7 +310,7 @@ export default function Partie() {
 
       <DialogueEgalite
         visible={egaliteOuverte}
-        noms={gagnants.map((g) => g.nom)}
+        noms={gagnants.map(nomDe)}
         onDepartager={finaliser}
         onEgalite={() => finaliser("")}
         onAnnuler={() => setEgaliteOuverte(false)}
@@ -308,7 +327,7 @@ export default function Partie() {
 
       <DialoguePremierJoueur
         visible={tirageOuvert}
-        noms={joueurs.map((j) => j.nom)}
+        noms={nomsPourTirage}
         onFermer={() => setTirageOuvert(false)}
       />
 
@@ -361,8 +380,6 @@ function makeStyles(c: AppColors) {
     },
     carteEnTete: { borderColor: c.success, borderWidth: 2 },
     ligneHaut: { flexDirection: "row", alignItems: "center", gap: 10 },
-    pastille: { width: 34, height: 34, borderRadius: 17, alignItems: "center", justifyContent: "center" },
-    pastilleTexte: { color: "#fff", fontWeight: "600" },
     nomInput: { flex: 1, fontSize: 16, fontWeight: "600", color: c.textPrimary, paddingVertical: 4 },
     supprimer: { color: c.textFaint, fontSize: 16, paddingHorizontal: 6 },
     membresBouton: {

@@ -2,13 +2,24 @@
 // Export et restauration de toutes les données locales.
 
 import { getDb } from "./database";
+import { insererJeuxHistoriques } from "./jeux";
+
+/**
+ * 1 : les jeux « natifs » vivaient dans le code.
+ * 2 : ils vivent en base.
+ * 3 : les joueurs ne sont plus des noms nus, mais des objets avec leur photo.
+ */
+const VERSION_SAUVEGARDE = 3;
+
+/** Un joueur exporté. Les sauvegardes d'avant la version 3 n'ont qu'un nom. */
+export type JoueurSauvegarde = { nom: string; photo: string | null };
 
 export type Sauvegarde = {
   application: "meep-meep";
   version: number;
   date: string;
   parties: Record<string, unknown>[];
-  joueurs: string[];
+  joueurs: (JoueurSauvegarde | string)[];
   jeux: Record<string, unknown>[];
   favoris: string[];
 };
@@ -44,21 +55,23 @@ const COLONNES_JEUX = [
   "categories",
   "bonus",
   "equipes",
+  "extensions",
+  "roles",
 ];
 
 export async function exporterDonnees(): Promise<Sauvegarde> {
   const db = await getDb();
   const parties = await db.getAllAsync<Record<string, unknown>>("SELECT * FROM parties");
-  const joueurs = await db.getAllAsync<{ nom: string }>("SELECT nom FROM joueurs");
+  const joueurs = await db.getAllAsync<JoueurSauvegarde>("SELECT nom, photo FROM joueurs");
   const jeux = await db.getAllAsync<Record<string, unknown>>("SELECT * FROM jeux");
   const favoris = await db.getAllAsync<{ jeu_id: string }>("SELECT jeu_id FROM favoris");
 
   return {
     application: "meep-meep",
-    version: 1,
+    version: VERSION_SAUVEGARDE,
     date: new Date().toISOString(),
     parties,
-    joueurs: joueurs.map((j) => j.nom),
+    joueurs,
     jeux,
     favoris: favoris.map((f) => f.jeu_id),
   };
@@ -86,6 +99,10 @@ export async function restaurerDonnees(s: Sauvegarde) {
     DELETE FROM partie_en_cours;
   `);
 
+  // Une sauvegarde d'avant la bibliothèque ne contient pas les jeux d'origine :
+  // ils étaient dans le code. On les remet, sinon ils disparaîtraient du catalogue.
+  if ((s.version ?? 1) < 2) await insererJeuxHistoriques();
+
   for (const p of s.parties) {
     const valeurs = COLONNES_PARTIES.map((c) => (p[c] ?? null) as never);
     await db.runAsync(
@@ -94,8 +111,14 @@ export async function restaurerDonnees(s: Sauvegarde) {
     );
   }
 
-  for (const nom of s.joueurs) {
-    if (nom) await db.runAsync("INSERT OR IGNORE INTO joueurs (nom) VALUES (?)", [nom]);
+  // Avant la version 3, un joueur n'était qu'un nom.
+  for (const j of s.joueurs) {
+    const joueur = typeof j === "string" ? { nom: j, photo: null } : j;
+    if (!joueur?.nom) continue;
+    await db.runAsync("INSERT OR IGNORE INTO joueurs (nom, photo) VALUES (?, ?)", [
+      joueur.nom,
+      joueur.photo ?? null,
+    ]);
   }
 
   for (const j of s.jeux) {
@@ -114,5 +137,5 @@ export async function restaurerDonnees(s: Sauvegarde) {
 export function resumeSauvegarde(s: Sauvegarde) {
   return `${s.parties.length} partie${s.parties.length > 1 ? "s" : ""}, ${s.joueurs.length} joueur${
     s.joueurs.length > 1 ? "s" : ""
-  }, ${s.jeux.length} jeu${s.jeux.length > 1 ? "x" : ""} ajouté${s.jeux.length > 1 ? "s" : ""}`;
+  }, ${s.jeux.length} jeu${s.jeux.length > 1 ? "x" : ""}`;
 }

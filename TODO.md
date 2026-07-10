@@ -2,40 +2,53 @@
 
 Liste des fonctionnalités à faire et des améliorations.
 
+**Progression : 54 / 57 — 95 %**
+
+`███████████████████░`
+
 ## Priorité haute
 
 - [ ] **Compiler l'app (EAS build)** — installer l'app pour de vrai sur le téléphone, sans passer par Expo Go. C'est aussi ce qui fera apparaître l'icône Meep Meep.
 
 ## Qualité du projet
 
-- [ ] **Tests automatisés** — toute la logique délicate est déjà isolée dans des fonctions pures : calcul des totaux et du bonus, détection des égalités, renommage d'un joueur propagé à l'historique, parseur de catégories, format d'échange des jeux. Quelques tests les verrouilleraient bien plus sûrement qu'un parcours manuel.
-- [ ] **Revue de code et optimisation** — supprimer le code mort, vérifier les rendus inutiles et les dépendances des effets.
-- [ ] **Chasse aux bugs** — parcourir méthodiquement chaque écran et chaque cas limite : aucun joueur, un seul joueur, noms vides, scores négatifs, très longues listes, thème sombre, rotation, reprise de partie.
-- [ ] **Tester le jeu Skull King** — bon cas d'épreuve pour le mode manches : dix manches de longueur fixe, scores négatifs quand le contrat n'est pas rempli, et le plus de points gagne. Vérifier la saisie du signe moins, l'ajout de manches, et le total cumulé.
-- [ ] **Documenter le projet** — le README et ses notes d'architecture sont à jour. Reste à commenter les endroits délicats du code au fil des relectures.
-
-## Manques repérés
-
-- [ ] **Aucune partie en cours visible depuis le catalogue** — il faut ouvrir la fiche d'un jeu pour découvrir qu'une partie attend. Un bandeau « Reprendre votre Yams » sur l'accueil réglerait ça.
-- [ ] **Impossible de vider l'historique** — ni suppression multiple, ni remise à zéro.
-- [ ] **Les photos des jeux supprimés restent dans le stockage** — prévoir un nettoyage à la suppression.
 
 ## Nouvelles fonctionnalités
 
-- [ ] **Bibliothèque de jeux prédéfinis** — un écran « Ajouter un jeu tout prêt » proposant une liste de jeux déjà décrits (Skull King, belote, 7 Wonders, et tous ceux qui sont aujourd'hui codés en dur). On en choisit un, il atterrit dans le catalogue comme un jeu ajouté : modifiable et supprimable. À terme, les jeux natifs de `data/jeux.ts` viendraient de cette bibliothèque, ce qui supprimerait la distinction entre jeux « natifs » et jeux « importés ».
-- [ ] **Note moyenne par jeu dans les statistiques** — maintenant que les parties sont notées, savoir quel jeu procure les meilleures soirées.
-- [ ] **Écran de détail par joueur** — ses parties, son taux de victoire par jeu, son adversaire favori, sa plus longue série de victoires.
-- [ ] **Tutoriel / aide dans les Réglages** — un écran d'aide expliquant les fonctionnalités : les modes de score et quand utiliser chacun, la syntaxe des cases et du bonus, les extensions et personnages, les favoris, l'export/import, la reprise de partie. Idéalement des sections dépliables, et de petites bulles d'aide contextuelles dans le formulaire d'ajout de jeu.
-- [ ] **Accessibilité** — libellés pour les lecteurs d'écran, contrastes, tailles de police.
+- [ ] **Étudier la faisabilité d'une API maison** — se renseigner sur ce qu'il faudrait pour héberger sa propre API : à quoi elle servirait (bibliothèque de jeux partagée et mise à jour sans republier l'app, synchronisation entre appareils, sauvegarde en ligne, contournement du jeton BoardGameGeek), quel hébergement, quel coût, quelles obligations (RGPD, comptes utilisateurs), et si un simple fichier JSON servi en statique suffirait.
 
 
 ## En attente
 
-- [ ] **Jeton BoardGameGeek** — demande d'application envoyée, réponse sous une semaine ou plus. Le code d'import est déjà prêt.
+- [ ] **Jeton BoardGameGeek** — demande d'application envoyée, réponse sous une semaine ou plus. Le code d'import est déjà prêt. Le bouton « Chercher sur BoardGameGeek » est retiré du formulaire en attendant : l'écran `app/bgg.tsx` et `lib/bgg.ts` sont intacts, il n'y a qu'à remettre le bouton.
 - [ ] **Logo « Powered by BGG »** — obligatoire si l'application est déclarée publique.
 
 ## Terminé
 
+- [x] Accessibilité vérifiée sur un vrai téléphone
+- [x] README réécrit : structure réelle, et des notes d'architecture qui listent les pièges plutôt que les évidences
+- [x] Bugs connus corrigés : mode de score changé, case supprimée, abandon depuis la fiche, tirage en équipes, homonymes
+- [x] Chasse aux bugs : « continuer à modifier », noms vides, équipes confondues avec des joueurs, JSON non-tableau
+- [x] Revue de code : douze fichiers morts supprimés, JSON de l'historique analysé une seule fois par écran
+- [x] Logique de score extraite des écrans dans `lib/score.ts`, et testée (Yams, Skull King, 6 qui prend)
+- [x] Tests automatisés : 157 tests sur `lib/` (jest-expo), et le renommage d'un joueur extrait de la base
+- [x] Accessibilité : contrastes WCAG AA sur les six accents et les deux thèmes, grandes polices, tableaux de manches et de feuille de score
+- [x] Accessibilité : libellés, rôles et états pour les lecteurs d'écran sur tout ce qui se touche
+- [x] Photos des joueurs dans les écrans de partie (compteur, objectif, coopératif)
+- [x] Skull King éprouvé en conditions réelles (mode manches, scores négatifs, total cumulé)
+- [x] Photo de profil par joueur, avec le même cycle de vie que les photos de jeux
+- [x] Tableaux de statistiques limités à cinq lignes, avec « Voir les N autres »
+- [x] Bulles « ? » dans le formulaire, ouvrant la bonne section de l'aide
+- [x] Écran d'aide dans les Réglages, en sections dépliables
+- [x] Fiche par joueur : taux de victoire par jeu, adversaire favori, plus longue série, dernières parties
+- [x] Note moyenne dans les statistiques : métrique globale et classement « Jeux les mieux notés »
+- [x] Extensions et personnages modifiables depuis le formulaire, parseurs isolés dans `lib/parse-jeu.ts`
+- [x] Nettoyage des photos : effacées avec leur jeu, à leur remplacement, et balayage des orphelines au démarrage
+- [x] Vider l'historique : sélection multiple par appui long, et remise à zéro dans les Réglages
+- [x] Fiche de jeu : vignette carrée à gauche, nom et catégorie à sa droite, au lieu de la bannière pleine largeur
+- [x] Bandeau « Reprendre votre… » sur le catalogue, pastille sur les jeux concernés, abandon avec confirmation
+- [x] Bibliothèque de jeux prédéfinis : écran « Ajouter un jeu tout prêt », 18 jeux livrés
+- [x] Plus de distinction entre jeux « natifs » et jeux « ajoutés » : tous vivent en base, tous se modifient et se suppriment
 - [x] Catalogue avec recherche et filtres (favoris, catégorie, joueurs, durée)
 - [x] Tri du catalogue : alphabétique, les plus joués, joués récemment
 - [x] Fiche de jeu : description, règles dépliables, extensions, personnages

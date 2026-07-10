@@ -33,20 +33,39 @@ export function DialogueConfirmation({
       animationType="fade"
       onRequestClose={onAnnuler}
     >
-      <TouchableOpacity style={styles.fond} activeOpacity={1} onPress={onAnnuler}>
-        <TouchableOpacity style={styles.carte} activeOpacity={1}>
-          <View style={styles.pastille}>
+      <TouchableOpacity
+        style={styles.fond}
+        activeOpacity={1}
+        accessibilityRole="button"
+        accessibilityLabel="Fermer"
+        onPress={onAnnuler}
+      >
+        {/* Tant que le dialogue est là, le reste de l'écran n'existe pas. */}
+        <TouchableOpacity style={styles.carte} activeOpacity={1} accessibilityViewIsModal>
+          <View style={styles.pastille} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
             <Text style={styles.pastilleTexte}>!</Text>
           </View>
 
-          <Text style={styles.titre}>{titre}</Text>
+          <Text style={styles.titre} accessibilityRole="header">
+            {titre}
+          </Text>
           {message ? <Text style={styles.message}>{message}</Text> : null}
 
           <View style={styles.actions}>
-            <TouchableOpacity style={styles.annuler} activeOpacity={0.7} onPress={onAnnuler}>
+            <TouchableOpacity
+              style={styles.annuler}
+              activeOpacity={0.7}
+              accessibilityRole="button"
+              onPress={onAnnuler}
+            >
               <Text style={styles.annulerTexte}>{texteAnnuler}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.confirmer} activeOpacity={0.8} onPress={onConfirmer}>
+            <TouchableOpacity
+              style={styles.confirmer}
+              activeOpacity={0.8}
+              accessibilityRole="button"
+              onPress={onConfirmer}
+            >
               <Text style={styles.confirmerTexte}>{texteConfirmer}</Text>
             </TouchableOpacity>
           </View>

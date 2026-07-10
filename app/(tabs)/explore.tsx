@@ -23,11 +23,13 @@ import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
 import { type Jeu } from "@/data/jeux";
 import { formatDuree } from "@/lib/duree";
+import { lignesDe, participantsDe, vainqueursDe } from "@/lib/lignes-partie";
 import {
   listerParties,
   modifierPartie,
   noterPartie,
   supprimerPartie,
+  supprimerParties,
   type JoueurScore,
   type PartieEnregistree,
   type Resultat,
@@ -71,6 +73,11 @@ export default function Historique() {
 
   const [aSupprimer, setASupprimer] = useState<PartieEnregistree | null>(null);
 
+  // null : mode normal. Un tableau, même vide : on est en train de cocher.
+  const [selection, setSelection] = useState<number[] | null>(null);
+  const [lotOuvert, setLotOuvert] = useState(false);
+  const enSelection = selection !== null;
+
   async function effacer() {
     if (!aSupprimer) return;
     const id = aSupprimer.id;
@@ -79,18 +86,41 @@ export default function Historique() {
     charger();
   }
 
+  function basculerSelection(id: number) {
+    setSelection((prev) => {
+      if (!prev) return [id];
+      return prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id];
+    });
+  }
+
   // Listes proposées dans les filtres, tirées de l'historique.
+  /**
+   * Les lignes de chaque partie, lues une seule fois.
+   *
+   * La recherche et les filtres relisaient le JSON de toutes les parties à
+   * chaque frappe. Cinq cents parties, cinq cents analyses JSON par lettre.
+   */
+  const lignesParPartie = useMemo(
+    () => new Map(parties.map((p) => [p.id, lignesDe(p.details)])),
+    [parties],
+  );
+  const lignesPartie = useCallback(
+    (p: PartieEnregistree) => lignesParPartie.get(p.id) ?? [],
+    [lignesParPartie],
+  );
+
   const jeuxDispo = useMemo(() => {
     const compte: Record<string, number> = {};
     for (const p of parties) compte[p.jeu_nom] = (compte[p.jeu_nom] ?? 0) + 1;
     return Object.entries(compte).sort((a, b) => b[1] - a[1]);
   }, [parties]);
 
+  // Les membres d'une équipe sont des joueurs ; « Équipe 1 » n'en est pas un.
   const joueursDispo = useMemo(() => {
     const noms = new Set<string>();
-    for (const p of parties) for (const j of joueursDe(p)) noms.add(j.nom);
+    for (const p of parties) for (const nom of participantsDe(lignesPartie(p))) noms.add(nom);
     return Array.from(noms).sort((a, b) => a.localeCompare(b, "fr"));
-  }, [parties]);
+  }, [parties, lignesPartie]);
 
   const nbFiltres = (jeuFiltre ? 1 : 0) + (joueurFiltre ? 1 : 0) + (periode ? 1 : 0);
 
@@ -99,7 +129,11 @@ export default function Historique() {
     const limite = periode ? Date.now() - PERIODES[periode].jours * 86400000 : 0;
 
     return parties.filter((p) => {
-      const noms = joueursDe(p).map((j) => j.nom);
+      // Les noms cherchés incluent les membres d'équipe, et le nom de l'équipe :
+      // on doit pouvoir retrouver une partie par « Chloé » comme par « Rouge ».
+      const lignes = lignesPartie(p);
+      const membres = participantsDe(lignes);
+      const noms = [...membres, ...lignes.map((l) => l.nom)];
 
       if (texte) {
         const dansJeu = p.jeu_nom.toLowerCase().includes(texte);
@@ -107,11 +141,32 @@ export default function Historique() {
         if (!dansJeu && !dansJoueurs) return false;
       }
       if (jeuFiltre && p.jeu_nom !== jeuFiltre) return false;
-      if (joueurFiltre && !noms.includes(joueurFiltre)) return false;
+      if (joueurFiltre && !membres.includes(joueurFiltre)) return false;
       if (periode && new Date(p.date).getTime() < limite) return false;
       return true;
     });
-  }, [parties, recherche, jeuFiltre, joueurFiltre, periode]);
+  }, [parties, recherche, jeuFiltre, joueurFiltre, periode, lignesPartie]);
+
+  // On ne supprime jamais ce qu'un filtre cache : la sélection se lit
+  // toujours à travers la liste affichée.
+  const cochees = useMemo(() => {
+    if (!selection) return [];
+    const visibles = new Set(partiesFiltrees.map((p) => p.id));
+    return selection.filter((id) => visibles.has(id));
+  }, [selection, partiesFiltrees]);
+
+  const toutCoche = partiesFiltrees.length > 0 && cochees.length === partiesFiltrees.length;
+
+  function toutSelectionner() {
+    setSelection(toutCoche ? [] : partiesFiltrees.map((p) => p.id));
+  }
+
+  async function effacerLot() {
+    setLotOuvert(false);
+    await supprimerParties(cochees).catch(() => {});
+    setSelection(null);
+    charger();
+  }
 
   function reinitialiser() {
     setJeuFiltre(null);
@@ -120,20 +175,16 @@ export default function Historique() {
   }
 
   const total = partiesFiltrees.length;
-  const victoiresParJoueur: Record<string, number> = {};
-  for (const p of partiesFiltrees) {
-    if (p.resultat === "victoire") {
-      // Coopératif gagné : la victoire revient à toute la table.
-      for (const j of joueursDe(p)) {
-        for (const nom of j.membres?.length ? j.membres : [j.nom]) {
-          victoiresParJoueur[nom] = (victoiresParJoueur[nom] ?? 0) + 1;
-        }
-      }
-    } else if (!p.resultat && p.gagnant) {
-      victoiresParJoueur[p.gagnant] = (victoiresParJoueur[p.gagnant] ?? 0) + 1;
+
+  // `vainqueursDe` gère les trois cas : coopératif gagné, égalité, et victoire
+  // d'équipe — qui revient à ses membres, non au nom de l'équipe.
+  const meilleur = useMemo(() => {
+    const victoires: Record<string, number> = {};
+    for (const p of partiesFiltrees) {
+      for (const nom of vainqueursDe(p)) victoires[nom] = (victoires[nom] ?? 0) + 1;
     }
-  }
-  const meilleur = Object.entries(victoiresParJoueur).sort((a, b) => b[1] - a[1])[0];
+    return Object.entries(victoires).sort((a, b) => b[1] - a[1])[0];
+  }, [partiesFiltrees]);
 
   return (
     <SafeAreaView style={styles.page} edges={["top"]}>
@@ -162,6 +213,9 @@ export default function Historique() {
             </View>
             <TouchableOpacity
               style={[styles.filtreBouton, nbFiltres > 0 && styles.filtreBoutonActif]}
+              accessibilityRole="button"
+              accessibilityLabel={nbFiltres > 0 ? `Filtres, ${nbFiltres} actifs` : "Filtres"}
+              accessibilityState={{ expanded: filtresOuverts }}
               onPress={() => setFiltresOuverts((o) => !o)}
             >
               <IconSymbol
@@ -240,6 +294,27 @@ export default function Historique() {
         </View>
       )}
 
+      {enSelection && (
+        <View style={styles.barreSelection}>
+          <Text style={styles.barreCompte}>
+            {cochees.length === 0
+              ? "Aucune partie cochée"
+              : `${cochees.length} partie${cochees.length > 1 ? "s" : ""} cochée${cochees.length > 1 ? "s" : ""}`}
+          </Text>
+          <TouchableOpacity onPress={toutSelectionner} hitSlop={8} accessibilityRole="button">
+            <Text style={styles.barreAction}>{toutCoche ? "Tout décocher" : "Tout cocher"}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => setSelection(null)}
+            hitSlop={8}
+            accessibilityRole="button"
+            accessibilityLabel="Quitter la sélection"
+          >
+            <Text style={styles.barreAnnuler}>Annuler</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+
       <FlatList
         data={partiesFiltrees}
         keyExtractor={(p) => String(p.id)}
@@ -257,12 +332,30 @@ export default function Historique() {
             </Text>
           </View>
         }
-        renderItem={({ item }) => (
+        renderItem={({ item }) => {
+          const coche = cochees.includes(item.id);
+          return (
           <TouchableOpacity
-            style={styles.carte}
+            style={[styles.carte, coche && styles.carteCochee]}
             activeOpacity={0.7}
-            onPress={() => setDetail(item)}
+            accessibilityRole={enSelection ? "checkbox" : "button"}
+            accessibilityState={enSelection ? { checked: coche } : undefined}
+            accessibilityLabel={`${item.jeu_nom}, ${formatDate(item.date)}, ${issueCourte(item)}`}
+            // L'appui long ne se devine pas à l'oreille.
+            accessibilityHint={enSelection ? undefined : "Appui long pour sélectionner"}
+            onLongPress={() => basculerSelection(item.id)}
+            delayLongPress={250}
+            onPress={() => (enSelection ? basculerSelection(item.id) : setDetail(item))}
           >
+            {enSelection && (
+              <View
+                style={[styles.case, coche && styles.caseActive]}
+                accessibilityElementsHidden
+                importantForAccessibility="no-hide-descendants"
+              >
+                {coche && <Text style={styles.caseCoche}>✓</Text>}
+              </View>
+            )}
             <View style={{ flex: 1 }}>
               <Text style={styles.jeuNom}>{item.jeu_nom}</Text>
               <Text style={styles.meta}>
@@ -270,7 +363,7 @@ export default function Historique() {
                 {item.duree ? ` · ${formatDuree(item.duree)}` : ""}
               </Text>
               <Text style={styles.joueurs} numberOfLines={2}>
-                {nomsJoueurs(item)}
+                {nomsJoueurs(lignesPartie(item))}
               </Text>
             </View>
             <View style={styles.droite}>
@@ -281,12 +374,33 @@ export default function Historique() {
                 <Text style={styles.score}>{item.score_gagnant} pts</Text>
               )}
             </View>
-            <TouchableOpacity style={styles.effacer} onPress={() => setASupprimer(item)}>
-              <Text style={styles.effacerTexte}>✕</Text>
-            </TouchableOpacity>
+            {!enSelection && (
+              <TouchableOpacity
+                style={styles.effacer}
+                accessibilityRole="button"
+                accessibilityLabel={`Supprimer cette partie de ${item.jeu_nom}`}
+                onPress={() => setASupprimer(item)}
+              >
+                <Text style={styles.effacerTexte}>✕</Text>
+              </TouchableOpacity>
+            )}
           </TouchableOpacity>
-        )}
+          );
+        }}
       />
+
+      {enSelection && cochees.length > 0 && (
+        <TouchableOpacity
+          style={styles.boutonLot}
+          activeOpacity={0.8}
+          accessibilityRole="button"
+          onPress={() => setLotOuvert(true)}
+        >
+          <Text style={styles.boutonLotTexte}>
+            Supprimer {cochees.length} partie{cochees.length > 1 ? "s" : ""}
+          </Text>
+        </TouchableOpacity>
+      )}
 
       <Modal
         visible={detail !== null}
@@ -320,6 +434,14 @@ export default function Historique() {
         }
         onConfirmer={effacer}
         onAnnuler={() => setASupprimer(null)}
+      />
+
+      <DialogueConfirmation
+        visible={lotOuvert}
+        titre={`Supprimer ${cochees.length} partie${cochees.length > 1 ? "s" : ""} ?`}
+        message="Elles disparaîtront de l'historique et des statistiques. C'est sans retour."
+        onConfirmer={effacerLot}
+        onAnnuler={() => setLotOuvert(false)}
       />
     </SafeAreaView>
   );
@@ -367,7 +489,7 @@ function DetailPartie({
   const objectif = coop || jeu?.scoreMode === "objectif";
 
   const [edition, setEdition] = useState(false);
-  const [lignes, setLignes] = useState<JoueurScore[]>(joueursDe(partie));
+  const [lignes, setLignes] = useState<JoueurScore[]>(lignesDe(partie.details));
   const [gagnant, setGagnant] = useState(partie.gagnant);
   const [resultat, setResultat] = useState<Resultat | null>(partie.resultat);
   const [evaluation, setEvaluation] = useState(partie.evaluation ?? 0);
@@ -391,9 +513,18 @@ function DetailPartie({
         : sens === "min"
           ? Math.min(...scores)
           : Math.max(...scores);
-    await modifierPartie(partie.id, lignes, coop ? "" : gagnant, scoreGagnant, resultat).catch(
-      () => {},
-    );
+    // Une ligne à membres trahit une partie en équipes : sans cela, l'édition
+    // inscrirait « Équipe 1 » dans la liste des joueurs.
+    const equipes = lignes.some((l) => !!l.membres?.length);
+    await modifierPartie(
+      partie.id,
+      lignes,
+      coop ? "" : gagnant,
+      scoreGagnant,
+      resultat,
+      undefined,
+      equipes,
+    ).catch(() => {});
     await noterPartie(partie.id, evaluation, note).catch(() => {});
     onEnregistre();
   }
@@ -595,7 +726,7 @@ function DetailPartie({
           <TouchableOpacity
             style={styles.annulerDetail}
             onPress={() => {
-              setLignes(joueursDe(partie));
+              setLignes(lignesDe(partie.details));
               setGagnant(partie.gagnant);
               setResultat(partie.resultat);
               setEdition(false);
@@ -619,14 +750,6 @@ function DetailPartie({
       )}
     </>
   );
-}
-
-function joueursDe(p: PartieEnregistree): JoueurScore[] {
-  try {
-    return JSON.parse(p.details) as JoueurScore[];
-  } catch {
-    return [];
-  }
 }
 
 function Groupe({
@@ -658,7 +781,13 @@ function Chip({
   styles: ReturnType<typeof makeStyles>;
 }) {
   return (
-    <TouchableOpacity style={[styles.chip, actif && styles.chipActif]} onPress={onPress}>
+    <TouchableOpacity
+      style={[styles.chip, actif && styles.chipActif]}
+      accessibilityRole="switch"
+      accessibilityState={{ checked: actif }}
+      accessibilityLabel={label}
+      onPress={onPress}
+    >
       <Text style={[styles.chipTexte, actif && styles.chipTexteActif]} numberOfLines={1}>
         {label}
       </Text>
@@ -666,18 +795,14 @@ function Chip({
   );
 }
 
-function nomsJoueurs(p: PartieEnregistree) {
-  try {
-    const joueurs = JSON.parse(p.details) as JoueurScore[];
-    return joueurs
-      .map((j) => {
-        if (j.membres?.length) return `${j.nom} (${j.membres.join(", ")})`;
-        return j.role ? `${j.nom} (${j.role})` : j.nom;
-      })
-      .join(", ");
-  } catch {
-    return "";
-  }
+/** Reçoit les lignes déjà lues : c'est l'écran qui garde le JSON analysé. */
+function nomsJoueurs(lignes: JoueurScore[]) {
+  return lignes
+    .map((j) => {
+      if (j.membres?.length) return `${j.nom} (${j.membres.join(", ")})`;
+      return j.role ? `${j.nom} (${j.role})` : j.nom;
+    })
+    .join(", ");
 }
 
 function makeStyles(c: AppColors) {
@@ -758,6 +883,7 @@ function makeStyles(c: AppColors) {
     carte: {
       flexDirection: "row",
       alignItems: "center",
+      gap: 12,
       backgroundColor: c.surface,
       borderRadius: 12,
       borderWidth: 1,
@@ -765,9 +891,44 @@ function makeStyles(c: AppColors) {
       padding: 14,
       marginBottom: 10,
     },
+    carteCochee: { borderColor: c.accent, backgroundColor: c.accentSoft },
+    barreSelection: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 14,
+      marginHorizontal: 16,
+      marginBottom: 10,
+      paddingVertical: 10,
+      paddingHorizontal: 14,
+      backgroundColor: c.surfaceAlt,
+      borderRadius: 12,
+    },
+    barreCompte: { flex: 1, fontSize: 13, fontWeight: "600", color: c.textSecondary },
+    barreAction: { fontSize: 13, fontWeight: "600", color: c.accentText },
+    barreAnnuler: { fontSize: 13, fontWeight: "600", color: c.textMuted },
+    case: {
+      width: 22,
+      height: 22,
+      borderRadius: 6,
+      borderWidth: 2,
+      borderColor: c.borderStrong,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    caseActive: { backgroundColor: c.accent, borderColor: c.accent },
+    caseCoche: { color: c.onAccent, fontSize: 13, fontWeight: "700" },
+    boutonLot: {
+      backgroundColor: c.danger,
+      borderRadius: 12,
+      paddingVertical: 14,
+      alignItems: "center",
+      marginHorizontal: 16,
+      marginBottom: 12,
+    },
+    boutonLotTexte: { color: c.onDanger, fontSize: 15, fontWeight: "600" },
     jeuNom: { fontSize: 16, fontWeight: "600", color: c.textPrimary },
     meta: { fontSize: 13, color: c.textMuted, marginTop: 2 },
-    joueurs: { fontSize: 12, color: c.textFaint, marginTop: 3 },
+    joueurs: { fontSize: 12, color: c.textMuted, marginTop: 3 },
     droite: { alignItems: "flex-end", marginRight: 8 },
     gagnant: { fontSize: 13, color: c.accentText, fontWeight: "600" },
     perdue: { color: c.textMuted },
@@ -809,7 +970,7 @@ function makeStyles(c: AppColors) {
       backgroundColor: c.surfaceAlt,
     },
     detailGagnant: { backgroundColor: c.successSoft },
-    detailRang: { width: 24, textAlign: "center", fontSize: 14, fontWeight: "700", color: c.textFaint },
+    detailRang: { width: 24, textAlign: "center", fontSize: 14, fontWeight: "700", color: c.textMuted },
     detailRangGagnant: { fontSize: 16 },
     detailNom: { fontSize: 15, fontWeight: "600", color: c.textPrimary },
     detailRole: { fontSize: 12, color: c.textMuted, marginTop: 2 },

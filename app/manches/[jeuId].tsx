@@ -25,9 +25,15 @@ import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
 import { prefixeJoueur, usePartie } from "@/hooks/use-partie";
 import { formatChrono } from "@/lib/duree";
+import {
+  classer,
+  nettoyerEntierSigne,
+  oublierJoueur,
+  seuilAtteint,
+  totalManches,
+} from "@/lib/score";
 
 type Scores = Record<string, Record<number, string>>; // [joueurId][numéro de manche]
-type Styles = ReturnType<typeof makeStyles>;
 
 const LARGEUR_LABEL = 96;
 const LARGEUR_COL = 78;
@@ -49,6 +55,8 @@ export default function PartieManches() {
     joueurs,
     joueursSauvegardes,
     joueursDispo,
+    nomDe,
+    nomsPourTirage,
     modeEquipes,
     reprise,
     termine,
@@ -98,59 +106,38 @@ export default function PartieManches() {
 
   const [resultat, setResultat] = useState<string | null>(null);
 
-  function valeur(joueurId: string, manche: number): number {
-    const n = parseInt(scores[joueurId]?.[manche] ?? "", 10);
-    return isNaN(n) ? 0 : n;
-  }
-
   function definir(joueurId: string, manche: number, texte: string) {
-    const negatif = texte.trimStart().startsWith("-");
-    const propre = (negatif ? "-" : "") + texte.replace(/[^0-9]/g, "");
     majScores((prev) => ({
       ...prev,
-      [joueurId]: { ...(prev[joueurId] ?? {}), [manche]: propre },
+      [joueurId]: { ...(prev[joueurId] ?? {}), [manche]: nettoyerEntierSigne(texte) },
     }));
   }
 
   function total(joueurId: string) {
-    let s = 0;
-    for (let m = 1; m <= nbManches; m++) s += valeur(joueurId, m);
-    return s;
+    return totalManches(scores[joueurId], nbManches);
   }
 
   function supprimerJoueur(id: string) {
     retirerJoueur(id);
-    majScores((prev) => {
-      const copie = { ...prev };
-      delete copie[id];
-      return copie;
-    });
+    majScores((prev) => oublierJoueur(prev, id));
   }
 
-  const totaux = joueurs.map((j) => total(j.id));
-  const meilleur = totaux.length
-    ? sens === "min"
-      ? Math.min(...totaux)
-      : Math.max(...totaux)
-    : 0;
-  const pire = totaux.length ? Math.max(...totaux) : 0;
-  const tousEgaux = totaux.every((t) => t === totaux[0]);
-  const gagnants = joueurs.filter((j) => total(j.id) === meilleur);
-  const seuilAtteint = seuilFin !== undefined && pire >= seuilFin;
+  const { meilleur, pire, gagnants, tousEgaux } = classer(joueurs, (j) => total(j.id), sens);
+  const seuilFranchi = seuilAtteint(pire, seuilFin);
 
   function terminer() {
     if (gagnants.length > 1) {
       setEgaliteOuverte(true);
       return;
     }
-    finaliser(gagnants[0]?.nom ?? "");
+    finaliser(gagnants[0] ? nomDe(gagnants[0]) : "");
   }
 
   async function finaliser(nomGagnant: string) {
     setResultat(nomGagnant);
     await terminerPartie({
       joueurs: joueurs.map((j) => ({
-        nom: j.nom,
+        nom: nomDe(j),
         score: total(j.id),
         membres: j.membres?.length ? j.membres : undefined,
       })),
@@ -168,7 +155,12 @@ export default function PartieManches() {
         titre={jeu ? jeu.nom : "Manches"}
         droite={
           <View style={styles.actionsEntete}>
-            <TouchableOpacity hitSlop={8} onPress={() => setTirageOuvert(true)}>
+            <TouchableOpacity
+              hitSlop={8}
+              accessibilityRole="button"
+              accessibilityLabel="Tirer au sort le premier joueur"
+              onPress={() => setTirageOuvert(true)}
+            >
               <IconSymbol name="die.face.5" size={22} color={colors.accentText} />
             </TouchableOpacity>
             <Text style={styles.chronoEntete}>⏱ {formatChrono(secondes)}</Text>
@@ -191,7 +183,7 @@ export default function PartieManches() {
         </View>
       )}
 
-      {seuilAtteint && !termine && (
+      {seuilFranchi && !termine && (
         <View style={styles.avertissement}>
           <Text style={styles.avertissementTexte}>
             Seuil de {seuilFin} atteint — tu peux terminer la partie.
@@ -241,6 +233,7 @@ export default function PartieManches() {
               <View key={j.id} style={[styles.cell, styles.cellEntete, { width: largeurCol }]}>
                 <TextInput
                   style={styles.nomInput}
+                  accessibilityLabel={`Nom : ${j.nom}`}
                   value={j.nom}
                   onChangeText={(t) => renommer(j.id, t)}
                   editable={!termine}
@@ -248,6 +241,8 @@ export default function PartieManches() {
                 {modeEquipes && (
                   <TouchableOpacity
                     disabled={termine}
+                    accessibilityRole="button"
+                    accessibilityLabel={`Membres de ${j.nom}`}
                     onPress={() => setMembresPour(j.id)}
                     style={styles.membresBouton}
                   >
@@ -257,7 +252,11 @@ export default function PartieManches() {
                   </TouchableOpacity>
                 )}
                 {!termine && joueurs.length > 1 && (
-                  <TouchableOpacity onPress={() => supprimerJoueur(j.id)}>
+                  <TouchableOpacity
+                    accessibilityRole="button"
+                    accessibilityLabel={`Retirer ${j.nom}`}
+                    onPress={() => supprimerJoueur(j.id)}
+                  >
                     <Text style={styles.supprimer}>✕</Text>
                   </TouchableOpacity>
                 )}
@@ -274,6 +273,8 @@ export default function PartieManches() {
                 <View key={j.id} style={[styles.cell, { width: largeurCol }]}>
                   <TextInput
                     style={styles.caseInput}
+                    // Sans libellé, un tableau de cases n'annonce que des nombres.
+                    accessibilityLabel={`Manche ${m}, ${j.nom}`}
                     value={scores[j.id]?.[m] ?? ""}
                     onChangeText={(t) => definir(j.id, m, t)}
                     keyboardType={Platform.OS === "ios" ? "numbers-and-punctuation" : "numeric"}
@@ -333,7 +334,7 @@ export default function PartieManches() {
 
       <DialogueEgalite
         visible={egaliteOuverte}
-        noms={gagnants.map((g) => g.nom)}
+        noms={gagnants.map(nomDe)}
         onDepartager={finaliser}
         onEgalite={() => finaliser("")}
         onAnnuler={() => setEgaliteOuverte(false)}
@@ -350,7 +351,7 @@ export default function PartieManches() {
 
       <DialoguePremierJoueur
         visible={tirageOuvert}
-        noms={joueurs.map((j) => j.nom)}
+        noms={nomsPourTirage}
         onFermer={() => setTirageOuvert(false)}
       />
 

@@ -4,13 +4,19 @@ import { useCallback, useMemo, useState, type ReactNode } from "react";
 import { FlatList, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { DialogueConfirmation } from "@/components/dialogue-confirmation";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { VisuelJeu } from "@/components/visuel-jeu";
-import { POLICE_TITRE } from "@/constants/fonts";
 import { type AppColors } from "@/constants/theme-colors";
 import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
+import {
+  effacerEtat,
+  listerPartiesEnCours,
+  type PartieEnAttente,
+} from "@/db/partie-en-cours";
 import { statistiquesParJeu } from "@/db/parties";
+import { cheminPartie } from "@/lib/route-partie";
 import { TRIS, trierJeux, type StatsJeu, type TriCle } from "@/lib/tri-catalogue";
 
 type DureeCle = "court" | "moyen" | "long";
@@ -37,19 +43,57 @@ export default function Catalogue() {
   const [filtresOuverts, setFiltresOuverts] = useState(false);
   const [tri, setTri] = useState<TriCle>("defaut");
   const [stats, setStats] = useState<Record<string, StatsJeu>>({});
+  const [enAttente, setEnAttente] = useState<PartieEnAttente[]>([]);
+  const [abandonOuvert, setAbandonOuvert] = useState(false);
 
-  // L'historique bouge à chaque partie terminée : on le relit en revenant sur l'onglet.
+  const relireEnAttente = useCallback(() => {
+    listerPartiesEnCours()
+      .then(setEnAttente)
+      .catch(() => setEnAttente([]));
+  }, []);
+
+  // L'historique et les parties en cours bougent à chaque partie jouée :
+  // on les relit en revenant sur l'onglet.
   useFocusEffect(
     useCallback(() => {
       let vivant = true;
       statistiquesParJeu().then((s) => {
         if (vivant) setStats(s);
       });
+      listerPartiesEnCours()
+        .then((p) => {
+          if (vivant) setEnAttente(p);
+        })
+        .catch(() => {});
       return () => {
         vivant = false;
       };
     }, []),
   );
+
+  // Une partie dont le jeu a été supprimé n'a plus rien à proposer.
+  const attentesConnues = useMemo(
+    () => enAttente.filter((p) => jeux.some((j) => j.id === p.jeuId)),
+    [enAttente, jeux],
+  );
+  const idsEnAttente = useMemo(
+    () => new Set(attentesConnues.map((p) => p.jeuId)),
+    [attentesConnues],
+  );
+  const derniere = attentesConnues[0];
+  const jeuDerniere = derniere ? jeux.find((j) => j.id === derniere.jeuId) : undefined;
+
+  function reprendre() {
+    if (!jeuDerniere) return;
+    router.push({ pathname: cheminPartie(jeuDerniere), params: { jeuId: jeuDerniere.id } });
+  }
+
+  async function abandonner() {
+    setAbandonOuvert(false);
+    if (!derniere) return;
+    await effacerEtat(derniere.jeuId).catch(() => {});
+    relireEnAttente();
+  }
 
   const categories = useMemo(() => Array.from(new Set(jeux.map((j) => j.categorie))), [jeux]);
   const nbFiltres =
@@ -102,6 +146,8 @@ export default function Catalogue() {
           <TouchableOpacity
             style={styles.themeBouton}
             activeOpacity={0.7}
+            accessibilityRole="button"
+            accessibilityLabel="Ajouter un jeu"
             onPress={() => router.push("/import")}
           >
             <IconSymbol name="plus" size={22} color={colors.accentText} />
@@ -109,6 +155,8 @@ export default function Catalogue() {
           <TouchableOpacity
             style={styles.themeBouton}
             activeOpacity={0.7}
+            accessibilityRole="button"
+            accessibilityLabel="Réglages"
             onPress={() => router.push("/reglages")}
           >
             <IconSymbol name="gearshape.fill" size={20} color={colors.accentText} />
@@ -127,7 +175,11 @@ export default function Catalogue() {
             placeholderTextColor={colors.placeholder}
           />
           {recherche.length > 0 && (
-            <TouchableOpacity onPress={() => setRecherche("")}>
+            <TouchableOpacity
+              accessibilityRole="button"
+              accessibilityLabel="Effacer la recherche"
+              onPress={() => setRecherche("")}
+            >
               <IconSymbol name="xmark" size={16} color={colors.textMuted} />
             </TouchableOpacity>
           )}
@@ -137,6 +189,9 @@ export default function Catalogue() {
             styles.filtreBouton,
             (filtresOuverts || personnalise) && styles.filtreBoutonActif,
           ]}
+          accessibilityRole="button"
+          accessibilityLabel={nbFiltres > 0 ? `Filtres, ${nbFiltres} actifs` : "Filtres"}
+          accessibilityState={{ expanded: filtresOuverts }}
           onPress={() => setFiltresOuverts((o) => !o)}
         >
           <IconSymbol
@@ -146,7 +201,10 @@ export default function Catalogue() {
           />
           {nbFiltres > 0 && (
             <View style={styles.filtreBadge}>
-              <Text style={styles.filtreBadgeTexte}>{nbFiltres}</Text>
+              {/* Une pastille de 18 px : le chiffre ne peut pas grandir sans déborder. */}
+              <Text style={styles.filtreBadgeTexte} allowFontScaling={false}>
+                {nbFiltres}
+              </Text>
             </View>
           )}
         </TouchableOpacity>
@@ -219,6 +277,52 @@ export default function Catalogue() {
         </View>
       )}
 
+      {jeuDerniere && derniere && (
+        <TouchableOpacity
+          style={styles.reprise}
+          activeOpacity={0.8}
+          accessibilityRole="button"
+          accessibilityLabel={`Reprendre votre ${jeuDerniere.nom}. ${sousTitreReprise(derniere)}`}
+          onPress={reprendre}
+        >
+          <View
+            style={styles.repriseIcone}
+            accessibilityElementsHidden
+            importantForAccessibility="no-hide-descendants"
+          >
+            <IconSymbol name="play.fill" size={18} color={colors.onAccent} />
+          </View>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.repriseTitre} numberOfLines={1}>
+              Reprendre votre {jeuDerniere.nom}
+            </Text>
+            <Text style={styles.repriseDetail} numberOfLines={1}>
+              {sousTitreReprise(derniere)}
+            </Text>
+          </View>
+          <TouchableOpacity
+            hitSlop={12}
+            accessibilityLabel="Abandonner cette partie"
+            onPress={() => setAbandonOuvert(true)}
+          >
+            <IconSymbol name="xmark" size={16} color={colors.accentText} />
+          </TouchableOpacity>
+        </TouchableOpacity>
+      )}
+
+      <DialogueConfirmation
+        visible={abandonOuvert}
+        titre="Abandonner cette partie ?"
+        message={
+          jeuDerniere
+            ? `La partie de « ${jeuDerniere.nom} » sera perdue. Elle n'ira pas dans l'historique.`
+            : undefined
+        }
+        texteConfirmer="Abandonner"
+        onConfirmer={abandonner}
+        onAnnuler={() => setAbandonOuvert(false)}
+      />
+
       <FlatList
         data={jeuxAffiches}
         keyExtractor={(jeu) => jeu.id}
@@ -240,6 +344,9 @@ export default function Catalogue() {
           <TouchableOpacity
             style={styles.carte}
             activeOpacity={0.7}
+            accessibilityRole="button"
+            accessibilityLabel={`${item.nom}${idsEnAttente.has(item.id) ? ", partie en cours" : ""}`}
+            accessibilityHint={`${item.joueursMin} à ${item.joueursMax} joueurs, ${item.dureeMin} minutes, ${item.categorie}`}
             onPress={() => router.push(`/jeu/${item.id}`)}
           >
             <VisuelJeu jeu={item} style={styles.carteImage} />
@@ -247,6 +354,12 @@ export default function Catalogue() {
               <Text style={styles.nomJeu} numberOfLines={1}>
                 {item.nom}
               </Text>
+              {idsEnAttente.has(item.id) && (
+                <View style={styles.pastille}>
+                  <View style={styles.pastillePoint} />
+                  <Text style={styles.pastilleTexte}>Partie en cours</Text>
+                </View>
+              )}
               <Text style={styles.meta}>
                 {item.joueursMin}–{item.joueursMax} joueurs · {item.dureeMin} min · {item.categorie}
               </Text>
@@ -261,6 +374,9 @@ export default function Catalogue() {
             <TouchableOpacity
               style={styles.etoile}
               hitSlop={10}
+              accessibilityRole="button"
+              accessibilityLabel={`${item.nom}, favori`}
+              accessibilityState={{ selected: estFavori(item.id) }}
               onPress={() => basculerFavori(item.id)}
             >
               <IconSymbol
@@ -274,6 +390,16 @@ export default function Catalogue() {
       />
     </SafeAreaView>
   );
+}
+
+/** « Commencée hier · Alice, Bob et 2 autres » */
+function sousTitreReprise(p: PartieEnAttente): string {
+  const quand = `Commencée ${dateRelative(p.date)}`;
+  if (p.joueurs.length === 0) return quand;
+  const visibles = p.joueurs.slice(0, 2).join(", ");
+  const reste = p.joueurs.length - 2;
+  if (reste <= 0) return `${quand} · ${visibles}`;
+  return `${quand} · ${visibles} et ${reste} autre${reste > 1 ? "s" : ""}`;
 }
 
 /** La ligne qui explique la place du jeu dans la liste triée. */
@@ -332,7 +458,14 @@ function Chip({
   styles: ReturnType<typeof makeStyles>;
 }) {
   return (
-    <TouchableOpacity style={[styles.chip, actif && styles.chipActif]} onPress={onPress}>
+    <TouchableOpacity
+      style={[styles.chip, actif && styles.chipActif]}
+      // Un filtre s'active et se désactive : c'est un interrupteur, pas un bouton.
+      accessibilityRole="switch"
+      accessibilityState={{ checked: actif }}
+      accessibilityLabel={label}
+      onPress={onPress}
+    >
       <Text style={[styles.chipTexte, actif && styles.chipTexteActif]}>{label}</Text>
     </TouchableOpacity>
   );
@@ -348,7 +481,6 @@ function makeStyles(c: AppColors) {
       paddingTop: 12,
       paddingBottom: 8,
     },
-    titre: { fontSize: 30, fontFamily: POLICE_TITRE, color: c.accentText },
     logo: { height: 34, aspectRatio: 1428 / 249, alignSelf: "flex-start" },
     sousTitre: { fontSize: 15, color: c.textMuted, marginTop: 4 },
     headerBoutons: { flexDirection: "row", gap: 8 },
@@ -372,12 +504,14 @@ function makeStyles(c: AppColors) {
       borderColor: c.border,
       borderRadius: 10,
       paddingHorizontal: 12,
-      height: 42,
+      // minHeight et non height : le champ suit les grandes polices du système.
+      minHeight: 42,
+      paddingVertical: 4,
     },
     rechercheInput: { flex: 1, fontSize: 15, color: c.textPrimary },
     filtreBouton: {
       width: 42,
-      height: 42,
+      minHeight: 42,
       borderRadius: 10,
       borderWidth: 1,
       borderColor: c.border,
@@ -423,19 +557,45 @@ function makeStyles(c: AppColors) {
     chipTexte: { fontSize: 13, color: c.textSecondary, fontWeight: "600" },
     chipTexteActif: { color: c.onAccent },
     reset: { fontSize: 13, color: c.accentText, fontWeight: "600", marginTop: 2 },
+    reprise: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 12,
+      backgroundColor: c.accentSoft,
+      borderRadius: 14,
+      marginHorizontal: 16,
+      marginBottom: 12,
+      paddingVertical: 12,
+      paddingHorizontal: 14,
+    },
+    repriseIcone: {
+      width: 36,
+      height: 36,
+      borderRadius: 18,
+      backgroundColor: c.accent,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    repriseTitre: { fontSize: 15, fontWeight: "700", color: c.accentText },
+    repriseDetail: { fontSize: 12, color: c.accentText, opacity: 0.8, marginTop: 2 },
+    pastille: { flexDirection: "row", alignItems: "center", gap: 6, marginTop: 5 },
+    pastillePoint: { width: 7, height: 7, borderRadius: 4, backgroundColor: c.accent },
+    pastilleTexte: { fontSize: 12, fontWeight: "600", color: c.accentText },
     liste: { paddingHorizontal: 16, paddingBottom: 24, flexGrow: 1 },
     carte: {
       flexDirection: "row",
+      alignItems: "center",
+      gap: 12,
       backgroundColor: c.surface,
       borderRadius: 14,
       marginBottom: 12,
       borderWidth: 1,
       borderColor: c.border,
-      overflow: "hidden",
+      padding: 12,
     },
-    carteImage: { width: 100, minHeight: 100, alignSelf: "stretch" },
-    carteCorps: { flex: 1, padding: 14, paddingRight: 40, justifyContent: "center" },
-    etoile: { position: "absolute", top: 8, right: 8, padding: 4 },
+    carteImage: { width: 76, height: 76, borderRadius: 12 },
+    carteCorps: { flex: 1, paddingRight: 26, justifyContent: "center" },
+    etoile: { position: "absolute", top: 6, right: 6, padding: 4 },
     nomJeu: { fontSize: 17, fontWeight: "600", color: c.textPrimary },
     meta: { fontSize: 13, color: c.textMuted, marginTop: 4, marginBottom: 8 },
     mention: {
@@ -449,6 +609,6 @@ function makeStyles(c: AppColors) {
     vide: { alignItems: "center", paddingTop: 60, paddingHorizontal: 24 },
     videTexte: { fontSize: 15, color: c.textMuted, textAlign: "center" },
     signature: { alignItems: "center", paddingTop: 8, paddingBottom: 4 },
-    signatureTexte: { fontSize: 12, color: c.textFaint, letterSpacing: 0.3 },
+    signatureTexte: { fontSize: 12, color: c.textMuted, letterSpacing: 0.3 },
   });
 }
