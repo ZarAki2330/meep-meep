@@ -1,8 +1,7 @@
 // app/partie/[jeuId].tsx — gestion des scores d'une partie en cours
 
-import { useFocusEffect } from "@react-navigation/native";
 import { useLocalSearchParams } from "expo-router";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import {
   FlatList,
   ScrollView,
@@ -14,31 +13,17 @@ import {
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
+import { DialogueBilan } from "@/components/dialogue-bilan";
 import { DialogueEgalite } from "@/components/dialogue-egalite";
+import { DialoguePremierJoueur } from "@/components/dialogue-premier-joueur";
 import { Entete } from "@/components/entete";
+import { SelecteurMembres } from "@/components/selecteur-membres";
+import { IconSymbol } from "@/components/ui/icon-symbol";
 import { type AppColors } from "@/constants/theme-colors";
 import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
-import { listerJoueurs } from "@/db/joueurs";
-import { chargerEtat, effacerEtat, sauvegarderEtat } from "@/db/partie-en-cours";
-import { enregistrerPartie } from "@/db/parties";
-import { useChrono } from "@/hooks/use-chrono";
+import { prefixeJoueur, usePartie } from "@/hooks/use-partie";
 import { formatChrono } from "@/lib/duree";
-
-type EtatSauve = { joueurs: Joueur[]; duree?: number };
-
-function estVierge(joueurs: Joueur[]) {
-  return (
-    joueurs.length === 2 &&
-    joueurs.every((j, i) => j.score === 0 && j.nom === `Joueur ${i + 1}`)
-  );
-}
-
-type Joueur = {
-  id: string;
-  nom: string;
-  score: number;
-};
 
 const COULEURS = ["#7a5195", "#1d9e75", "#378add", "#d85a30", "#c4457e"];
 
@@ -51,65 +36,41 @@ export default function Partie() {
   const jeu = jeux.find((j) => j.id === jeuId);
 
   const extensionsChoisies = extensions ? extensions.split("|").filter(Boolean) : [];
+  const prefixe = prefixeJoueur(jeu);
 
-  const [joueurs, setJoueurs] = useState<Joueur[]>([
-    { id: "j1", nom: "Joueur 1", score: 0 },
-    { id: "j2", nom: "Joueur 2", score: 0 },
-  ]);
-  const [termine, setTermine] = useState(false);
-  const [joueursSauvegardes, setJoueursSauvegardes] = useState<string[]>([]);
-  const [charge, setCharge] = useState(false);
-  const [reprise, setReprise] = useState(false);
-
-  useEffect(() => {
-    listerJoueurs()
-      .then((js) => setJoueursSauvegardes(js.map((j) => j.nom)))
-      .catch(() => {});
-  }, []);
-
-  // Les fonctions du chrono sont stables ; "secondes" change chaque seconde.
-  const { secondes, demarrer, pause, initialiser } = useChrono();
-  const secondesRef = useRef(0);
-  secondesRef.current = secondes;
-  const termineRef = useRef(false);
-  termineRef.current = termine;
-
-  // Reprise d'une partie non terminée.
-  useEffect(() => {
-    chargerEtat<EtatSauve>(jeuId ?? "")
-      .then((e) => {
-        if (e?.joueurs?.length) {
-          setJoueurs(e.joueurs);
-          if (e.duree) initialiser(e.duree);
-          setReprise(true);
-        }
-      })
-      .finally(() => setCharge(true));
-  }, [jeuId, initialiser]);
-
-  // Le chrono tourne quand l'écran est affiché, se met en pause sinon.
-  useFocusEffect(
-    useCallback(() => {
-      if (!termineRef.current) demarrer();
-      return () => {
-        pause();
-      };
-    }, [demarrer, pause]),
-  );
-
-  useEffect(() => {
-    if (termine) pause();
-  }, [termine, pause]);
-
-  // Sauvegarde automatique tant que la partie n'est pas terminée.
-  useEffect(() => {
-    if (!charge || termine) return;
-    if (estVierge(joueurs)) effacerEtat(jeuId ?? "").catch(() => {});
-    else sauvegarderEtat(jeuId ?? "", { joueurs, duree: secondesRef.current }).catch(() => {});
-    // chrono.secondes est volontairement hors dépendances : on l'enregistre
-    // à chaque changement de score, pas à chaque seconde.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [charge, termine, joueurs, jeuId]);
+  const {
+    joueurs,
+    setJoueurs,
+    joueursSauvegardes,
+    joueursDispo,
+    modeEquipes,
+    reprise,
+    termine,
+    secondes,
+    membresPour,
+    setMembresPour,
+    tirageOuvert,
+    setTirageOuvert,
+    egaliteOuverte,
+    setEgaliteOuverte,
+    bilanOuvert,
+    fermerBilan,
+    noter,
+    renommer,
+    ajouterJoueur,
+    ajouterJoueurNomme,
+    supprimerJoueur,
+    definirMembres,
+    terminerPartie,
+    reinitialiser,
+  } = usePartie({
+    jeuId: jeuId ?? "",
+    jeu,
+    extraInitial: {},
+    vierge: (js) =>
+      js.length === 2 &&
+      js.every((j, i) => j.score === 0 && j.nom === `${prefixe} ${i + 1}` && !j.membres?.length),
+  });
 
   const sens = jeu?.scoreVictoire ?? "max";
   const seuilFin = jeu?.seuilFin;
@@ -132,36 +93,14 @@ export default function Partie() {
     setJoueurs((prev) => prev.map((j) => (j.id === id ? { ...j, score: isNaN(n) ? 0 : n } : j)));
   }
 
-  function renommer(id: string, nom: string) {
-    setJoueurs((prev) => prev.map((j) => (j.id === id ? { ...j, nom } : j)));
-  }
-
-  function ajouterJoueur() {
-    setJoueurs((prev) => [
-      ...prev,
-      { id: `j${Date.now()}`, nom: `Joueur ${prev.length + 1}`, score: 0 },
-    ]);
-  }
-
-  function ajouterJoueurNomme(nom: string) {
-    setJoueurs((prev) => [...prev, { id: `j${Date.now()}`, nom, score: 0 }]);
-  }
-
-  const joueursDispo = joueursSauvegardes.filter((n) => !joueurs.some((j) => j.nom === n));
-
-  function supprimerJoueur(id: string) {
-    setJoueurs((prev) => prev.filter((j) => j.id !== id));
-  }
-
   function nouvellePartie() {
     setJoueurs((prev) => prev.map((j) => ({ ...j, score: 0 })));
     setResultat(null);
-    setTermine(false);
+    reinitialiser();
   }
 
   // Tous les joueurs au meilleur score : plus d'un = égalité.
   const gagnants = joueurs.filter((j) => j.score === meilleur);
-  const [egaliteOuverte, setEgaliteOuverte] = useState(false);
   // "" signifie une égalité enregistrée.
   const [resultat, setResultat] = useState<string | null>(null);
 
@@ -173,28 +112,31 @@ export default function Partie() {
     finaliser(gagnants[0]?.nom ?? "");
   }
 
-  function finaliser(nomGagnant: string) {
-    const duree = pause();
-    setEgaliteOuverte(false);
+  async function finaliser(nomGagnant: string) {
     setResultat(nomGagnant);
-    setTermine(true);
-    setReprise(false);
-    effacerEtat(jeuId ?? "").catch(() => {});
-    enregistrerPartie({
-      jeuId: jeuId ?? "",
-      jeuNom: jeu ? jeu.nom : "Partie",
-      joueurs: joueurs.map((j) => ({ nom: j.nom, score: j.score })),
+    await terminerPartie({
+      joueurs: joueurs.map((j) => ({
+        nom: j.nom,
+        score: j.score,
+        membres: j.membres?.length ? j.membres : undefined,
+      })),
       gagnant: nomGagnant,
       scoreGagnant: meilleur,
-      duree,
-    }).catch(() => {});
+    });
   }
 
   return (
     <View style={styles.page}>
       <Entete
         titre={jeu ? jeu.nom : "Partie"}
-        droite={<Text style={styles.chronoEntete}>⏱ {formatChrono(secondes)}</Text>}
+        droite={
+          <View style={styles.actionsEntete}>
+            <TouchableOpacity hitSlop={8} onPress={() => setTirageOuvert(true)}>
+              <IconSymbol name="die.face.5" size={22} color={colors.accentText} />
+            </TouchableOpacity>
+            <Text style={styles.chronoEntete}>⏱ {formatChrono(secondes)}</Text>
+          </View>
+        }
       />
 
       {reprise && !termine && (
@@ -280,6 +222,21 @@ export default function Partie() {
                 )}
               </View>
 
+              {modeEquipes && (
+                <TouchableOpacity
+                  style={styles.membresBouton}
+                  disabled={termine}
+                  onPress={() => setMembresPour(item.id)}
+                >
+                  <Text
+                    style={item.membres?.length ? styles.membresTexte : styles.membresVide}
+                    numberOfLines={1}
+                  >
+                    {item.membres?.length ? item.membres.join(", ") : "+ Ajouter des membres"}
+                  </Text>
+                </TouchableOpacity>
+              )}
+
               <View style={styles.ligneScore}>
                 <TouchableOpacity
                   style={styles.bouton}
@@ -319,7 +276,7 @@ export default function Partie() {
         {!termine ? (
           <>
             <TouchableOpacity style={styles.actionSecondaire} onPress={ajouterJoueur}>
-              <Text style={styles.actionSecondaireTexte}>+ Joueur</Text>
+              <Text style={styles.actionSecondaireTexte}>+ {prefixe}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.actionPrincipale} onPress={terminer}>
               <Text style={styles.actionPrincipaleTexte}>Terminer la partie</Text>
@@ -339,6 +296,23 @@ export default function Partie() {
         onEgalite={() => finaliser("")}
         onAnnuler={() => setEgaliteOuverte(false)}
       />
+
+      <SelecteurMembres
+        visible={membresPour !== null}
+        equipe={joueurs.find((j) => j.id === membresPour)?.nom ?? ""}
+        membres={joueurs.find((j) => j.id === membresPour)?.membres ?? []}
+        joueursConnus={joueursSauvegardes}
+        onValider={(m) => membresPour && definirMembres(membresPour, m)}
+        onAnnuler={() => setMembresPour(null)}
+      />
+
+      <DialoguePremierJoueur
+        visible={tirageOuvert}
+        noms={joueurs.map((j) => j.nom)}
+        onFermer={() => setTirageOuvert(false)}
+      />
+
+      <DialogueBilan visible={bilanOuvert} onPasser={fermerBilan} onEnregistrer={noter} />
     </View>
   );
 }
@@ -358,6 +332,7 @@ function makeStyles(c: AppColors) {
       paddingVertical: 8,
     },
     chipTexte: { color: c.accentText, fontSize: 13, fontWeight: "600", lineHeight: 18 },
+    actionsEntete: { flexDirection: "row", alignItems: "center", gap: 14 },
     chronoEntete: {
       fontSize: 15,
       fontWeight: "700",
@@ -390,6 +365,15 @@ function makeStyles(c: AppColors) {
     pastilleTexte: { color: "#fff", fontWeight: "600" },
     nomInput: { flex: 1, fontSize: 16, fontWeight: "600", color: c.textPrimary, paddingVertical: 4 },
     supprimer: { color: c.textFaint, fontSize: 16, paddingHorizontal: 6 },
+    membresBouton: {
+      marginTop: 10,
+      paddingVertical: 8,
+      paddingHorizontal: 12,
+      borderRadius: 10,
+      backgroundColor: c.surfaceAlt,
+    },
+    membresTexte: { fontSize: 13, color: c.accentText, fontWeight: "600" },
+    membresVide: { fontSize: 13, color: c.textMuted },
     ligneScore: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 16, marginTop: 10 },
     raccourci: { paddingHorizontal: 10, paddingVertical: 6, borderRadius: 8, backgroundColor: c.surfaceAlt },
     raccourciTexte: { fontSize: 14, color: c.textSecondary, fontWeight: "600" },

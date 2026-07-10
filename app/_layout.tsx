@@ -1,3 +1,4 @@
+import { Fredoka_600SemiBold, useFonts } from "@expo-google-fonts/fredoka";
 import { DarkTheme, DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
@@ -12,6 +13,12 @@ export const unstable_settings = {
 };
 
 export default function RootLayout() {
+  const [policesChargees] = useFonts({ Fredoka_600SemiBold });
+
+  if (!policesChargees) {
+    return null;
+  }
+
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       <AppThemeProvider>

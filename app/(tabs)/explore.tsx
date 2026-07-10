@@ -26,9 +26,11 @@ import { formatDuree } from "@/lib/duree";
 import {
   listerParties,
   modifierPartie,
+  noterPartie,
   supprimerPartie,
   type JoueurScore,
   type PartieEnregistree,
+  type Resultat,
 } from "@/db/parties";
 
 type PeriodeCle = "mois" | "trimestre" | "annee";
@@ -120,7 +122,16 @@ export default function Historique() {
   const total = partiesFiltrees.length;
   const victoiresParJoueur: Record<string, number> = {};
   for (const p of partiesFiltrees) {
-    if (p.gagnant) victoiresParJoueur[p.gagnant] = (victoiresParJoueur[p.gagnant] ?? 0) + 1;
+    if (p.resultat === "victoire") {
+      // Coopératif gagné : la victoire revient à toute la table.
+      for (const j of joueursDe(p)) {
+        for (const nom of j.membres?.length ? j.membres : [j.nom]) {
+          victoiresParJoueur[nom] = (victoiresParJoueur[nom] ?? 0) + 1;
+        }
+      }
+    } else if (!p.resultat && p.gagnant) {
+      victoiresParJoueur[p.gagnant] = (victoiresParJoueur[p.gagnant] ?? 0) + 1;
+    }
   }
   const meilleur = Object.entries(victoiresParJoueur).sort((a, b) => b[1] - a[1])[0];
 
@@ -263,8 +274,8 @@ export default function Historique() {
               </Text>
             </View>
             <View style={styles.droite}>
-              <Text style={styles.gagnant}>
-                {item.gagnant ? `🏆 ${item.gagnant}` : "🤝 Égalité"}
+              <Text style={[styles.gagnant, item.resultat === "defaite" && styles.perdue]}>
+                {issueCourte(item)}
               </Text>
               {item.score_gagnant > 0 && (
                 <Text style={styles.score}>{item.score_gagnant} pts</Text>
@@ -319,6 +330,13 @@ function formatDate(iso: string) {
   return d.toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
 }
 
+/** Résumé de l'issue, en quelques caractères, pour la liste. */
+function issueCourte(p: PartieEnregistree) {
+  if (p.resultat === "victoire") return "🏆 Tous";
+  if (p.resultat === "defaite") return "Défaite";
+  return p.gagnant ? `🏆 ${p.gagnant}` : "🤝 Égalité";
+}
+
 function formatDateLongue(iso: string) {
   const d = new Date(iso);
   return d.toLocaleDateString("fr-FR", {
@@ -344,11 +362,16 @@ function DetailPartie({
 }) {
   const jeu = jeux.find((j) => j.id === partie.jeu_id);
   const sens = jeu?.scoreVictoire ?? "max";
-  const objectif = jeu?.scoreMode === "objectif";
+  // Une partie coopérative se reconnaît à son issue, même si le jeu a été supprimé.
+  const coop = partie.resultat !== null;
+  const objectif = coop || jeu?.scoreMode === "objectif";
 
   const [edition, setEdition] = useState(false);
   const [lignes, setLignes] = useState<JoueurScore[]>(joueursDe(partie));
   const [gagnant, setGagnant] = useState(partie.gagnant);
+  const [resultat, setResultat] = useState<Resultat | null>(partie.resultat);
+  const [evaluation, setEvaluation] = useState(partie.evaluation ?? 0);
+  const [note, setNote] = useState(partie.note ?? "");
 
   function definirScore(index: number, texte: string) {
     const negatif = texte.trimStart().startsWith("-");
@@ -368,18 +391,23 @@ function DetailPartie({
         : sens === "min"
           ? Math.min(...scores)
           : Math.max(...scores);
-    await modifierPartie(partie.id, lignes, gagnant, scoreGagnant).catch(() => {});
+    await modifierPartie(partie.id, lignes, coop ? "" : gagnant, scoreGagnant, resultat).catch(
+      () => {},
+    );
+    await noterPartie(partie.id, evaluation, note).catch(() => {});
     onEnregistre();
   }
 
   // Affichage : tri et mise en avant du (ou des) vainqueur(s).
   const affichees = [...lignes];
-  if (objectif) {
+  if (coop) {
+    // Personne ne devance personne : on garde l'ordre de la table.
+  } else if (objectif) {
     affichees.sort((a, b) => (a.nom === gagnant ? -1 : b.nom === gagnant ? 1 : 0));
   } else {
     affichees.sort((a, b) => (sens === "min" ? a.score - b.score : b.score - a.score));
   }
-  const egalite = !gagnant;
+  const egalite = !coop && !gagnant;
   const meilleur = affichees.length ? affichees[0].score : 0;
 
   return (
@@ -392,6 +420,13 @@ function DetailPartie({
       {!edition && egalite && (
         <Text style={styles.detailEgalite}>🤝 Partie terminée sur une égalité</Text>
       )}
+      {coop && !edition && (
+        <Text style={styles.detailEgalite}>
+          {resultat === "victoire"
+            ? "🏆 Victoire de toute la table"
+            : "Le jeu l'a emporté ce jour-là"}
+        </Text>
+      )}
       {!objectif && (
         <Text style={styles.detailSens}>
           {sens === "min" ? "Le moins de points gagne" : "Le plus de points gagne"}
@@ -400,27 +435,41 @@ function DetailPartie({
 
       {edition && (
         <Text style={styles.detailAide}>
-          Corrige les scores, puis touche un joueur pour désigner le vainqueur.
+          {coop
+            ? "Corrige l'issue de la partie ci-dessous."
+            : "Corrige les scores, puis touche un joueur pour désigner le vainqueur."}
         </Text>
       )}
 
       <ScrollView style={{ maxHeight: 320 }}>
         {(edition ? lignes : affichees).map((j, i) => {
-          const estGagnant = edition
-            ? j.nom === gagnant
-            : egalite
-              ? j.score === meilleur
-              : j.nom === gagnant;
-          const Conteneur = edition ? TouchableOpacity : View;
+          const estGagnant = coop
+            ? resultat === "victoire"
+            : edition
+              ? j.nom === gagnant
+              : egalite
+                ? j.score === meilleur
+                : j.nom === gagnant;
+          const Conteneur = edition && !coop ? TouchableOpacity : View;
           return (
             <Conteneur
               key={`${j.nom}-${i}`}
               style={[styles.detailLigne, estGagnant && styles.detailGagnant]}
               activeOpacity={0.7}
-              onPress={edition ? () => setGagnant(j.nom) : undefined}
+              onPress={edition && !coop ? () => setGagnant(j.nom) : undefined}
             >
               <Text style={[styles.detailRang, estGagnant && styles.detailRangGagnant]}>
-                {estGagnant ? (egalite && !edition ? "🤝" : "🏆") : edition ? "·" : i + 1}
+                {coop
+                  ? estGagnant
+                    ? "🏆"
+                    : "·"
+                  : estGagnant
+                    ? egalite && !edition
+                      ? "🤝"
+                      : "🏆"
+                    : edition
+                      ? "·"
+                      : i + 1}
               </Text>
               <View style={{ flex: 1 }}>
                 <Text style={styles.detailNom}>{j.nom}</Text>
@@ -448,7 +497,38 @@ function DetailPartie({
         })}
       </ScrollView>
 
-      {edition && (
+      {edition && coop && (
+        <View style={styles.issues}>
+          <TouchableOpacity
+            style={[styles.egaliteChip, { flex: 1 }, resultat === "defaite" && styles.egaliteChipActif]}
+            onPress={() => setResultat("defaite")}
+          >
+            <Text
+              style={[
+                styles.egaliteChipTexte,
+                resultat === "defaite" && styles.egaliteChipTexteActif,
+              ]}
+            >
+              Défaite
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.egaliteChip, { flex: 1 }, resultat === "victoire" && styles.egaliteChipActif]}
+            onPress={() => setResultat("victoire")}
+          >
+            <Text
+              style={[
+                styles.egaliteChipTexte,
+                resultat === "victoire" && styles.egaliteChipTexteActif,
+              ]}
+            >
+              🏆 Victoire
+            </Text>
+          </TouchableOpacity>
+        </View>
+      )}
+
+      {edition && !coop && (
         <TouchableOpacity
           style={[styles.egaliteChip, !gagnant && styles.egaliteChipActif]}
           onPress={() => setGagnant("")}
@@ -460,12 +540,64 @@ function DetailPartie({
       )}
 
       {edition ? (
+        <View style={styles.bilanBloc}>
+          <Text style={styles.bilanTitre}>Note et souvenir</Text>
+          <View style={styles.etoiles}>
+            {[1, 2, 3, 4, 5].map((n) => (
+              <TouchableOpacity
+                key={n}
+                hitSlop={4}
+                onPress={() => setEvaluation(evaluation === n ? 0 : n)}
+              >
+                <IconSymbol
+                  name={n <= evaluation ? "star.fill" : "star"}
+                  size={26}
+                  color={n <= evaluation ? styles.etoilePleine.color : styles.etoileVide.color}
+                />
+              </TouchableOpacity>
+            ))}
+          </View>
+          <TextInput
+            style={styles.noteInput}
+            value={note}
+            onChangeText={setNote}
+            placeholder="Une anecdote à retenir ?"
+            placeholderTextColor={styles.etoileVide.color}
+            multiline
+          />
+        </View>
+      ) : (
+        (partie.evaluation || partie.note) && (
+          <View style={styles.bilanBloc}>
+            {partie.evaluation ? (
+              <View style={styles.etoiles}>
+                {[1, 2, 3, 4, 5].map((n) => (
+                  <IconSymbol
+                    key={n}
+                    name={n <= (partie.evaluation ?? 0) ? "star.fill" : "star"}
+                    size={18}
+                    color={
+                      n <= (partie.evaluation ?? 0)
+                        ? styles.etoilePleine.color
+                        : styles.etoileVide.color
+                    }
+                  />
+                ))}
+              </View>
+            ) : null}
+            {partie.note ? <Text style={styles.noteTexte}>« {partie.note} »</Text> : null}
+          </View>
+        )
+      )}
+
+      {edition ? (
         <View style={styles.actionsDetail}>
           <TouchableOpacity
             style={styles.annulerDetail}
             onPress={() => {
               setLignes(joueursDe(partie));
               setGagnant(partie.gagnant);
+              setResultat(partie.resultat);
               setEdition(false);
             }}
           >
@@ -638,6 +770,7 @@ function makeStyles(c: AppColors) {
     joueurs: { fontSize: 12, color: c.textFaint, marginTop: 3 },
     droite: { alignItems: "flex-end", marginRight: 8 },
     gagnant: { fontSize: 13, color: c.accentText, fontWeight: "600" },
+    perdue: { color: c.textMuted },
     score: { fontSize: 13, color: c.textMuted, marginTop: 2 },
     effacer: { padding: 6 },
     effacerTexte: { color: c.textFaint, fontSize: 15 },
@@ -693,6 +826,7 @@ function makeStyles(c: AppColors) {
       borderRadius: 8,
       paddingVertical: 6,
     },
+    issues: { flexDirection: "row", gap: 10 },
     egaliteChip: {
       marginTop: 10,
       paddingVertical: 11,
@@ -705,6 +839,35 @@ function makeStyles(c: AppColors) {
     egaliteChipActif: { backgroundColor: c.successSoft, borderColor: c.success },
     egaliteChipTexte: { fontSize: 13, fontWeight: "600", color: c.textSecondary },
     egaliteChipTexteActif: { color: c.textPrimary },
+    bilanBloc: {
+      marginTop: 12,
+      paddingTop: 12,
+      borderTopWidth: 1,
+      borderTopColor: c.border,
+    },
+    bilanTitre: { fontSize: 12, fontWeight: "700", color: c.textSecondary, marginBottom: 8 },
+    etoiles: { flexDirection: "row", gap: 6 },
+    etoilePleine: { color: c.accent },
+    etoileVide: { color: c.textFaint },
+    noteInput: {
+      marginTop: 10,
+      backgroundColor: c.surfaceAlt,
+      borderWidth: 1,
+      borderColor: c.border,
+      borderRadius: 10,
+      padding: 10,
+      minHeight: 70,
+      textAlignVertical: "top",
+      fontSize: 14,
+      color: c.textPrimary,
+    },
+    noteTexte: {
+      fontSize: 14,
+      color: c.textSecondary,
+      fontStyle: "italic",
+      lineHeight: 20,
+      marginTop: 8,
+    },
     actionsDetail: { flexDirection: "row", gap: 10, marginTop: 14, marginBottom: 4 },
     annulerDetail: {
       flex: 1,

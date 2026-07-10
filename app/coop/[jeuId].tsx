@@ -1,4 +1,4 @@
-// app/objectif/[jeuId].tsx — partie sans points : on désigne simplement le vainqueur
+// app/coop/[jeuId].tsx — partie coopérative : toute la table gagne ou perd ensemble
 
 import { useLocalSearchParams } from "expo-router";
 import { useState } from "react";
@@ -17,17 +17,17 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { DialogueBilan } from "@/components/dialogue-bilan";
 import { DialoguePremierJoueur } from "@/components/dialogue-premier-joueur";
 import { Entete } from "@/components/entete";
-import { SelecteurMembres } from "@/components/selecteur-membres";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { type AppColors } from "@/constants/theme-colors";
 import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
+import { type Resultat } from "@/db/parties";
 import { prefixeJoueur, usePartie } from "@/hooks/use-partie";
 import { formatChrono } from "@/lib/duree";
 
 const COULEURS = ["#7a5195", "#1d9e75", "#378add", "#d85a30", "#c4457e"];
 
-export default function PartieObjectif() {
+export default function PartieCooperative() {
   const { jeuId, extensions } = useLocalSearchParams<{ jeuId: string; extensions?: string }>();
   const { colors } = useTheme();
   const { jeux } = useJeux();
@@ -40,15 +40,9 @@ export default function PartieObjectif() {
 
   const {
     joueurs,
-    joueursSauvegardes,
     joueursDispo,
-    modeEquipes,
     termine,
     secondes,
-    extra,
-    setExtra,
-    membresPour,
-    setMembresPour,
     tirageOuvert,
     setTirageOuvert,
     bilanOuvert,
@@ -57,24 +51,19 @@ export default function PartieObjectif() {
     renommer,
     ajouterJoueur,
     ajouterJoueurNomme,
-    supprimerJoueur: retirerJoueur,
-    definirMembres,
+    supprimerJoueur,
     definirRole: attribuerRole,
     terminerPartie,
     reinitialiser,
   } = usePartie({
     jeuId: jeuId ?? "",
     jeu,
-    extraInitial: { gagnantId: null as string | null },
-    vierge: (js, e) =>
-      e.gagnantId === null &&
-      js.length === 2 &&
-      js.every((j, i) => !j.role && !j.membres?.length && j.nom === `${prefixe} ${i + 1}`),
+    extraInitial: {},
+    vierge: (js) => js.length === 2 && js.every((j, i) => !j.role && j.nom === `${prefixe} ${i + 1}`),
   });
 
-  const gagnantId = extra.gagnantId;
-  const setGagnantId = (id: string | null) => setExtra((e) => ({ ...e, gagnantId: id }));
-
+  // L'issue vit ici : c'est la seule chose que le coopératif ajoute au tronc commun.
+  const [resultat, setResultat] = useState<Resultat | null>(null);
   const [choixPourJoueur, setChoixPourJoueur] = useState<string | null>(null);
 
   // Personnages du jeu de base + ceux des extensions cochées.
@@ -87,29 +76,19 @@ export default function PartieObjectif() {
     setChoixPourJoueur(null);
   }
 
-  function supprimerJoueur(id: string) {
-    retirerJoueur(id);
-    if (gagnantId === id) setGagnantId(null);
-  }
-
-  const gagnant = joueurs.find((j) => j.id === gagnantId) ?? null;
-
-  async function terminer() {
-    if (!gagnant) return;
+  async function terminer(issue: Resultat) {
+    setResultat(issue);
     await terminerPartie({
-      joueurs: joueurs.map((j) => ({
-        nom: j.nom,
-        score: 0,
-        role: j.role,
-        membres: j.membres?.length ? j.membres : undefined,
-      })),
-      gagnant: gagnant.nom,
+      joueurs: joueurs.map((j) => ({ nom: j.nom, score: 0, role: j.role })),
+      // Personne ne l'emporte seul : c'est « resultat » qui porte l'issue.
+      gagnant: "",
       scoreGagnant: 0,
+      resultat: issue,
     });
   }
 
   function rejouer() {
-    setGagnantId(null);
+    setResultat(null);
     reinitialiser();
   }
 
@@ -135,13 +114,20 @@ export default function PartieObjectif() {
 
       <View style={styles.info}>
         <Text style={styles.infoTexte}>
-          {termine ? "Partie terminée" : "Touche le joueur qui a rempli son objectif"}
+          {termine ? "Partie terminée" : "Vous jouez tous ensemble contre le jeu"}
         </Text>
       </View>
 
-      {termine && gagnant && (
+      {resultat === "victoire" && (
         <View style={styles.banniere}>
-          <Text style={styles.banniereTexte}>🏆 {gagnant.nom} remporte la partie !</Text>
+          <Text style={styles.banniereTexte}>🏆 Victoire de toute la table !</Text>
+        </View>
+      )}
+      {resultat === "defaite" && (
+        <View style={[styles.banniere, styles.banniereDefaite]}>
+          <Text style={[styles.banniereTexte, styles.banniereTexteDefaite]}>
+            Le jeu l&apos;emporte cette fois.
+          </Text>
         </View>
       )}
 
@@ -164,101 +150,70 @@ export default function PartieObjectif() {
         data={joueurs}
         keyExtractor={(j) => j.id}
         contentContainerStyle={styles.liste}
-        renderItem={({ item, index }) => {
-          const choisi = item.id === gagnantId;
-          return (
-            <TouchableOpacity
-              style={[styles.carte, choisi && styles.carteChoisie]}
-              activeOpacity={0.8}
-              disabled={termine}
-              onPress={() => setGagnantId(choisi ? null : item.id)}
-            >
-              <View style={styles.ligneHaut}>
-                <View
-                  style={[styles.pastille, { backgroundColor: COULEURS[index % COULEURS.length] }]}
-                >
-                  <Text style={styles.pastilleTexte}>{item.nom.charAt(0).toUpperCase()}</Text>
-                </View>
-                <TextInput
-                  style={styles.nomInput}
-                  value={item.nom}
-                  onChangeText={(t) => renommer(item.id, t)}
-                  editable={!termine}
-                />
-                {choisi ? (
-                  <Text style={styles.coche}>🏆</Text>
-                ) : (
-                  !termine &&
-                  joueurs.length > 1 && (
-                    <TouchableOpacity onPress={() => supprimerJoueur(item.id)}>
-                      <Text style={styles.supprimer}>✕</Text>
-                    </TouchableOpacity>
-                  )
-                )}
+        renderItem={({ item, index }) => (
+          <View style={[styles.carte, resultat === "victoire" && styles.carteGagnante]}>
+            <View style={styles.ligneHaut}>
+              <View
+                style={[styles.pastille, { backgroundColor: COULEURS[index % COULEURS.length] }]}
+              >
+                <Text style={styles.pastilleTexte}>{item.nom.charAt(0).toUpperCase()}</Text>
               </View>
+              <TextInput
+                style={styles.nomInput}
+                value={item.nom}
+                onChangeText={(t) => renommer(item.id, t)}
+                editable={!termine}
+              />
+              {resultat === "victoire" ? (
+                <Text style={styles.coche}>🏆</Text>
+              ) : (
+                !termine &&
+                joueurs.length > 1 && (
+                  <TouchableOpacity onPress={() => supprimerJoueur(item.id)}>
+                    <Text style={styles.supprimer}>✕</Text>
+                  </TouchableOpacity>
+                )
+              )}
+            </View>
 
-              {modeEquipes ? (
-                <TouchableOpacity
-                  style={styles.roleBouton}
-                  activeOpacity={0.7}
-                  disabled={termine}
-                  onPress={() => setMembresPour(item.id)}
-                >
-                  <Text
-                    style={item.membres?.length ? styles.roleTexte : styles.rolePlaceholder}
-                    numberOfLines={1}
-                  >
-                    {item.membres?.length ? item.membres.join(", ") : "Ajouter des membres"}
-                  </Text>
-                  {!termine && <Text style={styles.roleChevron}>▸</Text>}
-                </TouchableOpacity>
-              ) : rolesDispo.length > 0 ? (
-                <TouchableOpacity
-                  style={styles.roleBouton}
-                  activeOpacity={0.7}
-                  disabled={termine}
-                  onPress={() => setChoixPourJoueur(item.id)}
-                >
-                  <Text style={item.role ? styles.roleTexte : styles.rolePlaceholder}>
-                    {item.role ?? "Choisir un personnage"}
-                  </Text>
-                  {!termine && <Text style={styles.roleChevron}>▸</Text>}
-                </TouchableOpacity>
-              ) : null}
-            </TouchableOpacity>
-          );
-        }}
+            {rolesDispo.length > 0 && (
+              <TouchableOpacity
+                style={styles.roleBouton}
+                activeOpacity={0.7}
+                disabled={termine}
+                onPress={() => setChoixPourJoueur(item.id)}
+              >
+                <Text style={item.role ? styles.roleTexte : styles.rolePlaceholder}>
+                  {item.role ?? "Choisir un personnage"}
+                </Text>
+                {!termine && <Text style={styles.roleChevron}>▸</Text>}
+              </TouchableOpacity>
+            )}
+          </View>
+        )}
       />
 
       <View style={[styles.barreBas, { paddingBottom: 16 + insets.bottom }]}>
         {!termine ? (
           <>
             <TouchableOpacity style={styles.actionSecondaire} onPress={ajouterJoueur}>
-              <Text style={styles.actionSecondaireTexte}>+ {prefixe}</Text>
+              <Text style={styles.actionSecondaireTexte}>+ Joueur</Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              style={[styles.actionPrincipale, !gagnant && styles.actionDesactivee]}
-              onPress={terminer}
-              disabled={!gagnant}
-            >
-              <Text style={styles.actionPrincipaleTexte}>Terminer la partie</Text>
-            </TouchableOpacity>
+            <View style={styles.issues}>
+              <TouchableOpacity style={styles.defaite} onPress={() => terminer("defaite")}>
+                <Text style={styles.defaiteTexte}>Défaite</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.victoire} onPress={() => terminer("victoire")}>
+                <Text style={styles.victoireTexte}>🏆 Victoire</Text>
+              </TouchableOpacity>
+            </View>
           </>
         ) : (
-          <TouchableOpacity style={styles.actionPrincipale} onPress={rejouer}>
-            <Text style={styles.actionPrincipaleTexte}>Nouvelle partie</Text>
+          <TouchableOpacity style={styles.rejouer} onPress={rejouer}>
+            <Text style={styles.rejouerTexte}>Nouvelle partie</Text>
           </TouchableOpacity>
         )}
       </View>
-
-      <SelecteurMembres
-        visible={membresPour !== null}
-        equipe={joueurs.find((j) => j.id === membresPour)?.nom ?? ""}
-        membres={joueurs.find((j) => j.id === membresPour)?.membres ?? []}
-        joueursConnus={joueursSauvegardes}
-        onValider={(m) => membresPour && definirMembres(membresPour, m)}
-        onAnnuler={() => setMembresPour(null)}
-      />
 
       <DialoguePremierJoueur
         visible={tirageOuvert}
@@ -301,11 +256,6 @@ export default function PartieObjectif() {
                     <View style={{ flex: 1, paddingRight: 8 }}>
                       <Text style={[styles.roleLigneNom, prisPar && styles.rolePris]}>{r.nom}</Text>
                       {r.origine && <Text style={styles.roleLigneOrigine}>{r.origine}</Text>}
-                      {r.objectif && (
-                        <Text style={styles.roleLigneObjectif} numberOfLines={2}>
-                          {r.objectif}
-                        </Text>
-                      )}
                     </View>
                     {prisPar && <Text style={styles.rolePrisTexte}>{prisPar.nom}</Text>}
                   </TouchableOpacity>
@@ -333,10 +283,17 @@ function makeStyles(c: AppColors) {
       marginRight: 12,
       fontVariant: ["tabular-nums"],
     },
-    info: { backgroundColor: c.accentSoft, paddingVertical: 8, paddingHorizontal: 16, alignItems: "center" },
+    info: {
+      backgroundColor: c.accentSoft,
+      paddingVertical: 8,
+      paddingHorizontal: 16,
+      alignItems: "center",
+    },
     infoTexte: { color: c.accentText, fontSize: 13, fontWeight: "600" },
     banniere: { backgroundColor: c.success, padding: 16, alignItems: "center" },
     banniereTexte: { color: c.onSuccess, fontSize: 18, fontWeight: "600" },
+    banniereDefaite: { backgroundColor: c.surfaceAlt },
+    banniereTexteDefaite: { color: c.textSecondary },
     chips: { flexGrow: 0 },
     chipsContenu: { gap: 8, paddingHorizontal: 16, paddingVertical: 10, alignItems: "center" },
     chip: {
@@ -356,7 +313,7 @@ function makeStyles(c: AppColors) {
       padding: 14,
       marginBottom: 12,
     },
-    carteChoisie: { borderColor: c.success, borderWidth: 2, backgroundColor: c.successSoft },
+    carteGagnante: { borderColor: c.success, borderWidth: 2, backgroundColor: c.successSoft },
     ligneHaut: { flexDirection: "row", alignItems: "center", gap: 12 },
     roleBouton: {
       flexDirection: "row",
@@ -398,17 +355,21 @@ function makeStyles(c: AppColors) {
       borderTopColor: c.border,
     },
     roleLigneNom: { fontSize: 15, fontWeight: "600", color: c.textPrimary },
-    roleLigneOrigine: { fontSize: 12, color: c.textMuted, marginTop: 2 },
-    roleLigneObjectif: { fontSize: 12, color: c.textSecondary, marginTop: 4, lineHeight: 16 },
+    roleLigneOrigine: { fontSize: 12, color: c.textMuted, marginTop: 2, lineHeight: 16 },
     rolePris: { color: c.textFaint },
     rolePrisTexte: { fontSize: 12, color: c.textFaint, fontStyle: "italic" },
-    pastille: { width: 36, height: 36, borderRadius: 18, alignItems: "center", justifyContent: "center" },
+    pastille: {
+      width: 36,
+      height: 36,
+      borderRadius: 18,
+      alignItems: "center",
+      justifyContent: "center",
+    },
     pastilleTexte: { color: "#fff", fontWeight: "600" },
     nomInput: { flex: 1, fontSize: 16, fontWeight: "600", color: c.textPrimary, paddingVertical: 4 },
     coche: { fontSize: 20 },
     supprimer: { color: c.textFaint, fontSize: 16, paddingHorizontal: 6 },
     barreBas: {
-      flexDirection: "row",
       gap: 10,
       padding: 16,
       borderTopWidth: 1,
@@ -416,16 +377,37 @@ function makeStyles(c: AppColors) {
       backgroundColor: c.surface,
     },
     actionSecondaire: {
-      flex: 1,
-      paddingVertical: 14,
+      paddingVertical: 12,
       borderRadius: 12,
       borderWidth: 1,
       borderColor: c.borderStrong,
       alignItems: "center",
     },
     actionSecondaireTexte: { fontSize: 15, color: c.textSecondary, fontWeight: "600" },
-    actionPrincipale: { flex: 2, paddingVertical: 14, borderRadius: 12, backgroundColor: c.accent, alignItems: "center" },
-    actionDesactivee: { opacity: 0.45 },
-    actionPrincipaleTexte: { fontSize: 15, color: c.onAccent, fontWeight: "600" },
+    issues: { flexDirection: "row", gap: 10 },
+    defaite: {
+      flex: 1,
+      paddingVertical: 14,
+      borderRadius: 12,
+      borderWidth: 1,
+      borderColor: c.danger,
+      alignItems: "center",
+    },
+    defaiteTexte: { fontSize: 15, color: c.danger, fontWeight: "600" },
+    victoire: {
+      flex: 1,
+      paddingVertical: 14,
+      borderRadius: 12,
+      backgroundColor: c.success,
+      alignItems: "center",
+    },
+    victoireTexte: { fontSize: 15, color: c.onSuccess, fontWeight: "600" },
+    rejouer: {
+      paddingVertical: 14,
+      borderRadius: 12,
+      backgroundColor: c.accent,
+      alignItems: "center",
+    },
+    rejouerTexte: { fontSize: 15, color: c.onAccent, fontWeight: "600" },
   });
 }

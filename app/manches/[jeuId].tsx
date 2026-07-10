@@ -1,8 +1,7 @@
 // app/manches/[jeuId].tsx — score par manches : une ligne par manche, total automatique
 
-import { useFocusEffect } from "@react-navigation/native";
 import { useLocalSearchParams } from "expo-router";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import {
   Platform,
   ScrollView,
@@ -16,37 +15,23 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { DialogueEgalite } from "@/components/dialogue-egalite";
+import { DialogueBilan } from "@/components/dialogue-bilan";
+import { DialoguePremierJoueur } from "@/components/dialogue-premier-joueur";
 import { Entete } from "@/components/entete";
 import { SelecteurMembres } from "@/components/selecteur-membres";
+import { IconSymbol } from "@/components/ui/icon-symbol";
 import { type AppColors } from "@/constants/theme-colors";
 import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
-import { listerJoueurs } from "@/db/joueurs";
-import { chargerEtat, effacerEtat, sauvegarderEtat } from "@/db/partie-en-cours";
-import { enregistrerPartie } from "@/db/parties";
-import { useChrono } from "@/hooks/use-chrono";
+import { prefixeJoueur, usePartie } from "@/hooks/use-partie";
 import { formatChrono } from "@/lib/duree";
 
-type Joueur = { id: string; nom: string; membres?: string[] };
 type Scores = Record<string, Record<number, string>>; // [joueurId][numéro de manche]
 type Styles = ReturnType<typeof makeStyles>;
-type EtatSauve = { joueurs: Joueur[]; scores: Scores; nbManches: number; duree?: number };
 
 const LARGEUR_LABEL = 96;
 const LARGEUR_COL = 78;
 const MANCHES_DEPART = 3;
-
-function estVierge(joueurs: Joueur[], scores: Scores, nbManches: number, prefixe: string) {
-  const aucunScore = Object.values(scores).every((c) =>
-    Object.values(c).every((v) => v === "" || v === undefined),
-  );
-  return (
-    aucunScore &&
-    nbManches === MANCHES_DEPART &&
-    joueurs.length === 2 &&
-    joueurs.every((j, i) => j.nom === `${prefixe} ${i + 1}` && !j.membres?.length)
-  );
-}
 
 export default function PartieManches() {
   const { jeuId } = useLocalSearchParams<{ jeuId: string }>();
@@ -58,74 +43,60 @@ export default function PartieManches() {
 
   const sens = jeu?.scoreVictoire ?? "max";
   const seuilFin = jeu?.seuilFin;
-  const modeEquipes = jeu?.equipes === true;
-  const prefixe = modeEquipes ? "Équipe" : "Joueur";
+  const prefixe = prefixeJoueur(jeu);
 
-  const [joueurs, setJoueurs] = useState<Joueur[]>([
-    { id: "j1", nom: `${modeEquipes ? "Équipe" : "Joueur"} 1` },
-    { id: "j2", nom: `${modeEquipes ? "Équipe" : "Joueur"} 2` },
-  ]);
-  const [membresPour, setMembresPour] = useState<string | null>(null);
-  const [scores, setScores] = useState<Scores>({});
-  const [nbManches, setNbManches] = useState(MANCHES_DEPART);
-  const [termine, setTermine] = useState(false);
+  const {
+    joueurs,
+    joueursSauvegardes,
+    joueursDispo,
+    modeEquipes,
+    reprise,
+    termine,
+    secondes,
+    extra,
+    setExtra,
+    membresPour,
+    setMembresPour,
+    tirageOuvert,
+    setTirageOuvert,
+    egaliteOuverte,
+    setEgaliteOuverte,
+    bilanOuvert,
+    fermerBilan,
+    noter,
+    renommer,
+    ajouterJoueur,
+    ajouterJoueurNomme,
+    supprimerJoueur: retirerJoueur,
+    definirMembres,
+    terminerPartie,
+    continuerEdition,
+  } = usePartie({
+    jeuId: jeuId ?? "",
+    jeu,
+    extraInitial: { scores: {} as Scores, nbManches: MANCHES_DEPART },
+    vierge: (js, e) => {
+      const aucunScore = Object.values(e.scores).every((c) =>
+        Object.values(c).every((v) => v === "" || v === undefined),
+      );
+      return (
+        aucunScore &&
+        e.nbManches === MANCHES_DEPART &&
+        js.length === 2 &&
+        js.every((j, i) => j.nom === `${prefixe} ${i + 1}` && !j.membres?.length)
+      );
+    },
+  });
+
+  const { scores, nbManches } = extra;
+  function majScores(maj: (s: Scores) => Scores) {
+    setExtra((e) => ({ ...e, scores: maj(e.scores) }));
+  }
+  function ajouterManche() {
+    setExtra((e) => ({ ...e, nbManches: e.nbManches + 1 }));
+  }
+
   const [resultat, setResultat] = useState<string | null>(null);
-  const [egaliteOuverte, setEgaliteOuverte] = useState(false);
-  const [joueursSauvegardes, setJoueursSauvegardes] = useState<string[]>([]);
-  const [charge, setCharge] = useState(false);
-  const [reprise, setReprise] = useState(false);
-
-  const { secondes, demarrer, pause, initialiser } = useChrono();
-  const secondesRef = useRef(0);
-  secondesRef.current = secondes;
-  const termineRef = useRef(false);
-  termineRef.current = termine;
-
-  useEffect(() => {
-    listerJoueurs()
-      .then((js) => setJoueursSauvegardes(js.map((j) => j.nom)))
-      .catch(() => {});
-  }, []);
-
-  useEffect(() => {
-    chargerEtat<EtatSauve>(jeuId ?? "")
-      .then((e) => {
-        if (e?.joueurs?.length) {
-          setJoueurs(e.joueurs);
-          setScores(e.scores ?? {});
-          setNbManches(e.nbManches ?? MANCHES_DEPART);
-          if (e.duree) initialiser(e.duree);
-          setReprise(true);
-        }
-      })
-      .finally(() => setCharge(true));
-  }, [jeuId, initialiser]);
-
-  useFocusEffect(
-    useCallback(() => {
-      if (!termineRef.current) demarrer();
-      return () => {
-        pause();
-      };
-    }, [demarrer, pause]),
-  );
-
-  useEffect(() => {
-    if (termine) pause();
-  }, [termine, pause]);
-
-  useEffect(() => {
-    if (!charge || termine) return;
-    if (estVierge(joueurs, scores, nbManches, prefixe)) effacerEtat(jeuId ?? "").catch(() => {});
-    else
-      sauvegarderEtat(jeuId ?? "", {
-        joueurs,
-        scores,
-        nbManches,
-        duree: secondesRef.current,
-      }).catch(() => {});
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [charge, termine, joueurs, scores, nbManches, jeuId]);
 
   function valeur(joueurId: string, manche: number): number {
     const n = parseInt(scores[joueurId]?.[manche] ?? "", 10);
@@ -135,7 +106,7 @@ export default function PartieManches() {
   function definir(joueurId: string, manche: number, texte: string) {
     const negatif = texte.trimStart().startsWith("-");
     const propre = (negatif ? "-" : "") + texte.replace(/[^0-9]/g, "");
-    setScores((prev) => ({
+    majScores((prev) => ({
       ...prev,
       [joueurId]: { ...(prev[joueurId] ?? {}), [manche]: propre },
     }));
@@ -147,22 +118,9 @@ export default function PartieManches() {
     return s;
   }
 
-  function renommer(id: string, nom: string) {
-    setJoueurs((prev) => prev.map((j) => (j.id === id ? { ...j, nom } : j)));
-  }
-  function ajouterJoueur() {
-    setJoueurs((prev) => [...prev, { id: `j${Date.now()}`, nom: `${prefixe} ${prev.length + 1}` }]);
-  }
-  function ajouterJoueurNomme(nom: string) {
-    setJoueurs((prev) => [...prev, { id: `j${Date.now()}`, nom }]);
-  }
-  function definirMembres(id: string, membres: string[]) {
-    setJoueurs((prev) => prev.map((j) => (j.id === id ? { ...j, membres } : j)));
-    setMembresPour(null);
-  }
   function supprimerJoueur(id: string) {
-    setJoueurs((prev) => prev.filter((j) => j.id !== id));
-    setScores((prev) => {
+    retirerJoueur(id);
+    majScores((prev) => {
       const copie = { ...prev };
       delete copie[id];
       return copie;
@@ -188,16 +146,9 @@ export default function PartieManches() {
     finaliser(gagnants[0]?.nom ?? "");
   }
 
-  function finaliser(nomGagnant: string) {
-    const duree = pause();
-    setEgaliteOuverte(false);
+  async function finaliser(nomGagnant: string) {
     setResultat(nomGagnant);
-    setTermine(true);
-    setReprise(false);
-    effacerEtat(jeuId ?? "").catch(() => {});
-    enregistrerPartie({
-      jeuId: jeuId ?? "",
-      jeuNom: jeu ? jeu.nom : "Partie",
+    await terminerPartie({
       joueurs: joueurs.map((j) => ({
         nom: j.nom,
         score: total(j.id),
@@ -205,19 +156,24 @@ export default function PartieManches() {
       })),
       gagnant: nomGagnant,
       scoreGagnant: meilleur,
-      duree,
-    }).catch(() => {});
+    });
   }
 
   const { width } = useWindowDimensions();
   const largeurCol = Math.max(LARGEUR_COL, (width - 24 - LARGEUR_LABEL) / joueurs.length);
-  const joueursDispo = joueursSauvegardes.filter((n) => !joueurs.some((j) => j.nom === n));
 
   return (
     <View style={styles.page}>
       <Entete
         titre={jeu ? jeu.nom : "Manches"}
-        droite={<Text style={styles.chronoEntete}>⏱ {formatChrono(secondes)}</Text>}
+        droite={
+          <View style={styles.actionsEntete}>
+            <TouchableOpacity hitSlop={8} onPress={() => setTirageOuvert(true)}>
+              <IconSymbol name="die.face.5" size={22} color={colors.accentText} />
+            </TouchableOpacity>
+            <Text style={styles.chronoEntete}>⏱ {formatChrono(secondes)}</Text>
+          </View>
+        }
       />
 
       {reprise && !termine && (
@@ -332,7 +288,7 @@ export default function PartieManches() {
           ))}
 
           {!termine && (
-            <TouchableOpacity style={styles.ajoutManche} onPress={() => setNbManches((n) => n + 1)}>
+            <TouchableOpacity style={styles.ajoutManche} onPress={ajouterManche}>
               <Text style={styles.ajoutMancheTexte}>+ Ajouter une manche</Text>
             </TouchableOpacity>
           )}
@@ -369,7 +325,7 @@ export default function PartieManches() {
             </TouchableOpacity>
           </>
         ) : (
-          <TouchableOpacity style={styles.actionPrincipale} onPress={() => setTermine(false)}>
+          <TouchableOpacity style={styles.actionPrincipale} onPress={continuerEdition}>
             <Text style={styles.actionPrincipaleTexte}>Continuer à modifier</Text>
           </TouchableOpacity>
         )}
@@ -391,6 +347,14 @@ export default function PartieManches() {
         onValider={(m) => membresPour && definirMembres(membresPour, m)}
         onAnnuler={() => setMembresPour(null)}
       />
+
+      <DialoguePremierJoueur
+        visible={tirageOuvert}
+        noms={joueurs.map((j) => j.nom)}
+        onFermer={() => setTirageOuvert(false)}
+      />
+
+      <DialogueBilan visible={bilanOuvert} onPasser={fermerBilan} onEnregistrer={noter} />
     </View>
   );
 }
@@ -400,6 +364,7 @@ function makeStyles(c: AppColors) {
     page: { flex: 1, backgroundColor: c.page },
     zoneTableau: { flex: 1 },
     grille: { padding: 12 },
+    actionsEntete: { flexDirection: "row", alignItems: "center", gap: 14 },
     chronoEntete: {
       fontSize: 15,
       fontWeight: "700",

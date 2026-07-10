@@ -124,7 +124,8 @@ export default function Joueurs() {
       if (sienne) {
         jouees++;
         jeux[p.jeu_nom] = (jeux[p.jeu_nom] ?? 0) + 1;
-        if (p.gagnant === sienne.nom) victoires++;
+        // En coopératif, la victoire est celle de toute la table.
+        if (p.resultat ? p.resultat === "victoire" : p.gagnant === sienne.nom) victoires++;
       }
     }
     const favori = Object.entries(jeux).sort((a, b) => b[1] - a[1])[0]?.[0] ?? null;

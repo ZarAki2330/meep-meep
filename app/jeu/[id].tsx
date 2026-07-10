@@ -3,7 +3,15 @@
 import { useFocusEffect } from "@react-navigation/native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useCallback, useState } from "react";
-import { ActivityIndicator, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  ActivityIndicator,
+  ScrollView,
+  Share,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 import { DialogueConfirmation } from "@/components/dialogue-confirmation";
 import { Entete } from "@/components/entete";
@@ -13,6 +21,7 @@ import { type AppColors } from "@/constants/theme-colors";
 import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
 import { effacerEtat, partieEnCours } from "@/db/partie-en-cours";
+import { jeuVersTexte } from "@/lib/jeu-partage";
 
 export default function FicheJeu() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -55,6 +64,7 @@ export default function FicheJeu() {
       grille: "/grille/[jeuId]",
       objectif: "/objectif/[jeuId]",
       manches: "/manches/[jeuId]",
+      cooperatif: "/coop/[jeuId]",
       compteur: "/partie/[jeuId]",
     } as const;
     router.push({
@@ -95,7 +105,20 @@ export default function FicheJeu() {
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.page }}>
-      <Entete titre={jeu.nom} />
+      <Entete
+        titre={jeu.nom}
+        droite={
+          <TouchableOpacity
+            hitSlop={10}
+            accessibilityLabel="Partager ce jeu"
+            onPress={() =>
+              Share.share({ title: jeu.nom, message: jeuVersTexte(jeu) }).catch(() => {})
+            }
+          >
+            <IconSymbol name="square.and.arrow.up" size={22} color={colors.accentText} />
+          </TouchableOpacity>
+        }
+      />
       <ScrollView style={styles.page} contentContainerStyle={styles.contenu}>
       <VisuelJeu jeu={jeu} style={styles.banniere} />
 

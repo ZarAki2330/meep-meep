@@ -34,6 +34,7 @@ const MAPPING = {
   'gearshape.fill': 'settings',
   'checkmark': 'check',
   'chevron.left': 'arrow-back',
+  'die.face.5': 'casino',
   'chevron.left.forwardslash.chevron.right': 'code',
   'chevron.right': 'chevron-right',
 } as IconMapping;

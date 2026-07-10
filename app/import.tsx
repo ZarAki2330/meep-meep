@@ -1,9 +1,13 @@
 // app/import.tsx — ajouter un jeu manuellement (hors-ligne)
 
+import * as FileSystemLegacy from "expo-file-system/legacy";
+import * as ImagePicker from "expo-image-picker";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { useEffect, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useState, type ReactNode } from "react";
 import {
+  Image,
   KeyboardAvoidingView,
+  Modal,
   Platform,
   ScrollView,
   StyleSheet,
@@ -19,8 +23,9 @@ import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
 import { type BonusGrille, type CategorieScore, type Jeu } from "@/data/jeux";
 import { ajouterJeu } from "@/db/jeux";
+import { texteVersJeu, type JeuSansId } from "@/lib/jeu-partage";
 
-type Mode = "compteur" | "objectif" | "grille" | "manches";
+type Mode = "compteur" | "objectif" | "grille" | "manches" | "cooperatif";
 
 function nombre(s: string, defaut: number): number {
   const n = parseInt(s, 10);
@@ -98,29 +103,62 @@ export default function AjouterJeu() {
   const [erreurNom, setErreurNom] = useState<string | null>(null);
   const [erreurCategories, setErreurCategories] = useState<string | null>(null);
   const [erreurBonus, setErreurBonus] = useState<string | null>(null);
+  const [erreurImage, setErreurImage] = useState<string | null>(null);
   const [prerempli, setPrerempli] = useState(false);
+  const [collageOuvert, setCollageOuvert] = useState(false);
+  const [texteColle, setTexteColle] = useState("");
+  const [erreurCollage, setErreurCollage] = useState<string | null>(null);
 
-  // Pré-remplit le formulaire quand on modifie un jeu existant.
-  useEffect(() => {
-    if (!jeuExistant || prerempli) return;
-    setNom(jeuExistant.nom);
-    setCategorie(jeuExistant.categorie);
-    setJMin(String(jeuExistant.joueursMin));
-    setJMax(String(jeuExistant.joueursMax));
-    setDuree(String(jeuExistant.dureeMin));
-    setAge(String(jeuExistant.ageMin));
-    setImage(jeuExistant.image ?? "");
-    setDescription(jeuExistant.description);
-    setRegles(jeuExistant.regles.join("\n"));
-    setSens(jeuExistant.scoreVictoire);
-    setSeuil(jeuExistant.seuilFin ? String(jeuExistant.seuilFin) : "");
-    setEquipes(jeuExistant.equipes === true);
-    setMode(jeuExistant.scoreMode ?? "compteur");
+  // Choisit une photo dans la galerie et la copie dans le stockage de l'app,
+  // sinon l'image disparaîtrait avec le cache du téléphone.
+  async function choisirImage() {
+    setErreurImage(null);
+    try {
+      const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (!permission.granted) {
+        setErreurImage("Autorise l'accès à tes photos pour choisir une image.");
+        return;
+      }
+      // Pas de recadrage : sur Android, l'écran de recadrage natif masque
+      // parfois son bouton de validation.
+      const res = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ["images"],
+        allowsEditing: false,
+        selectionLimit: 1,
+        quality: 0.8,
+      });
+      if (res.canceled || !res.assets?.[0]) return;
 
-    const cats = jeuExistant.categories ?? [];
+      const dossier = `${FileSystemLegacy.documentDirectory}images-jeux/`;
+      await FileSystemLegacy.makeDirectoryAsync(dossier, { intermediates: true }).catch(() => {});
+      const destination = `${dossier}${Date.now()}.jpg`;
+      await FileSystemLegacy.copyAsync({ from: res.assets[0].uri, to: destination });
+      setImage(destination);
+    } catch (e) {
+      setErreurImage(e instanceof Error ? e.message : String(e));
+    }
+  }
+
+  // Remplit tous les champs à partir d'un jeu (modification, ou jeu collé).
+  const appliquerJeu = useCallback((j: JeuSansId) => {
+    setNom(j.nom ?? "");
+    setCategorie(j.categorie ?? "");
+    setJMin(String(j.joueursMin ?? 2));
+    setJMax(String(j.joueursMax ?? 4));
+    setDuree(String(j.dureeMin ?? 30));
+    setAge(String(j.ageMin ?? 8));
+    setImage(j.image ?? "");
+    setDescription(j.description ?? "");
+    setRegles((j.regles ?? []).join("\n"));
+    setSens(j.scoreVictoire === "min" ? "min" : "max");
+    setSeuil(j.seuilFin ? String(j.seuilFin) : "");
+    setEquipes(j.equipes === true);
+    setMode(j.scoreMode ?? "compteur");
+
+    const cats = j.categories ?? [];
     setCategoriesTexte(categoriesVersTexte(cats));
 
-    const b = jeuExistant.bonus;
+    const b = j.bonus;
     if (b) {
       setBonusActif(true);
       setBonusSeuil(String(b.seuil));
@@ -138,10 +176,28 @@ export default function AjouterJeu() {
         }
       }
       setBonusSection(section);
+    } else {
+      setBonusActif(false);
     }
+  }, []);
 
+  // Pré-remplit le formulaire quand on modifie un jeu existant.
+  useEffect(() => {
+    if (!jeuExistant || prerempli) return;
+    appliquerJeu(jeuExistant);
     setPrerempli(true);
-  }, [jeuExistant, prerempli]);
+  }, [jeuExistant, prerempli, appliquerJeu]);
+
+  function collerJeu() {
+    setErreurCollage(null);
+    try {
+      appliquerJeu(texteVersJeu(texteColle));
+      setCollageOuvert(false);
+      setTexteColle("");
+    } catch (e) {
+      setErreurCollage(e instanceof Error ? e.message : String(e));
+    }
+  }
 
   // Aperçu des cases saisies, pour proposer les sections du bonus.
   const catsApercu = mode === "grille" ? parserCategories(categoriesTexte) : [];
@@ -194,7 +250,11 @@ export default function AjouterJeu() {
         .map((l) => l.trim())
         .filter(Boolean),
       scoreVictoire: mode === "compteur" || mode === "manches" ? sens : "max",
-      seuilFin: nombre(seuil, 0) > 0 ? nombre(seuil, 0) : undefined,
+      // Le seuil de fin ne veut rien dire hors des modes à points.
+      seuilFin:
+        (mode === "compteur" || mode === "manches") && nombre(seuil, 0) > 0
+          ? nombre(seuil, 0)
+          : undefined,
       equipes,
       scoreMode: mode,
       categories: cats,
@@ -213,10 +273,16 @@ export default function AjouterJeu() {
       <Entete titre={modeEdition ? "Modifier le jeu" : "Ajouter un jeu"} />
       <ScrollView style={styles.page} contentContainerStyle={styles.contenu}>
         {!modeEdition && (
-          <TouchableOpacity style={styles.bggBouton} onPress={() => router.push("/bgg")}>
-            <Text style={styles.bggTexte}>Chercher sur BoardGameGeek</Text>
-            <Text style={styles.bggChevron}>▸</Text>
-          </TouchableOpacity>
+          <>
+            <TouchableOpacity style={styles.bggBouton} onPress={() => router.push("/bgg")}>
+              <Text style={styles.bggTexte}>Chercher sur BoardGameGeek</Text>
+              <Text style={styles.bggChevron}>▸</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.bggBouton} onPress={() => setCollageOuvert(true)}>
+              <Text style={styles.bggTexte}>Coller un jeu partagé</Text>
+              <Text style={styles.bggChevron}>▸</Text>
+            </TouchableOpacity>
+          </>
         )}
 
         <Champ label="Nom du jeu" styles={styles} obligatoire>
@@ -313,7 +379,33 @@ export default function AjouterJeu() {
           </Champ>
         </View>
 
-        <Champ label="Image (URL, optionnel)" styles={styles}>
+        <Champ label="Image (optionnel)" styles={styles}>
+          <View style={styles.imageLigne}>
+            {image ? (
+              <Image source={{ uri: image }} style={styles.apercu} resizeMode="cover" />
+            ) : (
+              <View style={[styles.apercu, styles.apercuVide]}>
+                <Text style={styles.apercuVideTexte}>Aucune</Text>
+              </View>
+            )}
+
+            <View style={{ flex: 1, gap: 8 }}>
+              <TouchableOpacity style={styles.imageBouton} onPress={choisirImage}>
+                <Text style={styles.imageBoutonTexte}>Choisir dans la galerie</Text>
+              </TouchableOpacity>
+              {image ? (
+                <TouchableOpacity onPress={() => setImage("")}>
+                  <Text style={styles.imageRetirer}>Retirer l&apos;image</Text>
+                </TouchableOpacity>
+              ) : null}
+            </View>
+          </View>
+
+          {erreurImage && <Text style={styles.erreur}>{erreurImage}</Text>}
+
+          <Text style={[styles.aide, { marginTop: 12, marginBottom: 4 }]}>
+            Ou colle l&apos;adresse d&apos;une image trouvée sur le web.
+          </Text>
           <TextInput
             style={styles.input}
             value={image}
@@ -374,6 +466,13 @@ export default function AjouterJeu() {
               detail="Une grille avec tes propres cases (type Yams)."
               actif={mode === "grille"}
               onPress={() => setMode("grille")}
+              styles={styles}
+            />
+            <ModeChoix
+              titre="Coopératif"
+              detail="Pas de classement : toute la table gagne ou perd ensemble."
+              actif={mode === "cooperatif"}
+              onPress={() => setMode("cooperatif")}
               styles={styles}
             />
           </View>
@@ -525,6 +624,46 @@ export default function AjouterJeu() {
           </Text>
         </TouchableOpacity>
       </ScrollView>
+
+      <Modal
+        visible={collageOuvert}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setCollageOuvert(false)}
+      >
+        <TouchableOpacity
+          style={styles.fond}
+          activeOpacity={1}
+          onPress={() => setCollageOuvert(false)}
+        >
+          <TouchableOpacity style={styles.feuille} activeOpacity={1}>
+            <Text style={styles.feuilleTitre}>Coller un jeu</Text>
+            <Text style={styles.aide}>
+              Colle ici le texte d&apos;un jeu partagé. Le formulaire sera rempli, tu pourras tout
+              relire avant de valider.
+            </Text>
+            <TextInput
+              style={[styles.input, styles.multiGrand]}
+              value={texteColle}
+              onChangeText={setTexteColle}
+              placeholder={'{ "meepMeepJeu": 1, "jeu": { … } }'}
+              placeholderTextColor={colors.placeholder}
+              multiline
+              autoCapitalize="none"
+              autoCorrect={false}
+            />
+            {erreurCollage && <Text style={styles.erreur}>{erreurCollage}</Text>}
+            <View style={styles.actionsModal}>
+              <TouchableOpacity style={styles.annuler} onPress={() => setCollageOuvert(false)}>
+                <Text style={styles.annulerTexte}>Annuler</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.valider} onPress={collerJeu}>
+                <Text style={styles.validerTexte}>Remplir le formulaire</Text>
+              </TouchableOpacity>
+            </View>
+          </TouchableOpacity>
+        </TouchableOpacity>
+      </Modal>
     </KeyboardAvoidingView>
   );
 }
@@ -613,6 +752,24 @@ function makeStyles(c: AppColors) {
       fontSize: 15,
       color: c.textPrimary,
     },
+    imageLigne: { flexDirection: "row", gap: 12, alignItems: "center" },
+    apercu: { width: 84, height: 84, borderRadius: 12, backgroundColor: c.surfaceAlt },
+    apercuVide: {
+      alignItems: "center",
+      justifyContent: "center",
+      borderWidth: 1,
+      borderStyle: "dashed",
+      borderColor: c.borderStrong,
+    },
+    apercuVideTexte: { fontSize: 12, color: c.textMuted },
+    imageBouton: {
+      backgroundColor: c.accentSoft,
+      borderRadius: 10,
+      paddingVertical: 12,
+      alignItems: "center",
+    },
+    imageBoutonTexte: { color: c.accentText, fontWeight: "600", fontSize: 14 },
+    imageRetirer: { color: c.danger, fontSize: 13, fontWeight: "600", textAlign: "center" },
     inputErreur: { borderColor: c.danger, borderWidth: 1.5 },
     erreur: { color: c.danger, fontSize: 13, marginTop: 6 },
     multi: { minHeight: 60, textAlignVertical: "top" },
@@ -692,5 +849,39 @@ function makeStyles(c: AppColors) {
       marginTop: 8,
     },
     boutonTexte: { color: c.onAccent, fontSize: 16, fontWeight: "600" },
+
+    fond: {
+      flex: 1,
+      backgroundColor: c.ombre,
+      alignItems: "center",
+      justifyContent: "center",
+      paddingHorizontal: 24,
+    },
+    feuille: {
+      width: "100%",
+      maxWidth: 460,
+      backgroundColor: c.surface,
+      borderRadius: 18,
+      padding: 18,
+    },
+    feuilleTitre: { fontSize: 18, fontWeight: "700", color: c.textPrimary, marginBottom: 6 },
+    actionsModal: { flexDirection: "row", gap: 10, marginTop: 16 },
+    annuler: {
+      flex: 1,
+      paddingVertical: 13,
+      borderRadius: 12,
+      borderWidth: 1,
+      borderColor: c.borderStrong,
+      alignItems: "center",
+    },
+    annulerTexte: { fontSize: 15, fontWeight: "600", color: c.textSecondary },
+    valider: {
+      flex: 2,
+      paddingVertical: 13,
+      borderRadius: 12,
+      backgroundColor: c.accent,
+      alignItems: "center",
+    },
+    validerTexte: { fontSize: 15, fontWeight: "600", color: c.onAccent },
   });
 }

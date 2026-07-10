@@ -66,7 +66,8 @@ export default function Statistiques() {
         const s = (parJoueur[nom] ??= { nom, parties: 0, victoires: 0, meilleurScore: 0 });
         s.parties++;
         if (j.score > s.meilleurScore) s.meilleurScore = j.score;
-        if (p.gagnant === j.nom) s.victoires++;
+        // En coopératif, la victoire est celle de toute la table.
+        if (p.resultat ? p.resultat === "victoire" : p.gagnant === j.nom) s.victoires++;
       }
     }
   }

@@ -22,6 +22,9 @@ const COLONNES_PARTIES = [
   "score_gagnant",
   "details",
   "duree",
+  "note",
+  "evaluation",
+  "resultat",
 ];
 
 const COLONNES_JEUX = [

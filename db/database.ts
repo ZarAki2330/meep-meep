@@ -57,10 +57,12 @@ export function getDb() {
           // la colonne existe déjà
         }
       }
-      try {
-        await db.execAsync("ALTER TABLE parties ADD COLUMN duree INTEGER;");
-      } catch {
-        // la colonne existe déjà
+      for (const colonne of ["duree INTEGER", "note TEXT", "evaluation INTEGER", "resultat TEXT"]) {
+        try {
+          await db.execAsync(`ALTER TABLE parties ADD COLUMN ${colonne};`);
+        } catch {
+          // la colonne existe déjà
+        }
       }
 
       return db;

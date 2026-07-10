@@ -1,5 +1,6 @@
+import { useFocusEffect } from "@react-navigation/native";
 import { useRouter } from "expo-router";
-import { useMemo, useState, type ReactNode } from "react";
+import { useCallback, useMemo, useState, type ReactNode } from "react";
 import { FlatList, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -9,6 +10,8 @@ import { POLICE_TITRE } from "@/constants/fonts";
 import { type AppColors } from "@/constants/theme-colors";
 import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
+import { statistiquesParJeu } from "@/db/parties";
+import { TRIS, trierJeux, type StatsJeu, type TriCle } from "@/lib/tri-catalogue";
 
 type DureeCle = "court" | "moyen" | "long";
 
@@ -32,10 +35,26 @@ export default function Catalogue() {
   const [duree, setDuree] = useState<DureeCle | null>(null);
   const [favorisSeuls, setFavorisSeuls] = useState(false);
   const [filtresOuverts, setFiltresOuverts] = useState(false);
+  const [tri, setTri] = useState<TriCle>("defaut");
+  const [stats, setStats] = useState<Record<string, StatsJeu>>({});
+
+  // L'historique bouge à chaque partie terminée : on le relit en revenant sur l'onglet.
+  useFocusEffect(
+    useCallback(() => {
+      let vivant = true;
+      statistiquesParJeu().then((s) => {
+        if (vivant) setStats(s);
+      });
+      return () => {
+        vivant = false;
+      };
+    }, []),
+  );
 
   const categories = useMemo(() => Array.from(new Set(jeux.map((j) => j.categorie))), [jeux]);
   const nbFiltres =
     (categorie ? 1 : 0) + (joueurs ? 1 : 0) + (duree ? 1 : 0) + (favorisSeuls ? 1 : 0);
+  const personnalise = nbFiltres > 0 || tri !== "defaut";
 
   const jeuxFiltres = useMemo(() => {
     const texte = recherche.trim().toLowerCase();
@@ -57,11 +76,14 @@ export default function Catalogue() {
     });
   }, [jeux, recherche, categorie, joueurs, duree, favorisSeuls, estFavori]);
 
+  const jeuxAffiches = useMemo(() => trierJeux(jeuxFiltres, tri, stats), [jeuxFiltres, tri, stats]);
+
   function reinitialiser() {
     setCategorie(null);
     setJoueurs(null);
     setDuree(null);
     setFavorisSeuls(false);
+    setTri("defaut");
   }
 
   return (
@@ -111,13 +133,16 @@ export default function Catalogue() {
           )}
         </View>
         <TouchableOpacity
-          style={[styles.filtreBouton, (filtresOuverts || nbFiltres > 0) && styles.filtreBoutonActif]}
+          style={[
+            styles.filtreBouton,
+            (filtresOuverts || personnalise) && styles.filtreBoutonActif,
+          ]}
           onPress={() => setFiltresOuverts((o) => !o)}
         >
           <IconSymbol
             name="slider.horizontal.3"
             size={20}
-            color={nbFiltres > 0 ? colors.onAccent : colors.textSecondary}
+            color={personnalise ? colors.onAccent : colors.textSecondary}
           />
           {nbFiltres > 0 && (
             <View style={styles.filtreBadge}>
@@ -129,6 +154,18 @@ export default function Catalogue() {
 
       {filtresOuverts && (
         <View style={styles.panneau}>
+          <Groupe titre="Trier par" styles={styles}>
+            {TRIS.map((t) => (
+              <Chip
+                key={t.cle}
+                label={t.label}
+                actif={tri === t.cle}
+                onPress={() => setTri(t.cle)}
+                styles={styles}
+              />
+            ))}
+          </Groupe>
+
           <Groupe titre="Favoris" styles={styles}>
             <Chip
               label="★ Favoris uniquement"
@@ -174,16 +211,16 @@ export default function Catalogue() {
             ))}
           </Groupe>
 
-          {nbFiltres > 0 && (
+          {personnalise && (
             <TouchableOpacity onPress={reinitialiser}>
-              <Text style={styles.reset}>Réinitialiser les filtres</Text>
+              <Text style={styles.reset}>Tout réinitialiser</Text>
             </TouchableOpacity>
           )}
         </View>
       )}
 
       <FlatList
-        data={jeuxFiltres}
+        data={jeuxAffiches}
         keyExtractor={(jeu) => jeu.id}
         contentContainerStyle={styles.liste}
         keyboardShouldPersistTaps="handled"
@@ -193,7 +230,7 @@ export default function Catalogue() {
           </View>
         }
         ListFooterComponent={
-          jeuxFiltres.length > 0 ? (
+          jeuxAffiches.length > 0 ? (
             <View style={styles.signature}>
               <Text style={styles.signatureTexte}>Meep Meep · créé par Zaraki</Text>
             </View>
@@ -213,6 +250,10 @@ export default function Catalogue() {
               <Text style={styles.meta}>
                 {item.joueursMin}–{item.joueursMax} joueurs · {item.dureeMin} min · {item.categorie}
               </Text>
+              {/* Quand on trie par usage, on montre ce qui justifie l'ordre. */}
+              {tri !== "defaut" && tri !== "alpha" && (
+                <Text style={styles.mention}>{mentionTri(tri, stats[item.id])}</Text>
+              )}
               <Text style={styles.description} numberOfLines={2}>
                 {item.description}
               </Text>
@@ -233,6 +274,33 @@ export default function Catalogue() {
       />
     </SafeAreaView>
   );
+}
+
+/** La ligne qui explique la place du jeu dans la liste triée. */
+function mentionTri(tri: TriCle, stats?: StatsJeu): string {
+  if (!stats) return "Jamais joué";
+  if (tri === "plusJoues") {
+    return stats.parties === 1 ? "1 partie jouée" : `${stats.parties} parties jouées`;
+  }
+  return `Dernière partie ${dateRelative(stats.derniere)}`;
+}
+
+function dateRelative(iso: string): string {
+  const date = new Date(iso);
+  const jour = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+  const jours = Math.round((jour(new Date()) - jour(date)) / 86_400_000);
+
+  if (jours <= 0) return "aujourd'hui";
+  if (jours === 1) return "hier";
+  if (jours < 7) return `il y a ${jours} jours`;
+  if (jours < 14) return "la semaine dernière";
+
+  const memeAnnee = date.getFullYear() === new Date().getFullYear();
+  return `le ${date.toLocaleDateString("fr-FR", {
+    day: "numeric",
+    month: "long",
+    year: memeAnnee ? undefined : "numeric",
+  })}`;
 }
 
 function Groupe({
@@ -370,6 +438,13 @@ function makeStyles(c: AppColors) {
     etoile: { position: "absolute", top: 8, right: 8, padding: 4 },
     nomJeu: { fontSize: 17, fontWeight: "600", color: c.textPrimary },
     meta: { fontSize: 13, color: c.textMuted, marginTop: 4, marginBottom: 8 },
+    mention: {
+      fontSize: 12,
+      fontWeight: "600",
+      color: c.accentText,
+      marginTop: -4,
+      marginBottom: 8,
+    },
     description: { fontSize: 14, color: c.textSecondary, lineHeight: 20 },
     vide: { alignItems: "center", paddingTop: 60, paddingHorizontal: 24 },
     videTexte: { fontSize: 15, color: c.textMuted, textAlign: "center" },

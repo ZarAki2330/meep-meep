@@ -1,8 +1,7 @@
 // app/grille/[jeuId].tsx — feuille de score générique, pilotée par les catégories du jeu
 
-import { useFocusEffect } from "@react-navigation/native";
 import { useLocalSearchParams } from "expo-router";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import {
   Platform,
   ScrollView,
@@ -16,30 +15,21 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { DialogueEgalite } from "@/components/dialogue-egalite";
+import { DialogueBilan } from "@/components/dialogue-bilan";
+import { DialoguePremierJoueur } from "@/components/dialogue-premier-joueur";
 import { Entete } from "@/components/entete";
+import { SelecteurMembres } from "@/components/selecteur-membres";
+import { IconSymbol } from "@/components/ui/icon-symbol";
 import { type AppColors } from "@/constants/theme-colors";
 import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
 import { type CategorieScore } from "@/data/jeux";
-import { listerJoueurs } from "@/db/joueurs";
-import { chargerEtat, effacerEtat, sauvegarderEtat } from "@/db/partie-en-cours";
-import { enregistrerPartie } from "@/db/parties";
-import { useChrono } from "@/hooks/use-chrono";
+import { prefixeJoueur, usePartie, type JoueurPartie } from "@/hooks/use-partie";
 import { formatChrono } from "@/lib/duree";
 
-type Joueur = { id: string; nom: string };
+type Joueur = JoueurPartie;
 type Scores = Record<string, Record<string, string>>;
 type Styles = ReturnType<typeof makeStyles>;
-type EtatSauve = { joueurs: Joueur[]; scores: Scores; duree?: number };
-
-function grilleVierge(joueurs: Joueur[], scores: Scores) {
-  const aucunScore = Object.values(scores).every((c) => Object.values(c).every((v) => v === ""));
-  return (
-    aucunScore &&
-    joueurs.length === 2 &&
-    joueurs.every((j, i) => j.nom === `Joueur ${i + 1}`)
-  );
-}
 
 const LARGEUR_LABEL = 130;
 const LARGEUR_COL = 68;
@@ -54,63 +44,54 @@ export default function FeuilleGrille() {
 
   const categories: CategorieScore[] = jeu?.categories ?? [];
   const bonus = jeu?.bonus;
+  const prefixe = prefixeJoueur(jeu);
 
-  const [joueurs, setJoueurs] = useState<Joueur[]>([
-    { id: "j1", nom: "Joueur 1" },
-    { id: "j2", nom: "Joueur 2" },
-  ]);
-  const [scores, setScores] = useState<Scores>({});
-  const [termine, setTermine] = useState(false);
-  const [dejaEnregistre, setDejaEnregistre] = useState(false);
-  const [joueursSauvegardes, setJoueursSauvegardes] = useState<string[]>([]);
-  const [charge, setCharge] = useState(false);
-  const [reprise, setReprise] = useState(false);
+  const {
+    joueurs,
+    joueursSauvegardes,
+    joueursDispo,
+    modeEquipes,
+    reprise,
+    termine,
+    secondes,
+    extra,
+    setExtra,
+    membresPour,
+    setMembresPour,
+    tirageOuvert,
+    setTirageOuvert,
+    egaliteOuverte,
+    setEgaliteOuverte,
+    bilanOuvert,
+    fermerBilan,
+    noter,
+    renommer,
+    ajouterJoueur,
+    ajouterJoueurNomme,
+    supprimerJoueur: retirerJoueur,
+    definirMembres,
+    terminerPartie,
+    continuerEdition,
+  } = usePartie({
+    jeuId: jeuId ?? "",
+    jeu,
+    extraInitial: { scores: {} as Scores },
+    vierge: (js, e) => {
+      const aucunScore = Object.values(e.scores).every((c) =>
+        Object.values(c).every((v) => v === ""),
+      );
+      return (
+        aucunScore &&
+        js.length === 2 &&
+        js.every((j, i) => j.nom === `${prefixe} ${i + 1}` && !j.membres?.length)
+      );
+    },
+  });
 
-  useEffect(() => {
-    listerJoueurs()
-      .then((js) => setJoueursSauvegardes(js.map((j) => j.nom)))
-      .catch(() => {});
-  }, []);
-
-  const { secondes, demarrer, pause, initialiser } = useChrono();
-  const secondesRef = useRef(0);
-  secondesRef.current = secondes;
-  const termineRef = useRef(false);
-  termineRef.current = termine;
-
-  useEffect(() => {
-    chargerEtat<EtatSauve>(jeuId ?? "")
-      .then((e) => {
-        if (e?.joueurs?.length) {
-          setJoueurs(e.joueurs);
-          setScores(e.scores ?? {});
-          if (e.duree) initialiser(e.duree);
-          setReprise(true);
-        }
-      })
-      .finally(() => setCharge(true));
-  }, [jeuId, initialiser]);
-
-  useFocusEffect(
-    useCallback(() => {
-      if (!termineRef.current) demarrer();
-      return () => {
-        pause();
-      };
-    }, [demarrer, pause]),
-  );
-
-  useEffect(() => {
-    if (termine) pause();
-  }, [termine, pause]);
-
-  useEffect(() => {
-    if (!charge || termine) return;
-    if (grilleVierge(joueurs, scores)) effacerEtat(jeuId ?? "").catch(() => {});
-    else
-      sauvegarderEtat(jeuId ?? "", { joueurs, scores, duree: secondesRef.current }).catch(() => {});
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [charge, termine, joueurs, scores, jeuId]);
+  const scores = extra.scores;
+  function majScores(maj: (s: Scores) => Scores) {
+    setExtra((e) => ({ ...e, scores: maj(e.scores) }));
+  }
 
   function valeur(joueurId: string, cle: string): number {
     const n = parseInt(scores[joueurId]?.[cle] ?? "", 10);
@@ -121,7 +102,7 @@ export default function FeuilleGrille() {
   function definir(joueurId: string, cle: string, texte: string) {
     const negatif = texte.trimStart().startsWith("-");
     const propre = (negatif ? "-" : "") + texte.replace(/[^0-9]/g, "");
-    setScores((prev) => ({
+    majScores((prev) => ({
       ...prev,
       [joueurId]: { ...(prev[joueurId] ?? {}), [cle]: propre },
     }));
@@ -141,18 +122,9 @@ export default function FeuilleGrille() {
     return base + bonusGagne(joueurId);
   }
 
-  function renommer(id: string, nom: string) {
-    setJoueurs((prev) => prev.map((j) => (j.id === id ? { ...j, nom } : j)));
-  }
-  function ajouterJoueur() {
-    setJoueurs((prev) => [...prev, { id: `j${Date.now()}`, nom: `Joueur ${prev.length + 1}` }]);
-  }
-  function ajouterJoueurNomme(nom: string) {
-    setJoueurs((prev) => [...prev, { id: `j${Date.now()}`, nom }]);
-  }
   function supprimerJoueur(id: string) {
-    setJoueurs((prev) => prev.filter((j) => j.id !== id));
-    setScores((prev) => {
+    retirerJoueur(id);
+    majScores((prev) => {
       const copie = { ...prev };
       delete copie[id];
       return copie;
@@ -163,7 +135,6 @@ export default function FeuilleGrille() {
   const meilleurTotal = totaux.length ? Math.max(...totaux) : 0;
   const tousEgaux = totaux.every((t) => t === totaux[0]);
   const gagnants = joueurs.filter((j) => total(j.id) === meilleurTotal);
-  const [egaliteOuverte, setEgaliteOuverte] = useState(false);
   const [resultat, setResultat] = useState<string | null>(null);
 
   function terminer() {
@@ -174,29 +145,23 @@ export default function FeuilleGrille() {
     finaliser(gagnants[0]?.nom ?? "");
   }
 
-  function finaliser(nomGagnant: string) {
-    const duree = pause();
-    setEgaliteOuverte(false);
+  // Rappelée après un « continuer à modifier », elle ne recrée pas de ligne
+  // d'historique : le hook sait que la partie est déjà enregistrée.
+  async function finaliser(nomGagnant: string) {
     setResultat(nomGagnant);
-    setTermine(true);
-    setReprise(false);
-    effacerEtat(jeuId ?? "").catch(() => {});
-    if (!dejaEnregistre) {
-      enregistrerPartie({
-        jeuId: jeuId ?? "",
-        jeuNom: jeu ? jeu.nom : "Partie",
-        joueurs: joueurs.map((j) => ({ nom: j.nom, score: total(j.id) })),
-        gagnant: nomGagnant,
-        scoreGagnant: meilleurTotal,
-        duree,
-      }).catch(() => {});
-      setDejaEnregistre(true);
-    }
+    await terminerPartie({
+      joueurs: joueurs.map((j) => ({
+        nom: j.nom,
+        score: total(j.id),
+        membres: j.membres?.length ? j.membres : undefined,
+      })),
+      gagnant: nomGagnant,
+      scoreGagnant: meilleurTotal,
+    });
   }
 
   const { width } = useWindowDimensions();
   const largeurCol = Math.max(LARGEUR_COL, (width - 24 - LARGEUR_LABEL) / joueurs.length);
-  const joueursDispo = joueursSauvegardes.filter((n) => !joueurs.some((j) => j.nom === n));
 
   // Regroupe les catégories par section, en gardant l'ordre.
   const sections: { nom: string | null; cats: CategorieScore[] }[] = [];
@@ -211,7 +176,14 @@ export default function FeuilleGrille() {
     <View style={styles.page}>
       <Entete
         titre={jeu ? jeu.nom : "Feuille de score"}
-        droite={<Text style={styles.chronoEntete}>⏱ {formatChrono(secondes)}</Text>}
+        droite={
+          <View style={styles.actionsEntete}>
+            <TouchableOpacity hitSlop={8} onPress={() => setTirageOuvert(true)}>
+              <IconSymbol name="die.face.5" size={22} color={colors.accentText} />
+            </TouchableOpacity>
+            <Text style={styles.chronoEntete}>⏱ {formatChrono(secondes)}</Text>
+          </View>
+        }
       />
 
       {reprise && !termine && (
@@ -266,6 +238,17 @@ export default function FeuilleGrille() {
                   onChangeText={(t) => renommer(j.id, t)}
                   editable={!termine}
                 />
+                {modeEquipes && (
+                  <TouchableOpacity
+                    disabled={termine}
+                    onPress={() => setMembresPour(j.id)}
+                    style={styles.membresBouton}
+                  >
+                    <Text style={styles.membresTexte} numberOfLines={2}>
+                      {j.membres?.length ? j.membres.join(", ") : "+ membres"}
+                    </Text>
+                  </TouchableOpacity>
+                )}
                 {!termine && joueurs.length > 1 && (
                   <TouchableOpacity onPress={() => supprimerJoueur(j.id)}>
                     <Text style={styles.supprimer}>✕</Text>
@@ -343,14 +326,14 @@ export default function FeuilleGrille() {
         {!termine ? (
           <>
             <TouchableOpacity style={styles.actionSecondaire} onPress={ajouterJoueur}>
-              <Text style={styles.actionSecondaireTexte}>+ Joueur</Text>
+              <Text style={styles.actionSecondaireTexte}>+ {prefixe}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.actionPrincipale} onPress={terminer}>
               <Text style={styles.actionPrincipaleTexte}>Terminer</Text>
             </TouchableOpacity>
           </>
         ) : (
-          <TouchableOpacity style={styles.actionPrincipale} onPress={() => setTermine(false)}>
+          <TouchableOpacity style={styles.actionPrincipale} onPress={continuerEdition}>
             <Text style={styles.actionPrincipaleTexte}>Continuer à modifier</Text>
           </TouchableOpacity>
         )}
@@ -363,6 +346,23 @@ export default function FeuilleGrille() {
         onEgalite={() => finaliser("")}
         onAnnuler={() => setEgaliteOuverte(false)}
       />
+
+      <SelecteurMembres
+        visible={membresPour !== null}
+        equipe={joueurs.find((j) => j.id === membresPour)?.nom ?? ""}
+        membres={joueurs.find((j) => j.id === membresPour)?.membres ?? []}
+        joueursConnus={joueursSauvegardes}
+        onValider={(m) => membresPour && definirMembres(membresPour, m)}
+        onAnnuler={() => setMembresPour(null)}
+      />
+
+      <DialoguePremierJoueur
+        visible={tirageOuvert}
+        noms={joueurs.map((j) => j.nom)}
+        onFermer={() => setTirageOuvert(false)}
+      />
+
+      <DialogueBilan visible={bilanOuvert} onPasser={fermerBilan} onEnregistrer={noter} />
     </View>
   );
 }
@@ -479,6 +479,7 @@ function makeStyles(c: AppColors) {
     grille: { padding: 12 },
     banniere: { backgroundColor: c.success, padding: 14, alignItems: "center" },
     banniereTexte: { color: c.onSuccess, fontSize: 16, fontWeight: "600" },
+    actionsEntete: { flexDirection: "row", alignItems: "center", gap: 14 },
     chronoEntete: {
       fontSize: 15,
       fontWeight: "700",
@@ -516,6 +517,8 @@ function makeStyles(c: AppColors) {
     cellGagnant: { backgroundColor: c.successSoft, borderRadius: 8 },
     nomInput: { fontSize: 13, fontWeight: "600", color: c.textPrimary, textAlign: "center", width: "100%" },
     supprimer: { color: c.textFaint, fontSize: 12, marginTop: 2 },
+    membresBouton: { marginTop: 3, paddingHorizontal: 2 },
+    membresTexte: { fontSize: 10, color: c.accentText, textAlign: "center", fontWeight: "600" },
     sectionTexte: { fontSize: 13, fontWeight: "700", color: c.accentText },
     labelTexte: { fontSize: 14, color: c.textSecondary },
     aideTexte: { fontSize: 11, color: c.textFaint },

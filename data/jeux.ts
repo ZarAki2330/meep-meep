@@ -44,7 +44,8 @@ export type Jeu = {
   //  - "objectif" : pas de points, on désigne simplement le vainqueur
   //  - "grille" : feuille de score par catégorie (voir "categories")
   //  - "manches" : une ligne par manche, total automatique
-  scoreMode?: "compteur" | "objectif" | "grille" | "manches";
+  //  - "cooperatif" : pas de classement, toute la table gagne ou perd ensemble
+  scoreMode?: "compteur" | "objectif" | "grille" | "manches" | "cooperatif";
   // Pour le mode "grille" : les cases de la feuille de score.
   categories?: CategorieScore[];
   // Pour le mode "grille" : bonus optionnel.
@@ -61,6 +62,38 @@ export type Jeu = {
 };
 
 export const JEUX: Jeu[] = [
+  {
+    id: "pandemie",
+    nom: "Pandémie",
+    description:
+      "Quatre spécialistes s'allient contre quatre maladies. Vous gagnez ensemble, ou vous perdez ensemble.",
+    joueursMin: 2,
+    joueursMax: 4,
+    dureeMin: 45,
+    ageMin: 8,
+    categorie: "Coopératif",
+    scoreVictoire: "max",
+    scoreMode: "cooperatif",
+    regles: [
+      "Chaque joueur incarne un spécialiste et dispose de quatre actions par tour.",
+      "Les actions : se déplacer, retirer un cube de maladie, bâtir une station de recherche, échanger une carte ville, ou découvrir un remède.",
+      "Découvrir un remède demande de défausser cinq cartes de la même couleur, dans une station de recherche.",
+      "En fin de tour, on pioche deux cartes joueur, puis les villes de la pioche infection reçoivent un cube.",
+      "Une carte Épidémie accélère l'infection, contamine une nouvelle ville et ramène les villes déjà touchées sur le dessus de la pioche.",
+      "Quand une ville reçoit un quatrième cube, elle éclot : la maladie gagne toutes les villes voisines, en cascade.",
+      "Vous gagnez tous ensemble dès que les quatre remèdes sont découverts.",
+      "Vous perdez tous ensemble à la huitième éclosion, s'il manque des cubes d'une couleur, ou si la pioche joueur s'épuise.",
+    ],
+    roles: [
+      { nom: "Médecin", origine: "Retire tous les cubes d'une couleur d'un coup dans une ville." },
+      { nom: "Scientifique", origine: "N'a besoin que de quatre cartes pour découvrir un remède." },
+      { nom: "Répartiteur", origine: "Déplace le pion d'un autre joueur comme s'il était le sien." },
+      { nom: "Chercheuse", origine: "Donne n'importe quelle carte de sa main à un joueur présent dans la même ville." },
+      { nom: "Expert aux opérations", origine: "Bâtit une station de recherche sans défausser de carte." },
+      { nom: "Planificateur d'urgence", origine: "Conserve une carte Événement déjà jouée, pour la rejouer plus tard." },
+      { nom: "Militaire", origine: "Empêche l'infection et les éclosions dans sa ville et les villes voisines." },
+    ],
+  },
   {
     id: "catan",
     nom: "Catan",
