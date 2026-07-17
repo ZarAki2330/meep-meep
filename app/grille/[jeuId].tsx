@@ -208,12 +208,7 @@ export default function FeuilleGrille() {
         keyboardShouldPersistTaps="handled"
       >
         {!termine && joueursDispo.length > 0 && (
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            style={styles.chips}
-            contentContainerStyle={styles.chipsContenu}
-          >
+          <View style={styles.chipsContenu}>
             {joueursDispo.map((nom) => (
               <TouchableOpacity
                 key={nom}
@@ -223,7 +218,7 @@ export default function FeuilleGrille() {
                 <Text style={styles.chipTexte}>+ {nom}</Text>
               </TouchableOpacity>
             ))}
-          </ScrollView>
+          </View>
         )}
 
         <ScrollView horizontal showsHorizontalScrollIndicator>
@@ -500,7 +495,7 @@ function makeStyles(c: AppColors) {
     reprise: { backgroundColor: c.successSoft, paddingVertical: 8, paddingHorizontal: 16, alignItems: "center" },
     repriseTexte: { color: c.textSecondary, fontSize: 13, fontWeight: "600" },
     chips: { flexGrow: 0 },
-    chipsContenu: { gap: 8, paddingHorizontal: 12, paddingVertical: 10, alignItems: "center" },
+    chipsContenu: { flexDirection: "row", flexWrap: "wrap", gap: 8, paddingHorizontal: 12, paddingVertical: 10, alignItems: "center" },
     chip: {
       borderWidth: 1,
       borderColor: c.accent,

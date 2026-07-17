@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { DialogueConfirmation } from "@/components/dialogue-confirmation";
 import { Entete } from "@/components/entete";
@@ -30,6 +31,7 @@ export default function FicheJeu() {
   const { colors } = useTheme();
   const { jeux, pret, supprimerJeu, estFavori, basculerFavori } = useJeux();
   const styles = makeStyles(colors);
+  const insets = useSafeAreaInsets();
   const jeu = jeux.find((j) => j.id === id);
 
   const [extensionsActives, setExtensionsActives] = useState<string[]>([]);
@@ -122,7 +124,7 @@ export default function FicheJeu() {
           </TouchableOpacity>
         }
       />
-      <ScrollView style={styles.page} contentContainerStyle={styles.contenu}>
+      <ScrollView style={styles.page} contentContainerStyle={[styles.contenu, { paddingBottom: 40 + insets.bottom }]}>
       <View style={styles.enTete}>
         <VisuelJeu jeu={jeu} style={styles.vignette} />
 

@@ -7,6 +7,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useCallback, useState } from "react";
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { AvatarJoueur } from "@/components/avatar-joueur";
 import { DialogueRenommerJoueur } from "@/components/dialogue-renommer-joueur";
@@ -28,6 +29,7 @@ export default function FicheJoueur() {
   const { nom } = useLocalSearchParams<{ nom: string }>();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
+  const insets = useSafeAreaInsets();
   const router = useRouter();
 
   const [parties, setParties] = useState<PartieEnregistree[]>([]);
@@ -78,7 +80,7 @@ export default function FicheJoueur() {
   return (
     <View style={{ flex: 1, backgroundColor: colors.page }}>
       <Entete titre={nom} />
-      <ScrollView style={styles.page} contentContainerStyle={styles.contenu}>
+      <ScrollView style={styles.page} contentContainerStyle={[styles.contenu, { paddingBottom: 40 + insets.bottom }]}>
         <View style={styles.enTete}>
           <TouchableOpacity
             activeOpacity={0.8}

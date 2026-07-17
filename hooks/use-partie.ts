@@ -96,9 +96,7 @@ export function usePartie<E extends object>({
   nettoyerRef.current = nettoyer;
   const partieIdRef = useRef<number | null>(null);
 
-  const { secondes, demarrer, pause, initialiser } = useChrono();
-  const secondesRef = useRef(0);
-  secondesRef.current = secondes;
+  const { secondes, demarrer, initialiser, arreter, debutMs } = useChrono();
   const termineRef = useRef(false);
   termineRef.current = termine;
 
@@ -137,8 +135,14 @@ export function usePartie<E extends object>({
           });
         }
 
-        const duree = etat?.duree;
-        if (typeof duree === "number" && duree > 0) initialiser(duree);
+        const debut = etat?.debut;
+        if (typeof debut === "number" && debut > 0) {
+          initialiser(debut);
+        } else if (typeof etat?.duree === "number" && etat.duree > 0) {
+          // Ancien format (durée accumulée en secondes) : on reconstitue un
+          // instant de départ pour reprendre sans perdre le temps déjà écoulé.
+          initialiser(Date.now() - etat.duree * 1000);
+        }
 
         // Une partie déjà enregistrée, rouverte par « continuer à modifier »,
         // puis quittée : sans cet identifiant, la reprise en créerait une seconde.
@@ -154,19 +158,18 @@ export function usePartie<E extends object>({
       .finally(() => setCharge(true));
   }, [jeuId, initialiser, mode]);
 
-  // Le chrono tourne quand l'écran est affiché, se met en pause sinon.
+  // La durée d'une partie est le temps réel écoulé entre son début et sa fin :
+  // le chrono démarre à l'ouverture de l'écran et n'est plus mis en pause quand
+  // on le quitte (sinon une partie longue interrompue serait sous-comptée).
   useFocusEffect(
     useCallback(() => {
       if (!termineRef.current) demarrer();
-      return () => {
-        pause();
-      };
-    }, [demarrer, pause]),
+    }, [demarrer]),
   );
 
   useEffect(() => {
-    if (termine) pause();
-  }, [termine, pause]);
+    if (termine) arreter();
+  }, [termine, arreter]);
 
   // Sauvegarde automatique tant que la partie n'est pas terminée. La durée est
   // lue par référence : on l'enregistre à chaque saisie, pas à chaque seconde.
@@ -175,10 +178,11 @@ export function usePartie<E extends object>({
     if (viergeRef.current(joueurs, extra)) {
       effacerEtat(jeuId).catch(() => {});
     } else {
+      if (!termineRef.current) demarrer();
       sauvegarderEtat(jeuId, {
         joueurs,
         ...extra,
-        duree: secondesRef.current,
+        debut: debutMs(),
         partieId: partieIdRef.current,
         mode,
       }).catch(() => {});
@@ -231,7 +235,7 @@ export function usePartie<E extends object>({
     scoreGagnant: number;
     resultat?: Resultat;
   }) {
-    const duree = pause();
+    const duree = arreter();
     setEgaliteOuverte(false);
     setTermine(true);
     setReprise(false);
@@ -271,7 +275,8 @@ export function usePartie<E extends object>({
   /** Rouvre la saisie sans repartir de zéro : la partie enregistrée reste la même. */
   function continuerEdition() {
     setTermine(false);
-    demarrer();
+    // Reprend le décompte là où il s'était figé à la fin de la partie.
+    initialiser(Date.now() - secondes * 1000);
   }
 
   /** Repart sur une partie neuve : nouveau chrono, nouvelle ligne d'historique. */
@@ -280,8 +285,7 @@ export function usePartie<E extends object>({
     setPartieId(null);
     setTermine(false);
     setReprise(false);
-    initialiser(0);
-    demarrer();
+    initialiser(Date.now());
   }
 
   function noter(evaluation: number | null, note: string) {

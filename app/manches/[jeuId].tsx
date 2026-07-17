@@ -207,12 +207,7 @@ export default function PartieManches() {
         keyboardShouldPersistTaps="handled"
       >
         {!termine && joueursDispo.length > 0 && (
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            style={styles.chips}
-            contentContainerStyle={styles.chipsContenu}
-          >
+          <View style={styles.chipsContenu}>
             {joueursDispo.map((nom) => (
               <TouchableOpacity
                 key={nom}
@@ -222,7 +217,7 @@ export default function PartieManches() {
                 <Text style={styles.chipTexte}>+ {nom}</Text>
               </TouchableOpacity>
             ))}
-          </ScrollView>
+          </View>
         )}
 
         <ScrollView horizontal showsHorizontalScrollIndicator>
@@ -382,7 +377,7 @@ function makeStyles(c: AppColors) {
     banniere: { backgroundColor: c.success, padding: 14, alignItems: "center" },
     banniereTexte: { color: c.onSuccess, fontSize: 16, fontWeight: "600" },
     chips: { flexGrow: 0 },
-    chipsContenu: { gap: 8, paddingHorizontal: 12, paddingVertical: 10, alignItems: "center" },
+    chipsContenu: { flexDirection: "row", flexWrap: "wrap", gap: 8, paddingHorizontal: 12, paddingVertical: 10, alignItems: "center" },
     chip: {
       borderWidth: 1,
       borderColor: c.accent,

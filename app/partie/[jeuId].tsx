@@ -4,7 +4,6 @@ import { useLocalSearchParams } from "expo-router";
 import { useState } from "react";
 import {
   FlatList,
-  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -181,18 +180,13 @@ export default function Partie() {
       )}
 
       {!termine && joueursDispo.length > 0 && (
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          style={styles.chips}
-          contentContainerStyle={styles.chipsContenu}
-        >
+        <View style={styles.chipsContenu}>
           {joueursDispo.map((nom) => (
             <TouchableOpacity key={nom} style={styles.chip} onPress={() => ajouterJoueurNomme(nom)}>
               <Text style={styles.chipTexte}>+ {nom}</Text>
             </TouchableOpacity>
           ))}
-        </ScrollView>
+        </View>
       )}
 
       <FlatList
@@ -341,7 +335,7 @@ function makeStyles(c: AppColors) {
     page: { flex: 1, backgroundColor: c.page },
     liste: { padding: 16, paddingBottom: 24 },
     chips: { flexGrow: 0 },
-    chipsContenu: { gap: 8, paddingHorizontal: 16, paddingVertical: 10, alignItems: "center" },
+    chipsContenu: { flexDirection: "row", flexWrap: "wrap", gap: 8, paddingHorizontal: 16, paddingVertical: 10, alignItems: "center" },
     chip: {
       borderWidth: 1,
       borderColor: c.accent,

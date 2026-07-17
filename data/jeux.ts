@@ -65,4 +65,8 @@ export type Jeu = {
   extensions?: string[];
   // Rôles / personnages jouables (optionnel).
   roles?: RoleJeu[];
+  // Certains jeux (ex. L'Imposteur) ont des rôles destinés à être partagés :
+  // un même rôle peut être attribué à plusieurs joueurs. Par défaut (absent ou
+  // false), chaque rôle est exclusif — un seul joueur peut le prendre (Villainous).
+  rolesPartageables?: boolean;
 };

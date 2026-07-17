@@ -13,8 +13,8 @@ import { VisuelJeu } from "@/components/visuel-jeu";
 import { type AppColors } from "@/constants/theme-colors";
 import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
-import { BIBLIOTHEQUE } from "@/data/bibliotheque";
 import { type Jeu } from "@/data/jeux";
+import { useBibliotheque } from "@/hooks/use-bibliotheque";
 import { ajouterJeu } from "@/db/jeux";
 
 const LIBELLES_MODE: Record<NonNullable<Jeu["scoreMode"]>, string> = {
@@ -36,18 +36,19 @@ export default function Bibliotheque() {
   const styles = makeStyles(colors);
   const router = useRouter();
   const { jeux, rafraichir } = useJeux();
+  const bibliotheque = useBibliotheque();
 
   const [recherche, setRecherche] = useState("");
   const dejaAjoutes = useMemo(() => new Set(jeux.map((j) => j.id)), [jeux]);
 
   const resultats = useMemo(() => {
     const texte = recherche.trim().toLowerCase();
-    if (!texte) return BIBLIOTHEQUE;
-    return BIBLIOTHEQUE.filter(
+    if (!texte) return bibliotheque;
+    return bibliotheque.filter(
       (j) =>
         j.nom.toLowerCase().includes(texte) || j.categorie.toLowerCase().includes(texte),
     );
-  }, [recherche]);
+  }, [recherche, bibliotheque]);
 
   const restants = resultats.filter((j) => !dejaAjoutes.has(j.id)).length;
 

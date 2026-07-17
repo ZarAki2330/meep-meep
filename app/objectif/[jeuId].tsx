@@ -5,7 +5,6 @@ import { useState } from "react";
 import {
   FlatList,
   Modal,
-  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -150,18 +149,13 @@ export default function PartieObjectif() {
       )}
 
       {!termine && joueursDispo.length > 0 && (
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          style={styles.chips}
-          contentContainerStyle={styles.chipsContenu}
-        >
+        <View style={styles.chipsContenu}>
           {joueursDispo.map((nom) => (
             <TouchableOpacity key={nom} style={styles.chip} onPress={() => ajouterJoueurNomme(nom)}>
               <Text style={styles.chipTexte}>+ {nom}</Text>
             </TouchableOpacity>
           ))}
-        </ScrollView>
+        </View>
       )}
 
       <FlatList
@@ -289,19 +283,27 @@ export default function PartieObjectif() {
         >
           <TouchableOpacity style={styles.feuille} activeOpacity={1}>
             <Text style={styles.feuilleTitre}>Choisir un personnage</Text>
-            <ScrollView style={{ maxHeight: 420 }}>
-              <TouchableOpacity
-                style={styles.roleLigne}
-                onPress={() => choixPourJoueur && definirRole(choixPourJoueur, undefined)}
-              >
-                <Text style={styles.roleLigneNom}>Aucun</Text>
-              </TouchableOpacity>
-
-              {rolesDispo.map((r) => {
-                const prisPar = joueurs.find((j) => j.role === r.nom && j.id !== choixPourJoueur);
+            <FlatList
+              style={{ maxHeight: 420 }}
+              data={rolesDispo}
+              keyExtractor={(r) => r.nom}
+              keyboardShouldPersistTaps="handled"
+              initialNumToRender={12}
+              windowSize={10}
+              ListHeaderComponent={
+                <TouchableOpacity
+                  style={styles.roleLigne}
+                  onPress={() => choixPourJoueur && definirRole(choixPourJoueur, undefined)}
+                >
+                  <Text style={styles.roleLigneNom}>Aucun</Text>
+                </TouchableOpacity>
+              }
+              renderItem={({ item: r }) => {
+                const prisPar = jeu?.rolesPartageables
+                  ? undefined
+                  : joueurs.find((j) => j.role === r.nom && j.id !== choixPourJoueur);
                 return (
                   <TouchableOpacity
-                    key={r.nom}
                     style={styles.roleLigne}
                     disabled={!!prisPar}
                     onPress={() => choixPourJoueur && definirRole(choixPourJoueur, r.nom)}
@@ -318,8 +320,8 @@ export default function PartieObjectif() {
                     {prisPar && <Text style={styles.rolePrisTexte}>{prisPar.nom}</Text>}
                   </TouchableOpacity>
                 );
-              })}
-            </ScrollView>
+              }}
+            />
           </TouchableOpacity>
         </TouchableOpacity>
       </Modal>
@@ -346,7 +348,7 @@ function makeStyles(c: AppColors) {
     banniere: { backgroundColor: c.success, padding: 16, alignItems: "center" },
     banniereTexte: { color: c.onSuccess, fontSize: 18, fontWeight: "600" },
     chips: { flexGrow: 0 },
-    chipsContenu: { gap: 8, paddingHorizontal: 16, paddingVertical: 10, alignItems: "center" },
+    chipsContenu: { flexDirection: "row", flexWrap: "wrap", gap: 8, paddingHorizontal: 16, paddingVertical: 10, alignItems: "center" },
     chip: {
       borderWidth: 1,
       borderColor: c.accent,

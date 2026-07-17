@@ -1,48 +1,57 @@
 // hooks/use-chrono.ts
-// Chronomètre avec pause : il tourne quand l'écran est actif, se met en pause sinon.
+// Chronomètre basé sur l'horloge réelle : la durée d'une partie est le temps
+// écoulé entre son début et sa fin. On mémorise l'instant de départ (ms) plutôt
+// qu'un compteur accumulé en mémoire, ce qui rend la durée exacte même si l'app
+// est fermée et la partie reprise plus tard.
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
 export function useChrono() {
-  const [base, setBase] = useState(0); // secondes déjà accumulées
-  const baseRef = useRef(0);
-  const depuis = useRef<number | null>(null); // instant du dernier démarrage (ms)
+  const debut = useRef<number | null>(null); // instant de départ (ms), null si non démarré ou figé
+  const fige = useRef<number | null>(null); // total figé (s) une fois la partie arrêtée
   const [, rafraichir] = useState(0);
 
-  baseRef.current = base;
-
-  // Rafraîchit l'affichage chaque seconde quand le chrono tourne.
+  // Rafraîchit l'affichage chaque seconde tant que le chrono tourne.
   useEffect(() => {
     const id = setInterval(() => {
-      if (depuis.current !== null) rafraichir((n) => n + 1);
+      if (debut.current !== null) rafraichir((n) => n + 1);
     }, 1000);
     return () => clearInterval(id);
   }, []);
 
-  const demarrer = useCallback(() => {
-    if (depuis.current === null) depuis.current = Date.now();
+  /** Démarre le décompte s'il ne l'est pas déjà (idempotent). */
+  const demarrer = useCallback((debutMsArg?: number) => {
+    if (debut.current === null && fige.current === null) {
+      debut.current = debutMsArg ?? Date.now();
+      rafraichir((n) => n + 1);
+    }
   }, []);
 
-  /** Met en pause et renvoie le total exact de secondes écoulées. */
-  const pause = useCallback(() => {
-    let total = baseRef.current;
-    if (depuis.current !== null) {
-      total += Math.floor((Date.now() - depuis.current) / 1000);
-      depuis.current = null;
-      baseRef.current = total;
-      setBase(total);
-    }
+  /** Reprend une partie : fixe l'instant de départ persistant. */
+  const initialiser = useCallback((debutMsArg: number) => {
+    fige.current = null;
+    debut.current = debutMsArg;
+    rafraichir((n) => n + 1);
+  }, []);
+
+  /** Fige le chrono et renvoie le total exact de secondes écoulées. */
+  const arreter = useCallback(() => {
+    const total =
+      debut.current !== null
+        ? Math.max(0, Math.floor((Date.now() - debut.current) / 1000))
+        : (fige.current ?? 0);
+    fige.current = total;
+    debut.current = null;
     return total;
   }, []);
 
-  /** Reprend un chrono déjà commencé (reprise de partie). */
-  const initialiser = useCallback((secondes: number) => {
-    baseRef.current = secondes;
-    setBase(secondes);
-  }, []);
+  /** Instant de départ (ms) à persister pour la reprise, ou null si arrêté. */
+  const debutMs = useCallback(() => debut.current, []);
 
   const secondes =
-    base + (depuis.current !== null ? Math.floor((Date.now() - depuis.current) / 1000) : 0);
+    debut.current !== null
+      ? Math.max(0, Math.floor((Date.now() - debut.current) / 1000))
+      : (fige.current ?? 0);
 
-  return { secondes, demarrer, pause, initialiser };
+  return { secondes, demarrer, initialiser, arreter, debutMs };
 }

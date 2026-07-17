@@ -25,6 +25,7 @@ type Row = {
   equipes: number | null;
   extensions: string | null;
   roles: string | null;
+  roles_partageables: number | null;
 };
 
 const MODES: Jeu["scoreMode"][] = ["compteur", "objectif", "grille", "manches", "cooperatif"];
@@ -64,6 +65,7 @@ function rowVersJeu(r: Row): Jeu {
     equipes: r.equipes === 1,
     extensions: listeOuRien(parseJson<string[]>(r.extensions, [])),
     roles: listeOuRien(parseJson<RoleJeu[]>(r.roles, [])),
+    rolesPartageables: r.roles_partageables === 1,
   };
 }
 
@@ -77,8 +79,8 @@ export async function ajouterJeu(j: Jeu) {
   const db = await getDb();
   await db.runAsync(
     `INSERT OR REPLACE INTO jeux
-      (id, nom, description, joueurs_min, joueurs_max, duree_min, age_min, categorie, image, regles, score_victoire, seuil_fin, score_mode, categories, bonus, equipes, extensions, roles)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      (id, nom, description, joueurs_min, joueurs_max, duree_min, age_min, categorie, image, regles, score_victoire, seuil_fin, score_mode, categories, bonus, equipes, extensions, roles, roles_partageables)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       j.id,
       j.nom,
@@ -98,6 +100,7 @@ export async function ajouterJeu(j: Jeu) {
       j.equipes ? 1 : 0,
       j.extensions ? JSON.stringify(j.extensions) : null,
       j.roles ? JSON.stringify(j.roles) : null,
+      j.rolesPartageables ? 1 : 0,
     ],
   );
 }

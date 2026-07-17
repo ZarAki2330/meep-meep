@@ -543,6 +543,7 @@ function DetailPartie({
 
   return (
     <>
+      <ScrollView style={{ flexShrink: 1 }} contentContainerStyle={{ paddingBottom: 6 }}>
       <Text style={styles.detailTitre}>{partie.jeu_nom}</Text>
       <Text style={styles.detailDate}>
         {formatDateLongue(partie.date)}
@@ -572,7 +573,6 @@ function DetailPartie({
         </Text>
       )}
 
-      <ScrollView style={{ maxHeight: 320 }}>
         {(edition ? lignes : affichees).map((j, i) => {
           const estGagnant = coop
             ? resultat === "victoire"
@@ -626,7 +626,6 @@ function DetailPartie({
             </Conteneur>
           );
         })}
-      </ScrollView>
 
       {edition && coop && (
         <View style={styles.issues}>
@@ -720,6 +719,7 @@ function DetailPartie({
           </View>
         )
       )}
+      </ScrollView>
 
       {edition ? (
         <View style={styles.actionsDetail}>
@@ -949,6 +949,7 @@ function makeStyles(c: AppColors) {
     feuille: {
       width: "100%",
       maxWidth: 420,
+      maxHeight: "85%",
       backgroundColor: c.surface,
       borderRadius: 18,
       paddingHorizontal: 18,

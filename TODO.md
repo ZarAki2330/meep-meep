@@ -2,29 +2,44 @@
 
 Liste des fonctionnalités à faire et des améliorations.
 
-**Progression : 54 / 57 — 95 %**
+**Progression : 66 / 69 — 96 %**
 
 `███████████████████░`
 
+## Bugs à corriger
+
+_Aucun bug en attente. 🎉_
+
 ## Priorité haute
 
-- [ ] **Compiler l'app (EAS build)** — installer l'app pour de vrai sur le téléphone, sans passer par Expo Go. C'est aussi ce qui fera apparaître l'icône Meep Meep.
+- [ ] **Publier sur le Play Store** — compte développeur Google Play (25 $, une fois). Build `production` en `.aab`, puis `eas submit`. Demandent une fiche : captures d'écran, description, politique de confidentialité (l'app ne collecte rien, mais la déclaration reste obligatoire), et le questionnaire de classification par âge.
+- [ ] **Publier sur l'App Store** — adhésion Apple Developer (99 $/an). Même chose côté fiche, plus une revue humaine d'Apple : compter quelques jours et de possibles allers-retours. Le logo « Powered by BGG » devient obligatoire dès que l'app est publique.
 
 ## Qualité du projet
 
 
 ## Nouvelles fonctionnalités
 
-- [ ] **Étudier la faisabilité d'une API maison** — se renseigner sur ce qu'il faudrait pour héberger sa propre API : à quoi elle servirait (bibliothèque de jeux partagée et mise à jour sans republier l'app, synchronisation entre appareils, sauvegarde en ligne, contournement du jeton BoardGameGeek), quel hébergement, quel coût, quelles obligations (RGPD, comptes utilisateurs), et si un simple fichier JSON servi en statique suffirait.
-
+_(rien en attente)_
 
 ## En attente
 
-- [ ] **Jeton BoardGameGeek** — demande d'application envoyée, réponse sous une semaine ou plus. Le code d'import est déjà prêt. Le bouton « Chercher sur BoardGameGeek » est retiré du formulaire en attendant : l'écran `app/bgg.tsx` et `lib/bgg.ts` sont intacts, il n'y a qu'à remettre le bouton.
 - [ ] **Logo « Powered by BGG »** — obligatoire si l'application est déclarée publique.
 
 ## Terminé
 
+- [x] Catalogue de jeux distant (option A de l'étude) : `catalogue.json` (18 jeux) servi en statique depuis GitHub brut, récupéré et mis en cache par l'app (`lib/catalogue.ts`, `hooks/use-bibliotheque.ts`), fusionné dans l'écran « Ajouter un jeu tout prêt » (`app/bibliotheque.tsx`). Le distant prime par id (ajout/correction sans republier), hors-ligne préservé, aucune donnée personnelle. ⚠️ Reste à commit + push `catalogue.json` sur GitHub pour l'activer.
+- [x] Étude de faisabilité d'une API maison : document `docs/etude-api-maison.md` (usages, 3 niveaux d'ambition, hébergement et coûts à jour, obligations RGPD, recommandation par étapes). Conclusion : un catalogue JSON statique gratuit couvre l'usage principal (bibliothèque partagée) sans RGPD ; le backend complet (sync/comptes) n'est à envisager que si un vrai besoin émerge.
+- [x] Import BoardGameGeek réactivé : bouton « Chercher sur BoardGameGeek » remis dans le formulaire d'ajout (`app/import.tsx`), relié à l'écran `/bgg` (recherche + import) déjà en place. Parsing de l'API XML v2 conforme. ⚠️ Nécessite le jeton dans `.env.local` (`EXPO_PUBLIC_BGG_TOKEN=…`) puis `npx expo start -c`.
+- [x] Rôles partageables : nouvelle option de jeu `rolesPartageables` (interrupteur dans le formulaire) — quand elle est activée, un même rôle peut être attribué à plusieurs joueurs (ex. L'Imposteur : plusieurs citoyens, un imposteur), sinon chaque rôle reste exclusif (Villainous). Type, migration base, persistance et sélection non exclusive dans les modes objectif/coop
+- [x] Défilement à la sélection d'un personnage : liste virtualisée (`FlatList` au lieu d'un `ScrollView` non virtualisé) dans les modes objectif et coopératif — défilement fluide même avec beaucoup de personnages (`app/objectif/[jeuId].tsx`, `app/coop/[jeuId].tsx`)
+- [x] Barre de navigation système adaptée au thème : voile de contraste blanc désactivé au build (`androidNavigationBar.enforceContrast: false` dans `app.json`), fond de fenêtre teinté au thème via `expo-system-ui`, et couleur des icônes pilotée par `expo-navigation-bar` selon le thème interne (`app/_layout.tsx`). ⚠️ Nécessite `npx expo install expo-navigation-bar` puis un nouveau build (config native + module natif).
+- [x] Compteur de temps de partie : durée mesurée sur l'horloge réelle depuis un instant de départ persistant (`hooks/use-chrono.ts`, `hooks/use-partie.ts`) — plus de sous-comptage après fermeture/reprise (une partie de 3 h s'enregistre bien comme 3 h)
+- [x] Boutons coupés en bas de page : fiches jeu et joueur — le bas de contenu tient compte de la zone de sécurité (`insets.bottom`), les boutons « Supprimer ce jeu » et « Renommer ou fusionner » ne passent plus sous la barre système (`app/jeu/[id].tsx`, `app/joueur/[nom].tsx`)
+- [x] Badges d'ajout des joueurs enregistrés : passage à la ligne (`flexWrap`) au lieu d'une rangée qui défile — les noms restent toujours lisibles quel que soit le nombre de joueurs, sur les 5 modes (compteur, coop, objectif, manches, feuille de score)
+- [x] Défilement — détail d'une partie (historique) : feuille bornée à l'écran et contenu entièrement défilable (tous les joueurs visibles), boutons épinglés en bas (`app/(tabs)/explore.tsx`)
+- [x] Défilement — modale « Coller un jeu » : contenu défilable, feuille bornée, champ de collage remonté au-dessus du clavier (`app/import.tsx`)
+- [x] APK compilé par EAS Build et installé sur le téléphone (profil `preview`)
 - [x] Accessibilité vérifiée sur un vrai téléphone
 - [x] README réécrit : structure réelle, et des notes d'architecture qui listent les pièges plutôt que les évidences
 - [x] Bugs connus corrigés : mode de score changé, case supprimée, abandon depuis la fiche, tirage en équipes, homonymes

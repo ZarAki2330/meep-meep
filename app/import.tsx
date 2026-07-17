@@ -82,6 +82,7 @@ export default function AjouterJeu() {
   const [erreurImage, setErreurImage] = useState<string | null>(null);
   const [extensionsTexte, setExtensionsTexte] = useState("");
   const [rolesTexte, setRolesTexte] = useState("");
+  const [rolesPartageables, setRolesPartageables] = useState(false);
   const [prerempli, setPrerempli] = useState(false);
   const [collageOuvert, setCollageOuvert] = useState(false);
   const [texteColle, setTexteColle] = useState("");
@@ -123,6 +124,7 @@ export default function AjouterJeu() {
     setMode(j.scoreMode ?? "compteur");
     setExtensionsTexte(extensionsVersTexte(j.extensions ?? []));
     setRolesTexte(rolesVersTexte(j.roles ?? []));
+    setRolesPartageables(j.rolesPartageables === true);
 
     const cats = j.categories ?? [];
     setCategoriesTexte(categoriesVersTexte(cats));
@@ -234,6 +236,7 @@ export default function AjouterJeu() {
       bonus,
       extensions: listeOuRien(parserExtensions(extensionsTexte)),
       roles: listeOuRien(parserRoles(rolesTexte)),
+      rolesPartageables,
     };
     await ajouterJeu(jeu);
     // La photo qu'on vient de remplacer n'a plus de propriétaire.
@@ -255,8 +258,10 @@ export default function AjouterJeu() {
               <Text style={styles.bggTexte}>Ajouter un jeu tout prêt</Text>
               <Text style={styles.bggChevron}>▸</Text>
             </TouchableOpacity>
-            {/* Bouton BoardGameGeek retiré le temps d'obtenir le jeton d'API.
-                L'écran /bgg et lib/bgg.ts restent en place. */}
+            <TouchableOpacity style={styles.bggBouton} onPress={() => router.push("/bgg")}>
+              <Text style={styles.bggTexte}>Chercher sur BoardGameGeek</Text>
+              <Text style={styles.bggChevron}>▸</Text>
+            </TouchableOpacity>
             <TouchableOpacity style={styles.bggBouton} onPress={() => setCollageOuvert(true)}>
               <Text style={styles.bggTexte}>Coller un jeu partagé</Text>
               <Text style={styles.bggChevron}>▸</Text>
@@ -461,6 +466,30 @@ export default function AjouterJeu() {
                 : `Ces extensions ne sont pas déclarées ci-dessus : ${inconnues.map((e) => `« ${e} »`).join(", ")}. Leurs personnages ne s'afficheront jamais.`}
             </Text>
           )}
+        </Champ>
+
+        <Champ label="Rôles partageables ?" styles={styles} aide="extensions">
+          <TouchableOpacity
+            style={styles.bonusBascule}
+            activeOpacity={0.7}
+            accessibilityRole="checkbox"
+            accessibilityState={{ checked: rolesPartageables }}
+            accessibilityLabel="Un même rôle peut être attribué à plusieurs joueurs"
+            onPress={() => setRolesPartageables((v) => !v)}
+          >
+            <View
+              style={[styles.case, rolesPartageables && styles.caseActive]}
+              accessibilityElementsHidden
+              importantForAccessibility="no-hide-descendants"
+            >
+              {rolesPartageables && <Text style={styles.caseCoche}>✓</Text>}
+            </View>
+            <Text style={styles.bonusTexte}>
+              Un même rôle peut être donné à plusieurs joueurs (ex. L&apos;Imposteur : plusieurs
+              citoyens, un imposteur). Sinon, chaque rôle n&apos;est attribuable qu&apos;à une seule
+              personne.
+            </Text>
+          </TouchableOpacity>
         </Champ>
 
         <Champ label="Comment se compte le score ?" styles={styles} aide="modes">
@@ -669,12 +698,21 @@ export default function AjouterJeu() {
         animationType="fade"
         onRequestClose={() => setCollageOuvert(false)}
       >
+        <KeyboardAvoidingView
+          style={{ flex: 1 }}
+          behavior={Platform.OS === "ios" ? "padding" : undefined}
+        >
         <TouchableOpacity
           style={styles.fond}
           activeOpacity={1}
           onPress={() => setCollageOuvert(false)}
         >
           <TouchableOpacity style={styles.feuille} activeOpacity={1}>
+            <ScrollView
+              style={{ flexShrink: 1 }}
+              contentContainerStyle={{ paddingBottom: 4 }}
+              keyboardShouldPersistTaps="handled"
+            >
             <Text style={styles.feuilleTitre}>Coller un jeu</Text>
             <Text style={styles.aide}>
               Colle ici le texte d&apos;un jeu partagé. Le formulaire sera rempli, tu pourras tout
@@ -691,6 +729,7 @@ export default function AjouterJeu() {
               autoCorrect={false}
             />
             {erreurCollage && <Text style={styles.erreur}>{erreurCollage}</Text>}
+            </ScrollView>
             <View style={styles.actionsModal}>
               <TouchableOpacity style={styles.annuler} onPress={() => setCollageOuvert(false)}>
                 <Text style={styles.annulerTexte}>Annuler</Text>
@@ -701,6 +740,7 @@ export default function AjouterJeu() {
             </View>
           </TouchableOpacity>
         </TouchableOpacity>
+        </KeyboardAvoidingView>
       </Modal>
     </KeyboardAvoidingView>
   );
@@ -942,6 +982,7 @@ function makeStyles(c: AppColors) {
     feuille: {
       width: "100%",
       maxWidth: 460,
+      maxHeight: "85%",
       backgroundColor: c.surface,
       borderRadius: 18,
       padding: 18,
