@@ -2,9 +2,9 @@
 
 Liste des fonctionnalités à faire et des améliorations.
 
-**Progression : 69 / 80 — 86 %**
+**Progression : 70 / 80 — 88 %**
 
-`█████████████████░░░`
+`██████████████████░░`
 
 ## Bugs à corriger
 
@@ -22,7 +22,6 @@ Liste des fonctionnalités à faire et des améliorations.
 ## Nouvelles fonctionnalités
 
 - [ ] **Désactiver l'import BoardGameGeek** — retirer/masquer l'accès BGG devenu inutile : bouton « Chercher sur BoardGameGeek » dans le formulaire, écran `/bgg`. Vérifier que le logo « Powered by BGG » n'est alors plus requis.
-- [ ] **Trier « Ajouter un jeu tout prêt »** — ajouter un tri (alphabétique, catégorie, nouveautés…) à l'écran `bibliotheque.tsx`, comme sur le catalogue principal.
 - [ ] **Ajouter de nouveaux jeux au catalogue** _(tâche récurrente)_ — enrichir régulièrement `catalogue.json` : nouvelles sorties, gammes complétées, et finalisation des fiches provisoires (voir `claude/gigamic-fiches-provisoires.md`).
 - [ ] **Afficher les règles officielles en PDF dans l'app** — se renseigner sur la faisabilité d'intégrer et d'afficher un PDF de règles directement dans la fiche du jeu (visionneuse embarquée, stockage, droits).
 - [ ] **Améliorer les interfaces de l'app** — soigner les écrans, par ex. les personnages dans les jeux : une photo ou un logo par personnage.
@@ -35,6 +34,7 @@ _(rien en attente)_
 
 ## Terminé
 
+- [x] Trier « Ajouter un jeu tout prêt » : rangée « Trier par » sur l'écran `bibliotheque.tsx` avec quatre tris — A → Z, Catégorie, Durée, Joueurs (`lib/tri-bibliotheque.ts`, fonction pure testée). Pas de tri « nouveautés » : le catalogue ne porte aucune date, à ajouter au type `Jeu` d'abord si besoin.
 - [x] Une photo pour tous les jeux : vraies photos du catalogue Gigamic récupérées pour 287 des 309 jeux (`image` renseigné dans `catalogue.json`), et repli visuel amélioré — une tuile colorée par catégorie (`lib/couleur-jeu.ts`, testé, branché dans `components/visuel-jeu.tsx`) pour que chaque jeu sans photo reste distinct. Restent sans photo : les 14 jeux non-Gigamic (Azul, Splendor, Dixit…) et ~7 jeux Gigamic absents du catalogue en ligne (5 ou Moins, Orapa Mine, Solacia, Mémoires d'une chamane, Bellevue — Parthenay) — à compléter à la main si tu as les visuels.
 - [x] Alimenter le catalogue depuis l'API BGG : étude (`docs/api-bgg-catalogue.md`) + script d'outillage `scripts/generer-catalogue.mjs` qui récupère les jeux depuis BGG (liste d'ids dans `scripts/bgg-ids.txt`), gère les 202/429 et le groupage, et ajoute au `catalogue.json` sans écraser les entrées existantes. BGG remplit la coquille (nom, image, joueurs, durée) ; règles/rôles/mode de score restent à compléter à la main.
 - [x] Logo « Powered by BGG » : composant d'attribution cliquable (`components/powered-by-bgg.tsx`) renvoyant vers BoardGameGeek (page du jeu depuis une fiche importée, accueil sinon), affiché sur l'écran de recherche BGG et les fiches de jeux importés. ⚠️ `assets/images/powered-by-bgg.png` est un placeholder — à remplacer par le logo officiel « Powered by BGG » (même nom de fichier).

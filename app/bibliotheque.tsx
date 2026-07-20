@@ -17,6 +17,7 @@ import { type Jeu } from "@/data/jeux";
 import { useBibliotheque } from "@/hooks/use-bibliotheque";
 import { ajouterJeu } from "@/db/jeux";
 import { estJeuDeBase } from "@/lib/regroupement";
+import { TRIS_BIBLIO, trierBibliotheque, type TriBiblioCle } from "@/lib/tri-bibliotheque";
 
 const LIBELLES_MODE: Record<NonNullable<Jeu["scoreMode"]>, string> = {
   compteur: "Compteur",
@@ -40,7 +41,14 @@ export default function Bibliotheque() {
   const bibliotheque = useBibliotheque();
 
   const [recherche, setRecherche] = useState("");
+  const [tri, setTri] = useState<TriBiblioCle>("alpha");
+  const [triOuvert, setTriOuvert] = useState(false);
   const dejaAjoutes = useMemo(() => new Set(jeux.map((j) => j.id)), [jeux]);
+
+  // Le tri par défaut (A → Z) ne « personnalise » pas l'écran : le bouton ne
+  // s'allume que dès qu'on choisit un autre tri.
+  const triPersonnalise = tri !== "alpha";
+  const labelTri = TRIS_BIBLIO.find((t) => t.cle === tri)?.label ?? "";
 
   const resultats = useMemo(() => {
     const texte = recherche.trim().toLowerCase();
@@ -59,6 +67,7 @@ export default function Bibliotheque() {
   }, [recherche, bibliotheque]);
 
   const restants = resultats.filter((j) => !dejaAjoutes.has(j.id)).length;
+  const resultatsTries = useMemo(() => trierBibliotheque(resultats, tri), [resultats, tri]);
 
   async function ajouter(jeu: Jeu) {
     await ajouterJeu(jeu);
@@ -69,29 +78,68 @@ export default function Bibliotheque() {
     <View style={styles.page}>
       <Entete titre="Ajouter un jeu tout prêt" />
 
-      <View style={styles.rechercheChamp}>
-        <IconSymbol name="magnifyingglass" size={18} color={colors.textMuted} />
-        <TextInput
-          style={styles.rechercheInput}
-          value={recherche}
-          onChangeText={setRecherche}
-          placeholder="Rechercher dans la bibliothèque"
-          placeholderTextColor={colors.placeholder}
-        />
-        {recherche.length > 0 && (
-          <TouchableOpacity
-            onPress={() => setRecherche("")}
-            hitSlop={10}
-            accessibilityRole="button"
-            accessibilityLabel="Effacer la recherche"
-          >
-            <IconSymbol name="xmark" size={16} color={colors.textMuted} />
-          </TouchableOpacity>
-        )}
+      <View style={styles.rechercheLigne}>
+        <View style={styles.rechercheChamp}>
+          <IconSymbol name="magnifyingglass" size={18} color={colors.textMuted} />
+          <TextInput
+            style={styles.rechercheInput}
+            value={recherche}
+            onChangeText={setRecherche}
+            placeholder="Rechercher dans la bibliothèque"
+            placeholderTextColor={colors.placeholder}
+          />
+          {recherche.length > 0 && (
+            <TouchableOpacity
+              onPress={() => setRecherche("")}
+              hitSlop={10}
+              accessibilityRole="button"
+              accessibilityLabel="Effacer la recherche"
+            >
+              <IconSymbol name="xmark" size={16} color={colors.textMuted} />
+            </TouchableOpacity>
+          )}
+        </View>
+        <TouchableOpacity
+          style={[styles.triBouton, (triOuvert || triPersonnalise) && styles.triBoutonActif]}
+          accessibilityRole="button"
+          accessibilityLabel={triPersonnalise ? `Trier, ${labelTri}` : "Trier"}
+          accessibilityState={{ expanded: triOuvert }}
+          onPress={() => setTriOuvert((o) => !o)}
+        >
+          <IconSymbol
+            name="slider.horizontal.3"
+            size={20}
+            color={triOuvert || triPersonnalise ? colors.onAccent : colors.textSecondary}
+          />
+        </TouchableOpacity>
       </View>
 
+      {triOuvert && (
+        <View style={styles.panneau}>
+          <Text style={styles.groupeLabel}>Trier par</Text>
+          <View style={styles.chipsWrap}>
+            {TRIS_BIBLIO.map((t) => {
+              const actif = tri === t.cle;
+              return (
+                <TouchableOpacity
+                  key={t.cle}
+                  style={[styles.chip, actif && styles.chipActif]}
+                  // Un seul tri à la fois : sémantique de sélection, pas d'interrupteur.
+                  accessibilityRole="button"
+                  accessibilityState={{ selected: actif }}
+                  accessibilityLabel={`Trier par ${t.label}`}
+                  onPress={() => setTri(t.cle)}
+                >
+                  <Text style={[styles.chipTexte, actif && styles.chipTexteActif]}>{t.label}</Text>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+        </View>
+      )}
+
       <FlatList
-        data={resultats}
+        data={resultatsTries}
         keyExtractor={(j) => j.id}
         contentContainerStyle={styles.liste}
         ListHeaderComponent={
@@ -148,7 +196,15 @@ export default function Bibliotheque() {
 function makeStyles(c: AppColors) {
   return StyleSheet.create({
     page: { flex: 1, backgroundColor: c.page },
+    rechercheLigne: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 10,
+      marginHorizontal: 16,
+      marginTop: 12,
+    },
     rechercheChamp: {
+      flex: 1,
       flexDirection: "row",
       alignItems: "center",
       gap: 8,
@@ -158,10 +214,41 @@ function makeStyles(c: AppColors) {
       borderRadius: 12,
       paddingHorizontal: 12,
       paddingVertical: 10,
-      marginHorizontal: 16,
-      marginTop: 12,
     },
     rechercheInput: { flex: 1, fontSize: 15, color: c.textPrimary, padding: 0 },
+    triBouton: {
+      width: 46,
+      alignSelf: "stretch",
+      borderRadius: 12,
+      borderWidth: 1,
+      borderColor: c.border,
+      backgroundColor: c.surface,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    triBoutonActif: { backgroundColor: c.accent, borderColor: c.accent },
+    panneau: {
+      backgroundColor: c.surface,
+      borderWidth: 1,
+      borderColor: c.border,
+      borderRadius: 12,
+      marginHorizontal: 16,
+      marginTop: 10,
+      padding: 12,
+    },
+    groupeLabel: { fontSize: 13, fontWeight: "600", color: c.textSecondary, marginBottom: 8 },
+    chipsWrap: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
+    chip: {
+      borderWidth: 1,
+      borderColor: c.border,
+      backgroundColor: c.surfaceAlt,
+      borderRadius: 20,
+      paddingHorizontal: 12,
+      paddingVertical: 6,
+    },
+    chipActif: { backgroundColor: c.accent, borderColor: c.accent },
+    chipTexte: { fontSize: 13, color: c.textSecondary, fontWeight: "600" },
+    chipTexteActif: { color: c.onAccent },
     liste: { padding: 16, paddingBottom: 40, gap: 10 },
     intro: { fontSize: 13, color: c.textMuted, lineHeight: 18, marginBottom: 6 },
     vide: { fontSize: 14, color: c.textMuted, textAlign: "center", marginTop: 24 },
