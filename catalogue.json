@@ -36,7 +36,8 @@
       "À son tour, on prend la carte de la défausse (en l'échangeant avec une des siennes) ou on pioche une carte, que l'on garde en échange ou que l'on défausse.",
       "Des cartes Pouvoir permettent d'échanger ou de voler des cartes à un adversaire pour l'aider à descendre.",
       "Dès qu'on pense avoir un total de 5 ou moins, on annonce « 5 ou moins » et on parie d'avoir le plus petit score ; si c'est vrai, on marque 0 pour la manche et les autres comptent leurs cartes restantes."
-    ]
+    ],
+    "image": "https://www.gigamic.com/4669-large_default/5-ou-moins.jpg"
   },
   {
     "id": "6quiprend",
@@ -546,7 +547,8 @@
       "Fiche provisoire : les règles détaillées seront ajoutées à partir du règlement officiel."
     ],
     "type": "edition",
-    "jeuParent": "bellevue"
+    "jeuParent": "bellevue",
+    "image": "https://www.gigamic.com/4672-large_default/bellevue-parthenay.jpg"
   },
   {
     "id": "bellevuewimereux",
@@ -2049,7 +2051,8 @@
       "Les pièces n'appartiennent à personne : vous ne pouvez déplacer qu'une pièce de la rangée la plus proche de vous.",
       "Une pièce avance d'autant de cases que sa taille (1, 2 ou 3) ; en arrivant sur une autre pièce, on peut rebondir et poursuivre avec elle.",
       "But : amener n'importe quelle pièce sur la case « but » adverse."
-    ]
+    ],
+    "image": "https://www.gigamic.com/129-large_default/gyges.jpg"
   },
   {
     "id": "generationmimes",
@@ -3407,7 +3410,8 @@
       "Une bande-son dédiée accompagne l'exploration : on observe les détails et on écoute les indices.",
       "Il faut relier les éléments pour progresser dans cette quête intérieure, contemplative et poétique.",
       "L'aventure s'achève lorsque les souvenirs perdus sont retrouvés."
-    ]
+    ],
+    "image": "https://www.gigamic.com/4622-large_default/memoires-d-une-chamane.jpg"
   },
   {
     "id": "meoute",
@@ -3624,7 +3628,8 @@
       "Tour après tour, on affine ses hypothèses sur l'emplacement et l'état des gemmes recherchées.",
       "Le temps presse : le rival cherche les mêmes gemmes en parallèle.",
       "Le premier à localiser correctement toutes les gemmes l'emporte."
-    ]
+    ],
+    "image": "https://www.gigamic.com/4410-large_default/orapa-mine.jpg"
   },
   {
     "id": "oriflamme",
@@ -5150,23 +5155,6 @@
     "image": "https://www.espritjeu.com/upload/image/skull-king-vf-p-image-80958-grande.jpg"
   },
   {
-    "id": "solacia",
-    "nom": "Solacia",
-    "categorie": "Aventure",
-    "description": "Une gamme d'aventures narratives où l'on affronte une menace au fil de l'histoire.",
-    "joueursMin": 1,
-    "joueursMax": 4,
-    "dureeMin": 45,
-    "ageMin": 10,
-    "scoreVictoire": "max",
-    "scoreMode": "cooperatif",
-    "regles": [
-      "Solacia est une série d'aventures narratives, déclinée en histoires (Le Démon de glace, Le Sorcier maudit).",
-      "On avance dans un récit interactif en résolvant les épreuves qui se présentent.",
-      "Fiche provisoire : les règles détaillées seront ajoutées à partir du règlement officiel."
-    ]
-  },
-  {
     "id": "solaciademonglace",
     "nom": "Solacia — Le Démon de glace",
     "categorie": "Aventure",
@@ -5182,8 +5170,7 @@
       "Cette boîte propose une affaire particulière : une aventure glaciale.",
       "Fiche provisoire : les règles détaillées seront ajoutées à partir du règlement officiel."
     ],
-    "type": "edition",
-    "jeuParent": "solacia"
+    "image": "https://www.gigamic.com/4537-large_default/solacia-le-demon-de-glace.jpg"
   },
   {
     "id": "solaciasorciermaudit",
@@ -5201,8 +5188,7 @@
       "Cette boîte propose une affaire particulière : une aventure ensorcelée.",
       "Fiche provisoire : les règles détaillées seront ajoutées à partir du règlement officiel."
     ],
-    "type": "edition",
-    "jeuParent": "solacia"
+    "image": "https://www.gigamic.com/4533-large_default/solacia-le-sorcier-maudit.jpg"
   },
   {
     "id": "sousscelles",
