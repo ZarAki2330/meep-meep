@@ -26,7 +26,11 @@ type Row = {
   extensions: string | null;
   roles: string | null;
   roles_partageables: number | null;
+  jeu_type: string | null;
+  jeu_parent: string | null;
 };
+
+const TYPES: NonNullable<Jeu["type"]>[] = ["jeu", "extension", "edition"];
 
 const MODES: Jeu["scoreMode"][] = ["compteur", "objectif", "grille", "manches", "cooperatif"];
 
@@ -66,6 +70,8 @@ function rowVersJeu(r: Row): Jeu {
     extensions: listeOuRien(parseJson<string[]>(r.extensions, [])),
     roles: listeOuRien(parseJson<RoleJeu[]>(r.roles, [])),
     rolesPartageables: r.roles_partageables === 1,
+    type: TYPES.find((t) => t === r.jeu_type) ?? "jeu",
+    jeuParent: r.jeu_parent ?? undefined,
   };
 }
 
@@ -79,8 +85,8 @@ export async function ajouterJeu(j: Jeu) {
   const db = await getDb();
   await db.runAsync(
     `INSERT OR REPLACE INTO jeux
-      (id, nom, description, joueurs_min, joueurs_max, duree_min, age_min, categorie, image, regles, score_victoire, seuil_fin, score_mode, categories, bonus, equipes, extensions, roles, roles_partageables)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      (id, nom, description, joueurs_min, joueurs_max, duree_min, age_min, categorie, image, regles, score_victoire, seuil_fin, score_mode, categories, bonus, equipes, extensions, roles, roles_partageables, jeu_type, jeu_parent)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       j.id,
       j.nom,
@@ -101,6 +107,8 @@ export async function ajouterJeu(j: Jeu) {
       j.extensions ? JSON.stringify(j.extensions) : null,
       j.roles ? JSON.stringify(j.roles) : null,
       j.rolesPartageables ? 1 : 0,
+      j.type ?? "jeu",
+      j.jeuParent ?? null,
     ],
   );
 }

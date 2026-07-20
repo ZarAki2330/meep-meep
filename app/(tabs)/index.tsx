@@ -17,6 +17,7 @@ import {
 } from "@/db/partie-en-cours";
 import { statistiquesParJeu } from "@/db/parties";
 import { cheminPartie } from "@/lib/route-partie";
+import { estJeuDeBase } from "@/lib/regroupement";
 import { TRIS, trierJeux, type StatsJeu, type TriCle } from "@/lib/tri-catalogue";
 
 type DureeCle = "court" | "moyen" | "long";
@@ -96,6 +97,7 @@ export default function Catalogue() {
   }
 
   const categories = useMemo(() => Array.from(new Set(jeux.map((j) => j.categorie))), [jeux]);
+  const idsPresents = useMemo(() => new Set(jeux.map((j) => j.id)), [jeux]);
   const nbFiltres =
     (categorie ? 1 : 0) + (joueurs ? 1 : 0) + (duree ? 1 : 0) + (favorisSeuls ? 1 : 0);
   const personnalise = nbFiltres > 0 || tri !== "defaut";
@@ -103,6 +105,9 @@ export default function Catalogue() {
   const jeuxFiltres = useMemo(() => {
     const texte = recherche.trim().toLowerCase();
     return jeux.filter((j) => {
+      // Hors recherche, on masque extensions et éditions : elles sont regroupées
+      // sous leur jeu de base (visible sur sa fiche). La recherche, elle, trouve tout.
+      if (!texte && !estJeuDeBase(j) && j.jeuParent && idsPresents.has(j.jeuParent)) return false;
       if (texte && !j.nom.toLowerCase().includes(texte)) return false;
       if (favorisSeuls && !estFavori(j.id)) return false;
       if (categorie && j.categorie !== categorie) return false;
@@ -118,7 +123,7 @@ export default function Catalogue() {
       if (duree === "long" && j.dureeMin <= 60) return false;
       return true;
     });
-  }, [jeux, recherche, categorie, joueurs, duree, favorisSeuls, estFavori]);
+  }, [jeux, recherche, categorie, joueurs, duree, favorisSeuls, estFavori, idsPresents]);
 
   const jeuxAffiches = useMemo(() => trierJeux(jeuxFiltres, tri, stats), [jeuxFiltres, tri, stats]);
 

@@ -24,7 +24,10 @@ import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
 import { effacerEtat, partieEnCours } from "@/db/partie-en-cours";
 import { jeuVersTexte } from "@/lib/jeu-partage";
+import { enfantsDe } from "@/lib/regroupement";
 import { cheminPartie } from "@/lib/route-partie";
+
+const LIBELLE_TYPE = { extension: "Extension", edition: "Édition" } as const;
 
 export default function FicheJeu() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -109,6 +112,9 @@ export default function FicheJeu() {
     );
   }
 
+  // Extensions et éditions rattachées à ce jeu, présentes dans le catalogue.
+  const declinaisons = enfantsDe(jeu.id, jeux);
+
   return (
     <View style={{ flex: 1, backgroundColor: colors.page }}>
       <Entete
@@ -158,6 +164,39 @@ export default function FicheJeu() {
       </View>
 
       <Text style={styles.description}>{jeu.description}</Text>
+
+      {declinaisons.length > 0 && (
+        <View style={styles.declinaisonsBloc}>
+          <Text style={styles.sectionTitre}>Extensions & éditions</Text>
+          {declinaisons.map((d) => (
+            <TouchableOpacity
+              key={d.id}
+              style={styles.declinaisonLigne}
+              activeOpacity={0.7}
+              accessibilityRole="button"
+              accessibilityLabel={`${d.nom}, ${LIBELLE_TYPE[d.type === "extension" ? "extension" : "edition"]}. Voir la fiche`}
+              onPress={() => router.push(`/jeu/${d.id}`)}
+            >
+              <VisuelJeu jeu={d} style={styles.declinaisonVisuel} />
+              <View style={{ flex: 1 }}>
+                <Text style={styles.declinaisonNom} numberOfLines={1}>
+                  {d.nom}
+                </Text>
+                <Text style={styles.declinaisonType}>
+                  {LIBELLE_TYPE[d.type === "extension" ? "extension" : "edition"]}
+                </Text>
+              </View>
+              <Text
+                style={styles.declinaisonChevron}
+                accessibilityElementsHidden
+                importantForAccessibility="no-hide-descendants"
+              >
+                ▸
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      )}
 
       {jeu.extensions && jeu.extensions.length > 0 && (
         <View style={styles.extensionsBloc}>
@@ -431,6 +470,22 @@ function makeStyles(c: AppColors) {
     roleOrigine: { fontSize: 13, color: c.textMuted, marginTop: 2 },
     roleObjectif: { fontSize: 14, color: c.textSecondary, lineHeight: 20, marginTop: 8 },
     roleObjectifLabel: { fontWeight: "600", color: c.accentText },
+    declinaisonsBloc: { marginTop: 4 },
+    declinaisonLigne: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 12,
+      backgroundColor: c.surface,
+      borderWidth: 1,
+      borderColor: c.border,
+      borderRadius: 12,
+      padding: 10,
+      marginBottom: 8,
+    },
+    declinaisonVisuel: { width: 44, height: 44, borderRadius: 10 },
+    declinaisonNom: { fontSize: 15, fontWeight: "600", color: c.textPrimary },
+    declinaisonType: { fontSize: 12, color: c.textMuted, marginTop: 2 },
+    declinaisonChevron: { fontSize: 16, color: c.textFaint, fontWeight: "700", paddingHorizontal: 2 },
     extensionsBloc: { marginTop: 4 },
     extensionsSous: { fontSize: 13, color: c.textMuted, marginBottom: 10 },
     extensionLigne: {

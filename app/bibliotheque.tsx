@@ -16,6 +16,7 @@ import { useTheme } from "@/context/theme";
 import { type Jeu } from "@/data/jeux";
 import { useBibliotheque } from "@/hooks/use-bibliotheque";
 import { ajouterJeu } from "@/db/jeux";
+import { estJeuDeBase } from "@/lib/regroupement";
 
 const LIBELLES_MODE: Record<NonNullable<Jeu["scoreMode"]>, string> = {
   compteur: "Compteur",
@@ -43,7 +44,14 @@ export default function Bibliotheque() {
 
   const resultats = useMemo(() => {
     const texte = recherche.trim().toLowerCase();
-    if (!texte) return bibliotheque;
+    // Hors recherche, on masque extensions et éditions : elles se retrouvent
+    // sous leur jeu de base (sur sa fiche). La recherche, elle, trouve tout.
+    if (!texte) {
+      const ids = new Set(bibliotheque.map((j) => j.id));
+      return bibliotheque.filter(
+        (j) => estJeuDeBase(j) || !j.jeuParent || !ids.has(j.jeuParent),
+      );
+    }
     return bibliotheque.filter(
       (j) =>
         j.nom.toLowerCase().includes(texte) || j.categorie.toLowerCase().includes(texte),

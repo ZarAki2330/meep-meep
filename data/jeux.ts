@@ -69,4 +69,14 @@ export type Jeu = {
   // un même rôle peut être attribué à plusieurs joueurs. Par défaut (absent ou
   // false), chaque rôle est exclusif — un seul joueur peut le prendre (Villainous).
   rolesPartageables?: boolean;
+  // Nature de l'entrée dans le catalogue :
+  //  - "jeu" (défaut, ou champ absent) : un jeu à part entière, affiché dans la liste.
+  //  - "extension" : un module qui nécessite un jeu de base (ex. Oriflamme Alliance).
+  //  - "edition" : une déclinaison d'un jeu existant — mini/pocket, version junior,
+  //    thème différent, réédition (ex. Similo : Contes, Quarto mini).
+  // Les extensions et éditions sont rattachées à leur jeu de base via "jeuParent"
+  // et regroupées sous lui plutôt que listées à part.
+  type?: "jeu" | "extension" | "edition";
+  // Identifiant du jeu de base auquel cette entrée est rattachée (si type ≠ "jeu").
+  jeuParent?: string;
 };

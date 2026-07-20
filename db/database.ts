@@ -61,6 +61,8 @@ export function getDb() {
         "extensions TEXT",
         "roles TEXT",
         "roles_partageables INTEGER",
+        "jeu_type TEXT",
+        "jeu_parent TEXT",
       ]) {
         try {
           await db.execAsync(`ALTER TABLE jeux ADD COLUMN ${colonne};`);
