@@ -18,6 +18,11 @@ export function VisuelJeu({ jeu, style }: { jeu: Jeu; style?: StyleProp<ViewStyl
   // pour rester distinct dans les listes.
   const couleur = couleurJeu(jeu);
   const montrerImage = !!jeu.image && !erreur;
+  // Les PNG ont souvent un fond transparent (logos, détourés) : on les pose sur
+  // un fond blanc et on les affiche en entier, sans rogner, façon photo produit.
+  // Les JPEG (photos de boîte pleines) restent en « cover » sur la tuile colorée.
+  const estPng = !!jeu.image && /\.png(\?|$)/i.test(jeu.image);
+  const fond = montrerImage && estPng ? "#ffffff" : couleur;
 
   return (
     <View
@@ -25,7 +30,7 @@ export function VisuelJeu({ jeu, style }: { jeu: Jeu; style?: StyleProp<ViewStyl
       accessible={false}
       accessibilityElementsHidden
       importantForAccessibility="no-hide-descendants"
-      style={[styles.base, { backgroundColor: couleur }, style]}
+      style={[styles.base, { backgroundColor: fond }, style]}
       onLayout={(e) => setCote(e.nativeEvent.layout.height)}
     >
       {!montrerImage && (
@@ -42,7 +47,7 @@ export function VisuelJeu({ jeu, style }: { jeu: Jeu; style?: StyleProp<ViewStyl
         <Image
           source={{ uri: jeu.image }}
           style={StyleSheet.absoluteFill}
-          contentFit="cover"
+          contentFit={estPng ? "contain" : "cover"}
           transition={200}
           onError={() => setErreur(true)}
         />
