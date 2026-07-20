@@ -139,7 +139,8 @@
       "En fin d'âge, les conflits militaires opposent chaque cité à ses deux voisines.",
       "Après le troisième âge, on additionne : militaire, pièces, merveille, bâtiments civils, commerciaux, guildes et science.",
       "Le plus grand total gagne ; en cas d'égalité, le plus riche l'emporte."
-    ]
+    ],
+    "image": "https://www.espritjeu.com/upload/image/7-wonders--nouvelle-edition-2020--p-image-72122-grande.jpg"
   },
   {
     "id": "akropolis",
@@ -383,7 +384,8 @@
       "Cette tuile marque des points selon les tuiles déjà voisines, en ligne et en colonne.",
       "La partie s'arrête à la fin du tour où un joueur complète une ligne horizontale du mur.",
       "Bonus final : 2 points par ligne complète, 7 par colonne, 10 par couleur posée cinq fois."
-    ]
+    ],
+    "image": "https://www.espritjeu.com/upload/image/azul-p-image-98040-grande.jpg"
   },
   {
     "id": "ballons",
@@ -587,7 +589,8 @@
       "Le dernier pli vaut 10 points (« dix de der »). Le total d'une donne fait 162 points.",
       "L'équipe preneuse doit faire plus de la moitié des points, sinon elle chute et l'adversaire empoche tout.",
       "La première équipe à 1000 points gagne la partie."
-    ]
+    ],
+    "image": "https://cdn.aptoide.com/imgs/3/0/c/30c7365234d569e76b6d3e773984780e_icon.png"
   },
   {
     "id": "bernard",
@@ -786,7 +789,8 @@
       "Une abbaye entourée de huit tuiles rapporte 9 points.",
       "En fin de partie, on compte les constructions inachevées et les prés.",
       "Le plus grand total gagne."
-    ]
+    ],
+    "image": "https://www.espritjeu.com/upload/image/carcassonne-p-image-108126-grande.jpg"
   },
   {
     "id": "carrocombo",
@@ -1011,7 +1015,8 @@
       "Son équipe touche les mots qu'elle croit être les siens, un par un.",
       "Un mot adverse ou neutre met fin au tour. Le mot Assassin fait perdre immédiatement.",
       "La première équipe à trouver tous ses agents gagne."
-    ]
+    ],
+    "image": "https://www.espritjeu.com/upload/image/codenames-p-image-105501-grande.jpg"
   },
   {
     "id": "crazycups",
@@ -1399,7 +1404,8 @@
       "Sinon, le conteur et ceux qui l'ont trouvé marquent 3 points.",
       "Chaque joueur marque 1 point par vote reçu sur sa propre carte.",
       "Le premier à 30 points gagne."
-    ]
+    ],
+    "image": "https://www.espritjeu.com/upload/image/dixit--nouvelle-edition-2021--p-image-75827-grande.jpg"
   },
   {
     "id": "dodelido",
@@ -2284,7 +2290,8 @@
       "Le devineur propose une réponse, une seule fois.",
       "Bonne réponse : la carte est gagnée. Mauvaise réponse : la carte est perdue, et la suivante est écartée.",
       "Passer ne fait perdre que la carte en cours. Vous jouez treize cartes, ensemble."
-    ]
+    ],
+    "image": "https://www.espritjeu.com/upload/image/just-one-p-image-105825-grande.jpg"
   },
   {
     "id": "katamino",
@@ -3137,7 +3144,8 @@
       "La manche s'arrête à 1000 bornes exactement, ou quand la pioche est épuisée.",
       "On compte les bornes parcourues, plus les primes : manche terminée, coups fourrés, bottes, allonge, sans les 200.",
       "La partie s'arrête quand un joueur ou une équipe atteint 5000 points."
-    ]
+    ],
+    "image": "https://www.espritjeu.com/upload/image/mille-bornes-classique-p-image-103995-grande.jpg"
   },
   {
     "id": "millesabords",
@@ -3791,7 +3799,8 @@
         "nom": "Militaire",
         "origine": "Empêche l'infection et les éclosions dans sa ville et les villes voisines."
       }
-    ]
+    ],
+    "image": "https://www.espritjeu.com/upload/image/pandemic--pandemie--p-image-66186-grande.jpg"
   },
   {
     "id": "paniclab",
@@ -4777,7 +4786,8 @@
       "Les cases colorées doublent ou triplent la lettre, ou le mot entier ; elles ne comptent qu'à la pose.",
       "Poser ses sept lettres d'un coup rapporte 50 points de prime (le « scrabble »).",
       "La partie s'arrête quand un joueur a posé sa dernière lettre, sac vide. On retranche à chacun la valeur des lettres restantes."
-    ]
+    ],
+    "image": "https://www.espritjeu.com/upload/image/scrabble-classique---cooperatif-p-image-95563-grande.jpg"
   },
   {
     "id": "secretidentity",
@@ -5136,7 +5146,8 @@
       "Contrat tenu : 20 points par pli annoncé, plus les bonus. Contrat manqué : 10 points de pénalité par pli d'écart.",
       "Annoncer zéro et le tenir rapporte 10 points par carte en main ; se tromper les fait perdre.",
       "Après la dixième manche, le plus grand total gagne."
-    ]
+    ],
+    "image": "https://www.espritjeu.com/upload/image/skull-king-vf-p-image-80958-grande.jpg"
   },
   {
     "id": "solacia",
@@ -5409,7 +5420,8 @@
       "Les nobles viennent d'eux-mêmes quand on possède les bonus qu'ils exigent : 3 points chacun.",
       "Dès qu'un joueur atteint 15 points, on termine le tour de table : le plus grand total gagne.",
       "En cas d'égalité, celui qui a acheté le moins de cartes l'emporte."
-    ]
+    ],
+    "image": "https://www.espritjeu.com/upload/image/splendor-p-image-96446-grande.jpg"
   },
   {
     "id": "squadro",
@@ -5748,7 +5760,8 @@
       "La communication est interdite, sauf un jeton de communication : poser une carte devant soi en indiquant si c'est sa plus haute, sa plus basse, ou son unique carte de cette couleur.",
       "Vous gagnez ensemble si toutes les missions sont accomplies avant la fin des plis.",
       "Vous perdez ensemble dès qu'une mission devient impossible."
-    ]
+    ],
+    "image": "https://www.espritjeu.com/upload/image/the-crew---en-quete-de-la-9eme-planete-p-image-83200-grande.jpg"
   },
   {
     "id": "thedream",
@@ -5789,7 +5802,8 @@
       "Manche 3 : les mêmes cartes, en mimant, sans un son.",
       "Une carte devinée rapporte un point à l'équipe et sort du paquet pour la manche en cours.",
       "On additionne les points des trois manches : l'équipe la plus haute gagne."
-    ]
+    ],
+    "image": "https://www.espritjeu.com/upload/image/time-s-up-family---vert-p-image-95774-grande.jpg"
   },
   {
     "id": "tossit",
