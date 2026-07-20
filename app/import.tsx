@@ -266,10 +266,6 @@ export default function AjouterJeu() {
               <Text style={styles.bggTexte}>Ajouter un jeu tout prêt</Text>
               <Text style={styles.bggChevron}>▸</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.bggBouton} onPress={() => router.push("/bgg")}>
-              <Text style={styles.bggTexte}>Chercher sur BoardGameGeek</Text>
-              <Text style={styles.bggChevron}>▸</Text>
-            </TouchableOpacity>
             <TouchableOpacity style={styles.bggBouton} onPress={() => setCollageOuvert(true)}>
               <Text style={styles.bggTexte}>Coller un jeu partagé</Text>
               <Text style={styles.bggChevron}>▸</Text>

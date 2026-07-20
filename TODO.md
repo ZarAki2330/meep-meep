@@ -2,9 +2,9 @@
 
 Liste des fonctionnalités à faire et des améliorations.
 
-**Progression : 72 / 83 — 87 %**
+**Progression : 73 / 83 — 88 %**
 
-`█████████████████░░░`
+`██████████████████░░`
 
 ## Bugs à corriger
 
@@ -23,7 +23,6 @@ Liste des fonctionnalités à faire et des améliorations.
 
 ## Nouvelles fonctionnalités
 
-- [ ] **Désactiver l'import BoardGameGeek** — retirer/masquer l'accès BGG devenu inutile : bouton « Chercher sur BoardGameGeek » dans le formulaire, écran `/bgg`. Vérifier que le logo « Powered by BGG » n'est alors plus requis.
 - [ ] **Ajouter de nouveaux jeux au catalogue** _(tâche récurrente)_ — enrichir régulièrement `catalogue.json` : nouvelles sorties, gammes complétées, et finalisation des fiches provisoires (voir `claude/gigamic-fiches-provisoires.md`).
 - [ ] **Afficher les règles officielles en PDF dans l'app** — se renseigner sur la faisabilité d'intégrer et d'afficher un PDF de règles directement dans la fiche du jeu (visionneuse embarquée, stockage, droits).
 - [ ] **Améliorer les interfaces de l'app** — soigner les écrans, par ex. les personnages dans les jeux : une photo ou un logo par personnage.
@@ -35,6 +34,7 @@ _(rien en attente)_
 
 ## Terminé
 
+- [x] Désactiver l'import BoardGameGeek : bouton « Chercher sur BoardGameGeek » retiré du formulaire d'ajout (`import.tsx`), et l'écran `/bgg` redirige désormais vers l'ajout d'un jeu (`app/bgg.tsx`, ancien code conservé dans git). Le logo « Powered by BGG » n'est plus requis : il ne s'affiche que sur d'anciens jeux importés de BGG (id commençant par « bgg ») en garde-fou de conformité, et disparaît si le catalogue n'en contient aucun. `lib/bgg.ts` devient du code mort (supprimable plus tard).
 - [x] Champ éditeur sur tous les jeux : champ `editeur` ajouté au type `Jeu`, à la base (colonne `editeur` + migration), affiché sur la fiche sous le nom **et dans les listes** (catalogue + bibliothèque), et saisissable dans le formulaire d'ajout/édition (`import.tsx`, avec puces des éditeurs déjà utilisés). Renseigné pour les 308 jeux — « Gigamic » pour les 291 jeux du catalogue Gigamic, l'éditeur réel pour les 17 autres (Repos Production, Libellud, Kosmos…).
 - [x] Synchronisation des métadonnées au démarrage : au lancement, les jeux déjà en base voient leur **éditeur et leur photo** rafraîchis depuis le catalogue distant (`synchroniserDepuisCatalogue` dans `db/jeux.ts`, branché dans `context/jeux.tsx`). Ne touche qu'à ces deux champs et jamais aux jeux ajoutés à la main. Corrige aussi la photo des anciens jeux (ex. « 6 qui prend » qui gardait une image Wikimedia) sans avoir à les réajouter.
 - [x] Trier « Ajouter un jeu tout prêt » : rangée « Trier par » sur l'écran `bibliotheque.tsx` avec quatre tris — A → Z, Catégorie, Durée, Joueurs (`lib/tri-bibliotheque.ts`, fonction pure testée). Pas de tri « nouveautés » : le catalogue ne porte aucune date, à ajouter au type `Jeu` d'abord si besoin.
