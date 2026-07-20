@@ -12,33 +12,45 @@ export function DialogueConfirmation({
   message,
   texteConfirmer = "Supprimer",
   texteAnnuler = "Annuler",
+  // "danger" (rouge, défaut) pour une suppression ; "accent" pour une action
+  // positive comme un ajout.
+  variante = "danger",
   onConfirmer,
   onAnnuler,
+  // Fermeture sans choisir (fond ou bouton retour). Par défaut, revient à
+  // « annuler » ; on peut le distinguer pour ne rien faire quand aucun bouton
+  // n'a été pressé (ex. proposition d'ajout/suppression facultative).
+  onFermer,
 }: {
   visible: boolean;
   titre: string;
   message?: string;
   texteConfirmer?: string;
   texteAnnuler?: string;
+  variante?: "danger" | "accent";
   onConfirmer: () => void;
   onAnnuler: () => void;
+  onFermer?: () => void;
 }) {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
+  const confirmerFond = variante === "accent" ? colors.accent : colors.danger;
+  const confirmerTexte = variante === "accent" ? colors.onAccent : colors.onDanger;
+  const fermer = onFermer ?? onAnnuler;
 
   return (
     <Modal
       visible={visible}
       transparent
       animationType="fade"
-      onRequestClose={onAnnuler}
+      onRequestClose={fermer}
     >
       <TouchableOpacity
         style={styles.fond}
         activeOpacity={1}
         accessibilityRole="button"
         accessibilityLabel="Fermer"
-        onPress={onAnnuler}
+        onPress={fermer}
       >
         {/* Tant que le dialogue est là, le reste de l'écran n'existe pas. */}
         <TouchableOpacity style={styles.carte} activeOpacity={1} accessibilityViewIsModal>
@@ -61,12 +73,14 @@ export function DialogueConfirmation({
               <Text style={styles.annulerTexte}>{texteAnnuler}</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={styles.confirmer}
+              style={[styles.confirmer, { backgroundColor: confirmerFond }]}
               activeOpacity={0.8}
               accessibilityRole="button"
               onPress={onConfirmer}
             >
-              <Text style={styles.confirmerTexte}>{texteConfirmer}</Text>
+              <Text style={[styles.confirmerTexte, { color: confirmerTexte }]}>
+                {texteConfirmer}
+              </Text>
             </TouchableOpacity>
           </View>
         </TouchableOpacity>
@@ -120,20 +134,31 @@ function makeStyles(c: AppColors) {
     actions: { flexDirection: "row", gap: 10, marginTop: 22, width: "100%" },
     annuler: {
       flex: 1,
-      paddingVertical: 13,
+      minHeight: 48,
+      paddingVertical: 12,
+      paddingHorizontal: 10,
       borderRadius: 12,
       borderWidth: 1,
       borderColor: c.borderStrong,
       alignItems: "center",
+      justifyContent: "center",
     },
-    annulerTexte: { fontSize: 15, fontWeight: "600", color: c.textSecondary },
+    annulerTexte: {
+      fontSize: 15,
+      fontWeight: "600",
+      color: c.textSecondary,
+      textAlign: "center",
+    },
     confirmer: {
       flex: 1,
-      paddingVertical: 13,
+      minHeight: 48,
+      paddingVertical: 12,
+      paddingHorizontal: 10,
       borderRadius: 12,
       backgroundColor: c.danger,
       alignItems: "center",
+      justifyContent: "center",
     },
-    confirmerTexte: { fontSize: 15, fontWeight: "600", color: c.onDanger },
+    confirmerTexte: { fontSize: 15, fontWeight: "600", color: c.onDanger, textAlign: "center" },
   });
 }

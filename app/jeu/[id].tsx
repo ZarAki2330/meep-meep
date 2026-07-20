@@ -89,9 +89,15 @@ export default function FicheJeu() {
     setEnCours(false);
   }
 
-  async function supprimer() {
+  async function supprimer(avecDeclinaisons: boolean) {
     if (!jeu) return;
     setConfirmationOuverte(false);
+    if (avecDeclinaisons) {
+      // Les extensions et éditions rattachées d'abord, puis le jeu de base.
+      for (const d of enfantsDe(jeu.id, jeux)) {
+        await supprimerJeu(d.id);
+      }
+    }
     await supprimerJeu(jeu.id);
     router.back();
   }
@@ -347,9 +353,18 @@ export default function FicheJeu() {
       <DialogueConfirmation
         visible={confirmationOuverte}
         titre="Supprimer ce jeu ?"
-        message={`« ${jeu.nom} » sera retiré de ton catalogue.`}
-        onConfirmer={supprimer}
-        onAnnuler={() => setConfirmationOuverte(false)}
+        message={
+          declinaisons.length > 0
+            ? `« ${jeu.nom} » a ${declinaisons.length} extension${declinaisons.length > 1 ? "s" : ""} ou édition${declinaisons.length > 1 ? "s" : ""} rattachée${declinaisons.length > 1 ? "s" : ""} dans ta ludothèque. Les supprimer aussi ?`
+            : `« ${jeu.nom} » sera retiré de ton catalogue.`
+        }
+        texteConfirmer={declinaisons.length > 0 ? "Tout supprimer" : "Supprimer"}
+        texteAnnuler={declinaisons.length > 0 ? "Le jeu seul" : "Annuler"}
+        onConfirmer={() => supprimer(declinaisons.length > 0)}
+        onAnnuler={() =>
+          declinaisons.length > 0 ? supprimer(false) : setConfirmationOuverte(false)
+        }
+        onFermer={() => setConfirmationOuverte(false)}
       />
       </ScrollView>
     </View>

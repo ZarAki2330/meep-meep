@@ -2,13 +2,13 @@
 
 Liste des fonctionnalités à faire et des améliorations.
 
-**Progression : 73 / 83 — 88 %**
+**Progression : 76 / 85 — 89 %**
 
 `██████████████████░░`
 
 ## Bugs à corriger
 
-- [ ] **Vérifier pourquoi tous les jeux n'apparaissent pas dans « Ajouter un jeu tout prêt »** — piste principale : le regroupement des extensions/éditions ajouté récemment (`app/bibliotheque.tsx` + `lib/regroupement.ts`) masque, hors recherche, les entrées dont le jeu de base est présent. C'est voulu, mais ça peut donner l'impression qu'il « manque » des jeux. Vérifier aussi que le catalogue distant (`catalogue.json`, 309 jeux) est bien récupéré et fusionné (`hooks/use-bibliotheque.ts`) et non bloqué par le cache ou le hors-ligne.
+_Aucun bug en attente. 🎉_
 
 ## Priorité haute
 
@@ -34,6 +34,9 @@ _(rien en attente)_
 
 ## Terminé
 
+- [x] Suppression d'un jeu : proposer de supprimer aussi les extensions/éditions rattachées. Si le jeu de base a des déclinaisons installées, le dialogue propose « Tout supprimer » ou « Le jeu seul » (`app/jeu/[id].tsx`). Fermer un dialogue sans choisir (fond/retour) n'ajoute ni ne supprime plus rien : nouveau `onFermer` du `DialogueConfirmation`, distinct des boutons, appliqué aussi au popup d'ajout d'extension.
+- [x] Proposer le jeu de base à l'ajout d'une extension : dans « Ajouter un jeu tout prêt », ajouter une extension/édition dont le jeu de base n'est pas encore dans la ludothèque ouvre un popup qui propose « Ajouter les deux » ou « Seulement l'extension » (certaines extensions se jouent seules, ex. Villainous — donc proposition, pas obligation). Nouvelle variante « accent » du `DialogueConfirmation`. Rappel : la fiche du jeu de base liste déjà ses extensions/éditions installées (section « Extensions & éditions »).
+- [x] Corrigé — des jeux manquaient dans « Ajouter un jeu tout prêt » : le regroupement masquait 73 extensions/éditions (sur 308) hors recherche, alors que cet écran n'a pas de fiche pour les atteindre — elles n'étaient donc ajoutables que par la recherche. `app/bibliotheque.tsx` affiche désormais **tous** les jeux, avec un badge « Extension »/« Édition » pour les distinguer. Le catalogue distant, lui, se chargeait bien. (Le regroupement reste en place sur le catalogue principal, où la fiche du jeu donne accès aux déclinaisons.)
 - [x] Désactiver l'import BoardGameGeek : bouton « Chercher sur BoardGameGeek » retiré du formulaire d'ajout (`import.tsx`), et l'écran `/bgg` redirige désormais vers l'ajout d'un jeu (`app/bgg.tsx`, ancien code conservé dans git). Le logo « Powered by BGG » n'est plus requis : il ne s'affiche que sur d'anciens jeux importés de BGG (id commençant par « bgg ») en garde-fou de conformité, et disparaît si le catalogue n'en contient aucun. `lib/bgg.ts` devient du code mort (supprimable plus tard).
 - [x] Champ éditeur sur tous les jeux : champ `editeur` ajouté au type `Jeu`, à la base (colonne `editeur` + migration), affiché sur la fiche sous le nom **et dans les listes** (catalogue + bibliothèque), et saisissable dans le formulaire d'ajout/édition (`import.tsx`, avec puces des éditeurs déjà utilisés). Renseigné pour les 308 jeux — « Gigamic » pour les 291 jeux du catalogue Gigamic, l'éditeur réel pour les 17 autres (Repos Production, Libellud, Kosmos…).
 - [x] Synchronisation des métadonnées au démarrage : au lancement, les jeux déjà en base voient leur **éditeur et leur photo** rafraîchis depuis le catalogue distant (`synchroniserDepuisCatalogue` dans `db/jeux.ts`, branché dans `context/jeux.tsx`). Ne touche qu'à ces deux champs et jamais aux jeux ajoutés à la main. Corrige aussi la photo des anciens jeux (ex. « 6 qui prend » qui gardait une image Wikimedia) sans avoir à les réajouter.

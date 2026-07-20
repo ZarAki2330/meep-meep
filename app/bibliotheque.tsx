@@ -7,6 +7,7 @@ import { useRouter } from "expo-router";
 import { useMemo, useState } from "react";
 import { FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
+import { DialogueConfirmation } from "@/components/dialogue-confirmation";
 import { Entete } from "@/components/entete";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { VisuelJeu } from "@/components/visuel-jeu";
@@ -16,7 +17,6 @@ import { useTheme } from "@/context/theme";
 import { type Jeu } from "@/data/jeux";
 import { useBibliotheque } from "@/hooks/use-bibliotheque";
 import { ajouterJeu } from "@/db/jeux";
-import { estJeuDeBase } from "@/lib/regroupement";
 import { TRIS_BIBLIO, trierBibliotheque, type TriBiblioCle } from "@/lib/tri-bibliotheque";
 
 const LIBELLES_MODE: Record<NonNullable<Jeu["scoreMode"]>, string> = {
@@ -26,6 +26,9 @@ const LIBELLES_MODE: Record<NonNullable<Jeu["scoreMode"]>, string> = {
   manches: "Manches",
   cooperatif: "Coopératif",
 };
+
+// Étiquette affichée sur les extensions et éditions, pour les distinguer d'un jeu de base.
+const LIBELLE_TYPE = { extension: "Extension", edition: "Édition" } as const;
 
 function joueurs(j: Jeu): string {
   const unite = j.equipes ? "équipes" : "joueurs";
@@ -43,6 +46,9 @@ export default function Bibliotheque() {
   const [recherche, setRecherche] = useState("");
   const [tri, setTri] = useState<TriBiblioCle>("alpha");
   const [triOuvert, setTriOuvert] = useState(false);
+  // Quand on ajoute une extension sans posséder son jeu de base, on propose
+  // d'ajouter aussi le jeu de base (certaines extensions se jouent seules).
+  const [propositionBase, setPropositionBase] = useState<{ ext: Jeu; base: Jeu } | null>(null);
   const dejaAjoutes = useMemo(() => new Set(jeux.map((j) => j.id)), [jeux]);
 
   // Le tri par défaut (A → Z) ne « personnalise » pas l'écran : le bouton ne
@@ -52,14 +58,11 @@ export default function Bibliotheque() {
 
   const resultats = useMemo(() => {
     const texte = recherche.trim().toLowerCase();
-    // Hors recherche, on masque extensions et éditions : elles se retrouvent
-    // sous leur jeu de base (sur sa fiche). La recherche, elle, trouve tout.
-    if (!texte) {
-      const ids = new Set(bibliotheque.map((j) => j.id));
-      return bibliotheque.filter(
-        (j) => estJeuDeBase(j) || !j.jeuParent || !ids.has(j.jeuParent),
-      );
-    }
+    // Ici, contrairement au catalogue, on n'a pas de fiche pour atteindre les
+    // extensions et éditions rangées sous un jeu de base : on les affiche donc
+    // toutes, sinon elles seraient impossibles à ajouter en parcourant la liste.
+    // Un badge « Extension »/« Édition » permet de les reconnaître.
+    if (!texte) return bibliotheque;
     return bibliotheque.filter(
       (j) =>
         j.nom.toLowerCase().includes(texte) || j.categorie.toLowerCase().includes(texte),
@@ -69,9 +72,22 @@ export default function Bibliotheque() {
   const restants = resultats.filter((j) => !dejaAjoutes.has(j.id)).length;
   const resultatsTries = useMemo(() => trierBibliotheque(resultats, tri), [resultats, tri]);
 
-  async function ajouter(jeu: Jeu) {
+  async function ajouterUn(jeu: Jeu) {
     await ajouterJeu(jeu);
     rafraichir();
+  }
+
+  async function ajouter(jeu: Jeu) {
+    // Extension ou édition dont le jeu de base n'est pas encore dans la ludothèque :
+    // on propose de l'ajouter aussi, sans l'imposer.
+    if (jeu.type && jeu.type !== "jeu" && jeu.jeuParent && !dejaAjoutes.has(jeu.jeuParent)) {
+      const base = bibliotheque.find((j) => j.id === jeu.jeuParent);
+      if (base) {
+        setPropositionBase({ ext: jeu, base });
+        return;
+      }
+    }
+    await ajouterUn(jeu);
   }
 
   return (
@@ -157,9 +173,14 @@ export default function Bibliotheque() {
               <VisuelJeu jeu={item} style={styles.visuel} />
 
               <View style={styles.corps}>
-                <Text style={styles.nom} numberOfLines={1}>
-                  {item.nom}
-                </Text>
+                <View style={styles.nomLigne}>
+                  <Text style={styles.nom} numberOfLines={1}>
+                    {item.nom}
+                  </Text>
+                  {item.type && item.type !== "jeu" ? (
+                    <Text style={styles.typeTag}>{LIBELLE_TYPE[item.type]}</Text>
+                  ) : null}
+                </View>
                 <Text style={styles.meta} numberOfLines={1}>
                   {item.categorie} · {joueurs(item)} · {item.dureeMin} min
                   {item.editeur ? ` · ${item.editeur}` : ""}
@@ -189,6 +210,34 @@ export default function Bibliotheque() {
             </View>
           );
         }}
+      />
+
+      <DialogueConfirmation
+        visible={!!propositionBase}
+        variante="accent"
+        titre="Ajouter aussi le jeu de base ?"
+        message={
+          propositionBase
+            ? `« ${propositionBase.ext.nom} » est une extension de « ${propositionBase.base.nom} », que tu n'as pas encore. Certaines extensions se jouent seules, d'autres ont besoin du jeu de base.`
+            : undefined
+        }
+        texteConfirmer="Ajouter les deux"
+        texteAnnuler="Extension seule"
+        onConfirmer={() => {
+          const p = propositionBase;
+          setPropositionBase(null);
+          if (p) {
+            // Le jeu de base d'abord, puis l'extension.
+            ajouterUn(p.base).then(() => ajouterUn(p.ext));
+          }
+        }}
+        onAnnuler={() => {
+          const p = propositionBase;
+          setPropositionBase(null);
+          if (p) ajouterUn(p.ext);
+        }}
+        // Fermer sans choisir n'ajoute rien.
+        onFermer={() => setPropositionBase(null)}
       />
     </View>
   );
@@ -265,7 +314,19 @@ function makeStyles(c: AppColors) {
     },
     visuel: { width: 56, height: 56, borderRadius: 10 },
     corps: { flex: 1, gap: 2 },
-    nom: { fontSize: 16, fontWeight: "600", color: c.textPrimary },
+    nomLigne: { flexDirection: "row", alignItems: "center", gap: 8 },
+    nom: { flexShrink: 1, fontSize: 16, fontWeight: "600", color: c.textPrimary },
+    typeTag: {
+      fontSize: 10,
+      fontWeight: "700",
+      color: c.textMuted,
+      borderWidth: 1,
+      borderColor: c.border,
+      borderRadius: 6,
+      paddingHorizontal: 5,
+      paddingVertical: 1,
+      overflow: "hidden",
+    },
     meta: { fontSize: 12, color: c.textMuted },
     badge: { fontSize: 11, fontWeight: "600", color: c.accentText, marginTop: 2 },
     ajouter: {
