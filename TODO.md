@@ -2,7 +2,7 @@
 
 Liste des fonctionnalités à faire et des améliorations.
 
-**Progression : 70 / 80 — 88 %**
+**Progression : 71 / 80 — 89 %**
 
 `██████████████████░░`
 
@@ -26,7 +26,6 @@ Liste des fonctionnalités à faire et des améliorations.
 - [ ] **Afficher les règles officielles en PDF dans l'app** — se renseigner sur la faisabilité d'intégrer et d'afficher un PDF de règles directement dans la fiche du jeu (visionneuse embarquée, stockage, droits).
 - [ ] **Améliorer les interfaces de l'app** — soigner les écrans, par ex. les personnages dans les jeux : une photo ou un logo par personnage.
 - [ ] **Revoir le design de l'application et le logo** — rafraîchir l'identité visuelle : maquette globale (couleurs, typographie, écrans clés) et refonte du logo Meep Meep.
-- [ ] **Champ éditeur sur tous les jeux** — ajouter un champ `editeur` (ex. « Gigamic ») au type `Jeu`, à `catalogue.json` et à la base, l'afficher sur la fiche de jeu, et le renseigner pour chaque jeu.
 
 ## En attente
 
@@ -34,6 +33,7 @@ _(rien en attente)_
 
 ## Terminé
 
+- [x] Champ éditeur sur tous les jeux : champ `editeur` ajouté au type `Jeu`, à la base (colonne `editeur` + migration), affiché sur la fiche sous le nom, et saisissable dans le formulaire d'ajout/édition (`import.tsx`, avec puces des éditeurs déjà utilisés). Renseigné pour les 308 jeux — « Gigamic » pour les 291 jeux du catalogue Gigamic, l'éditeur réel pour les 17 autres (Repos Production, Libellud, Kosmos…).
 - [x] Trier « Ajouter un jeu tout prêt » : rangée « Trier par » sur l'écran `bibliotheque.tsx` avec quatre tris — A → Z, Catégorie, Durée, Joueurs (`lib/tri-bibliotheque.ts`, fonction pure testée). Pas de tri « nouveautés » : le catalogue ne porte aucune date, à ajouter au type `Jeu` d'abord si besoin.
 - [x] Une photo pour tous les jeux : vraies photos du catalogue Gigamic récupérées pour 287 des 309 jeux (`image` renseigné dans `catalogue.json`), et repli visuel amélioré — une tuile colorée par catégorie (`lib/couleur-jeu.ts`, testé, branché dans `components/visuel-jeu.tsx`) pour que chaque jeu sans photo reste distinct. Restent sans photo : les 14 jeux non-Gigamic (Azul, Splendor, Dixit…) et ~7 jeux Gigamic absents du catalogue en ligne (5 ou Moins, Orapa Mine, Solacia, Mémoires d'une chamane, Bellevue — Parthenay) — à compléter à la main si tu as les visuels.
 - [x] Alimenter le catalogue depuis l'API BGG : étude (`docs/api-bgg-catalogue.md`) + script d'outillage `scripts/generer-catalogue.mjs` qui récupère les jeux depuis BGG (liste d'ids dans `scripts/bgg-ids.txt`), gère les 202/429 et le groupage, et ajoute au `catalogue.json` sans écraser les entrées existantes. BGG remplit la coquille (nom, image, joueurs, durée) ; règles/rôles/mode de score restent à compléter à la main.

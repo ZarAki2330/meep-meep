@@ -15,6 +15,7 @@ type Row = {
   duree_min: number;
   age_min: number;
   categorie: string;
+  editeur: string | null;
   image: string;
   regles: string;
   score_victoire: string;
@@ -59,6 +60,7 @@ function rowVersJeu(r: Row): Jeu {
     dureeMin: r.duree_min,
     ageMin: r.age_min,
     categorie: r.categorie,
+    editeur: r.editeur ?? undefined,
     image: r.image,
     regles: parseJson<string[]>(r.regles, []),
     scoreVictoire: r.score_victoire === "min" ? "min" : "max",
@@ -85,8 +87,8 @@ export async function ajouterJeu(j: Jeu) {
   const db = await getDb();
   await db.runAsync(
     `INSERT OR REPLACE INTO jeux
-      (id, nom, description, joueurs_min, joueurs_max, duree_min, age_min, categorie, image, regles, score_victoire, seuil_fin, score_mode, categories, bonus, equipes, extensions, roles, roles_partageables, jeu_type, jeu_parent)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      (id, nom, description, joueurs_min, joueurs_max, duree_min, age_min, categorie, editeur, image, regles, score_victoire, seuil_fin, score_mode, categories, bonus, equipes, extensions, roles, roles_partageables, jeu_type, jeu_parent)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       j.id,
       j.nom,
@@ -96,6 +98,7 @@ export async function ajouterJeu(j: Jeu) {
       j.dureeMin,
       j.ageMin,
       j.categorie,
+      j.editeur ?? null,
       j.image ?? "",
       JSON.stringify(j.regles),
       j.scoreVictoire,

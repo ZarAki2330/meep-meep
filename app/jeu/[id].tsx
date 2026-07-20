@@ -140,6 +140,11 @@ export default function FicheJeu() {
           <View style={styles.categorie}>
             <Text style={styles.categorieTexte}>{jeu.categorie}</Text>
           </View>
+          {jeu.editeur ? (
+            <Text style={styles.editeur}>
+              Éditeur&nbsp;: {jeu.editeur}
+            </Text>
+          ) : null}
         </View>
 
         <TouchableOpacity
@@ -386,6 +391,7 @@ function makeStyles(c: AppColors) {
       paddingVertical: 4,
     },
     categorieTexte: { fontSize: 12, fontWeight: "600", color: c.accentText },
+    editeur: { fontSize: 13, color: c.textMuted, marginTop: 6 },
     metaLigne: { flexDirection: "row", gap: 12, marginTop: 18 },
     metaBloc: {
       flex: 1,

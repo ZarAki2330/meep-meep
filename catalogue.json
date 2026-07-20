@@ -17,7 +17,8 @@
       "Les cartes Bonus (intermédiaire et final) récompensent la diversité des couleurs collectées.",
       "Décompte : une carte d'une couleur vaut 1 point, deux cartes 5 points, les cartes en trop comptent en négatif ; le joueur au plus grand total gagne."
     ],
-    "image": "https://www.gigamic.com/4461-home_default/2-sans-3.jpg"
+    "image": "https://www.gigamic.com/4461-home_default/2-sans-3.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "5oumoins",
@@ -37,7 +38,8 @@
       "Des cartes Pouvoir permettent d'échanger ou de voler des cartes à un adversaire pour l'aider à descendre.",
       "Dès qu'on pense avoir un total de 5 ou moins, on annonce « 5 ou moins » et on parie d'avoir le plus petit score ; si c'est vrai, on marque 0 pour la manche et les autres comptent leurs cartes restantes."
     ],
-    "image": "https://www.gigamic.com/4669-large_default/5-ou-moins.jpg"
+    "image": "https://www.gigamic.com/4669-large_default/5-ou-moins.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "6quiprend",
@@ -57,7 +59,8 @@
       "Poser la 6e carte d'une rangée fait ramasser les 5 précédentes : leurs têtes de bœuf sont des points de pénalité.",
       "À la fin des 10 cartes, chacun note ses têtes de bœuf.",
       "Dès qu'un joueur atteint 66, la partie s'arrête : le joueur avec le MOINS de points gagne."
-    ]
+    ],
+    "editeur": "Gigamic"
   },
   {
     "id": "6quiprendanniversaire",
@@ -76,7 +79,8 @@
     ],
     "type": "edition",
     "jeuParent": "6quiprend",
-    "image": "https://www.gigamic.com/2916-home_default/6-qui-prend-anniversaire.jpg"
+    "image": "https://www.gigamic.com/2916-home_default/6-qui-prend-anniversaire.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "6quiprendjunior",
@@ -98,7 +102,8 @@
     ],
     "type": "edition",
     "jeuParent": "6quiprend",
-    "image": "https://www.gigamic.com/2251-home_default/6-qui-prend-junior.jpg"
+    "image": "https://www.gigamic.com/2251-home_default/6-qui-prend-junior.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "6quisurprend",
@@ -120,7 +125,8 @@
     ],
     "type": "edition",
     "jeuParent": "6quiprend",
-    "image": "https://www.gigamic.com/2621-home_default/six-qui-surprend.jpg"
+    "image": "https://www.gigamic.com/2621-home_default/six-qui-surprend.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "7wonders",
@@ -141,7 +147,8 @@
       "Après le troisième âge, on additionne : militaire, pièces, merveille, bâtiments civils, commerciaux, guildes et science.",
       "Le plus grand total gagne ; en cas d'égalité, le plus riche l'emporte."
     ],
-    "image": "https://www.espritjeu.com/upload/image/7-wonders--nouvelle-edition-2020--p-image-72122-grande.jpg"
+    "image": "https://www.espritjeu.com/upload/image/7-wonders--nouvelle-edition-2020--p-image-72122-grande.jpg",
+    "editeur": "Repos Production"
   },
   {
     "id": "akropolis",
@@ -162,7 +169,8 @@
       "Un quartier vaut son nombre de tuiles valides × son niveau (hauteur), multiplié par les Places de même couleur adjacentes.",
       "En fin de partie, on additionne la valeur des quartiers et la Pierre restante : le plus de points l'emporte."
     ],
-    "image": "https://www.gigamic.com/1835-home_default/akropolis.jpg"
+    "image": "https://www.gigamic.com/1835-home_default/akropolis.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "akropolisathena",
@@ -184,7 +192,8 @@
     ],
     "type": "extension",
     "jeuParent": "akropolis",
-    "image": "https://www.gigamic.com/3153-home_default/akropolis-athena.jpg"
+    "image": "https://www.gigamic.com/3153-home_default/akropolis-athena.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "akropolispantheon",
@@ -206,7 +215,8 @@
     ],
     "type": "extension",
     "jeuParent": "akropolis",
-    "image": "https://www.gigamic.com/4205-home_default/akropolis-pantheon.jpg"
+    "image": "https://www.gigamic.com/4205-home_default/akropolis-pantheon.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "altay",
@@ -226,7 +236,8 @@
       "Une colonie sur un territoire du bon type booste la production ; en fin de tour, on défausse les ressources et cartes non utilisées, puis on pioche cinq nouvelles cartes.",
       "Les points de victoire viennent des accomplissements, des colonies et marqueurs de conquête, et de sa merveille secrète ; le joueur au meilleur total l'emporte."
     ],
-    "image": "https://www.gigamic.com/4052-home_default/altay.jpg"
+    "image": "https://www.gigamic.com/4052-home_default/altay.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "apresvous",
@@ -246,7 +257,8 @@
       "Un joueur incapable de jouer révèle sa main pour prouver sa bonne foi, gagne un jeton de courtoisie, défausse sa main et pioche cinq cartes ; le jeton de bienséance passe alors au suivant, qui énonce une nouvelle règle.",
       "Le premier à réunir trois jetons de courtoisie (cinq à deux joueurs) est désigné le plus courtois de la table et remporte la partie."
     ],
-    "image": "https://www.gigamic.com/4440-home_default/apres-vous.jpg"
+    "image": "https://www.gigamic.com/4440-home_default/apres-vous.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "archeo",
@@ -266,7 +278,8 @@
       "Chaque fouille use les pelles : il faut avancer avant qu'elles ne soient toutes brisées.",
       "L'équipe gagne si les fossiles et les étoiles sont réunis à temps."
     ],
-    "image": "https://www.gigamic.com/3922-home_default/archeo.jpg"
+    "image": "https://www.gigamic.com/3922-home_default/archeo.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "aupif",
@@ -286,7 +299,8 @@
       "Le but est de classer sans se tromper, à l'estime.",
       "Le groupe marque d'autant plus de points qu'il a bien deviné l'ordre."
     ],
-    "image": "https://www.gigamic.com/4232-home_default/au-pif.jpg"
+    "image": "https://www.gigamic.com/4232-home_default/au-pif.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "audimat",
@@ -306,7 +320,8 @@
       "Quand la carte Vote apparaît, chacun désigne un candidat encore en lice à éliminer ; le plus voté quitte l'émission, la carte Amulette départageant les égalités.",
       "On continue avec de nouvelles piles de questions ; quand il ne reste plus qu'un seul candidat, il est déclaré vainqueur."
     ],
-    "image": "https://www.gigamic.com/1852-home_default/audimat.jpg"
+    "image": "https://www.gigamic.com/1852-home_default/audimat.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "aurignac",
@@ -326,7 +341,8 @@
       "Les choix de développement rapportent des points au fil de la partie.",
       "La tribu la plus prospère, avec le meilleur score, l'emporte."
     ],
-    "image": "https://www.gigamic.com/1977-home_default/aurignac.jpg"
+    "image": "https://www.gigamic.com/1977-home_default/aurignac.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "aurum",
@@ -346,7 +362,8 @@
       "Selon les combinaisons réalisées, on marque plus ou moins de points en fin de manche.",
       "Après le nombre de manches prévu, le joueur au meilleur total l'emporte."
     ],
-    "image": "https://www.gigamic.com/3174-home_default/aurum.jpg"
+    "image": "https://www.gigamic.com/3174-home_default/aurum.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "avantgarde",
@@ -366,7 +383,8 @@
       "Le but est de monter la plus belle exposition possible pour le vernissage public.",
       "Le joueur qui totalise le plus de points remporte la partie."
     ],
-    "image": "https://www.gigamic.com/3187-home_default/avant-garde.jpg"
+    "image": "https://www.gigamic.com/3187-home_default/avant-garde.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "azul",
@@ -386,7 +404,8 @@
       "La partie s'arrête à la fin du tour où un joueur complète une ligne horizontale du mur.",
       "Bonus final : 2 points par ligne complète, 7 par colonne, 10 par couleur posée cinq fois."
     ],
-    "image": "https://www.espritjeu.com/upload/image/azul-p-image-98040-grande.jpg"
+    "image": "https://www.espritjeu.com/upload/image/azul-p-image-98040-grande.jpg",
+    "editeur": "Plan B Games"
   },
   {
     "id": "ballons",
@@ -406,7 +425,8 @@
       "Il faut protéger ses ballons tout en compliquant la collection des autres.",
       "Le joueur qui conserve le plus de ballons remporte la partie."
     ],
-    "image": "https://www.gigamic.com/1372-home_default/ballons.jpg"
+    "image": "https://www.gigamic.com/1372-home_default/ballons.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "bango",
@@ -426,7 +446,8 @@
       "Les suites réalisées rapportent des points selon leur longueur.",
       "Le joueur au meilleur total remporte la partie."
     ],
-    "image": "https://www.gigamic.com/3561-home_default/bango.jpg"
+    "image": "https://www.gigamic.com/3561-home_default/bango.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "bazarbizarre",
@@ -445,7 +466,8 @@
       "Le plus rapide et juste remporte la carte ; se tromper en fait perdre une.",
       "Le joueur avec le plus de cartes une fois la pioche épuisée gagne."
     ],
-    "image": "https://www.gigamic.com/587-home_default/bazar-bizarre.jpg"
+    "image": "https://www.gigamic.com/587-home_default/bazar-bizarre.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "bazarbizarre2",
@@ -467,7 +489,8 @@
     ],
     "type": "edition",
     "jeuParent": "bazarbizarre",
-    "image": "https://www.gigamic.com/590-home_default/bazar-bizarre-2-0.jpg"
+    "image": "https://www.gigamic.com/590-home_default/bazar-bizarre-2-0.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "bazarbizarremini",
@@ -489,7 +512,8 @@
     ],
     "type": "edition",
     "jeuParent": "bazarbizarre",
-    "image": "https://www.gigamic.com/2988-home_default/bazar-bizarre-mini.jpg"
+    "image": "https://www.gigamic.com/2988-home_default/bazar-bizarre-mini.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "bellavista",
@@ -509,7 +533,8 @@
       "On cherche à remplir les contrats les plus avantageux.",
       "Le joueur qui a marqué le plus de points en fin de partie gagne."
     ],
-    "image": "https://www.gigamic.com/4322-home_default/bella-vista.jpg"
+    "image": "https://www.gigamic.com/4322-home_default/bella-vista.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "bellevue",
@@ -529,7 +554,8 @@
       "Bien agencer boutiques, fenêtres et toits permet de valoriser sa rue.",
       "Le joueur qui bâtit la plus belle rue, avec le meilleur score, remporte la partie."
     ],
-    "image": "https://www.gigamic.com/3719-home_default/bellevue.jpg"
+    "image": "https://www.gigamic.com/3719-home_default/bellevue.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "bellevueparthenay",
@@ -548,7 +574,8 @@
     ],
     "type": "edition",
     "jeuParent": "bellevue",
-    "image": "https://www.gigamic.com/4672-large_default/bellevue-parthenay.jpg"
+    "image": "https://www.gigamic.com/4672-large_default/bellevue-parthenay.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "bellevuewimereux",
@@ -567,7 +594,8 @@
     ],
     "type": "edition",
     "jeuParent": "bellevue",
-    "image": "https://www.gigamic.com/4457-home_default/bellevue-wimereux.jpg"
+    "image": "https://www.gigamic.com/4457-home_default/bellevue-wimereux.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "belote",
@@ -592,7 +620,8 @@
       "L'équipe preneuse doit faire plus de la moitié des points, sinon elle chute et l'adversaire empoche tout.",
       "La première équipe à 1000 points gagne la partie."
     ],
-    "image": "https://cdn.aptoide.com/imgs/3/0/c/30c7365234d569e76b6d3e773984780e_icon.png"
+    "image": "https://cdn.aptoide.com/imgs/3/0/c/30c7365234d569e76b6d3e773984780e_icon.png",
+    "editeur": "Jeu traditionnel"
   },
   {
     "id": "bernard",
@@ -612,7 +641,8 @@
       "On peut interrompre un joueur si l'on conteste son association.",
       "Le joueur qui marque le plus de points grâce à ses propositions validées l'emporte."
     ],
-    "image": "https://www.gigamic.com/2178-home_default/bernard.jpg"
+    "image": "https://www.gigamic.com/2178-home_default/bernard.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "bluffer",
@@ -632,7 +662,8 @@
       "On marque des points quand d'autres se laissent piéger par sa fausse réponse, ou quand on trouve la vraie.",
       "Le joueur qui a marqué le plus de points remporte la partie."
     ],
-    "image": "https://www.gigamic.com/1255-home_default/bluffer.jpg"
+    "image": "https://www.gigamic.com/1255-home_default/bluffer.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "bohnanza",
@@ -652,7 +683,8 @@
       "Quand on récolte un champ, on gagne des pièces d'or selon le nombre de haricots, via le « baromètre » imprimé sur les cartes.",
       "Après trois tours de pioche complète, le joueur qui a accumulé le plus de pièces d'or l'emporte."
     ],
-    "image": "https://www.gigamic.com/3521-home_default/bohnanza.jpg"
+    "image": "https://www.gigamic.com/3521-home_default/bohnanza.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "bossfightersqr",
@@ -672,7 +704,8 @@
       "À chaque combat, l'équipe coordonne ses cartes et sa tactique face aux attaques du boss, en gérant compteurs de vie et jetons d'état.",
       "L'équipe remporte un combat en terrassant le boss ; la campagne est bouclée quand les dix ont été vaincus."
     ],
-    "image": "https://www.gigamic.com/4606-home_default/boss-fighters-qr.jpg"
+    "image": "https://www.gigamic.com/4606-home_default/boss-fighters-qr.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "cabanga",
@@ -692,7 +725,8 @@
       "Bien lire le jeu permet d'enchaîner de longues séries de poses.",
       "Le premier joueur à vider sa main remporte la manche."
     ],
-    "image": "https://www.gigamic.com/3121-home_default/cabanga.jpg"
+    "image": "https://www.gigamic.com/3121-home_default/cabanga.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "canardage",
@@ -712,7 +746,8 @@
       "Il faut protéger ses propres canards tout en poussant les adversaires à tirer sur les leurs.",
       "En fin de partie, le joueur dont il reste le plus de canards vivants (ou le meilleur score) l'emporte."
     ],
-    "image": "https://www.gigamic.com/607-home_default/canardage.jpg"
+    "image": "https://www.gigamic.com/607-home_default/canardage.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "captainswar",
@@ -732,7 +767,8 @@
       "Les règles diffèrent selon qu'on joue à 1-2 ou à 3-6 joueurs.",
       "Le pirate le plus prospère à l'issue de la bataille navale finale remporte la partie."
     ],
-    "image": "https://www.gigamic.com/1820-home_default/captains-war.jpg"
+    "image": "https://www.gigamic.com/1820-home_default/captains-war.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "capybaraka",
@@ -752,7 +788,8 @@
       "La manche se termine quand chacun a joué ses douze cartes Capybara.",
       "On compte les points ; en cas d'égalité, une règle de départage désigne le vainqueur, et le meilleur score gagne."
     ],
-    "image": "https://www.gigamic.com/4388-home_default/capybaraka.jpg"
+    "image": "https://www.gigamic.com/4388-home_default/capybaraka.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "carapate",
@@ -772,7 +809,8 @@
       "Il faut faire progresser son animal tout en brouillant les pistes.",
       "Le joueur dont l'animal franchit la Barrière en premier remporte la partie."
     ],
-    "image": "https://www.gigamic.com/2952-home_default/carapate.jpg"
+    "image": "https://www.gigamic.com/2952-home_default/carapate.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "carcassonne",
@@ -792,7 +830,8 @@
       "En fin de partie, on compte les constructions inachevées et les prés.",
       "Le plus grand total gagne."
     ],
-    "image": "https://www.espritjeu.com/upload/image/carcassonne-p-image-108126-grande.jpg"
+    "image": "https://www.espritjeu.com/upload/image/carcassonne-p-image-108126-grande.jpg",
+    "editeur": "Hans im Glück"
   },
   {
     "id": "carrocombo",
@@ -812,7 +851,8 @@
       "Des cartes spéciales pimentent le jeu : X (valeur libre de 1 à 12), Stop (remporte aussitôt le pli) et Pioche (piocher trois cartes à placer dans sa main).",
       "Le dernier joueur encore en main à la fin d'une manche paie un jeton ; qui n'a plus de jeton perd, et le dernier joueur qui en conserve un remporte la partie."
     ],
-    "image": "https://www.gigamic.com/1217-home_default/carro-combo.jpg"
+    "image": "https://www.gigamic.com/1217-home_default/carro-combo.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "catan",
@@ -831,7 +871,8 @@
       "Échange des ressources avec les autres joueurs ou avec la banque.",
       "Construis des routes, des colonies et des villes, ou achète des cartes développement.",
       "Le premier à atteindre 10 points de victoire remporte la partie."
-    ]
+    ],
+    "editeur": "Kosmos"
   },
   {
     "id": "champdhonneur",
@@ -851,7 +892,8 @@
       "On manœuvre ses unités sur les hexagones du plateau et on pose ses marqueurs Contrôle sur les Lieux (hexagones spéciaux repérables au symbole vert).",
       "La partie s'arrête dès qu'un joueur (ou une équipe à quatre) a placé tous ses marqueurs Contrôle sur des Lieux : il remporte la victoire."
     ],
-    "image": "https://www.gigamic.com/1055-home_default/champ-dhonneur.jpg"
+    "image": "https://www.gigamic.com/1055-home_default/champ-dhonneur.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "champdhonneurfelonie",
@@ -873,7 +915,8 @@
     ],
     "type": "extension",
     "jeuParent": "champdhonneur",
-    "image": "https://www.gigamic.com/2687-home_default/champ-d-honneur-extension-felonie.jpg"
+    "image": "https://www.gigamic.com/2687-home_default/champ-d-honneur-extension-felonie.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "champdhonneurnoblesse",
@@ -895,7 +938,8 @@
     ],
     "type": "extension",
     "jeuParent": "champdhonneur",
-    "image": "https://www.gigamic.com/1251-home_default/champ-dhonneur-extension-noblesse.jpg"
+    "image": "https://www.gigamic.com/1251-home_default/champ-dhonneur-extension-noblesse.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "champdhonneursiege",
@@ -917,7 +961,8 @@
     ],
     "type": "extension",
     "jeuParent": "champdhonneur",
-    "image": "https://www.gigamic.com/1590-home_default/champ-dhonneur-extension-siege.jpg"
+    "image": "https://www.gigamic.com/1590-home_default/champ-dhonneur-extension-siege.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "chicheoupoischiche",
@@ -937,7 +982,8 @@
       "On pose la question en conséquence ; la réponse codée au dos se vérifie avec le révélateur rouge. Une bonne réponse rapporte une carte Chiche (3 points) ou Pois Chiche (1 point).",
       "Un dé ajoute des variantes de tour (points doublés, question imposée, vol de points…). Quand les cartes sont épuisées, l'équipe au plus grand total gagne."
     ],
-    "image": "https://www.gigamic.com/2073-home_default/chiche-ou-pois-chiche.jpg"
+    "image": "https://www.gigamic.com/2073-home_default/chiche-ou-pois-chiche.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "chronomots",
@@ -957,7 +1003,8 @@
       "Chaque mot correctement formé est mis de côté comme réussite commune.",
       "L'équipe gagne si elle valide suffisamment de mots avant la fin de la réserve de lettres."
     ],
-    "image": "https://www.gigamic.com/919-home_default/chrono-mots.jpg"
+    "image": "https://www.gigamic.com/919-home_default/chrono-mots.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "clacclac",
@@ -977,7 +1024,8 @@
       "Attention aux erreurs : un mauvais jeton fait perdre des points ou reposer sa pile.",
       "À la fin, le joueur qui a rassemblé le plus de jetons l'emporte."
     ],
-    "image": "https://www.gigamic.com/4087-home_default/clac-clac.jpg"
+    "image": "https://www.gigamic.com/4087-home_default/clac-clac.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "cocotaki",
@@ -997,7 +1045,8 @@
       "Oublier de crier (ou crier au mauvais moment) fait piocher une carte de pénalité.",
       "Le premier joueur à s'être débarrassé de toutes ses cartes remporte la manche."
     ],
-    "image": "https://www.gigamic.com/1264-home_default/cocotaki.jpg"
+    "image": "https://www.gigamic.com/1264-home_default/cocotaki.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "codenames",
@@ -1018,7 +1067,8 @@
       "Un mot adverse ou neutre met fin au tour. Le mot Assassin fait perdre immédiatement.",
       "La première équipe à trouver tous ses agents gagne."
     ],
-    "image": "https://www.espritjeu.com/upload/image/codenames-p-image-105501-grande.jpg"
+    "image": "https://www.espritjeu.com/upload/image/codenames-p-image-105501-grande.jpg",
+    "editeur": "Czech Games Edition"
   },
   {
     "id": "crazycups",
@@ -1038,7 +1088,8 @@
       "Le premier à avoir terminé sonne la cloche : s'il a juste, il remporte la carte.",
       "Le joueur qui a gagné le plus de cartes remporte la partie."
     ],
-    "image": "https://www.gigamic.com/906-home_default/crazy-cups.jpg"
+    "image": "https://www.gigamic.com/906-home_default/crazy-cups.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "critical",
@@ -1056,7 +1107,8 @@
       "On progresse dans une histoire à embranchements en prenant des décisions ensemble.",
       "Fiche provisoire : les règles détaillées seront ajoutées à partir du règlement officiel."
     ],
-    "image": "https://www.gigamic.com/1824-home_default/critical-fondation-s1.jpg"
+    "image": "https://www.gigamic.com/1824-home_default/critical-fondation-s1.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "criticalfondations1",
@@ -1076,7 +1128,8 @@
     ],
     "type": "edition",
     "jeuParent": "critical",
-    "image": "https://www.gigamic.com/1824-home_default/critical-fondation-s1.jpg"
+    "image": "https://www.gigamic.com/1824-home_default/critical-fondation-s1.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "criticalfondations2",
@@ -1096,7 +1149,8 @@
     ],
     "type": "edition",
     "jeuParent": "critical",
-    "image": "https://www.gigamic.com/2956-home_default/critical-fondation-s2.jpg"
+    "image": "https://www.gigamic.com/2956-home_default/critical-fondation-s2.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "criticalsanctuaires1",
@@ -1116,7 +1170,8 @@
     ],
     "type": "edition",
     "jeuParent": "critical",
-    "image": "https://www.gigamic.com/2151-home_default/critical-sanctuaire-s1.jpg"
+    "image": "https://www.gigamic.com/2151-home_default/critical-sanctuaire-s1.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "criticalsanctuaires2",
@@ -1136,7 +1191,8 @@
     ],
     "type": "edition",
     "jeuParent": "critical",
-    "image": "https://www.gigamic.com/4097-home_default/critical-sanctuaire-s2.jpg"
+    "image": "https://www.gigamic.com/4097-home_default/critical-sanctuaire-s2.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "cyclades",
@@ -1155,7 +1211,8 @@
       "Construisez et rassemblez les éléments nécessaires pour ériger une Métropole.",
       "Le premier à contrôler deux Métropoles remporte la partie."
     ],
-    "image": "https://www.gigamic.com/3229-home_default/cyclades.jpg"
+    "image": "https://www.gigamic.com/3229-home_default/cyclades.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "cycladescreatures",
@@ -1177,7 +1234,8 @@
     ],
     "type": "extension",
     "jeuParent": "cyclades",
-    "image": "https://www.gigamic.com/3387-home_default/cyclades-creatures-heroes.jpg"
+    "image": "https://www.gigamic.com/3387-home_default/cyclades-creatures-heroes.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "cycladesmaelstrom",
@@ -1199,7 +1257,8 @@
     ],
     "type": "extension",
     "jeuParent": "cyclades",
-    "image": "https://www.gigamic.com/4546-home_default/cyclades-maelstroem.jpg"
+    "image": "https://www.gigamic.com/4546-home_default/cyclades-maelstroem.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "cycladesmaelstromdeluxe",
@@ -1221,7 +1280,8 @@
     ],
     "type": "extension",
     "jeuParent": "cyclades",
-    "image": "https://www.gigamic.com/4549-home_default/cyclades-maelstrom-deluxe.jpg"
+    "image": "https://www.gigamic.com/4549-home_default/cyclades-maelstrom-deluxe.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "cycladestroops",
@@ -1243,7 +1303,8 @@
     ],
     "type": "extension",
     "jeuParent": "cyclades",
-    "image": "https://www.gigamic.com/3378-home_default/cyclades-troops-fleets.jpg"
+    "image": "https://www.gigamic.com/3378-home_default/cyclades-troops-fleets.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "orgeetble",
@@ -1263,7 +1324,8 @@
       "La gestion de sa brasserie et de ses réserves guide la stratégie.",
       "En fin de partie, le joueur au meilleur total de points l'emporte."
     ],
-    "image": "https://www.gigamic.com/2206-home_default/dorge-et-de-ble.jpg"
+    "image": "https://www.gigamic.com/2206-home_default/dorge-et-de-ble.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "danslacourdecole",
@@ -1283,7 +1345,8 @@
       "Les cartes récupérées se placent devant soi et rapportent des points en fin de partie.",
       "Le joueur à la plus belle collection remporte la partie."
     ],
-    "image": "https://www.gigamic.com/3641-home_default/dans-la-cour-d-ecole.jpg"
+    "image": "https://www.gigamic.com/3641-home_default/dans-la-cour-d-ecole.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "dicepoolparty",
@@ -1303,7 +1366,8 @@
       "Un plongeon réussi rapporte des points ; un « plat » en fait perdre.",
       "Le joueur au meilleur total de points remporte la partie."
     ],
-    "image": "https://www.gigamic.com/4634-home_default/dice-pool-party.jpg"
+    "image": "https://www.gigamic.com/4634-home_default/dice-pool-party.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "difference",
@@ -1323,7 +1387,8 @@
       "On enchaîne aussitôt avec la carte suivante de sa pile.",
       "Le premier joueur à avoir posé toutes ses cartes remporte la partie."
     ],
-    "image": "https://www.gigamic.com/3464-home_default/difference.jpg"
+    "image": "https://www.gigamic.com/3464-home_default/difference.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "differenceasterix",
@@ -1345,7 +1410,8 @@
     ],
     "type": "edition",
     "jeuParent": "difference",
-    "image": "https://www.gigamic.com/4167-home_default/difference-edition-asterix.jpg"
+    "image": "https://www.gigamic.com/4167-home_default/difference-edition-asterix.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "differencejunior",
@@ -1367,7 +1433,8 @@
     ],
     "type": "edition",
     "jeuParent": "difference",
-    "image": "https://www.gigamic.com/1359-home_default/difference-junior.jpg"
+    "image": "https://www.gigamic.com/1359-home_default/difference-junior.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "dimoi",
@@ -1385,7 +1452,8 @@
       "La gamme se décline en éditions selon le public : Amis, Couples, Enfants, Familles, Pimentée.",
       "Fiche provisoire : les règles détaillées seront ajoutées à partir du règlement officiel."
     ],
-    "image": "https://www.gigamic.com/2642-home_default/dimoi-edition-familles.jpg"
+    "image": "https://www.gigamic.com/2642-home_default/dimoi-edition-familles.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "dixit",
@@ -1407,7 +1475,8 @@
       "Chaque joueur marque 1 point par vote reçu sur sa propre carte.",
       "Le premier à 30 points gagne."
     ],
-    "image": "https://www.espritjeu.com/upload/image/dixit--nouvelle-edition-2021--p-image-75827-grande.jpg"
+    "image": "https://www.espritjeu.com/upload/image/dixit--nouvelle-edition-2021--p-image-75827-grande.jpg",
+    "editeur": "Libellud"
   },
   {
     "id": "dodelido",
@@ -1426,7 +1495,8 @@
       "La tortue ralentit tout, le crocodile emballe tout : gare aux erreurs.",
       "Le premier à s'être débarrassé de toutes ses cartes gagne."
     ],
-    "image": "https://www.gigamic.com/4156-home_default/dodelido.jpg"
+    "image": "https://www.gigamic.com/4156-home_default/dodelido.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "donjonssiphons",
@@ -1446,7 +1516,8 @@
       "Les autres jugent la prestation : les meilleures répliques sont récompensées.",
       "Le joueur qui a marqué le plus de points au fil des événements l'emporte."
     ],
-    "image": "https://www.gigamic.com/1460-home_default/donjons-et-siphons.jpg"
+    "image": "https://www.gigamic.com/1460-home_default/donjons-et-siphons.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "dorfromantik",
@@ -1465,7 +1536,8 @@
       "Remplissez les tuiles Drapeau en atteignant leurs objectifs, et gagnez des tuiles bonus.",
       "Toute la table vise un score commun, à améliorer de partie en partie (mode campagne)."
     ],
-    "image": "https://www.gigamic.com/2391-home_default/dorfromantik-le-jeu-de-societe.jpg"
+    "image": "https://www.gigamic.com/2391-home_default/dorfromantik-le-jeu-de-societe.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "dorfromantikduel",
@@ -1487,7 +1559,8 @@
     ],
     "type": "edition",
     "jeuParent": "dorfromantik",
-    "image": "https://www.gigamic.com/3222-home_default/dorfromantik-le-duel.jpg"
+    "image": "https://www.gigamic.com/3222-home_default/dorfromantik-le-duel.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "doubleface",
@@ -1507,7 +1580,8 @@
       "Manquer sa cible fait grimper son score par des pénalités.",
       "À la fin, le joueur au plus petit score l'emporte."
     ],
-    "image": "https://www.gigamic.com/4131-home_default/double-face.jpg"
+    "image": "https://www.gigamic.com/4131-home_default/double-face.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "drgribouille",
@@ -1527,7 +1601,8 @@
       "C'est l'heure de pointe : il faut aller vite sans se tromper de pilules.",
       "L'équipe gagne si elle parvient à soigner tout le monde correctement."
     ],
-    "image": "https://www.gigamic.com/3608-home_default/dr-gribouille.jpg"
+    "image": "https://www.gigamic.com/3608-home_default/dr-gribouille.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "dragonsdesmers",
@@ -1547,7 +1622,8 @@
       "On adapte sa stratégie selon les navires qui apparaissent.",
       "Le joueur qui a accumulé le plus de points l'emporte."
     ],
-    "image": "https://www.gigamic.com/3196-home_default/dragons-des-mers.jpg"
+    "image": "https://www.gigamic.com/3196-home_default/dragons-des-mers.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "dueldescrocs",
@@ -1567,7 +1643,8 @@
       "Les cartes remportées déterminent la valeur du butin amassé.",
       "Le joueur qui rafle la plus grosse part gagne la partie."
     ],
-    "image": "https://www.gigamic.com/3538-home_default/duel-d-escrocs.jpg"
+    "image": "https://www.gigamic.com/3538-home_default/duel-d-escrocs.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "duke",
@@ -1587,7 +1664,8 @@
       "Une manche se gagne en mettant en jeu sa huitième et dernière carte : celle-ci indique le nombre de points de victoire remportés.",
       "On enchaîne les manches ; le joueur qui atteint le total de points fixé gagne la partie."
     ],
-    "image": "https://www.gigamic.com/3593-home_default/duke.jpg"
+    "image": "https://www.gigamic.com/3593-home_default/duke.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "defifoo",
@@ -1607,7 +1685,8 @@
       "L'arbitrage garantit que les règles de chaque épreuve sont respectées.",
       "La première équipe à remporter sept défis gagne la partie."
     ],
-    "image": "https://www.gigamic.com/2283-home_default/defifoo.jpg"
+    "image": "https://www.gigamic.com/2283-home_default/defifoo.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "dekal",
@@ -1627,7 +1706,8 @@
       "Les manœuvres des adversaires peuvent désorganiser la stratégie que l'on avait prévue.",
       "En fin de partie, on compte les points de sa grille : le plus petit total gagne."
     ],
-    "image": "https://www.gigamic.com/3042-home_default/dekal.jpg"
+    "image": "https://www.gigamic.com/3042-home_default/dekal.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "dekalxl",
@@ -1649,7 +1729,8 @@
     ],
     "type": "edition",
     "jeuParent": "dekal",
-    "image": "https://www.gigamic.com/4393-home_default/dekal-xl.jpg"
+    "image": "https://www.gigamic.com/4393-home_default/dekal-xl.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "detrak",
@@ -1668,7 +1749,8 @@
       "Le hasard des dés est le même pour tous : c'est le placement qui fait la différence.",
       "Le meilleur total de points l'emporte."
     ],
-    "image": "https://www.gigamic.com/1028-home_default/detrak.jpg"
+    "image": "https://www.gigamic.com/1028-home_default/detrak.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "enclumeimage",
@@ -1688,7 +1770,8 @@
       "Les cartes sont classées par difficulté, avec des valeurs de points correspondantes.",
       "Le joueur (ou l'équipe) qui totalise le plus de points remporte la partie."
     ],
-    "image": "https://www.gigamic.com/3300-home_default/enclume-image.jpg"
+    "image": "https://www.gigamic.com/3300-home_default/enclume-image.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "enquetesbandiville",
@@ -1708,7 +1791,8 @@
       "Le temps presse : les complices progressent autour de la ville à chaque tour.",
       "L'équipe gagne si elle boucle ses arrestations avant que les complices n'aient fait le tour."
     ],
-    "image": "https://www.gigamic.com/4239-home_default/enquetes-a-bandiville.jpg"
+    "image": "https://www.gigamic.com/4239-home_default/enquetes-a-bandiville.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "fishcheat",
@@ -1728,7 +1812,8 @@
       "Le bluff et la lecture des autres joueurs orientent les choix.",
       "Le joueur qui a marqué le plus de points remporte la partie."
     ],
-    "image": "https://www.gigamic.com/2190-home_default/fish-and-cheat.jpg"
+    "image": "https://www.gigamic.com/2190-home_default/fish-and-cheat.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "flammerougebmx",
@@ -1748,7 +1833,8 @@
       "Le premier pilote à franchir la ligne d'arrivée l'emporte.",
       "En cas d'égalité sur le même tour, c'est le pilote le plus avancé, à l'intérieur, qui gagne."
     ],
-    "image": "https://www.gigamic.com/3199-home_default/flamme-rouge-bmx.jpg"
+    "image": "https://www.gigamic.com/3199-home_default/flamme-rouge-bmx.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "forthestory",
@@ -1766,7 +1852,8 @@
       "À tour de rôle, on ajoute des éléments pour construire une histoire commune.",
       "Fiche provisoire : les règles détaillées seront ajoutées à partir du règlement officiel."
     ],
-    "image": "https://www.gigamic.com/3109-home_default/for-the-story-alibis.jpg"
+    "image": "https://www.gigamic.com/3109-home_default/for-the-story-alibis.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "forthestoryalibis",
@@ -1786,7 +1873,8 @@
     ],
     "type": "edition",
     "jeuParent": "forthestory",
-    "image": "https://www.gigamic.com/3109-home_default/for-the-story-alibis.jpg"
+    "image": "https://www.gigamic.com/3109-home_default/for-the-story-alibis.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "forthestorysurlaroute",
@@ -1806,7 +1894,8 @@
     ],
     "type": "edition",
     "jeuParent": "forthestory",
-    "image": "https://www.gigamic.com/3573-home_default/for-the-story-sur-la-route.jpg"
+    "image": "https://www.gigamic.com/3573-home_default/for-the-story-sur-la-route.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "gagnetamaman",
@@ -1826,7 +1915,8 @@
       "Le jeu travaille la perception des formes et la géométrie dans l'espace.",
       "Le premier à remplir sa zone sans trou remporte le duel."
     ],
-    "image": "https://www.gigamic.com/3437-home_default/gagne-ta-maman.jpg"
+    "image": "https://www.gigamic.com/3437-home_default/gagne-ta-maman.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "gagnetonpapa",
@@ -1846,7 +1936,8 @@
       "La boîte propose aussi des variantes : puzzle solo, jeu d'équilibre et construction en 3D.",
       "Le premier à remplir entièrement sa zone remporte le duel."
     ],
-    "image": "https://www.gigamic.com/3433-home_default/gagne-ton-papa.jpg"
+    "image": "https://www.gigamic.com/3433-home_default/gagne-ton-papa.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "galerapagos",
@@ -1865,7 +1956,8 @@
       "Il n'y en a pas pour tout le monde : alliances, bluff et trahisons sont au cœur du jeu.",
       "À la fin, les naufragés qui parviennent à quitter l'île à temps gagnent… si tant est que quelqu'un ait survécu."
     ],
-    "image": "https://www.gigamic.com/879-home_default/galerapagos.jpg"
+    "image": "https://www.gigamic.com/879-home_default/galerapagos.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "galerapagostribu",
@@ -1887,7 +1979,8 @@
     ],
     "type": "extension",
     "jeuParent": "galerapagos",
-    "image": "https://www.gigamic.com/1379-home_default/galerapagos-extension-boite.jpg"
+    "image": "https://www.gigamic.com/1379-home_default/galerapagos-extension-boite.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "gangdecastors",
@@ -1907,7 +2000,8 @@
       "Le but est de faire baisser la valeur de ses quatre cartes en mémorisant ce que l'on a.",
       "Quand un joueur pense avoir le plus petit total, il stoppe la manche ; on additionne, et le plus petit score gagne."
     ],
-    "image": "https://www.gigamic.com/3525-home_default/gang-de-castors.jpg"
+    "image": "https://www.gigamic.com/3525-home_default/gang-de-castors.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "gosux",
@@ -1927,7 +2021,8 @@
       "Il faut composer et enchaîner ses combos au bon moment.",
       "Le premier joueur à réunir deux jetons Suprématie gagne immédiatement la partie."
     ],
-    "image": "https://www.gigamic.com/2055-home_default/gosu-x.jpg"
+    "image": "https://www.gigamic.com/2055-home_default/gosu-x.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "gosuxabunakkashii",
@@ -1949,7 +2044,8 @@
     ],
     "type": "extension",
     "jeuParent": "gosux",
-    "image": "https://www.gigamic.com/2697-home_default/gosu-x-abunakkashii.jpg"
+    "image": "https://www.gigamic.com/2697-home_default/gosu-x-abunakkashii.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "gosuxastraia",
@@ -1971,7 +2067,8 @@
     ],
     "type": "extension",
     "jeuParent": "gosux",
-    "image": "https://www.gigamic.com/4075-home_default/gosu-x-extension-astraia.jpg"
+    "image": "https://www.gigamic.com/4075-home_default/gosu-x-extension-astraia.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "gosuxrukgnarl",
@@ -1993,7 +2090,8 @@
     ],
     "type": "extension",
     "jeuParent": "gosux",
-    "image": "https://www.gigamic.com/3257-home_default/gosu-x-extension-rukgnarl-bonesreaper.jpg"
+    "image": "https://www.gigamic.com/3257-home_default/gosu-x-extension-rukgnarl-bonesreaper.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "greenville1989",
@@ -2013,7 +2111,8 @@
       "La narration est essentielle : on décrit ce que l'on voit et ressent sur les cartes.",
       "L'équipe l'emporte si elle traverse l'aventure sans s'y perdre."
     ],
-    "image": "https://www.gigamic.com/1528-home_default/greenville-1989.jpg"
+    "image": "https://www.gigamic.com/1528-home_default/greenville-1989.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "gwent",
@@ -2033,7 +2132,8 @@
       "Les unités se posent sur trois lignes (corps à corps, distance, siège) et ajoutent leur Force à son total ; les cartes Spéciales (météo, leurre, incinération…) modifient la Force en jeu, et les Héros ne sont affectés par aucune capacité.",
       "Passer met fin à sa manche ; quand les deux joueurs ont passé, la Force totale la plus élevée remporte la manche et le perdant retire un jeton gemme. Perdre ses deux gemmes fait perdre la partie (au meilleur des trois manches)."
     ],
-    "image": "https://www.gigamic.com/3928-home_default/gwent-le-jeu-de-cartes-legendaire.jpg"
+    "image": "https://www.gigamic.com/3928-home_default/gwent-le-jeu-de-cartes-legendaire.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "gyges",
@@ -2052,7 +2152,8 @@
       "Une pièce avance d'autant de cases que sa taille (1, 2 ou 3) ; en arrivant sur une autre pièce, on peut rebondir et poursuivre avec elle.",
       "But : amener n'importe quelle pièce sur la case « but » adverse."
     ],
-    "image": "https://www.gigamic.com/129-large_default/gyges.jpg"
+    "image": "https://www.gigamic.com/129-large_default/gyges.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "generationmimes",
@@ -2072,7 +2173,8 @@
       "En mode par équipe (dès 4 joueurs), les équipes disposent d'une minute pour faire deviner un maximum de mots à tour de rôle.",
       "Le premier joueur à réunir 10 cartes (ou la première équipe à 15 cartes) remporte la partie."
     ],
-    "image": "https://www.gigamic.com/3203-home_default/generation-mimes.jpg"
+    "image": "https://www.gigamic.com/3203-home_default/generation-mimes.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "halligalli",
@@ -2091,7 +2193,8 @@
       "Le plus rapide remporte les cartes retournées ; sonner à tort coûte des cartes.",
       "Le joueur qui finit par récupérer toutes les cartes gagne."
     ],
-    "image": "https://www.gigamic.com/902-home_default/halli-galli.jpg"
+    "image": "https://www.gigamic.com/902-home_default/halli-galli.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "halligallijunior",
@@ -2113,7 +2216,8 @@
     ],
     "type": "edition",
     "jeuParent": "halligalli",
-    "image": "https://www.gigamic.com/904-home_default/halli-junior.jpg"
+    "image": "https://www.gigamic.com/904-home_default/halli-junior.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "hilo",
@@ -2133,7 +2237,8 @@
       "Dès qu'un joueur a retourné toutes ses cartes, la manche se termine pour tout le monde.",
       "On additionne les valeurs restantes ; après plusieurs manches, le plus petit total gagne."
     ],
-    "image": "https://www.gigamic.com/3676-home_default/hilo.jpg"
+    "image": "https://www.gigamic.com/3676-home_default/hilo.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "imagides",
@@ -2153,7 +2258,8 @@
       "L'imagination et l'observation sont au cœur de chaque manche.",
       "Le vainqueur dépend du mode retenu ; l'essentiel est de faire travailler son imaginaire."
     ],
-    "image": "https://www.gigamic.com/1776-home_default/imagides.jpg"
+    "image": "https://www.gigamic.com/1776-home_default/imagides.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "improo",
@@ -2173,7 +2279,8 @@
       "Quand tout le monde a improvisé, les émotions sont révélées : une émotion bien devinée rapporte 2 points au Juge et 1 point au joueur.",
       "Le Juge classe les impros avec les cartes Piment (ce qui fixe l'ordre du tour suivant et fait tourner le rôle de Juge) ; le premier à 15 points gagne."
     ],
-    "image": "https://www.gigamic.com/3873-home_default/improo.jpg"
+    "image": "https://www.gigamic.com/3873-home_default/improo.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "incantibus",
@@ -2193,7 +2300,8 @@
       "On collecte des Armes (pour capturer les Monstres de même couleur), des Ingrédients (pour réaliser des Potions), des Pièces d'or, des Sorts et des Sorciers, jusqu'à atteindre la crypte pour l'Affrontement final.",
       "Le joueur qui a récolté le plus de Points de Magie remporte la partie."
     ],
-    "image": "https://www.gigamic.com/3569-home_default/incantibus.jpg"
+    "image": "https://www.gigamic.com/3569-home_default/incantibus.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "inimaginable",
@@ -2213,7 +2321,8 @@
       "En recoupant les réponses, le groupe reconstitue peu à peu ce qui s'est réellement passé.",
       "La partie se termine dès que l'explication complète est trouvée."
     ],
-    "image": "https://www.gigamic.com/3970-home_default/inimaginable.jpg"
+    "image": "https://www.gigamic.com/3970-home_default/inimaginable.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "instable",
@@ -2233,7 +2342,8 @@
       "Celui qui fait tomber la tour est éliminé (ou perd la manche).",
       "Le dernier joueur à ne pas avoir renversé la tour remporte la partie."
     ],
-    "image": "https://www.gigamic.com/3580-home_default/instable.jpg"
+    "image": "https://www.gigamic.com/3580-home_default/instable.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "ipso",
@@ -2253,7 +2363,8 @@
       "Chaque suite valide rapporte des points en fin de partie.",
       "Le joueur au meilleur total remporte la partie."
     ],
-    "image": "https://www.gigamic.com/4434-home_default/ipso.jpg"
+    "image": "https://www.gigamic.com/4434-home_default/ipso.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "jokesdepapa",
@@ -2273,7 +2384,8 @@
       "On enchaîne les duels en alternant les rôles.",
       "La première équipe à marquer cinq points remporte la partie."
     ],
-    "image": "https://www.gigamic.com/921-home_default/jokes-de-papa.jpg"
+    "image": "https://www.gigamic.com/921-home_default/jokes-de-papa.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "justone",
@@ -2294,7 +2406,8 @@
       "Bonne réponse : la carte est gagnée. Mauvaise réponse : la carte est perdue, et la suivante est écartée.",
       "Passer ne fait perdre que la carte en cours. Vous jouez treize cartes, ensemble."
     ],
-    "image": "https://www.espritjeu.com/upload/image/just-one-p-image-105825-grande.jpg"
+    "image": "https://www.espritjeu.com/upload/image/just-one-p-image-105825-grande.jpg",
+    "editeur": "Repos Production"
   },
   {
     "id": "katamino",
@@ -2312,7 +2425,8 @@
       "En solo, relevez des défis de difficulté croissante en ajoutant des pièces.",
       "En duel, le premier à remplir sa zone gagne."
     ],
-    "image": "https://www.gigamic.com/926-home_default/katamino.jpg"
+    "image": "https://www.gigamic.com/926-home_default/katamino.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "kataminopocket",
@@ -2334,7 +2448,8 @@
     ],
     "type": "edition",
     "jeuParent": "katamino",
-    "image": "https://www.gigamic.com/685-home_default/katamino-pocket.jpg"
+    "image": "https://www.gigamic.com/685-home_default/katamino-pocket.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "kingdomcrossing",
@@ -2354,7 +2469,8 @@
       "Avec ses ressources, on recrute des personnages et on construit des structures depuis les decks disposés sur le plateau.",
       "Les constructions et objectifs rapportent des points ; le joueur au meilleur score l'emporte."
     ],
-    "image": "https://www.gigamic.com/4063-home_default/kingdom-crossing.jpg"
+    "image": "https://www.gigamic.com/4063-home_default/kingdom-crossing.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "klask",
@@ -2374,7 +2490,8 @@
       "Vous marquez aussi si l'adversaire tombe dans son propre trou (« Klask ») ou capte deux des aimants blancs.",
       "Le premier à 6 points remporte la partie."
     ],
-    "image": "https://www.gigamic.com/2334-home_default/klask.jpg"
+    "image": "https://www.gigamic.com/2334-home_default/klask.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "kontour",
@@ -2394,7 +2511,8 @@
       "On tourne pour que chacun dessine à son tour.",
       "Le premier joueur à totaliser 10 points remporte la partie."
     ],
-    "image": "https://www.gigamic.com/3508-home_default/kontour.jpg"
+    "image": "https://www.gigamic.com/3508-home_default/kontour.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "koowah",
@@ -2414,7 +2532,8 @@
       "Le voisin de gauche prononce le mot à voix haute, sans autre indice, et le groupe discute pour deviner à quelle image il fait référence.",
       "Les bonnes associations rapportent des points ; les joueurs cherchent à en marquer un maximum tous ensemble."
     ],
-    "image": "https://www.gigamic.com/4644-home_default/koowah.jpg"
+    "image": "https://www.gigamic.com/4644-home_default/koowah.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "kumikumi",
@@ -2434,7 +2553,8 @@
       "Si son empilage est correct, il remporte la carte ; sinon la manche continue pour les autres.",
       "Le premier joueur à réunir trois cartes Thème gagne la partie."
     ],
-    "image": "https://www.gigamic.com/4396-home_default/kumi-kumi.jpg"
+    "image": "https://www.gigamic.com/4396-home_default/kumi-kumi.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "keblo",
@@ -2454,7 +2574,8 @@
       "La moindre erreur ou hésitation fait échouer la tentative et l'on recommence.",
       "Le groupe gagne s'il atteint 20 en tenant toutes les contraintes."
     ],
-    "image": "https://www.gigamic.com/4212-home_default/keblo.jpg"
+    "image": "https://www.gigamic.com/4212-home_default/keblo.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "limposteur",
@@ -2475,7 +2596,8 @@
       "Après les indices, tout le monde débat puis vote pour désigner l'imposteur.",
       "Les joueurs gagnent s'ils démasquent l'imposteur ; l'imposteur gagne s'il passe inaperçu ou devine le mot secret."
     ],
-    "image": "https://www.gigamic.com/3164-home_default/l-imposteur.jpg"
+    "image": "https://www.gigamic.com/3164-home_default/l-imposteur.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "lacoincoinche",
@@ -2495,7 +2617,8 @@
       "On joue ensuite les plis en suivant l'atout et la couleur ; l'équipe preneuse doit atteindre son contrat.",
       "Les points s'accumulent manche après manche jusqu'au score de fin fixé, que la meilleure équipe atteint."
     ],
-    "image": "https://www.gigamic.com/3099-home_default/la-coincoinche.jpg"
+    "image": "https://www.gigamic.com/3099-home_default/la-coincoinche.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "fabriquearreves",
@@ -2515,7 +2638,8 @@
       "Les jetons Outil aident à ajuster les rêves en cours de fabrication.",
       "L'équipe gagne si les cinq rêves sont créés en respectant le thème de la nuit."
     ],
-    "image": "https://www.gigamic.com/3105-home_default/la-fabrique-a-reves.jpg"
+    "image": "https://www.gigamic.com/3105-home_default/la-fabrique-a-reves.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "findesartichauts",
@@ -2535,7 +2659,8 @@
       "Il faut construire un moteur de cartes efficace pour se nettoyer plus vite que les autres.",
       "On gagne dès qu'on ne possède plus aucun artichaut."
     ],
-    "image": "https://www.gigamic.com/3515-home_default/la-fin-des-artichauts.jpg"
+    "image": "https://www.gigamic.com/3515-home_default/la-fin-des-artichauts.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "lascopette",
@@ -2555,7 +2680,8 @@
       "Vider entièrement la table déclenche une « Scopette » et rapporte un jeton bonus.",
       "Décompte : 1 point par carte de sa couleur secrète, par carte portant l'un de ses symboles, par carte « or » et par jeton Scopette, 2 points pour une carte cumulant couleur et symbole ; le meilleur total gagne."
     ],
-    "image": "https://www.gigamic.com/3914-home_default/la-scopette.jpg"
+    "image": "https://www.gigamic.com/3914-home_default/la-scopette.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "latriplette",
@@ -2575,7 +2701,8 @@
       "On peut ensuite vendre des séries d'exactement trois cartes — un Trio (mêmes valeurs) ou une Suite (valeurs consécutives) — en gardant une carte et en défaussant les deux autres ; la série rapporte la valeur de la carte conservée (bonus pour la Suite), et la réserve est limitée à cinq cartes visibles en fin de tour.",
       "Dès qu'un joueur atteint 15 points, on termine le tour ; le plus haut score gagne, l'égalité étant départagée par le plus grand nombre de cartes en pile de score."
     ],
-    "image": "https://www.gigamic.com/4368-home_default/la-triplette.jpg"
+    "image": "https://www.gigamic.com/4368-home_default/la-triplette.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "lama",
@@ -2594,7 +2721,8 @@
       "Chaque valeur en main compte une fois (le Lama vaut 10) — accumuler est risqué.",
       "On enchaîne les manches ; le joueur avec le MOINS de points gagne."
     ],
-    "image": "https://www.gigamic.com/3344-home_default/lama.jpg"
+    "image": "https://www.gigamic.com/3344-home_default/lama.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "lamacadabra",
@@ -2614,7 +2742,8 @@
       "Si l'on n'a pas de lama à jouer au bon moment, seul le jeton magique peut sauver la mise.",
       "Après plusieurs manches, le joueur avec le moins de points l'emporte."
     ],
-    "image": "https://www.gigamic.com/3182-home_default/lama-cadabra.jpg"
+    "image": "https://www.gigamic.com/3182-home_default/lama-cadabra.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "lebaron",
@@ -2634,7 +2763,8 @@
       "Il faut anticiper les poses des autres pour éviter de récupérer les mauvaises rangées.",
       "Le joueur avec le moins de points négatifs remporte la partie."
     ],
-    "image": "https://www.gigamic.com/3906-home_default/le-baron.jpg"
+    "image": "https://www.gigamic.com/3906-home_default/le-baron.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "leboulet",
@@ -2654,7 +2784,8 @@
       "Les cartes Boulet, jouées avec le thème, se refilent à un adversaire pour l'encombrer.",
       "Le premier joueur à se débarrasser de toutes ses cartes remporte la partie."
     ],
-    "image": "https://www.gigamic.com/4563-home_default/le-boulet.jpg"
+    "image": "https://www.gigamic.com/4563-home_default/le-boulet.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "lecassedetrop",
@@ -2674,7 +2805,8 @@
       "On s'appuie sur les questions pour tisser des liens entre les personnages et enrichir l'histoire du casse et de l'interrogatoire.",
       "Une carte qui ne plaît pas peut être passée ; c'est une expérience narrative collective que l'on construit ensemble."
     ],
-    "image": "https://www.gigamic.com/1833-home_default/le-casse-de-trop.jpg"
+    "image": "https://www.gigamic.com/1833-home_default/le-casse-de-trop.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "legourdineur",
@@ -2694,7 +2826,8 @@
       "Mais si le Gourdineur a écrit le même mot qu'un joueur, il le « frappe » avec le gourdin : ce joueur ne marque rien et le Gourdineur gagne 1 point par victime (à mot strictement identique).",
       "Le rôle de Gourdineur tourne ; la partie s'arrête quand chacun l'a été (deux fois à 3-4 joueurs), et le meilleur score gagne."
     ],
-    "image": "https://www.gigamic.com/3617-home_default/le-gourdineur.jpg"
+    "image": "https://www.gigamic.com/3617-home_default/le-gourdineur.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "piqueniquefacteursouris",
@@ -2714,7 +2847,8 @@
       "Des variantes (Dragon enrhumé, Tente) corsent le défi selon l'âge des joueurs.",
       "On gagne tous ensemble si Facteur Souris rejoint ses amis à temps pour le pique-nique."
     ],
-    "image": "https://www.gigamic.com/3192-home_default/le-pique-nique-de-facteur-souris.jpg"
+    "image": "https://www.gigamic.com/3192-home_default/le-pique-nique-de-facteur-souris.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "pokercafards",
@@ -2734,7 +2868,8 @@
       "Celui qui se trompe (ou qui est démasqué) récupère la carte, posée face visible devant lui.",
       "On perd dès qu'on accumule quatre exemplaires d'une même bestiole ; le dernier joueur épargné gagne."
     ],
-    "image": "https://www.gigamic.com/4454-home_default/poker-des-cafards.jpg"
+    "image": "https://www.gigamic.com/4454-home_default/poker-des-cafards.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "letraquenard",
@@ -2754,7 +2889,8 @@
       "On exécute ce que la carte demande (situations, questions, gages), puis on la défausse — sauf indication de la conserver au centre.",
       "On enchaîne ainsi jusqu'à épuiser le paquet : c'est une expérience festive entre amis, sans vainqueur désigné."
     ],
-    "image": "https://www.gigamic.com/1885-home_default/le-traquenard.jpg"
+    "image": "https://www.gigamic.com/1885-home_default/le-traquenard.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "leaders",
@@ -2774,7 +2910,8 @@
       "L'objectif n'est pas de verser le sang mais de capturer le rival.",
       "Le premier à capturer son adversaire remporte la partie."
     ],
-    "image": "https://www.gigamic.com/3866-home_default/leaders.jpg"
+    "image": "https://www.gigamic.com/3866-home_default/leaders.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "leda",
@@ -2794,7 +2931,8 @@
       "Les actions réussies font progresser son clan et rapportent des points.",
       "Le joueur dont la civilisation prospère le mieux remporte la partie."
     ],
-    "image": "https://www.gigamic.com/4330-home_default/leda.jpg"
+    "image": "https://www.gigamic.com/4330-home_default/leda.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "cinqrois",
@@ -2814,7 +2952,8 @@
       "Dès qu'un joueur pose l'intégralité de sa main, les autres comptabilisent les points de leurs cartes non combinées.",
       "Après les onze manches, le plus petit total remporte la partie."
     ],
-    "image": "https://www.gigamic.com/3915-home_default/les-cinq-rois.jpg"
+    "image": "https://www.gigamic.com/3915-home_default/les-cinq-rois.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "citesrivales",
@@ -2834,7 +2973,8 @@
       "Les navires ouvrent des routes commerciales et de nouvelles opportunités.",
       "Le joueur qui bâtit la cité la plus prospère, avec le meilleur score, l'emporte."
     ],
-    "image": "https://www.gigamic.com/3576-home_default/les-cites-rivales.jpg"
+    "image": "https://www.gigamic.com/3576-home_default/les-cites-rivales.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "jardinssuspendus",
@@ -2854,7 +2994,8 @@
       "Le jardin se compose d'arbres (séries adjacentes d'une même essence), de fleurs (seul le plus grand massif de chaque couleur compte), d'animaux (points selon l'étage), de personnages et de zones irriguées.",
       "En fin de partie, on additionne les points de victoire (arbres, fleurs, animaux, personnages, irrigation, objectifs) : le plus grand total plaît le plus au couple royal et l'emporte. Un mode solo avec Automa est inclus."
     ],
-    "image": "https://www.gigamic.com/3582-home_default/les-jardins-suspendus.jpg"
+    "image": "https://www.gigamic.com/3582-home_default/les-jardins-suspendus.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "lineit",
@@ -2874,7 +3015,8 @@
       "Les paris et jetons Jackpot ajoutent de la tension à la prise de risque.",
       "Le joueur au meilleur total de points l'emporte."
     ],
-    "image": "https://www.gigamic.com/3919-home_default/line-it.jpg"
+    "image": "https://www.gigamic.com/3919-home_default/line-it.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "littoral",
@@ -2894,7 +3036,8 @@
       "Les coquillages et les aménagements rapportent des points en fin de partie.",
       "Le joueur qui a bâti le littoral le plus riche gagne."
     ],
-    "image": "https://www.gigamic.com/3062-home_default/littoral.jpg"
+    "image": "https://www.gigamic.com/3062-home_default/littoral.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "lobo77",
@@ -2913,7 +3056,8 @@
       "Des cartes spéciales inversent le sens, changent le total ou sautent un joueur.",
       "Sans plus de jeton, vous êtes éliminé ; le dernier joueur en lice gagne."
     ],
-    "image": "https://www.gigamic.com/3295-home_default/lobo-77.jpg"
+    "image": "https://www.gigamic.com/3295-home_default/lobo-77.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "looot",
@@ -2932,7 +3076,8 @@
       "Complétez vos drakkars et achevez vos chantiers pour marquer des points de victoire.",
       "Le joueur qui rapporte le plus de richesses (le Jarl) en fin de partie l'emporte."
     ],
-    "image": "https://www.gigamic.com/2926-home_default/looot.jpg"
+    "image": "https://www.gigamic.com/2926-home_default/looot.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "lumios",
@@ -2952,7 +3097,8 @@
       "L'adresse et la coordination d'équipe font la différence.",
       "L'équipe qui atteint son objectif de lumies remporte la partie."
     ],
-    "image": "https://www.gigamic.com/4319-home_default/lumios.jpg"
+    "image": "https://www.gigamic.com/4319-home_default/lumios.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "machupichu",
@@ -2972,7 +3118,8 @@
       "Le perdant récupère les défausses et les glisse sous son paquet, puis on relance.",
       "Le premier joueur à s'être débarrassé de toutes ses cartes remporte la partie."
     ],
-    "image": "https://www.gigamic.com/3996-home_default/machu-pichu.jpg"
+    "image": "https://www.gigamic.com/3996-home_default/machu-pichu.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "magicarta",
@@ -2989,7 +3136,8 @@
       "Magicarta est un jeu de cartes illustré destiné aux enfants, sur un thème de sorcellerie.",
       "Fiche provisoire : les règles détaillées seront ajoutées à partir du règlement officiel."
     ],
-    "image": "https://www.gigamic.com/3552-home_default/magicarta-le-fantome-de-la-sorciere.jpg"
+    "image": "https://www.gigamic.com/3552-home_default/magicarta-le-fantome-de-la-sorciere.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "magnumopus",
@@ -3009,7 +3157,8 @@
       "Sollicitations : chacun choisit en secret une carte Personnalité, puis les paquets tournent autour de la table (l'Ouroboros fixe le sens) jusqu'à avoir six cartes devant soi.",
       "Mécénat : le détenteur de l'Ouroboros appelle les Personnalités par numéro et celui qui en a le plus en bénéficie (financement, faveur, achat de Composants). Décompte : 1 point par Composant, +1 par paire en vue, +2 par formule complétée ; le plus de prestige gagne."
     ],
-    "image": "https://www.gigamic.com/1496-home_default/magnum-opus.jpg"
+    "image": "https://www.gigamic.com/1496-home_default/magnum-opus.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "mamiemoulemaki",
@@ -3029,7 +3178,8 @@
       "Chaque joueur doit trouver une réponse commençant par cette lettre pour chaque catégorie.",
       "On marque des points selon les réponses trouvées ; le meilleur total après cinq tours l'emporte."
     ],
-    "image": "https://www.gigamic.com/2072-home_default/mamie-moule-maki.jpg"
+    "image": "https://www.gigamic.com/2072-home_default/mamie-moule-maki.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "marrakech",
@@ -3048,7 +3198,8 @@
       "Posez ensuite un de vos tapis (2 cases) adjacent à Assam, en recouvrant éventuellement les tapis adverses.",
       "En fin de partie, additionnez vos dirhams et vos cases de tapis encore visibles : le plus riche gagne."
     ],
-    "image": "https://www.gigamic.com/2386-home_default/marrakech.jpg"
+    "image": "https://www.gigamic.com/2386-home_default/marrakech.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "maitremakatsu",
@@ -3068,7 +3219,8 @@
       "Bien choisir quand et comment engager ses ninjas est la clé.",
       "Le joueur qui a le plus impressionné le maître remporte la partie."
     ],
-    "image": "https://www.gigamic.com/4297-home_default/maitre-makatsu.jpg"
+    "image": "https://www.gigamic.com/4297-home_default/maitre-makatsu.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "mesos",
@@ -3088,7 +3240,8 @@
       "Les actions et constructions rapportent des points de prestige.",
       "Après la troisième ère et l'événement final, la tribu la plus prestigieuse l'emporte."
     ],
-    "image": "https://www.gigamic.com/3546-home_default/mesos.jpg"
+    "image": "https://www.gigamic.com/3546-home_default/mesos.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "meuhte",
@@ -3108,7 +3261,8 @@
       "La Vache rose récompense un accord parfait ou une situation particulière selon la question.",
       "Le premier joueur à réunir huit points Vache remporte la partie."
     ],
-    "image": "https://www.gigamic.com/1579-home_default/meuhte.jpg"
+    "image": "https://www.gigamic.com/1579-home_default/meuhte.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "microherohercule",
@@ -3125,7 +3279,8 @@
       "Micro Hero : Hercule est un jeu de cartes solo compact, sur le thème des travaux d'Hercule.",
       "Fiche provisoire : les règles détaillées seront ajoutées à partir du règlement officiel."
     ],
-    "image": "https://www.gigamic.com/4407-home_default/micro-hero-hercule.jpg"
+    "image": "https://www.gigamic.com/4407-home_default/micro-hero-hercule.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "millebornes",
@@ -3148,7 +3303,8 @@
       "On compte les bornes parcourues, plus les primes : manche terminée, coups fourrés, bottes, allonge, sans les 200.",
       "La partie s'arrête quand un joueur ou une équipe atteint 5000 points."
     ],
-    "image": "https://www.espritjeu.com/upload/image/mille-bornes-classique-p-image-103995-grande.jpg"
+    "image": "https://www.espritjeu.com/upload/image/mille-bornes-classique-p-image-103995-grande.jpg",
+    "editeur": "Dujardin"
   },
   {
     "id": "millesabords",
@@ -3168,7 +3324,8 @@
       "Une carte Fortune, piochée en début de tour, modifie vos gains (multiplicateurs, malus…).",
       "Dès qu'un joueur atteint 6000 points, on termine la manche ; le meilleur score l'emporte."
     ],
-    "image": "https://www.gigamic.com/3259-home_default/mille-sabords.jpg"
+    "image": "https://www.gigamic.com/3259-home_default/mille-sabords.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "millerzoo",
@@ -3188,7 +3345,8 @@
       "Chaque coéquipier apporte des compétences propres pour aider le groupe.",
       "L'équipe gagne si elle maintient le bien-être des animaux et résout les problèmes à temps."
     ],
-    "image": "https://www.gigamic.com/2238-home_default/miller-zoo.jpg"
+    "image": "https://www.gigamic.com/2238-home_default/miller-zoo.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "miromiro",
@@ -3208,7 +3366,8 @@
       "Les bonnes estimations rapportent des jetons +, les erreurs des jetons -.",
       "Le joueur avec le meilleur solde de jetons remporte la partie."
     ],
-    "image": "https://www.gigamic.com/4414-home_default/miro-miro.jpg"
+    "image": "https://www.gigamic.com/4414-home_default/miro-miro.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "miroirmagique",
@@ -3228,7 +3387,8 @@
       "Il faut de l'observation et un peu de sens de l'illusion pour aller vite.",
       "Le premier joueur à réunir dix cartes Objet gagne la partie."
     ],
-    "image": "https://www.gigamic.com/3887-home_default/miroir-magique.jpg"
+    "image": "https://www.gigamic.com/3887-home_default/miroir-magique.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "misfitheroes",
@@ -3248,7 +3408,8 @@
       "On marque des points en s'imposant dans la compétition des héros décalés.",
       "Le joueur au meilleur total remporte le titre de nouveau héros du pays."
     ],
-    "image": "https://www.gigamic.com/4309-home_default/misfit-heroes.jpg"
+    "image": "https://www.gigamic.com/4309-home_default/misfit-heroes.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "mito",
@@ -3267,7 +3428,8 @@
       "Mais gare à la Gardienne punaise : un joueur surpris à tricher est pénalisé.",
       "Le premier à n'avoir plus aucune carte gagne."
     ],
-    "image": "https://www.gigamic.com/4215-home_default/mito.jpg"
+    "image": "https://www.gigamic.com/4215-home_default/mito.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "moka",
@@ -3287,7 +3449,8 @@
       "Réussir un mot ou un défi rapporte les points correspondants.",
       "Le joueur qui totalise le plus de points remporte la partie."
     ],
-    "image": "https://www.gigamic.com/2943-home_default/moka.jpg"
+    "image": "https://www.gigamic.com/2943-home_default/moka.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "monique",
@@ -3307,7 +3470,8 @@
       "Règle de l'humour : si, en vous justifiant, vous faites rire votre accusateur, vous gagnez l'échange automatiquement et c'est lui qui pioche.",
       "On peut aussi piocher une carte ou jouer une carte Monique à effet spécial ; le premier joueur à vider sa main remporte la partie."
     ],
-    "image": "https://www.gigamic.com/1793-home_default/monique.jpg"
+    "image": "https://www.gigamic.com/1793-home_default/monique.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "mymurdermystery",
@@ -3327,7 +3491,8 @@
       "Le coupable est l'un des participants, ce qui mêle enquête, bluff et négociation.",
       "On l'emporte en atteignant ses objectifs personnels et en perçant le mystère."
     ],
-    "image": "https://www.gigamic.com/4554-home_default/my-murder-mystery-monnaie-de-singe.jpg"
+    "image": "https://www.gigamic.com/4554-home_default/my-murder-mystery-monnaie-de-singe.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "mymurdermysterymonnaiesinge",
@@ -3349,7 +3514,8 @@
       "L'enquête se mène sans maître du jeu.",
       "On l'emporte en atteignant ses objectifs et en perçant le mystère."
     ],
-    "image": "https://www.gigamic.com/4554-home_default/my-murder-mystery-monnaie-de-singe.jpg"
+    "image": "https://www.gigamic.com/4554-home_default/my-murder-mystery-monnaie-de-singe.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "mymurdermysteryprotocolefinal",
@@ -3371,7 +3537,8 @@
       "On recoupe les indices et on négocie pour se disculper et confondre le coupable.",
       "On gagne en réalisant ses objectifs et en résolvant l'affaire."
     ],
-    "image": "https://www.gigamic.com/4557-home_default/my-murder-mystery-protocole-final.jpg"
+    "image": "https://www.gigamic.com/4557-home_default/my-murder-mystery-protocole-final.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "medievallons",
@@ -3391,7 +3558,8 @@
       "On enchaîne les coups jusqu'à ce que la carte Fin de partie soit atteinte.",
       "Le joueur qui a réuni les meilleures combinaisons remporte la partie."
     ],
-    "image": "https://www.gigamic.com/4332-home_default/medievallons.jpg"
+    "image": "https://www.gigamic.com/4332-home_default/medievallons.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "memoireschamane",
@@ -3411,7 +3579,8 @@
       "Il faut relier les éléments pour progresser dans cette quête intérieure, contemplative et poétique.",
       "L'aventure s'achève lorsque les souvenirs perdus sont retrouvés."
     ],
-    "image": "https://www.gigamic.com/4622-large_default/memoires-d-une-chamane.jpg"
+    "image": "https://www.gigamic.com/4622-large_default/memoires-d-une-chamane.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "meoute",
@@ -3431,7 +3600,8 @@
       "Des cartes spéciales viennent pimenter et piéger la partie.",
       "Le joueur qui remporte le plus de cartes grâce à ses bons réflexes gagne."
     ],
-    "image": "https://www.gigamic.com/4659-home_default/meoute.jpg"
+    "image": "https://www.gigamic.com/4659-home_default/meoute.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "naishi",
@@ -3451,7 +3621,8 @@
       "Envoyer des émissaires à la Cour impériale débloque des actions additionnelles ; on remplace les cartes de son jeu en respectant leur position dans la Rivière.",
       "En fin de partie, les cartes de la Main sont révélées et placées sous celles de la Ligne pour former un territoire en grille de 2 × 5 ; on additionne les points, et le meilleur total l'emporte."
     ],
-    "image": "https://www.gigamic.com/4402-home_default/naishi.jpg"
+    "image": "https://www.gigamic.com/4402-home_default/naishi.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "naishilegendes",
@@ -3470,7 +3641,8 @@
     ],
     "type": "edition",
     "jeuParent": "naishi",
-    "image": "https://www.gigamic.com/4446-home_default/naishi-legendes-et-voyageurs.jpg"
+    "image": "https://www.gigamic.com/4446-home_default/naishi-legendes-et-voyageurs.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "nicole",
@@ -3490,7 +3662,8 @@
       "En Solo, on tente de donner cinq mots tout seul ; en Duel, deux joueurs alternent jusqu'à ce que l'un sèche.",
       "Règle de l'humour : faire rire l'assemblée rend sa proposition incontestable. Le dernier en jeu marque 1 point, et le premier à 5 points gagne (cartes noires réservées aux 16+)."
     ],
-    "image": "https://www.gigamic.com/2863-home_default/nicole.jpg"
+    "image": "https://www.gigamic.com/2863-home_default/nicole.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "nitronitro",
@@ -3510,7 +3683,8 @@
       "Une question trop facile ou trop difficile rapporte peu.",
       "Le joueur qui a marqué le plus de points remporte la partie."
     ],
-    "image": "https://www.gigamic.com/3528-home_default/nitro-nitro.jpg"
+    "image": "https://www.gigamic.com/3528-home_default/nitro-nitro.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "nonmerci",
@@ -3529,7 +3703,8 @@
       "Chaque jeton en votre possession retire un point.",
       "But : avoir le total le plus BAS ; le joueur avec le moins de points gagne."
     ],
-    "image": "https://www.gigamic.com/3693-home_default/non-merci.jpg"
+    "image": "https://www.gigamic.com/3693-home_default/non-merci.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "northgard",
@@ -3549,7 +3724,8 @@
       "Améliorer son deck et gérer ses ressources permet des actions plus puissantes au fil des manches.",
       "Les conquêtes, constructions et exploits rapportent des points de gloire ; le joueur au meilleur total l'emporte."
     ],
-    "image": "https://www.gigamic.com/1847-home_default/northgard-uncharted-lands.jpg"
+    "image": "https://www.gigamic.com/1847-home_default/northgard-uncharted-lands.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "nympheasnoirs",
@@ -3569,7 +3745,8 @@
       "Le scénario, unique et immersif, s'inspire du best-seller de Michel Bussi.",
       "L'équipe gagne si elle reconstitue la vérité et résout l'affaire."
     ],
-    "image": "https://www.gigamic.com/4141-home_default/nympheas-noirs.jpg"
+    "image": "https://www.gigamic.com/4141-home_default/nympheas-noirs.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "odysseus",
@@ -3589,7 +3766,8 @@
       "Réussir une épreuve et remporter un récit rapporte des points de victoire.",
       "À la fin du périple, le joueur qui a accumulé le plus de points l'emporte."
     ],
-    "image": "https://www.gigamic.com/4384-home_default/odysseus.jpg"
+    "image": "https://www.gigamic.com/4384-home_default/odysseus.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "oltree",
@@ -3609,7 +3787,8 @@
       "Il faut maintenir à flot le Prestige et la Défense du fortin, sous peine de perdre immédiatement, tout en gérant la Vitalité de chaque Patrouilleur.",
       "L'équipe l'emporte en menant la Chronique à son terme, d'autant mieux qu'elle a rempli les objectifs de sa Mission."
     ],
-    "image": "https://www.gigamic.com/3726-home_default/oltree.jpg"
+    "image": "https://www.gigamic.com/3726-home_default/oltree.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "orapamine",
@@ -3629,7 +3808,8 @@
       "Le temps presse : le rival cherche les mêmes gemmes en parallèle.",
       "Le premier à localiser correctement toutes les gemmes l'emporte."
     ],
-    "image": "https://www.gigamic.com/4410-large_default/orapa-mine.jpg"
+    "image": "https://www.gigamic.com/4410-large_default/orapa-mine.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "oriflamme",
@@ -3648,7 +3828,8 @@
       "La file se résout de gauche à droite : les cartes révélées déclenchent leur effet pour gagner des pièces d'influence, ou en voler.",
       "Après plusieurs manches, le joueur avec le plus d'influence l'emporte."
     ],
-    "image": "https://www.gigamic.com/1342-home_default/oriflamme.jpg"
+    "image": "https://www.gigamic.com/1342-home_default/oriflamme.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "oriflammealliance",
@@ -3670,7 +3851,8 @@
     ],
     "type": "extension",
     "jeuParent": "oriflamme",
-    "image": "https://www.gigamic.com/1817-home_default/oriflamme-alliance.jpg"
+    "image": "https://www.gigamic.com/1817-home_default/oriflamme-alliance.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "oriflammeembrasement",
@@ -3692,7 +3874,8 @@
     ],
     "type": "extension",
     "jeuParent": "oriflamme",
-    "image": "https://www.gigamic.com/1261-home_default/oriflamme-embrasement.jpg"
+    "image": "https://www.gigamic.com/1261-home_default/oriflamme-embrasement.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "origine",
@@ -3712,7 +3895,8 @@
       "Chacun devine les intentions des autres pour compléter le monde harmonieusement.",
       "L'équipe gagne si elle parvient à rendre la planète luxuriante et vivable."
     ],
-    "image": "https://www.gigamic.com/3602-home_default/origine.jpg"
+    "image": "https://www.gigamic.com/3602-home_default/origine.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "padupe",
@@ -3732,7 +3916,8 @@
       "On révèle : pour chaque joueur désigné, un duel l'oppose au Conteur, et le bon camp prend un jeton de la cagnotte.",
       "Les joueurs qui ont vu juste peuvent miser jusqu'à trois jetons pour doubler leur gain ; le rôle de Conteur tourne, et le plus riche en jetons en fin de partie l'emporte."
     ],
-    "image": "https://www.gigamic.com/3089-home_default/padupe.jpg"
+    "image": "https://www.gigamic.com/3089-home_default/padupe.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "paillettesclaquettes",
@@ -3752,7 +3937,8 @@
       "Décompte : numéro exact 4 points, à ±1 case 2 points, à ±2 cases 1 point, et un pari réussi rapporte 1 point supplémentaire.",
       "La partie s'arrête dès qu'une équipe atteint 12 points ou plus ; un mode coopératif (2-3 joueurs) mesure le niveau de performance de l'équipe."
     ],
-    "image": "https://www.gigamic.com/4110-home_default/paillettes-claquettes.jpg"
+    "image": "https://www.gigamic.com/4110-home_default/paillettes-claquettes.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "pandemie",
@@ -3805,7 +3991,8 @@
         "origine": "Empêche l'infection et les éclosions dans sa ville et les villes voisines."
       }
     ],
-    "image": "https://www.espritjeu.com/upload/image/pandemic--pandemie--p-image-66186-grande.jpg"
+    "image": "https://www.espritjeu.com/upload/image/pandemic--pandemie--p-image-66186-grande.jpg",
+    "editeur": "Z-Man Games"
   },
   {
     "id": "paniclab",
@@ -3825,7 +4012,8 @@
       "Attention à l'amibe noire « mutante », qui change la règle de recherche en cours de route.",
       "Le premier à trouver la bonne amibe gagne la carte ; celui qui en a le plus à la fin l'emporte."
     ],
-    "image": "https://www.gigamic.com/3291-home_default/panic-lab.jpg"
+    "image": "https://www.gigamic.com/3291-home_default/panic-lab.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "paon",
@@ -3845,7 +4033,8 @@
       "Les plumes récoltées se cumulent d'une manche à l'autre.",
       "Après la troisième saison, le joueur avec le plus de plumes l'emporte."
     ],
-    "image": "https://www.gigamic.com/4287-home_default/paon.jpg"
+    "image": "https://www.gigamic.com/4287-home_default/paon.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "papayoo",
@@ -3864,7 +4053,8 @@
       "L'idée est de refiler ces cartes plutôt que de les ramasser.",
       "On enchaîne les manches ; le joueur avec le MOINS de points gagne."
     ],
-    "image": "https://www.gigamic.com/3520-home_default/papayoo.jpg"
+    "image": "https://www.gigamic.com/3520-home_default/papayoo.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "pickomino",
@@ -3883,7 +4073,8 @@
       "Rater son total ou ne plus pouvoir garder de dé fait perdre votre dernière tuile.",
       "En fin de partie, le joueur avec le plus de vers gagne."
     ],
-    "image": "https://www.gigamic.com/2400-home_default/pickomino.jpg"
+    "image": "https://www.gigamic.com/2400-home_default/pickomino.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "pickominomini",
@@ -3905,7 +4096,8 @@
     ],
     "type": "edition",
     "jeuParent": "pickomino",
-    "image": "https://www.gigamic.com/2992-home_default/pickomino-mini.jpg"
+    "image": "https://www.gigamic.com/2992-home_default/pickomino-mini.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "pigeonexplosion",
@@ -3925,7 +4117,8 @@
       "Les effets permettent de piocher, d'attaquer ou de se protéger.",
       "Le dernier joueur dont le pigeon n'a pas explosé remporte la partie."
     ],
-    "image": "https://www.gigamic.com/4307-home_default/pigeon-explosion.jpg"
+    "image": "https://www.gigamic.com/4307-home_default/pigeon-explosion.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "pippo",
@@ -3945,7 +4138,8 @@
       "Une erreur oblige à rendre une carte déjà gagnée.",
       "À la fin, le joueur qui a récupéré le plus de cartes remporte la partie."
     ],
-    "image": "https://www.gigamic.com/1367-home_default/pippo.jpg"
+    "image": "https://www.gigamic.com/1367-home_default/pippo.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "ploufcanard",
@@ -3965,7 +4159,8 @@
       "L'équipe coordonne ses déplacements pour ne pas se laisser distancer par le nuage.",
       "On gagne tous ensemble si les canards atteignent la mare avant que le soleil ne disparaisse."
     ],
-    "image": "https://www.gigamic.com/2914-home_default/plouf-canard.jpg"
+    "image": "https://www.gigamic.com/2914-home_default/plouf-canard.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "pointcity",
@@ -3984,7 +4179,8 @@
       "Combinez vos bâtiments pour construire une ville efficace.",
       "Le joueur avec le plus de points de victoire en fin de partie gagne."
     ],
-    "image": "https://www.gigamic.com/2807-home_default/point-city.jpg"
+    "image": "https://www.gigamic.com/2807-home_default/point-city.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "potionoupoison",
@@ -4004,7 +4200,8 @@
       "Le bluff et la déduction déterminent qui goûtera le mauvais breuvage.",
       "Le dernier joueur à ne pas avoir succombé remporte la partie."
     ],
-    "image": "https://www.gigamic.com/4452-home_default/potion-ou-poison.jpg"
+    "image": "https://www.gigamic.com/4452-home_default/potion-ou-poison.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "poulepoule",
@@ -4024,7 +4221,8 @@
       "La manche s'arrête quand le second renard apparaît : chacun annonce alors le nombre d'œufs restants.",
       "Le joueur qui donne le bon total marque des points ; on enchaîne les manches et le meilleur score l'emporte."
     ],
-    "image": "https://www.gigamic.com/1941-home_default/poule-poule.jpg"
+    "image": "https://www.gigamic.com/1941-home_default/poule-poule.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "poumpoumcrounch",
@@ -4044,7 +4242,8 @@
       "Révéler une troisième carte Ours transforme un joueur en ours : il file chercher une cuillère et, à son retour, rafle d'un coup toutes les cartes Champignon encore sur la table.",
       "Quand les neuf cartes Ours ont été révélées, la partie s'arrête ; celui qui a le plus de champignons gagne."
     ],
-    "image": "https://www.gigamic.com/4339-home_default/poum-poum-crounch.jpg"
+    "image": "https://www.gigamic.com/4339-home_default/poum-poum-crounch.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "pourlareine",
@@ -4064,7 +4263,8 @@
       "Les réponses tissent peu à peu l'histoire du voyage et les relations, tendres ou tendues, au sein de l'escorte.",
       "À la fin du paquet, on découvre où vont les loyautés : défendre la Reine ou la trahir. C'est une expérience narrative collective, sans vainqueur désigné."
     ],
-    "image": "https://www.gigamic.com/1327-home_default/pour-la-reine.jpg"
+    "image": "https://www.gigamic.com/1327-home_default/pour-la-reine.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "privacynolimit",
@@ -4084,7 +4284,8 @@
       "L'urne est dévoilée : ceux qui ont deviné le bon total marquent des points.",
       "Le joueur qui totalise le plus de points remporte la partie."
     ],
-    "image": "https://www.gigamic.com/1808-home_default/privacy-no-limit.jpg"
+    "image": "https://www.gigamic.com/1808-home_default/privacy-no-limit.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "pylos",
@@ -4102,7 +4303,8 @@
       "Poser une bille au sommet d'un carré de 4 permet de remonter des billes déjà jouées ; aligner ou encadrer permet d'en récupérer.",
       "Le joueur qui pose la dernière bille, au sommet de la pyramide, gagne (l'adversaire est à court de billes)."
     ],
-    "image": "https://www.gigamic.com/750-home_default/pylos-classic.jpg"
+    "image": "https://www.gigamic.com/750-home_default/pylos-classic.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "pylosmini",
@@ -4124,7 +4326,8 @@
     ],
     "type": "edition",
     "jeuParent": "pylos",
-    "image": "https://www.gigamic.com/752-home_default/pylos-mini.jpg"
+    "image": "https://www.gigamic.com/752-home_default/pylos-mini.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "pepite",
@@ -4144,7 +4347,8 @@
       "Le but est d'accumuler un maximum de pépites dans sa banque.",
       "Après la quatrième manche, celui qui a le plus de pépites en banque gagne."
     ],
-    "image": "https://www.gigamic.com/4123-home_default/pepite.jpg"
+    "image": "https://www.gigamic.com/4123-home_default/pepite.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "qawale",
@@ -4161,7 +4365,8 @@
       "Posez une pierre de votre couleur sur une pile, puis déplacez toute cette pile, pierre par pierre, sur des cases adjacentes.",
       "But : aligner 4 pierres de votre couleur visibles au sommet des piles (ligne, colonne ou diagonale)."
     ],
-    "image": "https://www.gigamic.com/1974-home_default/qawale.jpg"
+    "image": "https://www.gigamic.com/1974-home_default/qawale.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "qawalemini",
@@ -4183,7 +4388,8 @@
     ],
     "type": "edition",
     "jeuParent": "qawale",
-    "image": "https://www.gigamic.com/3486-home_default/qawale-mini.jpg"
+    "image": "https://www.gigamic.com/3486-home_default/qawale-mini.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "qomet",
@@ -4203,7 +4409,8 @@
       "Il faut anticiper les alignements adverses pour ne pas se faire barrer la route.",
       "Le joueur qui réalise le plus de carrés remporte la partie."
     ],
-    "image": "https://www.gigamic.com/4183-home_default/qomet.jpg"
+    "image": "https://www.gigamic.com/4183-home_default/qomet.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "quadri",
@@ -4223,7 +4430,8 @@
       "Chaque objectif accompli rapporte des points.",
       "Le joueur (ou le score) le plus élevé l'emporte."
     ],
-    "image": "https://www.gigamic.com/4364-home_default/quadri.jpg"
+    "image": "https://www.gigamic.com/4364-home_default/quadri.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "quantik",
@@ -4242,7 +4450,8 @@
       "But : compléter une ligne, une colonne ou une région avec les 4 formes différentes.",
       "Le joueur qui pose la 4e forme complétant une zone gagne."
     ],
-    "image": "https://www.gigamic.com/1434-home_default/quantik.jpg"
+    "image": "https://www.gigamic.com/1434-home_default/quantik.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "quantikmini",
@@ -4264,7 +4473,8 @@
     ],
     "type": "edition",
     "jeuParent": "quantik",
-    "image": "https://www.gigamic.com/1490-home_default/quantik-mini.jpg"
+    "image": "https://www.gigamic.com/1490-home_default/quantik-mini.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "quarto",
@@ -4284,7 +4494,8 @@
       "But : réaliser un alignement (ligne, colonne ou diagonale) de 4 pièces partageant au moins un caractère commun.",
       "Le joueur qui complète un tel alignement annonce « Quarto ! » et gagne."
     ],
-    "image": "https://www.gigamic.com/754-home_default/quarto.jpg"
+    "image": "https://www.gigamic.com/754-home_default/quarto.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "quartomini",
@@ -4306,7 +4517,8 @@
     ],
     "type": "edition",
     "jeuParent": "quarto",
-    "image": "https://www.gigamic.com/759-home_default/quarto-mini.jpg"
+    "image": "https://www.gigamic.com/759-home_default/quarto-mini.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "queenmarieantoinette",
@@ -4326,7 +4538,8 @@
       "Les cartes Condition (l'Exigence de la reine et une par faction) déterminent comment marquer des points, en cours de jeu comme en fin de partie.",
       "La partie s'arrête dès qu'un joueur atteint le seuil d'influence (50 à deux, 45 à trois, 40 à quatre joueurs) ou vide une colonne ; le plus de points d'influence l'emporte."
     ],
-    "image": "https://www.gigamic.com/3653-home_default/queen-marie-antoinette.jpg"
+    "image": "https://www.gigamic.com/3653-home_default/queen-marie-antoinette.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "quixo",
@@ -4344,7 +4557,8 @@
       "But : aligner 5 cubes à votre symbole (ligne, colonne ou diagonale).",
       "Attention : provoquer un alignement adverse le fait gagner."
     ],
-    "image": "https://www.gigamic.com/761-home_default/quixo.jpg"
+    "image": "https://www.gigamic.com/761-home_default/quixo.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "quixomini",
@@ -4366,7 +4580,8 @@
     ],
     "type": "edition",
     "jeuParent": "quixo",
-    "image": "https://www.gigamic.com/763-home_default/quixo-mini.jpg"
+    "image": "https://www.gigamic.com/763-home_default/quixo-mini.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "quoridor",
@@ -4385,7 +4600,8 @@
       "Les barrières ralentissent les adversaires mais ne doivent jamais enfermer totalement un joueur.",
       "Le premier à atteindre sa ligne d'arrivée opposée gagne."
     ],
-    "image": "https://www.gigamic.com/3151-home_default/quoridor.jpg"
+    "image": "https://www.gigamic.com/3151-home_default/quoridor.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "quoridormini",
@@ -4407,7 +4623,8 @@
     ],
     "type": "edition",
     "jeuParent": "quoridor",
-    "image": "https://www.gigamic.com/3152-home_default/quoridor-mini.jpg"
+    "image": "https://www.gigamic.com/3152-home_default/quoridor-mini.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "quoridorpacman",
@@ -4427,7 +4644,8 @@
       "Pac-Man doit gober les quatre super pac-gommes ; les fantômes doivent l'attraper trois fois avant.",
       "Pac-Man gagne s'il avale les quatre gommes ; les fantômes gagnent s'ils lui prennent ses trois vies."
     ],
-    "image": "https://www.gigamic.com/2962-home_default/quoridor-pac-man.jpg"
+    "image": "https://www.gigamic.com/2962-home_default/quoridor-pac-man.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "qwinto",
@@ -4446,7 +4664,8 @@
       "Compléter des colonnes et des rangées rapporte des points ; ne plus pouvoir écrire fait stagner.",
       "Le meilleur total de points l'emporte."
     ],
-    "image": "https://www.gigamic.com/3682-home_default/qwinto.jpg"
+    "image": "https://www.gigamic.com/3682-home_default/qwinto.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "qwixx",
@@ -4465,7 +4684,8 @@
       "Le joueur actif utilise les dés blancs et de couleur ; les autres n'utilisent que les blancs.",
       "Chaque rangée rapporte selon le nombre de croix ; les pénalités comptent en négatif. Le meilleur total gagne."
     ],
-    "image": "https://www.gigamic.com/3369-home_default/qwixx.jpg"
+    "image": "https://www.gigamic.com/3369-home_default/qwixx.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "ratak",
@@ -4485,7 +4705,8 @@
       "Il faut lire le jeu adverse pour choisir quand attaquer, soutenir ou temporiser.",
       "Le camp qui remporte les affrontements l'emporte."
     ],
-    "image": "https://www.gigamic.com/4304-home_default/ratak.jpg"
+    "image": "https://www.gigamic.com/4304-home_default/ratak.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "ratapolis",
@@ -4505,7 +4726,8 @@
       "Les cartes Indice révèlent quels bâtiments les chats vont retirer du jeu ; détenir la majorité de rats sur un bâtiment procure un avantage.",
       "En fin de partie, chaque bâtiment rapporte du gruyère selon le nombre de rats présents ; le joueur au plus grand total l'emporte."
     ],
-    "image": "https://www.gigamic.com/2333-home_default/ratapolis.jpg"
+    "image": "https://www.gigamic.com/2333-home_default/ratapolis.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "ratjack",
@@ -4525,7 +4747,8 @@
       "La meilleure main de la manche remporte la mise.",
       "Après plusieurs manches, le joueur au meilleur score l'emporte."
     ],
-    "image": "https://www.gigamic.com/3140-home_default/ratjack.jpg"
+    "image": "https://www.gigamic.com/3140-home_default/ratjack.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "ratjackcoupdulapin",
@@ -4547,7 +4770,8 @@
     ],
     "type": "extension",
     "jeuParent": "ratjack",
-    "image": "https://www.gigamic.com/4292-home_default/ratjack-extension-coup-du-lapin.jpg"
+    "image": "https://www.gigamic.com/4292-home_default/ratjack-extension-coup-du-lapin.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "rebellesprincesses",
@@ -4567,7 +4791,8 @@
       "Chaque princesse dispose d'un pouvoir spécial utilisable une fois par manche.",
       "Décompte : chaque carte Prince ramassée vaut 1 demande en mariage et la Grenouille en vaut 5 ; après cinq manches, la princesse qui en a le moins (le plus petit score) remporte la victoire."
     ],
-    "image": "https://www.gigamic.com/3094-home_default/rebelles-princesses.jpg"
+    "image": "https://www.gigamic.com/3094-home_default/rebelles-princesses.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "reporter",
@@ -4587,7 +4812,8 @@
       "Une assistance intégrée permet de vérifier si l'on a bien exploité chaque document.",
       "L'enquête est réussie quand l'équipe recoupe correctement toutes les informations pour boucler le reportage."
     ],
-    "image": "https://www.gigamic.com/4202-home_default/reporter.jpg"
+    "image": "https://www.gigamic.com/4202-home_default/reporter.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "rollnbump",
@@ -4607,7 +4833,8 @@
       "Quand toutes les revendications sont complétées, on calcule les points.",
       "Le score combine la valeur des cartes et un bonus de série ; le meilleur total gagne."
     ],
-    "image": "https://www.gigamic.com/2218-home_default/roll-n-bump.jpg"
+    "image": "https://www.gigamic.com/2218-home_default/roll-n-bump.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "rollnbumpduel",
@@ -4629,7 +4856,8 @@
     ],
     "type": "edition",
     "jeuParent": "rollnbump",
-    "image": "https://www.gigamic.com/4542-home_default/roll-n-bump-duel.jpg"
+    "image": "https://www.gigamic.com/4542-home_default/roll-n-bump-duel.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "rollie",
@@ -4649,7 +4877,8 @@
       "Des jetons Bonus s'obtiennent en fin de partie pour récompenser certaines réussites.",
       "Le joueur qui a accumulé le plus d'argent (billets + bonus) remporte la partie."
     ],
-    "image": "https://www.gigamic.com/4091-home_default/rollie.jpg"
+    "image": "https://www.gigamic.com/4091-home_default/rollie.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "romirami",
@@ -4669,7 +4898,8 @@
       "La manche s'arrête dès qu'un joueur s'est débarrassé de toutes ses cartes.",
       "Les cartes restant en main comptent en points de pénalité ; après plusieurs manches, le plus petit total gagne."
     ],
-    "image": "https://www.gigamic.com/2351-home_default/romi-rami.jpg"
+    "image": "https://www.gigamic.com/2351-home_default/romi-rami.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "revolte",
@@ -4689,7 +4919,8 @@
       "« Révolte ! » : si un pli contient strictement plus de Citoyens que de cartes de chaque autre famille, personne ne le remporte.",
       "Fin de manche : un blason par pli gagné ; après trois manches, qui a strictement plus de pièces que ses adversaires gagne 2 blasons, et le plus grand total de blasons l'emporte."
     ],
-    "image": "https://www.gigamic.com/3713-home_default/revolte.jpg"
+    "image": "https://www.gigamic.com/3713-home_default/revolte.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "saboteur",
@@ -4708,7 +4939,8 @@
       "Les chercheurs veulent atteindre le filon ; les saboteurs veulent les en empêcher sans se faire démasquer.",
       "À la fin de la manche, le camp gagnant se partage des pépites ; après trois manches, le plus riche gagne."
     ],
-    "image": "https://www.gigamic.com/4223-home_default/saboteur.jpg"
+    "image": "https://www.gigamic.com/4223-home_default/saboteur.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "saboteur2",
@@ -4730,7 +4962,8 @@
     ],
     "type": "extension",
     "jeuParent": "saboteur",
-    "image": "https://www.gigamic.com/4226-home_default/saboteur-2-les-mineurs-contre-attaquent.jpg"
+    "image": "https://www.gigamic.com/4226-home_default/saboteur-2-les-mineurs-contre-attaquent.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "saboteurleduel",
@@ -4752,7 +4985,8 @@
     ],
     "type": "edition",
     "jeuParent": "saboteur",
-    "image": "https://www.gigamic.com/3700-home_default/saboteur-le-duel.jpg"
+    "image": "https://www.gigamic.com/3700-home_default/saboteur-le-duel.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "saladedecafards",
@@ -4772,7 +5006,8 @@
       "Le joueur suivant peut croire l'annonce, ou la contester en retournant la carte ; celui qui s'est trompé ramasse la carte.",
       "Le premier joueur qui parvient à se défausser de toutes ses cartes gagne la partie."
     ],
-    "image": "https://www.gigamic.com/4176-home_default/salade-de-cafards.jpg"
+    "image": "https://www.gigamic.com/4176-home_default/salade-de-cafards.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "scrabble",
@@ -4792,7 +5027,8 @@
       "Poser ses sept lettres d'un coup rapporte 50 points de prime (le « scrabble »).",
       "La partie s'arrête quand un joueur a posé sa dernière lettre, sac vide. On retranche à chacun la valeur des lettres restantes."
     ],
-    "image": "https://www.espritjeu.com/upload/image/scrabble-classique---cooperatif-p-image-95563-grande.jpg"
+    "image": "https://www.espritjeu.com/upload/image/scrabble-classique---cooperatif-p-image-95563-grande.jpg",
+    "editeur": "Mattel"
   },
   {
     "id": "secretidentity",
@@ -4812,7 +5048,8 @@
       "Les bons accords entre indices et votes font avancer les pions sur la piste de score.",
       "Le joueur qui totalise le plus de points remporte la partie."
     ],
-    "image": "https://www.gigamic.com/3061-home_default/secret-identity.jpg"
+    "image": "https://www.gigamic.com/3061-home_default/secret-identity.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "serpentina",
@@ -4832,7 +5069,8 @@
       "Celui qui complète un serpent le remporte et le met de côté.",
       "Quand toutes les cartes sont jouées, le joueur qui a rassemblé le plus de serpents gagne."
     ],
-    "image": "https://www.gigamic.com/1370-home_default/serpentina.jpg"
+    "image": "https://www.gigamic.com/1370-home_default/serpentina.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "set",
@@ -4851,7 +5089,8 @@
       "Dès que vous en voyez un, annoncez « Set ! » et ramassez les trois cartes ; on complète et on continue.",
       "Le joueur qui a ramassé le plus de Sets gagne."
     ],
-    "image": "https://www.gigamic.com/3375-home_default/set.jpg"
+    "image": "https://www.gigamic.com/3375-home_default/set.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "shackletonbase",
@@ -4871,7 +5110,8 @@
       "Les projets et constructions rapportent des ressources et des points selon ses choix stratégiques.",
       "Le joueur au meilleur total de points en fin de partie l'emporte."
     ],
-    "image": "https://www.gigamic.com/3232-home_default/shackleton-base.jpg"
+    "image": "https://www.gigamic.com/3232-home_default/shackleton-base.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "shapeit",
@@ -4891,7 +5131,8 @@
       "Si tous disent le même mot, la manche est gagnée et la carte est mise de côté ; un jeton Silence permet de s'abstenir.",
       "L'équipe gagne si elle valide assez de cartes ensemble."
     ],
-    "image": "https://www.gigamic.com/4426-home_default/shape-it.jpg"
+    "image": "https://www.gigamic.com/4426-home_default/shape-it.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "similo",
@@ -4910,7 +5151,8 @@
       "Les autres éliminent des personnages de la table selon ces indices.",
       "Il faut réduire les cartes jusqu'au bon personnage en cinq manches, sans jamais éliminer le secret."
     ],
-    "image": "https://www.gigamic.com/1191-home_default/similo-contes.jpg"
+    "image": "https://www.gigamic.com/1191-home_default/similo-contes.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "similoanimaux",
@@ -4932,7 +5174,8 @@
     ],
     "type": "edition",
     "jeuParent": "similo",
-    "image": "https://www.gigamic.com/1295-home_default/similo-animaux.jpg"
+    "image": "https://www.gigamic.com/1295-home_default/similo-animaux.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "similoanimauxaquatiques",
@@ -4954,7 +5197,8 @@
     ],
     "type": "edition",
     "jeuParent": "similo",
-    "image": "https://www.gigamic.com/4039-home_default/similo-animaux-aquatiques.jpg"
+    "image": "https://www.gigamic.com/4039-home_default/similo-animaux-aquatiques.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "similoanimauxsauvages",
@@ -4976,7 +5220,8 @@
     ],
     "type": "edition",
     "jeuParent": "similo",
-    "image": "https://www.gigamic.com/1326-home_default/similo-animaux-sauvages.jpg"
+    "image": "https://www.gigamic.com/1326-home_default/similo-animaux-sauvages.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "similocontes",
@@ -4998,7 +5243,8 @@
     ],
     "type": "edition",
     "jeuParent": "similo",
-    "image": "https://www.gigamic.com/1191-home_default/similo-contes.jpg"
+    "image": "https://www.gigamic.com/1191-home_default/similo-contes.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "similoharrypotter",
@@ -5020,7 +5266,8 @@
     ],
     "type": "edition",
     "jeuParent": "similo",
-    "image": "https://www.gigamic.com/4579-home_default/similo-harry-potter.jpg"
+    "image": "https://www.gigamic.com/4579-home_default/similo-harry-potter.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "similohistoire",
@@ -5042,7 +5289,8 @@
     ],
     "type": "edition",
     "jeuParent": "similo",
-    "image": "https://www.gigamic.com/1192-home_default/similo-histoire.jpg"
+    "image": "https://www.gigamic.com/1192-home_default/similo-histoire.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "similojurassicworld",
@@ -5064,7 +5312,8 @@
     ],
     "type": "edition",
     "jeuParent": "similo",
-    "image": "https://www.gigamic.com/3210-home_default/similo-jurassic-world.jpg"
+    "image": "https://www.gigamic.com/3210-home_default/similo-jurassic-world.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "similoseigneuranneaux",
@@ -5086,7 +5335,8 @@
     ],
     "type": "edition",
     "jeuParent": "similo",
-    "image": "https://www.gigamic.com/2619-home_default/similo-le-seigneur-des-anneaux.jpg"
+    "image": "https://www.gigamic.com/2619-home_default/similo-le-seigneur-des-anneaux.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "similomonstres",
@@ -5108,7 +5358,8 @@
     ],
     "type": "edition",
     "jeuParent": "similo",
-    "image": "https://www.gigamic.com/1727-home_default/similo-monstres.jpg"
+    "image": "https://www.gigamic.com/1727-home_default/similo-monstres.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "similomythes",
@@ -5130,7 +5381,8 @@
     ],
     "type": "edition",
     "jeuParent": "similo",
-    "image": "https://www.gigamic.com/1193-home_default/similo-mythes.jpg"
+    "image": "https://www.gigamic.com/1193-home_default/similo-mythes.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "skullking",
@@ -5152,7 +5404,8 @@
       "Annoncer zéro et le tenir rapporte 10 points par carte en main ; se tromper les fait perdre.",
       "Après la dixième manche, le plus grand total gagne."
     ],
-    "image": "https://www.espritjeu.com/upload/image/skull-king-vf-p-image-80958-grande.jpg"
+    "image": "https://www.espritjeu.com/upload/image/skull-king-vf-p-image-80958-grande.jpg",
+    "editeur": "Schmidt Spiele"
   },
   {
     "id": "solaciademonglace",
@@ -5170,7 +5423,8 @@
       "Cette boîte propose une affaire particulière : une aventure glaciale.",
       "Fiche provisoire : les règles détaillées seront ajoutées à partir du règlement officiel."
     ],
-    "image": "https://www.gigamic.com/4537-large_default/solacia-le-demon-de-glace.jpg"
+    "image": "https://www.gigamic.com/4537-large_default/solacia-le-demon-de-glace.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "solaciasorciermaudit",
@@ -5188,7 +5442,8 @@
       "Cette boîte propose une affaire particulière : une aventure ensorcelée.",
       "Fiche provisoire : les règles détaillées seront ajoutées à partir du règlement officiel."
     ],
-    "image": "https://www.gigamic.com/4533-large_default/solacia-le-sorcier-maudit.jpg"
+    "image": "https://www.gigamic.com/4533-large_default/solacia-le-sorcier-maudit.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "sousscelles",
@@ -5206,7 +5461,8 @@
       "On explore des indices et des documents pour reconstituer ce qui s'est réellement passé.",
       "Fiche provisoire : les règles détaillées seront ajoutées à partir du règlement officiel."
     ],
-    "image": "https://www.gigamic.com/2439-home_default/sous-scelles-la-clef.jpg"
+    "image": "https://www.gigamic.com/2439-home_default/sous-scelles-la-clef.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "sousscelles63ames",
@@ -5226,7 +5482,8 @@
     ],
     "type": "edition",
     "jeuParent": "sousscelles",
-    "image": "https://www.gigamic.com/2437-home_default/sous-scelles-63-ames.jpg"
+    "image": "https://www.gigamic.com/2437-home_default/sous-scelles-63-ames.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "sousscellesultimechatiment",
@@ -5246,7 +5503,8 @@
     ],
     "type": "edition",
     "jeuParent": "sousscelles",
-    "image": "https://www.gigamic.com/3238-home_default/sous-scelles-l-ultime-chatiment.jpg"
+    "image": "https://www.gigamic.com/3238-home_default/sous-scelles-l-ultime-chatiment.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "sousscelleslaclef",
@@ -5266,7 +5524,8 @@
     ],
     "type": "edition",
     "jeuParent": "sousscelles",
-    "image": "https://www.gigamic.com/2439-home_default/sous-scelles-la-clef.jpg"
+    "image": "https://www.gigamic.com/2439-home_default/sous-scelles-la-clef.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "sousscellesfilletroisieme",
@@ -5286,7 +5545,8 @@
     ],
     "type": "edition",
     "jeuParent": "sousscelles",
-    "image": "https://www.gigamic.com/3245-home_default/sous-scelles-la-fille-du-troisieme.jpg"
+    "image": "https://www.gigamic.com/3245-home_default/sous-scelles-la-fille-du-troisieme.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "sousscellesgardiencaves",
@@ -5306,7 +5566,8 @@
     ],
     "type": "edition",
     "jeuParent": "sousscelles",
-    "image": "https://www.gigamic.com/2441-home_default/sous-scelles-le-gardien-des-caves.jpg"
+    "image": "https://www.gigamic.com/2441-home_default/sous-scelles-le-gardien-des-caves.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "sousscellesmaudits",
@@ -5326,7 +5587,8 @@
     ],
     "type": "edition",
     "jeuParent": "sousscelles",
-    "image": "https://www.gigamic.com/3241-home_default/sous-scelles-les-maudits-de-fosse-aux-ronces.jpg"
+    "image": "https://www.gigamic.com/3241-home_default/sous-scelles-les-maudits-de-fosse-aux-ronces.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "spacelab",
@@ -5346,7 +5608,8 @@
       "Les découvertes et aménagements rapportent des points.",
       "Le joueur qui a bâti la station la plus performante l'emporte."
     ],
-    "image": "https://www.gigamic.com/4132-home_default/space-lab.jpg"
+    "image": "https://www.gigamic.com/4132-home_default/space-lab.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "specific",
@@ -5366,7 +5629,8 @@
       "Une erreur est pénalisée ; la tuile « ? » se remporte en annonçant le nom de l'animal.",
       "Le premier à réunir cinq tuiles (quatre à trois ou quatre joueurs) remporte la partie."
     ],
-    "image": "https://www.gigamic.com/1487-home_default/specific.jpg"
+    "image": "https://www.gigamic.com/1487-home_default/specific.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "speek",
@@ -5386,7 +5650,8 @@
       "Des symboles Action ajoutent des contraintes (dire le mot debout, en chantant, en se pinçant le nez…), et les litiges se règlent par duel ou par vote.",
       "Le premier joueur à remporter cinq cartes Catégorie gagne la partie."
     ],
-    "image": "https://www.gigamic.com/4482-home_default/speek.jpg"
+    "image": "https://www.gigamic.com/4482-home_default/speek.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "splendor",
@@ -5407,7 +5672,8 @@
       "Dès qu'un joueur atteint 15 points, on termine le tour de table : le plus grand total gagne.",
       "En cas d'égalité, celui qui a acheté le moins de cartes l'emporte."
     ],
-    "image": "https://www.espritjeu.com/upload/image/splendor-p-image-96446-grande.jpg"
+    "image": "https://www.espritjeu.com/upload/image/splendor-p-image-96446-grande.jpg",
+    "editeur": "Space Cowboys"
   },
   {
     "id": "squadro",
@@ -5425,7 +5691,8 @@
       "Chaque pion avance du nombre de cases indiqué sur sa ligne ; un pion dépassé par un adversaire est renvoyé au départ.",
       "Le premier à ramener 4 de ses 5 pions gagne."
     ],
-    "image": "https://www.gigamic.com/1431-home_default/squadro-classic.jpg"
+    "image": "https://www.gigamic.com/1431-home_default/squadro-classic.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "squadromini",
@@ -5447,7 +5714,8 @@
     ],
     "type": "edition",
     "jeuParent": "squadro",
-    "image": "https://www.gigamic.com/1223-home_default/squadro-mini.jpg"
+    "image": "https://www.gigamic.com/1223-home_default/squadro-mini.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "staraoke",
@@ -5467,7 +5735,8 @@
       "On ne peut pas réutiliser une chanson déjà chantée, et un litige sur le micro se règle à celui qui a le plus de doigts en contact avec.",
       "Le premier joueur à réunir sept cartes gagne ; un mode « As du Mic » ajoute des cartes Joker Star et leurs contraintes."
     ],
-    "image": "https://www.gigamic.com/4335-home_default/staraoke.jpg"
+    "image": "https://www.gigamic.com/4335-home_default/staraoke.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "stereomind",
@@ -5486,7 +5755,8 @@
       "On marque en étant en phase avec le groupe.",
       "Fiche provisoire : les règles détaillées seront ajoutées à partir du règlement officiel."
     ],
-    "image": "https://www.gigamic.com/4637-home_default/stereo-mind.jpg"
+    "image": "https://www.gigamic.com/4637-home_default/stereo-mind.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "stupidevautour",
@@ -5505,7 +5775,8 @@
       "Carte positive : la plus haute enchère l'emporte. Carte négative (vautour) : la plus BASSE la ramasse. Les enchères à égalité s'annulent.",
       "En fin de partie, le meilleur total de points gagne."
     ],
-    "image": "https://www.gigamic.com/3460-home_default/stupide-vautour.jpg"
+    "image": "https://www.gigamic.com/3460-home_default/stupide-vautour.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "suspects",
@@ -5525,7 +5796,8 @@
       "Bien observer et déduire permet d'identifier le coupable sans se tromper.",
       "L'enquête est réussie si l'on répond correctement aux questions finales de l'affaire."
     ],
-    "image": "https://www.gigamic.com/1468-home_default/suspects.jpg"
+    "image": "https://www.gigamic.com/1468-home_default/suspects.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "suspectspocketliverpool",
@@ -5545,7 +5817,8 @@
     ],
     "type": "edition",
     "jeuParent": "suspects",
-    "image": "https://www.gigamic.com/3307-home_default/suspects-pocket-hors-jeu-a-liverpool.jpg"
+    "image": "https://www.gigamic.com/3307-home_default/suspects-pocket-hors-jeu-a-liverpool.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "suspectspocketravel",
@@ -5565,7 +5838,8 @@
     ],
     "type": "edition",
     "jeuParent": "suspects",
-    "image": "https://www.gigamic.com/3313-home_default/suspects-pocket-l-operation-ravel.jpg"
+    "image": "https://www.gigamic.com/3313-home_default/suspects-pocket-l-operation-ravel.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "suspectspocketfairchild",
@@ -5585,7 +5859,8 @@
     ],
     "type": "edition",
     "jeuParent": "suspects",
-    "image": "https://www.gigamic.com/3310-home_default/suspects-pocket-la-disparition-d-pr-fairchild.jpg"
+    "image": "https://www.gigamic.com/3310-home_default/suspects-pocket-la-disparition-d-pr-fairchild.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "tantrix",
@@ -5605,7 +5880,8 @@
       "En fin de partie, le joueur qui a réalisé la plus longue ligne ou boucle de sa couleur l'emporte.",
       "Version Discovery : la boîte propose aussi des défis solo de difficulté croissante."
     ],
-    "image": "https://www.gigamic.com/818-home_default/tantrix.jpg"
+    "image": "https://www.gigamic.com/818-home_default/tantrix.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "tantrixpocket",
@@ -5627,7 +5903,8 @@
     ],
     "type": "edition",
     "jeuParent": "tantrix",
-    "image": "https://www.gigamic.com/816-home_default/tantrix-pocket.jpg"
+    "image": "https://www.gigamic.com/816-home_default/tantrix-pocket.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "tantrixsolo",
@@ -5647,7 +5924,8 @@
       "La règle d'or impose de toujours respecter les correspondances de couleurs entre bords accolés.",
       "Le défi consiste à aller le plus loin possible dans la série croissante de boucles."
     ],
-    "image": "https://www.gigamic.com/3895-home_default/tantrix-solo.jpg"
+    "image": "https://www.gigamic.com/3895-home_default/tantrix-solo.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "tantrixstrategie",
@@ -5667,7 +5945,8 @@
       "La règle d'or reste la même : chaque bord accolé doit relier deux bandes de même couleur.",
       "Le joueur qui réalise la plus longue ligne (ou boucle) de sa couleur l'emporte."
     ],
-    "image": "https://www.gigamic.com/818-home_default/tantrix.jpg"
+    "image": "https://www.gigamic.com/818-home_default/tantrix.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "tetaki",
@@ -5687,7 +5966,8 @@
       "Observation et rapidité aident à réunir les bonnes cartes avant les autres.",
       "Le joueur qui a assemblé le plus d'animaux remporte la partie."
     ],
-    "image": "https://www.gigamic.com/3052-home_default/tetaki.jpg"
+    "image": "https://www.gigamic.com/3052-home_default/tetaki.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "texto",
@@ -5707,7 +5987,8 @@
       "Le premier à trouver un mot valide remporte la carte.",
       "On enchaîne les cartes ; le joueur qui en a gagné le plus l'emporte."
     ],
-    "image": "https://www.gigamic.com/822-home_default/texto.jpg"
+    "image": "https://www.gigamic.com/822-home_default/texto.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "texto2",
@@ -5726,7 +6007,8 @@
     ],
     "type": "edition",
     "jeuParent": "texto",
-    "image": "https://www.gigamic.com/1541-home_default/texto-2.jpg"
+    "image": "https://www.gigamic.com/1541-home_default/texto-2.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "thecrew",
@@ -5747,7 +6029,8 @@
       "Vous gagnez ensemble si toutes les missions sont accomplies avant la fin des plis.",
       "Vous perdez ensemble dès qu'une mission devient impossible."
     ],
-    "image": "https://www.espritjeu.com/upload/image/the-crew---en-quete-de-la-9eme-planete-p-image-83200-grande.jpg"
+    "image": "https://www.espritjeu.com/upload/image/the-crew---en-quete-de-la-9eme-planete-p-image-83200-grande.jpg",
+    "editeur": "Kosmos"
   },
   {
     "id": "thedream",
@@ -5767,7 +6050,8 @@
       "L'observation et le soupçon sont essentiels : chacun scrute les choix des autres.",
       "Le camp qui atteint son objectif (enfermer le cauchemar, ou le laisser s'échapper pour les corrompus) l'emporte."
     ],
-    "image": "https://www.gigamic.com/4598-home_default/the-dream.jpg"
+    "image": "https://www.gigamic.com/4598-home_default/the-dream.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "timesup",
@@ -5789,7 +6073,8 @@
       "Une carte devinée rapporte un point à l'équipe et sort du paquet pour la manche en cours.",
       "On additionne les points des trois manches : l'équipe la plus haute gagne."
     ],
-    "image": "https://www.espritjeu.com/upload/image/time-s-up-family---vert-p-image-95774-grande.jpg"
+    "image": "https://www.espritjeu.com/upload/image/time-s-up-family---vert-p-image-95774-grande.jpg",
+    "editeur": "Repos Production"
   },
   {
     "id": "tossit",
@@ -5809,7 +6094,8 @@
       "On peut jouer en équipes et se pratiquer aussi bien à l'intérieur qu'en extérieur.",
       "Le premier à atteindre le score fixé, ou le meilleur total, remporte la partie."
     ],
-    "image": "https://www.gigamic.com/4707-home_default/tossit-football-edition.jpg"
+    "image": "https://www.gigamic.com/4707-home_default/tossit-football-edition.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "toutim",
@@ -5829,7 +6115,8 @@
       "On alterne les rôles au fil des tours.",
       "Le joueur qui a marqué le plus de points remporte la partie."
     ],
-    "image": "https://www.gigamic.com/1356-home_default/toutim.jpg"
+    "image": "https://www.gigamic.com/1356-home_default/toutim.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "traq",
@@ -5849,7 +6136,8 @@
       "On perd la manche si l'on répète une question déjà utilisée ou si l'on est démasqué dans son bluff.",
       "Après huit manches, le joueur qui en a perdu le moins remporte la partie."
     ],
-    "image": "https://www.gigamic.com/3721-home_default/traq.jpg"
+    "image": "https://www.gigamic.com/3721-home_default/traq.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "treetopia",
@@ -5869,7 +6157,8 @@
       "Les jetons Enchantement et les graines d'Espoir aident à composer un sanctuaire florissant.",
       "Le joueur qui compose le plus beau sanctuaire, avec le meilleur score, l'emporte."
     ],
-    "image": "https://www.gigamic.com/2984-home_default/treetopia.jpg"
+    "image": "https://www.gigamic.com/2984-home_default/treetopia.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "triolet",
@@ -5889,7 +6178,8 @@
       "On marque la somme des tuiles concernées par la pose ; réussir un « Triolet » (trois tuiles totalisant 15) rapporte un gros bonus.",
       "Le joueur avec le plus de points à la fin de la partie gagne."
     ],
-    "image": "https://www.gigamic.com/1432-home_default/triolet.jpg"
+    "image": "https://www.gigamic.com/1432-home_default/triolet.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "tulikko",
@@ -5909,7 +6199,8 @@
       "Les découvertes rapportent des points.",
       "Le premier à dévoiler tous les secrets (ou le meilleur score) remporte la partie."
     ],
-    "image": "https://www.gigamic.com/4196-home_default/tulikko.jpg"
+    "image": "https://www.gigamic.com/4196-home_default/tulikko.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "varuna",
@@ -5929,7 +6220,8 @@
       "Les adversaires visent les mêmes découvertes : il faut choisir ses priorités.",
       "Le joueur qui totalise le plus de Points de Mission remporte la partie."
     ],
-    "image": "https://www.gigamic.com/1606-home_default/varuna.jpg"
+    "image": "https://www.gigamic.com/1606-home_default/varuna.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "vazy",
@@ -5949,7 +6241,8 @@
       "Le jeu se déroule sur la durée (plusieurs semaines), sans décompte de points.",
       "Le but n'est pas de gagner mais d'accumuler des fous rires et des moments mémorables à deux."
     ],
-    "image": "https://www.gigamic.com/3590-home_default/vazy.jpg"
+    "image": "https://www.gigamic.com/3590-home_default/vazy.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "verso",
@@ -5969,7 +6262,8 @@
       "Les adversaires peuvent vous forcer à retourner vos cartes et bousculer votre stratégie.",
       "Le joueur qui accumule le plus de jetons de victoire remporte la partie."
     ],
-    "image": "https://www.gigamic.com/3647-home_default/verso.jpg"
+    "image": "https://www.gigamic.com/3647-home_default/verso.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "verybadlands",
@@ -5989,7 +6283,8 @@
       "Un cycle jour/nuit change la valeur de certaines cartes et déclenche des effets particuliers.",
       "Quand votre dinosaure est éteint, vous perdez ; il faut donc survivre le plus longtemps possible."
     ],
-    "image": "https://www.gigamic.com/3251-home_default/very-bad-lands-t-rex.jpg"
+    "image": "https://www.gigamic.com/3251-home_default/very-bad-lands-t-rex.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "verybadlandsbrachio",
@@ -6008,7 +6303,8 @@
     ],
     "type": "edition",
     "jeuParent": "verybadlands",
-    "image": "https://www.gigamic.com/3247-home_default/very-bad-lands-brachio.jpg"
+    "image": "https://www.gigamic.com/3247-home_default/very-bad-lands-brachio.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "verybadlandstrex",
@@ -6027,7 +6323,8 @@
     ],
     "type": "edition",
     "jeuParent": "verybadlands",
-    "image": "https://www.gigamic.com/3251-home_default/very-bad-lands-t-rex.jpg"
+    "image": "https://www.gigamic.com/3251-home_default/very-bad-lands-t-rex.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "villainous",
@@ -6189,7 +6486,8 @@
       "Effectue les actions du lieu : gagner du Pouvoir, jouer des cartes, activer des capacités.",
       "Tu peux jouer une carte du Destin contre un adversaire pour le gêner.",
       "Chaque méchant a un objectif unique : le premier à le remplir gagne."
-    ]
+    ],
+    "editeur": "Ravensburger"
   },
   {
     "id": "wazabi",
@@ -6208,7 +6506,8 @@
       "Des faces spéciales déclenchent des actions qui peuvent gêner les adversaires (leur refiler des dés).",
       "Le premier joueur sans aucun dé remporte la partie."
     ],
-    "image": "https://www.gigamic.com/1101-home_default/wazabi.jpg"
+    "image": "https://www.gigamic.com/1101-home_default/wazabi.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "wazabipiment",
@@ -6230,7 +6529,8 @@
     ],
     "type": "extension",
     "jeuParent": "wazabi",
-    "image": "https://www.gigamic.com/1305-home_default/wazabi-extension-supplement-piment.jpg"
+    "image": "https://www.gigamic.com/1305-home_default/wazabi-extension-supplement-piment.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "winkybilly",
@@ -6250,7 +6550,8 @@
       "On peut aussi accuser un adversaire (« Contre Winky ! ») ou annoncer un « Double Winky » quand les deux membres ont quatre cartes identiques.",
       "La première équipe à réunir sept jetons Billy remporte la partie."
     ],
-    "image": "https://www.gigamic.com/4283-home_default/winky-billy.jpg"
+    "image": "https://www.gigamic.com/4283-home_default/winky-billy.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "wizard",
@@ -6270,7 +6571,8 @@
       "Réussir exactement son pari rapporte 20 points plus 10 par pli annoncé ; se tromper coûte 10 points par pli d'écart.",
       "Après le nombre de manches prévu, le joueur avec le plus haut total gagne."
     ],
-    "image": "https://www.gigamic.com/3339-home_default/wizard.jpg"
+    "image": "https://www.gigamic.com/3339-home_default/wizard.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "yams",
@@ -6377,7 +6679,8 @@
       "Partie haute (1 à 6) : additionne les dés de la valeur choisie. Bonus de 35 si le total haut atteint 63.",
       "Partie basse : Brelan et Carré = somme des dés ; Full = 25 ; Petite suite = 30 ; Grande suite = 40 ; Yams = 50 ; Chance = somme des dés.",
       "Quand toutes les cases sont remplies, le plus grand total gagne."
-    ]
+    ],
+    "editeur": "Jeu traditionnel"
   },
   {
     "id": "yogi",
@@ -6396,7 +6699,8 @@
       "Un joueur qui ne parvient plus à tenir l'une de ses contraintes est éliminé.",
       "Le dernier joueur encore en lice gagne."
     ],
-    "image": "https://www.gigamic.com/3470-home_default/yogi.jpg"
+    "image": "https://www.gigamic.com/3470-home_default/yogi.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "zimzamzoum",
@@ -6416,7 +6720,8 @@
       "Trouver la bonne carte permet de la garder.",
       "À la fin, le joueur qui a rassemblé le plus de cartes gagne."
     ],
-    "image": "https://www.gigamic.com/4106-home_default/zim-zam-zoum.jpg"
+    "image": "https://www.gigamic.com/4106-home_default/zim-zam-zoum.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "eclairdegenie",
@@ -6436,7 +6741,8 @@
       "Le premier à donner la bonne solution remporte la carte.",
       "On enchaîne les cartes ; le joueur qui en gagne le plus l'emporte."
     ],
-    "image": "https://www.gigamic.com/4207-home_default/eclair-de-genie.jpg"
+    "image": "https://www.gigamic.com/4207-home_default/eclair-de-genie.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "ileenvue",
@@ -6456,7 +6762,8 @@
       "Les jetons d'observation et le dé rythment les décisions communes.",
       "L'équipage gagne s'il mène le bateau à bon port."
     ],
-    "image": "https://www.gigamic.com/3225-home_default/ile-en-vue-moussaillons-.jpg"
+    "image": "https://www.gigamic.com/3225-home_default/ile-en-vue-moussaillons-.jpg",
+    "editeur": "Gigamic"
   },
   {
     "id": "oeufpouroeuf",
@@ -6476,6 +6783,7 @@
       "Répondre juste et vite permet de gagner des cartes ; se tromper fait tout perdre le fil.",
       "Le joueur qui a rassemblé le plus d'œufs remporte la partie."
     ],
-    "image": "https://www.gigamic.com/4449-home_default/oeuf-pour-oeuf.jpg"
+    "image": "https://www.gigamic.com/4449-home_default/oeuf-pour-oeuf.jpg",
+    "editeur": "Gigamic"
   }
 ]

@@ -58,8 +58,14 @@ export default function AjouterJeu() {
     a.localeCompare(b, "fr"),
   );
 
+  // Éditeurs déjà utilisés, proposés en un clic (« Gigamic » revient souvent).
+  const editeursExistants = Array.from(
+    new Set(jeux.map((j) => j.editeur?.trim()).filter((e): e is string => !!e)),
+  ).sort((a, b) => a.localeCompare(b, "fr"));
+
   const [nom, setNom] = useState("");
   const [categorie, setCategorie] = useState("");
+  const [editeur, setEditeur] = useState("");
   const [jMin, setJMin] = useState("2");
   const [jMax, setJMax] = useState("4");
   const [duree, setDuree] = useState("30");
@@ -111,6 +117,7 @@ export default function AjouterJeu() {
   const appliquerJeu = useCallback((j: JeuSansId) => {
     setNom(j.nom ?? "");
     setCategorie(j.categorie ?? "");
+    setEditeur(j.editeur ?? "");
     setJMin(String(j.joueursMin ?? 2));
     setJMax(String(j.joueursMax ?? 4));
     setDuree(String(j.dureeMin ?? 30));
@@ -219,6 +226,7 @@ export default function AjouterJeu() {
       dureeMin: nombre(duree, 0),
       ageMin: nombre(age, 0),
       categorie: categorie.trim() || "Divers",
+      editeur: editeur.trim() || undefined,
       image: image.trim(),
       regles: regles
         .split("\n")
@@ -305,6 +313,32 @@ export default function AjouterJeu() {
             value={categorie}
             onChangeText={setCategorie}
             placeholder="Ou saisis une nouvelle catégorie"
+            placeholderTextColor={colors.placeholder}
+          />
+        </Champ>
+
+        <Champ label="Éditeur (optionnel)" styles={styles}>
+          {editeursExistants.length > 0 && (
+            <View style={[styles.chipsWrap, { marginBottom: 10 }]}>
+              {editeursExistants.map((ed) => {
+                const actif = editeur.trim().toLowerCase() === ed.toLowerCase();
+                return (
+                  <TouchableOpacity
+                    key={ed}
+                    style={[styles.chip, actif && styles.chipActif]}
+                    onPress={() => setEditeur(actif ? "" : ed)}
+                  >
+                    <Text style={[styles.chipTexte, actif && styles.chipTexteActif]}>{ed}</Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+          )}
+          <TextInput
+            style={styles.input}
+            value={editeur}
+            onChangeText={setEditeur}
+            placeholder="Ex. Gigamic"
             placeholderTextColor={colors.placeholder}
           />
         </Champ>

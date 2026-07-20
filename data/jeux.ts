@@ -36,6 +36,8 @@ export type Jeu = {
   dureeMin: number; // en minutes
   ageMin: number;
   categorie: string;
+  // Éditeur du jeu (ex. « Gigamic »). Optionnel : affiché sur la fiche s'il est renseigné.
+  editeur?: string;
   // Règles présentées en points courts (une entrée = un point).
   regles: string[];
   // URL d'une image de couverture, ou chemin d'une photo copiée dans l'app.
