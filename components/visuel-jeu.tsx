@@ -6,23 +6,17 @@ import { Image } from "expo-image";
 import { useState } from "react";
 import { StyleSheet, Text, View, type StyleProp, type ViewStyle } from "react-native";
 
-import { useTheme } from "@/context/theme";
 import { type Jeu } from "@/data/jeux";
-
-const COULEURS_CATEGORIE: Record<string, string> = {
-  Stratégie: "#378ADD",
-  Cartes: "#1D9E75",
-  Famille: "#EF9F27",
-};
+import { couleurJeu } from "@/lib/couleur-jeu";
 
 export function VisuelJeu({ jeu, style }: { jeu: Jeu; style?: StyleProp<ViewStyle> }) {
-  const { colors } = useTheme();
   const [erreur, setErreur] = useState(false);
   // L'initiale suit la taille du visuel : le même composant sert de bannière,
   // de vignette dans le catalogue et de miniature dans la bibliothèque.
   const [cote, setCote] = useState(0);
-  // Les catégories connues gardent leur couleur ; les autres suivent l'accent choisi.
-  const couleur = COULEURS_CATEGORIE[jeu.categorie] ?? colors.accent;
+  // Faute de photo, chaque jeu reçoit une tuile colorée selon sa catégorie,
+  // pour rester distinct dans les listes.
+  const couleur = couleurJeu(jeu);
   const montrerImage = !!jeu.image && !erreur;
 
   return (

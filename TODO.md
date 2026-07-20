@@ -2,13 +2,13 @@
 
 Liste des fonctionnalités à faire et des améliorations.
 
-**Progression : 68 / 70 — 97 %**
+**Progression : 69 / 80 — 86 %**
 
-`███████████████████░`
+`█████████████████░░░`
 
 ## Bugs à corriger
 
-_Aucun bug en attente. 🎉_
+- [ ] **Vérifier pourquoi tous les jeux n'apparaissent pas dans « Ajouter un jeu tout prêt »** — piste principale : le regroupement des extensions/éditions ajouté récemment (`app/bibliotheque.tsx` + `lib/regroupement.ts`) masque, hors recherche, les entrées dont le jeu de base est présent. C'est voulu, mais ça peut donner l'impression qu'il « manque » des jeux. Vérifier aussi que le catalogue distant (`catalogue.json`, 309 jeux) est bien récupéré et fusionné (`hooks/use-bibliotheque.ts`) et non bloqué par le cache ou le hors-ligne.
 
 ## Priorité haute
 
@@ -17,10 +17,17 @@ _Aucun bug en attente. 🎉_
 
 ## Qualité du projet
 
+- [ ] **Tester le fonctionnement des extensions et éditions** — vérifier le regroupement sous le jeu de base (masquage dans la liste, remontée par la recherche, section « Extensions & éditions » sur la fiche), la migration base (`jeu_type`, `jeu_parent`) et l'ajout depuis la bibliothèque.
 
 ## Nouvelles fonctionnalités
 
-_(rien en attente)_
+- [ ] **Désactiver l'import BoardGameGeek** — retirer/masquer l'accès BGG devenu inutile : bouton « Chercher sur BoardGameGeek » dans le formulaire, écran `/bgg`. Vérifier que le logo « Powered by BGG » n'est alors plus requis.
+- [ ] **Trier « Ajouter un jeu tout prêt »** — ajouter un tri (alphabétique, catégorie, nouveautés…) à l'écran `bibliotheque.tsx`, comme sur le catalogue principal.
+- [ ] **Ajouter de nouveaux jeux au catalogue** _(tâche récurrente)_ — enrichir régulièrement `catalogue.json` : nouvelles sorties, gammes complétées, et finalisation des fiches provisoires (voir `claude/gigamic-fiches-provisoires.md`).
+- [ ] **Afficher les règles officielles en PDF dans l'app** — se renseigner sur la faisabilité d'intégrer et d'afficher un PDF de règles directement dans la fiche du jeu (visionneuse embarquée, stockage, droits).
+- [ ] **Améliorer les interfaces de l'app** — soigner les écrans, par ex. les personnages dans les jeux : une photo ou un logo par personnage.
+- [ ] **Revoir le design de l'application et le logo** — rafraîchir l'identité visuelle : maquette globale (couleurs, typographie, écrans clés) et refonte du logo Meep Meep.
+- [ ] **Champ éditeur sur tous les jeux** — ajouter un champ `editeur` (ex. « Gigamic ») au type `Jeu`, à `catalogue.json` et à la base, l'afficher sur la fiche de jeu, et le renseigner pour chaque jeu.
 
 ## En attente
 
@@ -28,6 +35,7 @@ _(rien en attente)_
 
 ## Terminé
 
+- [x] Une photo pour tous les jeux : vraies photos du catalogue Gigamic récupérées pour 287 des 309 jeux (`image` renseigné dans `catalogue.json`), et repli visuel amélioré — une tuile colorée par catégorie (`lib/couleur-jeu.ts`, testé, branché dans `components/visuel-jeu.tsx`) pour que chaque jeu sans photo reste distinct. Restent sans photo : les 14 jeux non-Gigamic (Azul, Splendor, Dixit…) et ~7 jeux Gigamic absents du catalogue en ligne (5 ou Moins, Orapa Mine, Solacia, Mémoires d'une chamane, Bellevue — Parthenay) — à compléter à la main si tu as les visuels.
 - [x] Alimenter le catalogue depuis l'API BGG : étude (`docs/api-bgg-catalogue.md`) + script d'outillage `scripts/generer-catalogue.mjs` qui récupère les jeux depuis BGG (liste d'ids dans `scripts/bgg-ids.txt`), gère les 202/429 et le groupage, et ajoute au `catalogue.json` sans écraser les entrées existantes. BGG remplit la coquille (nom, image, joueurs, durée) ; règles/rôles/mode de score restent à compléter à la main.
 - [x] Logo « Powered by BGG » : composant d'attribution cliquable (`components/powered-by-bgg.tsx`) renvoyant vers BoardGameGeek (page du jeu depuis une fiche importée, accueil sinon), affiché sur l'écran de recherche BGG et les fiches de jeux importés. ⚠️ `assets/images/powered-by-bgg.png` est un placeholder — à remplacer par le logo officiel « Powered by BGG » (même nom de fichier).
 - [x] Catalogue de jeux distant (option A de l'étude) : `catalogue.json` (18 jeux) servi en statique depuis GitHub brut, récupéré et mis en cache par l'app (`lib/catalogue.ts`, `hooks/use-bibliotheque.ts`), fusionné dans l'écran « Ajouter un jeu tout prêt » (`app/bibliotheque.tsx`). Le distant prime par id (ajout/correction sans republier), hors-ligne préservé, aucune donnée personnelle. ⚠️ Reste à commit + push `catalogue.json` sur GitHub pour l'activer.
