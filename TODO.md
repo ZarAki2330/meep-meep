@@ -2,7 +2,7 @@
 
 Liste des fonctionnalités à faire et des améliorations.
 
-**Progression : 66 / 69 — 96 %**
+**Progression : 68 / 70 — 97 %**
 
 `███████████████████░`
 
@@ -24,10 +24,12 @@ _(rien en attente)_
 
 ## En attente
 
-- [ ] **Logo « Powered by BGG »** — obligatoire si l'application est déclarée publique.
+_(rien en attente)_
 
 ## Terminé
 
+- [x] Alimenter le catalogue depuis l'API BGG : étude (`docs/api-bgg-catalogue.md`) + script d'outillage `scripts/generer-catalogue.mjs` qui récupère les jeux depuis BGG (liste d'ids dans `scripts/bgg-ids.txt`), gère les 202/429 et le groupage, et ajoute au `catalogue.json` sans écraser les entrées existantes. BGG remplit la coquille (nom, image, joueurs, durée) ; règles/rôles/mode de score restent à compléter à la main.
+- [x] Logo « Powered by BGG » : composant d'attribution cliquable (`components/powered-by-bgg.tsx`) renvoyant vers BoardGameGeek (page du jeu depuis une fiche importée, accueil sinon), affiché sur l'écran de recherche BGG et les fiches de jeux importés. ⚠️ `assets/images/powered-by-bgg.png` est un placeholder — à remplacer par le logo officiel « Powered by BGG » (même nom de fichier).
 - [x] Catalogue de jeux distant (option A de l'étude) : `catalogue.json` (18 jeux) servi en statique depuis GitHub brut, récupéré et mis en cache par l'app (`lib/catalogue.ts`, `hooks/use-bibliotheque.ts`), fusionné dans l'écran « Ajouter un jeu tout prêt » (`app/bibliotheque.tsx`). Le distant prime par id (ajout/correction sans republier), hors-ligne préservé, aucune donnée personnelle. ⚠️ Reste à commit + push `catalogue.json` sur GitHub pour l'activer.
 - [x] Étude de faisabilité d'une API maison : document `docs/etude-api-maison.md` (usages, 3 niveaux d'ambition, hébergement et coûts à jour, obligations RGPD, recommandation par étapes). Conclusion : un catalogue JSON statique gratuit couvre l'usage principal (bibliothèque partagée) sans RGPD ; le backend complet (sync/comptes) n'est à envisager que si un vrai besoin émerge.
 - [x] Import BoardGameGeek réactivé : bouton « Chercher sur BoardGameGeek » remis dans le formulaire d'ajout (`app/import.tsx`), relié à l'écran `/bgg` (recherche + import) déjà en place. Parsing de l'API XML v2 conforme. ⚠️ Nécessite le jeton dans `.env.local` (`EXPO_PUBLIC_BGG_TOKEN=…`) puis `npx expo start -c`.

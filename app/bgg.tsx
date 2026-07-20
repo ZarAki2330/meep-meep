@@ -13,6 +13,7 @@ import {
 } from "react-native";
 
 import { Entete } from "@/components/entete";
+import { PoweredByBgg } from "@/components/powered-by-bgg";
 import { type AppColors } from "@/constants/theme-colors";
 import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
@@ -163,7 +164,7 @@ export default function ImporterBgg() {
         />
       )}
 
-      <Text style={styles.source}>Powered by BoardGameGeek</Text>
+      <PoweredByBgg />
     </View>
   );
 }

@@ -1,628 +1,2243 @@
 [
-  {
-    "id": "pandemie",
-    "nom": "Pandémie",
-    "description": "Quatre spécialistes s'allient contre quatre maladies. Vous gagnez ensemble, ou vous perdez ensemble.",
-    "joueursMin": 2,
-    "joueursMax": 4,
-    "dureeMin": 45,
-    "ageMin": 8,
-    "categorie": "Coopératif",
-    "scoreVictoire": "max",
-    "scoreMode": "cooperatif",
-    "regles": [
-      "Chaque joueur incarne un spécialiste et dispose de quatre actions par tour.",
-      "Les actions : se déplacer, retirer un cube de maladie, bâtir une station de recherche, échanger une carte ville, ou découvrir un remède.",
-      "Découvrir un remède demande de défausser cinq cartes de la même couleur, dans une station de recherche.",
-      "En fin de tour, on pioche deux cartes joueur, puis les villes de la pioche infection reçoivent un cube.",
-      "Une carte Épidémie accélère l'infection, contamine une nouvelle ville et ramène les villes déjà touchées sur le dessus de la pioche.",
-      "Quand une ville reçoit un quatrième cube, elle éclot : la maladie gagne toutes les villes voisines, en cascade.",
-      "Vous gagnez tous ensemble dès que les quatre remèdes sont découverts.",
-      "Vous perdez tous ensemble à la huitième éclosion, s'il manque des cubes d'une couleur, ou si la pioche joueur s'épuise."
-    ],
-    "roles": [
-      {
-        "nom": "Médecin",
-        "origine": "Retire tous les cubes d'une couleur d'un coup dans une ville."
-      },
-      {
-        "nom": "Scientifique",
-        "origine": "N'a besoin que de quatre cartes pour découvrir un remède."
-      },
-      {
-        "nom": "Répartiteur",
-        "origine": "Déplace le pion d'un autre joueur comme s'il était le sien."
-      },
-      {
-        "nom": "Chercheuse",
-        "origine": "Donne n'importe quelle carte de sa main à un joueur présent dans la même ville."
-      },
-      {
-        "nom": "Expert aux opérations",
-        "origine": "Bâtit une station de recherche sans défausser de carte."
-      },
-      {
-        "nom": "Planificateur d'urgence",
-        "origine": "Conserve une carte Événement déjà jouée, pour la rejouer plus tard."
-      },
-      {
-        "nom": "Militaire",
-        "origine": "Empêche l'infection et les éclosions dans sa ville et les villes voisines."
-      }
-    ]
+ {
+  "id": "6quiprend",
+  "nom": "6 qui prend !",
+  "description": "Posez vos cartes sans récolter de têtes de bœuf : ici, les points sont des pénalités.",
+  "joueursMin": 2,
+  "joueursMax": 10,
+  "dureeMin": 45,
+  "ageMin": 10,
+  "categorie": "Cartes",
+  "scoreVictoire": "min",
+  "seuilFin": 66,
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/6%20nimmt!.jpg?width=600",
+  "regles": [
+   "Chaque manche, tous les joueurs choisissent une carte en secret, puis on les révèle.",
+   "Les cartes se posent dans l'ordre croissant sur quatre rangées, à la suite de la carte la plus proche et inférieure.",
+   "Poser la 6e carte d'une rangée fait ramasser les 5 précédentes : leurs têtes de bœuf sont des points de pénalité.",
+   "À la fin des 10 cartes, chacun note ses têtes de bœuf.",
+   "Dès qu'un joueur atteint 66, la partie s'arrête : le joueur avec le MOINS de points gagne."
+  ]
+ },
+ {
+  "id": "7wonders",
+  "nom": "7 Wonders",
+  "description": "Trois âges, des cartes qu'on se passe, une merveille à bâtir. On compte les points à la fin.",
+  "joueursMin": 3,
+  "joueursMax": 7,
+  "dureeMin": 40,
+  "ageMin": 10,
+  "categorie": "Stratégie",
+  "scoreVictoire": "max",
+  "regles": [
+   "Chaque joueur dirige une cité et sa merveille, qu'il bâtit en plusieurs étapes.",
+   "À chaque tour, on choisit une carte de sa main en secret, puis on passe le reste de la main à son voisin.",
+   "Une carte se construit (en payant ses ressources), s'utilise pour une étape de merveille, ou se défausse contre 3 pièces.",
+   "On achète les ressources manquantes à ses voisins immédiats.",
+   "En fin d'âge, les conflits militaires opposent chaque cité à ses deux voisines.",
+   "Après le troisième âge, on additionne : militaire, pièces, merveille, bâtiments civils, commerciaux, guildes et science.",
+   "Le plus grand total gagne ; en cas d'égalité, le plus riche l'emporte."
+  ]
+ },
+ {
+  "id": "akropolis",
+  "nom": "Akropolis",
+  "description": "Bâtissez la plus prestigieuse cité de la Grèce antique en assemblant des quartiers en harmonie.",
+  "joueursMin": 2,
+  "joueursMax": 4,
+  "dureeMin": 25,
+  "ageMin": 8,
+  "categorie": "Stratégie",
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "À votre tour, prenez une tuile Cité disponible (les mieux placées se paient en Pierre) et ajoutez-la à votre cité.",
+   "Une tuile se pose à plat contre une tuile existante, ou en hauteur en s'appuyant sur des tuiles déjà posées.",
+   "Les carrières rapportent de la Pierre, qui sert à acheter les tuiles convoitées dans la réserve.",
+   "Chaque quartier a sa contrainte : Habitations regroupées, Marchés isolés, Casernes en périphérie, Temples entièrement entourés, Jardins libres.",
+   "Un quartier vaut son nombre de tuiles valides × son niveau (hauteur), multiplié par les Places de même couleur adjacentes.",
+   "En fin de partie, on additionne la valeur des quartiers et la Pierre restante : le plus de points l'emporte."
+  ]
+ },
+ {
+  "id": "aurum",
+  "nom": "Aurum",
+  "categorie": "Cartes",
+  "description": "Un jeu de plis d'alchimistes : remportez les bonnes cartes pour produire l'or le plus pur.",
+  "joueursMin": 2,
+  "joueursMax": 5,
+  "dureeMin": 30,
+  "ageMin": 10,
+  "scoreVictoire": "max",
+  "scoreMode": "manches",
+  "regles": [
+   "Chaque joueur incarne un alchimiste cherchant la combinaison de métaux qui donne le meilleur or.",
+   "On joue des manches de plis : chacun pose une carte Or, et le pli est remporté selon les règles de valeur.",
+   "Les cartes gagnées composent la « formule » que l'on cherche à optimiser.",
+   "Selon les combinaisons réalisées, on marque plus ou moins de points en fin de manche.",
+   "Après le nombre de manches prévu, le joueur au meilleur total l'emporte."
+  ]
+ },
+ {
+  "id": "avantgarde",
+  "nom": "Avant Garde",
+  "categorie": "Cartes",
+  "description": "Constituez une collection d'art d'avant-garde et attirez des mécènes pour votre vernissage.",
+  "joueursMin": 2,
+  "joueursMax": 5,
+  "dureeMin": 30,
+  "ageMin": 10,
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "On achète des œuvres d'art pour enrichir sa collection et attirer des mécènes aux pouvoirs spéciaux.",
+   "Plus la collection grandit, plus on débloque de moyens de marquer des points.",
+   "Les mécènes offrent des avantages qui orientent la stratégie de chacun.",
+   "Le but est de monter la plus belle exposition possible pour le vernissage public.",
+   "Le joueur qui totalise le plus de points remporte la partie."
+  ]
+ },
+ {
+  "id": "azul",
+  "nom": "Azul",
+  "description": "Des azulejos à poser, des lignes à compléter, et surtout des tuiles à ne pas laisser tomber.",
+  "joueursMin": 2,
+  "joueursMax": 4,
+  "dureeMin": 35,
+  "ageMin": 8,
+  "categorie": "Stratégie",
+  "scoreVictoire": "max",
+  "regles": [
+   "À ton tour, prends toutes les tuiles d'une même couleur sur une fabrique, ou toutes celles de cette couleur au centre.",
+   "Place-les sur une seule ligne de motif ; les tuiles en trop tombent sur ta ligne de plancher et coûtent des points.",
+   "Quand toutes les tuiles ont été prises, chaque ligne de motif complète envoie une tuile sur le mur.",
+   "Cette tuile marque des points selon les tuiles déjà voisines, en ligne et en colonne.",
+   "La partie s'arrête à la fin du tour où un joueur complète une ligne horizontale du mur.",
+   "Bonus final : 2 points par ligne complète, 7 par colonne, 10 par couleur posée cinq fois."
+  ]
+ },
+ {
+  "id": "bazarbizarre",
+  "nom": "Bazar Bizarre",
+  "description": "Attrapez le bon objet en un éclair… au prix d'une bonne gymnastique mentale.",
+  "joueursMin": 2,
+  "joueursMax": 8,
+  "dureeMin": 20,
+  "ageMin": 8,
+  "categorie": "Ambiance",
+  "scoreVictoire": "max",
+  "scoreMode": "objectif",
+  "regles": [
+   "Cinq objets en bois sont posés au centre ; on retourne une carte.",
+   "Si un objet apparaît dans sa vraie couleur, attrapez-le ; sinon, attrapez l'objet dont ni la forme ni la couleur ne figurent sur la carte.",
+   "Le plus rapide et juste remporte la carte ; se tromper en fait perdre une.",
+   "Le joueur avec le plus de cartes une fois la pioche épuisée gagne."
+  ]
+ },
+ {
+  "id": "bellavista",
+  "nom": "Bella Vista",
+  "categorie": "Familial",
+  "description": "Architectes d'une jolie bourgade, placez vos bâtiments pour remplir les contrats les plus payants.",
+  "joueursMin": 2,
+  "joueursMax": 4,
+  "dureeMin": 30,
+  "ageMin": 8,
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "On construit une bourgade avec ses parcs et ses rivières en posant des bâtiments avec soin.",
+   "Chaque emplacement doit respecter les contraintes imposées par la mairie.",
+   "Choisir sa place dans l'ordre de construction est stratégique, quitte à payer pour passer avant les autres.",
+   "On cherche à remplir les contrats les plus avantageux.",
+   "Le joueur qui a marqué le plus de points en fin de partie gagne."
+  ]
+ },
+ {
+  "id": "belote",
+  "nom": "Belote",
+  "description": "Le classique à quatre, en deux équipes. Première équipe à 1000 points.",
+  "joueursMin": 2,
+  "joueursMax": 2,
+  "dureeMin": 45,
+  "ageMin": 10,
+  "categorie": "Cartes",
+  "scoreVictoire": "max",
+  "scoreMode": "manches",
+  "seuilFin": 1000,
+  "equipes": true,
+  "regles": [
+   "Quatre joueurs, deux équipes assises en croix. Jeu de 32 cartes.",
+   "Après la donne, on retourne une carte : chacun peut prendre à cette couleur, qui devient l'atout.",
+   "À l'atout : Valet 20, Neuf 14, As 11, Dix 10, Roi 4, Dame 3. Hors atout : As 11, Dix 10, Roi 4, Dame 3, Valet 2.",
+   "On doit fournir la couleur demandée, couper si l'on ne l'a pas, et monter à l'atout.",
+   "Belote et Rebelote (Roi et Dame d'atout) valent 20 points à annoncer.",
+   "Le dernier pli vaut 10 points (« dix de der »). Le total d'une donne fait 162 points.",
+   "L'équipe preneuse doit faire plus de la moitié des points, sinon elle chute et l'adversaire empoche tout.",
+   "La première équipe à 1000 points gagne la partie."
+  ]
+ },
+ {
+  "id": "bohnanza",
+  "nom": "Bohnanza",
+  "categorie": "Cartes",
+  "description": "Plantez, échangez et vendez des haricots pour amasser le plus de pièces d'or.",
+  "joueursMin": 2,
+  "joueursMax": 7,
+  "dureeMin": 45,
+  "ageMin": 10,
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "Règle d'or : on ne réorganise jamais sa main, les cartes se jouent dans l'ordre où elles arrivent.",
+   "À son tour, on plante la première carte de sa main dans l'un de ses deux champs (chaque champ ne cultive qu'une variété de haricot).",
+   "On retourne ensuite deux cartes de la pioche : on les plante ou on les propose à l'échange avec les autres joueurs, qui peuvent aussi négocier leurs propres cartes.",
+   "Quand on récolte un champ, on gagne des pièces d'or selon le nombre de haricots, via le « baromètre » imprimé sur les cartes.",
+   "Après trois tours de pioche complète, le joueur qui a accumulé le plus de pièces d'or l'emporte."
+  ]
+ },
+ {
+  "id": "canardage",
+  "nom": "Canardage",
+  "categorie": "Ambiance",
+  "description": "Visez les canards de la file avec vos cibles… et sauvez les vôtres du tir groupé.",
+  "joueursMin": 3,
+  "joueursMax": 6,
+  "dureeMin": 20,
+  "ageMin": 7,
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "Une file de canards s'aligne au centre ; chaque joueur possède secrètement plusieurs canards dans cette file.",
+   "À son tour, on joue une carte action : poser une cible sur un canard, en viser deux d'un coup, mélanger la file, planquer un canard derrière un autre…",
+   "Quand le tir se déclenche, les canards visés par des cibles sont éliminés.",
+   "Il faut protéger ses propres canards tout en poussant les adversaires à tirer sur les leurs.",
+   "En fin de partie, le joueur dont il reste le plus de canards vivants (ou le meilleur score) l'emporte."
+  ]
+ },
+ {
+  "id": "carapate",
+  "nom": "Carapate",
+  "categorie": "Enfants",
+  "description": "Menez discrètement votre animal fétiche à la sortie du jardin avant les autres.",
+  "joueursMin": 2,
+  "joueursMax": 4,
+  "dureeMin": 20,
+  "ageMin": 6,
+  "scoreVictoire": "max",
+  "scoreMode": "objectif",
+  "regles": [
+   "Un parcours de tuiles Jardin relie la case Départ à la Barrière de sortie ; quatre pions Animaux y avancent.",
+   "Chaque joueur pioche en secret une carte lui attribuant l'animal qu'il veut voir sortir en premier.",
+   "À son tour, on fait avancer les animaux et on déclenche des effets de tuiles, sans dévoiler son favori.",
+   "Il faut faire progresser son animal tout en brouillant les pistes.",
+   "Le joueur dont l'animal franchit la Barrière en premier remporte la partie."
+  ]
+ },
+ {
+  "id": "carcassonne",
+  "nom": "Carcassonne",
+  "description": "Poser une tuile, placer un partisan, fermer une ville. Un paysage qui se construit.",
+  "joueursMin": 2,
+  "joueursMax": 5,
+  "dureeMin": 40,
+  "ageMin": 7,
+  "categorie": "Stratégie",
+  "scoreVictoire": "max",
+  "regles": [
+   "À ton tour, pioche une tuile et pose-la contre une tuile déjà posée, en respectant les raccords.",
+   "Tu peux ensuite y placer un partisan : voleur sur une route, chevalier dans une ville, moine dans une abbaye, paysan dans un pré.",
+   "Une route ou une ville terminée est marquée immédiatement, et les partisans reviennent à leur propriétaire.",
+   "Une abbaye entourée de huit tuiles rapporte 9 points.",
+   "En fin de partie, on compte les constructions inachevées et les prés.",
+   "Le plus grand total gagne."
+  ]
+ },
+ {
+  "id": "catan",
+  "nom": "Catan",
+  "description": "Bâtissez des colonies, échangez des ressources et étendez votre territoire.",
+  "joueursMin": 3,
+  "joueursMax": 4,
+  "dureeMin": 75,
+  "ageMin": 10,
+  "categorie": "Stratégie",
+  "scoreVictoire": "max",
+  "seuilFin": 10,
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/A%20game%20of%20Settlers%20of%20Catan.jpg?width=600",
+  "regles": [
+   "À ton tour, lance les deux dés : chaque joueur récolte les ressources des tuiles portant ce numéro et voisines de ses colonies.",
+   "Échange des ressources avec les autres joueurs ou avec la banque.",
+   "Construis des routes, des colonies et des villes, ou achète des cartes développement.",
+   "Le premier à atteindre 10 points de victoire remporte la partie."
+  ]
+ },
+ {
+  "id": "chronomots",
+  "nom": "Chrono-Mots",
+  "categorie": "Coopératif",
+  "description": "Tous ensemble contre le sablier : validez un maximum de mots avant d'épuiser la pioche.",
+  "joueursMin": 2,
+  "joueursMax": 8,
+  "dureeMin": 20,
+  "ageMin": 10,
+  "scoreVictoire": "max",
+  "scoreMode": "cooperatif",
+  "regles": [
+   "Les joueurs forment une équipe unique et jouent ensemble contre le jeu.",
+   "Des cartes Lettre sont disposées ; il faut composer les mots demandés par les cartes Mots en n'utilisant que les lettres disponibles.",
+   "Le sablier impose un rythme : on valide le plus de mots possibles avant que la pile de cartes Lettre ne soit épuisée.",
+   "Chaque mot correctement formé est mis de côté comme réussite commune.",
+   "L'équipe gagne si elle valide suffisamment de mots avant la fin de la réserve de lettres."
+  ]
+ },
+ {
+  "id": "clacclac",
+  "nom": "Clac Clac",
+  "categorie": "Rapidité",
+  "description": "Attrapez à la volée les jetons aimantés qui correspondent au dé.",
+  "joueursMin": 2,
+  "joueursMax": 6,
+  "dureeMin": 15,
+  "ageMin": 6,
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "Les jetons aimantés sont étalés au centre, faces symboles visibles.",
+   "À son tour, un joueur lance les deux dés (une couleur et un symbole).",
+   "Tous se précipitent pour attraper un jeton portant le bon symbole ; les jetons s'aimantent et se ramassent alors en pile d'un seul geste (« clac clac »).",
+   "Attention aux erreurs : un mauvais jeton fait perdre des points ou reposer sa pile.",
+   "À la fin, le joueur qui a rassemblé le plus de jetons l'emporte."
+  ]
+ },
+ {
+  "id": "cocotaki",
+  "nom": "Cocotaki",
+  "categorie": "Ambiance",
+  "description": "Un jeu de défausse déjanté où chaque carte animal se joue en imitant son cri.",
+  "joueursMin": 2,
+  "joueursMax": 10,
+  "dureeMin": 20,
+  "ageMin": 5,
+  "scoreVictoire": "max",
+  "scoreMode": "objectif",
+  "regles": [
+   "On se défausse à tour de rôle en posant une carte de la même couleur ou du même animal que la précédente.",
+   "En posant une carte animal, il faut pousser son cri — sauf le coq rouge, où l'on doit au contraire rester silencieux.",
+   "Des cartes spéciales inversent le sens, font passer un tour ou obligent à piocher.",
+   "Oublier de crier (ou crier au mauvais moment) fait piocher une carte de pénalité.",
+   "Le premier joueur à s'être débarrassé de toutes ses cartes remporte la manche."
+  ]
+ },
+ {
+  "id": "codenames",
+  "nom": "Codenames",
+  "description": "Deux équipes, une grille de mots, un seul indice à la fois. Trouver ses agents avant l'autre équipe.",
+  "joueursMin": 2,
+  "joueursMax": 2,
+  "dureeMin": 20,
+  "ageMin": 10,
+  "categorie": "Ambiance",
+  "scoreVictoire": "max",
+  "scoreMode": "objectif",
+  "equipes": true,
+  "regles": [
+   "25 cartes-mots forment une grille. Une carte-clé, vue des seuls maîtres-espions, indique qui appartient à quelle équipe.",
+   "Le maître-espion donne un indice d'un seul mot, suivi d'un nombre : le nombre de mots visés.",
+   "Son équipe touche les mots qu'elle croit être les siens, un par un.",
+   "Un mot adverse ou neutre met fin au tour. Le mot Assassin fait perdre immédiatement.",
+   "La première équipe à trouver tous ses agents gagne."
+  ]
+ },
+ {
+  "id": "crazycups",
+  "nom": "Crazy Cups",
+  "categorie": "Rapidité",
+  "description": "Alignez ou empilez vos gobelets comme sur la carte, puis sonnez la cloche le premier !",
+  "joueursMin": 2,
+  "joueursMax": 4,
+  "dureeMin": 15,
+  "ageMin": 6,
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "Chaque joueur dispose de cinq gobelets de couleurs différentes.",
+   "On retourne une carte : elle montre des objets dont les couleurs et positions indiquent comment ranger ses gobelets, empilés ou alignés.",
+   "Tous jouent en même temps pour reproduire le bon agencement le plus vite possible.",
+   "Le premier à avoir terminé sonne la cloche : s'il a juste, il remporte la carte.",
+   "Le joueur qui a gagné le plus de cartes remporte la partie."
+  ]
+ },
+ {
+  "id": "cyclades",
+  "nom": "Cyclades",
+  "description": "Achetez les faveurs des dieux grecs pour bâtir vos Métropoles.",
+  "joueursMin": 2,
+  "joueursMax": 5,
+  "dureeMin": 60,
+  "ageMin": 12,
+  "categorie": "Stratégie",
+  "scoreVictoire": "max",
+  "scoreMode": "objectif",
+  "regles": [
+   "Chaque tour, misez de l'or aux enchères sur les dieux (Poséidon, Arès, Zeus, Athéna, Apollon).",
+   "Le dieu obtenu détermine vos actions possibles : flottes, armées, bâtiments, prêtres, philosophes.",
+   "Construisez et rassemblez les éléments nécessaires pour ériger une Métropole.",
+   "Le premier à contrôler deux Métropoles remporte la partie."
+  ]
+ },
+ {
+  "id": "difference",
+  "nom": "Différence",
+  "categorie": "Rapidité",
+  "description": "Repérez plus vite que tout le monde les différences entre votre carte et celle du centre.",
+  "joueursMin": 2,
+  "joueursMax": 5,
+  "dureeMin": 15,
+  "ageMin": 6,
+  "scoreVictoire": "max",
+  "scoreMode": "objectif",
+  "regles": [
+   "Chaque joueur a une pile de cartes d'une même illustration (cirque, château, lac ou dragon) ; une carte est posée au centre.",
+   "Tout le monde joue en même temps et cherche les deux différences entre sa première carte et celle du centre.",
+   "Le premier à les trouver recouvre la carte centrale avec la sienne, qui devient la nouvelle référence.",
+   "On enchaîne aussitôt avec la carte suivante de sa pile.",
+   "Le premier joueur à avoir posé toutes ses cartes remporte la partie."
+  ]
+ },
+ {
+  "id": "dixit",
+  "nom": "Dixit",
+  "description": "Une phrase sur une image onirique : ni trop claire, ni trop obscure. Premier à 30 points.",
+  "joueursMin": 3,
+  "joueursMax": 6,
+  "dureeMin": 30,
+  "ageMin": 8,
+  "categorie": "Ambiance",
+  "scoreVictoire": "max",
+  "seuilFin": 30,
+  "regles": [
+   "Le conteur choisit une carte de sa main et prononce une phrase, un mot ou un son qui l'évoque.",
+   "Les autres joueurs proposent chacun une carte censée coller à cette phrase.",
+   "On mélange les cartes, on les révèle, et chacun vote pour celle qu'il croit être celle du conteur.",
+   "Si tout le monde ou personne ne trouve : le conteur ne marque rien, les autres marquent 2 points.",
+   "Sinon, le conteur et ceux qui l'ont trouvé marquent 3 points.",
+   "Chaque joueur marque 1 point par vote reçu sur sa propre carte.",
+   "Le premier à 30 points gagne."
+  ]
+ },
+ {
+  "id": "dodelido",
+  "nom": "Dodelido",
+  "description": "Un jeu de rapidité où tortue et crocodile sèment la pagaille.",
+  "joueursMin": 2,
+  "joueursMax": 6,
+  "dureeMin": 15,
+  "ageMin": 8,
+  "categorie": "Ambiance",
+  "scoreVictoire": "max",
+  "scoreMode": "objectif",
+  "regles": [
+   "À votre tour, posez une carte sur l'une des trois piles de défausse.",
+   "Annoncez aussitôt la bonne caractéristique parmi les cartes visibles : une espèce en double, une couleur en double, « rien », ou « Dodelido ! ».",
+   "La tortue ralentit tout, le crocodile emballe tout : gare aux erreurs.",
+   "Le premier à s'être débarrassé de toutes ses cartes gagne."
+  ]
+ },
+ {
+  "id": "dorfromantik",
+  "nom": "Dorfromantik",
+  "description": "Posez des tuiles pour composer de beaux paysages, ensemble, et battez votre score.",
+  "joueursMin": 1,
+  "joueursMax": 6,
+  "dureeMin": 45,
+  "ageMin": 8,
+  "categorie": "Coopératif",
+  "scoreVictoire": "max",
+  "scoreMode": "cooperatif",
+  "regles": [
+   "Jeu coopératif : à tour de rôle, posez une tuile hexagonale adjacente aux autres.",
+   "Faites correspondre les terrains (forêts, champs, villages, rails, rivières…) pour former de grands paysages.",
+   "Remplissez les tuiles Drapeau en atteignant leurs objectifs, et gagnez des tuiles bonus.",
+   "Toute la table vise un score commun, à améliorer de partie en partie (mode campagne)."
+  ]
+ },
+ {
+  "id": "dragonsdesmers",
+  "nom": "Dragons des Mers",
+  "categorie": "Familial",
+  "description": "Incarnez des dragons marins, coulez les navires pirates et amassez leurs trésors.",
+  "joueursMin": 2,
+  "joueursMax": 4,
+  "dureeMin": 30,
+  "ageMin": 8,
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "Des navires pirates s'aventurent dans les mers ; en dragons des mers, vous protégez les royaumes marins.",
+   "À son tour, on agit pour couler des bateaux pirates et récupérer les trésors qu'ils transportent.",
+   "Les trésors collectés et les créatures protégées rapportent des points.",
+   "On adapte sa stratégie selon les navires qui apparaissent.",
+   "Le joueur qui a accumulé le plus de points l'emporte."
+  ]
+ },
+ {
+  "id": "dueldescrocs",
+  "nom": "Duel d'Escrocs",
+  "categorie": "Bluff",
+  "description": "Deux bandits se partagent le butin… en trichant, se battant et se volant pour la plus grosse part.",
+  "joueursMin": 2,
+  "joueursMax": 2,
+  "dureeMin": 20,
+  "ageMin": 8,
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "Un groupe de bandits se répartit le butin d'un coup, mais chacun veut une part plus grosse.",
+   "Sur son tour, on joue des cartes pour tricher, se battre ou voler la part de l'adversaire.",
+   "Il faut anticiper les coups fourrés de l'autre et bluffer au bon moment.",
+   "Les cartes remportées déterminent la valeur du butin amassé.",
+   "Le joueur qui rafle la plus grosse part gagne la partie."
+  ]
+ },
+ {
+  "id": "duke",
+  "nom": "Duke",
+  "categorie": "Stratégie",
+  "description": "Des affrontements de cartes en plusieurs manches : posez votre huitième carte pour l'emporter.",
+  "joueursMin": 2,
+  "joueursMax": 4,
+  "dureeMin": 30,
+  "ageMin": 10,
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "Chaque joueur dispose d'une main de cartes et d'une ligne de défense.",
+   "À son tour, on peut passer, ou « contrer » en posant une carte identique à la carte d'attaque en cours — ce qui permet ensuite de poser sa propre carte d'attaque.",
+   "Les cartes Duke ont des effets spéciaux qui bousculent l'ordre des affrontements.",
+   "Une manche se gagne en mettant en jeu sa huitième et dernière carte : celle-ci indique le nombre de points de victoire remportés.",
+   "On enchaîne les manches ; le joueur qui atteint le total de points fixé gagne la partie."
+  ]
+ },
+ {
+  "id": "defifoo",
+  "nom": "Défifoo",
+  "categorie": "Ambiance",
+  "description": "Deux équipes s'affrontent sur des défis loufoques, la troisième arbitre.",
+  "joueursMin": 3,
+  "joueursMax": 9,
+  "dureeMin": 30,
+  "ageMin": 8,
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "On joue idéalement en trois équipes : deux s'affrontent sur un défi pendant que la troisième arbitre.",
+   "Les cartes Défi proposent des épreuves variées (adresse, rapidité, dessin, mime…) à l'aide du matériel fourni (dés, toupies, mètres-rubans, sablier).",
+   "L'équipe qui remporte le défi marque le point ; les rôles tournent à chaque manche.",
+   "L'arbitrage garantit que les règles de chaque épreuve sont respectées.",
+   "La première équipe à remporter sept défis gagne la partie."
+  ]
+ },
+ {
+  "id": "dekal",
+  "nom": "Dékal",
+  "categorie": "Cartes",
+  "description": "Agencez votre grille de cartes pour marquer le moins de points possible.",
+  "joueursMin": 2,
+  "joueursMax": 5,
+  "dureeMin": 20,
+  "ageMin": 8,
+  "scoreVictoire": "min",
+  "scoreMode": "compteur",
+  "regles": [
+   "Chaque joueur dispose 16 cartes en une grille de 4 sur 4 devant lui.",
+   "À son tour, on pioche ou on récupère une carte pour l'échanger avec une case de sa grille.",
+   "Aligner des cartes qui se suivent ou se ressemblent permet de neutraliser des points.",
+   "Les manœuvres des adversaires peuvent désorganiser la stratégie que l'on avait prévue.",
+   "En fin de partie, on compte les points de sa grille : le plus petit total gagne."
+  ]
+ },
+ {
+  "id": "detrak",
+  "nom": "Détrak",
+  "description": "Un roll & write où tout le monde joue les mêmes dés : à vous de bien les placer.",
+  "joueursMin": 1,
+  "joueursMax": 6,
+  "dureeMin": 15,
+  "ageMin": 8,
+  "categorie": "Famille",
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "Lancez les deux dés (six symboles) ; tous les joueurs notent les symboles obtenus dans leur grille, en même temps.",
+   "On marque des points selon les symboles regroupés dans chaque ligne et chaque colonne.",
+   "Le hasard des dés est le même pour tous : c'est le placement qui fait la différence.",
+   "Le meilleur total de points l'emporte."
+  ]
+ },
+ {
+  "id": "galerapagos",
+  "nom": "Galèrapagos",
+  "description": "Naufragés sur une île, survivez et bâtissez un radeau pour fuir avant l'ouragan — alliances et trahisons comprises.",
+  "joueursMin": 3,
+  "joueursMax": 12,
+  "dureeMin": 45,
+  "ageMin": 10,
+  "categorie": "Ambiance",
+  "scoreVictoire": "max",
+  "scoreMode": "objectif",
+  "regles": [
+   "Vous êtes des naufragés : il faut survivre (eau et nourriture sont rares) et construire ensemble un radeau pour quitter l'île avant l'ouragan.",
+   "Chaque tour, on récolte les ressources disponibles et on décide — par le marchandage, le vote ou la force — qui en profite.",
+   "Il n'y en a pas pour tout le monde : alliances, bluff et trahisons sont au cœur du jeu.",
+   "À la fin, les naufragés qui parviennent à quitter l'île à temps gagnent… si tant est que quelqu'un ait survécu."
+  ]
+ },
+ {
+  "id": "gangdecastors",
+  "nom": "Gang de castors",
+  "categorie": "Mémoire",
+  "description": "Mémorisez vos cartes cachées et visez le plus petit total pour gagner.",
+  "joueursMin": 2,
+  "joueursMax": 6,
+  "dureeMin": 15,
+  "ageMin": 6,
+  "scoreVictoire": "min",
+  "scoreMode": "compteur",
+  "regles": [
+   "Chaque joueur a quatre cartes posées face cachée devant lui et n'a le droit d'en regarder que deux au début.",
+   "À son tour, on pioche une carte : soit on l'échange avec l'une des siennes (que l'on défausse), soit on la défausse directement.",
+   "Certaines cartes déclenchent des pouvoirs : regarder une de ses cartes, espionner celle d'un adversaire, ou échanger deux cartes.",
+   "Le but est de faire baisser la valeur de ses quatre cartes en mémorisant ce que l'on a.",
+   "Quand un joueur pense avoir le plus petit total, il stoppe la manche ; on additionne, et le plus petit score gagne."
+  ]
+ },
+ {
+  "id": "gyges",
+  "nom": "Gyges",
+  "description": "Faites traverser une pièce jusqu'au but adverse, dans un ballet où rien n'est à personne.",
+  "joueursMin": 2,
+  "joueursMax": 2,
+  "dureeMin": 15,
+  "ageMin": 8,
+  "categorie": "Abstrait",
+  "scoreVictoire": "max",
+  "scoreMode": "objectif",
+  "regles": [
+   "Plateau de 36 cases avec une case « but » de chaque côté ; 12 pièces de trois tailles (simples, doubles, triples).",
+   "Les pièces n'appartiennent à personne : vous ne pouvez déplacer qu'une pièce de la rangée la plus proche de vous.",
+   "Une pièce avance d'autant de cases que sa taille (1, 2 ou 3) ; en arrivant sur une autre pièce, on peut rebondir et poursuivre avec elle.",
+   "But : amener n'importe quelle pièce sur la case « but » adverse."
+  ]
+ },
+ {
+  "id": "halligalli",
+  "nom": "Halli Galli",
+  "description": "Sonnez la cloche dès que cinq fruits identiques apparaissent !",
+  "joueursMin": 2,
+  "joueursMax": 6,
+  "dureeMin": 15,
+  "ageMin": 6,
+  "categorie": "Ambiance",
+  "scoreVictoire": "max",
+  "scoreMode": "objectif",
+  "regles": [
+   "À tour de rôle, chacun retourne une de ses cartes au centre de la table.",
+   "Dès que cinq fruits d'une même sorte sont visibles (toutes cartes confondues), sonnez la cloche le premier.",
+   "Le plus rapide remporte les cartes retournées ; sonner à tort coûte des cartes.",
+   "Le joueur qui finit par récupérer toutes les cartes gagne."
+  ]
+ },
+ {
+  "id": "hilo",
+  "nom": "Hilo",
+  "categorie": "Cartes",
+  "description": "Faites baisser la valeur de votre grille de neuf cartes pour finir avec le moins de points.",
+  "joueursMin": 2,
+  "joueursMax": 8,
+  "dureeMin": 20,
+  "ageMin": 8,
+  "scoreVictoire": "min",
+  "scoreMode": "compteur",
+  "regles": [
+   "Chaque joueur reçoit neuf cartes disposées face cachée en grille de 3 sur 3, sans les regarder.",
+   "À son tour, on pioche une carte pour remplacer l'une des siennes par une valeur plus faible, ou on la défausse.",
+   "Aligner trois cartes identiques dans une colonne les élimine et supprime leurs points.",
+   "Dès qu'un joueur a retourné toutes ses cartes, la manche se termine pour tout le monde.",
+   "On additionne les valeurs restantes ; après plusieurs manches, le plus petit total gagne."
+  ]
+ },
+ {
+  "id": "imagides",
+  "nom": "Imagidés",
+  "categorie": "Ambiance",
+  "description": "Douze dés d'images pour raconter, deviner et laisser filer l'imagination, dès 4 ans.",
+  "joueursMin": 2,
+  "joueursMax": 12,
+  "dureeMin": 20,
+  "ageMin": 4,
+  "scoreVictoire": "max",
+  "scoreMode": "objectif",
+  "regles": [
+   "Le jeu contient douze dés gravés, chacun sur un thème, soit 72 images différentes.",
+   "Selon le mode choisi, on lance les dés pour raconter une histoire, faire deviner ou associer des images.",
+   "Les règles proposent plusieurs variantes coopératives ou compétitives adaptées à l'âge des joueurs.",
+   "L'imagination et l'observation sont au cœur de chaque manche.",
+   "Le vainqueur dépend du mode retenu ; l'essentiel est de faire travailler son imaginaire."
+  ]
+ },
+ {
+  "id": "ipso",
+  "nom": "Ipso",
+  "categorie": "Cartes",
+  "description": "Bâtissez une pyramide de suites croissantes pour marquer un maximum de points.",
+  "joueursMin": 2,
+  "joueursMax": 6,
+  "dureeMin": 20,
+  "ageMin": 8,
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "Chaque joueur reçoit des cartes numérotées et forme devant lui une pyramide de quatre rangées face cachée, coiffée d'une carte Étoile.",
+   "À son tour, on cherche à composer des lignes de cartes en ordre croissant.",
+   "On révèle et réorganise progressivement sa pyramide pour la rendre la plus payante possible.",
+   "Chaque suite valide rapporte des points en fin de partie.",
+   "Le joueur au meilleur total remporte la partie."
+  ]
+ },
+ {
+  "id": "justone",
+  "nom": "Just One",
+  "description": "Faire deviner un mot en écrivant un indice chacun — mais les indices identiques s'annulent.",
+  "joueursMin": 3,
+  "joueursMax": 7,
+  "dureeMin": 20,
+  "ageMin": 8,
+  "categorie": "Coopératif",
+  "scoreVictoire": "max",
+  "scoreMode": "cooperatif",
+  "regles": [
+   "À chaque manche, un joueur devine ; les autres voient le mot mystère.",
+   "Chacun écrit en secret un seul mot comme indice.",
+   "On compare les indices : tous les doublons sont retirés, et le devineur ne les verra jamais.",
+   "Le devineur propose une réponse, une seule fois.",
+   "Bonne réponse : la carte est gagnée. Mauvaise réponse : la carte est perdue, et la suivante est écartée.",
+   "Passer ne fait perdre que la carte en cours. Vous jouez treize cartes, ensemble."
+  ]
+ },
+ {
+  "id": "katamino",
+  "nom": "Katamino",
+  "description": "Un casse-tête de pièces à emboîter, en solo comme en duel.",
+  "joueursMin": 1,
+  "joueursMax": 2,
+  "dureeMin": 15,
+  "ageMin": 3,
+  "categorie": "Casse-tête",
+  "scoreVictoire": "max",
+  "scoreMode": "objectif",
+  "regles": [
+   "Assemblez les pièces Pentaminos pour remplir sans trou la zone délimitée par le curseur.",
+   "En solo, relevez des défis de difficulté croissante en ajoutant des pièces.",
+   "En duel, le premier à remplir sa zone gagne."
+  ]
+ },
+ {
+  "id": "klask",
+  "nom": "Klask",
+  "description": "Un duel d'adresse magnétique : envoyez la bille dans le but adverse.",
+  "joueursMin": 2,
+  "joueursMax": 2,
+  "dureeMin": 10,
+  "ageMin": 8,
+  "categorie": "Adresse",
+  "scoreVictoire": "max",
+  "seuilFin": 6,
+  "scoreMode": "compteur",
+  "regles": [
+   "Sous le plateau, une poignée aimantée commande votre pion.",
+   "Marquez un point en envoyant la bille dans le but de l'adversaire.",
+   "Vous marquez aussi si l'adversaire tombe dans son propre trou (« Klask ») ou capte deux des aimants blancs.",
+   "Le premier à 6 points remporte la partie."
+  ]
+ },
+ {
+  "id": "kontour",
+  "nom": "Kontour",
+  "categorie": "Dessin",
+  "description": "Faites deviner un mot en 15 traits maximum : dessinateur et devineur marquent ensemble.",
+  "joueursMin": 3,
+  "joueursMax": 8,
+  "dureeMin": 30,
+  "ageMin": 8,
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "À son tour, un joueur pioche une carte mot et tente de le faire deviner en dessinant.",
+   "Contrainte : il ne dispose que de quinze traits de crayon au maximum, et d'un sablier de 30 secondes.",
+   "Dès qu'un joueur devine le mot, le dessinateur et le devineur marquent tous les deux des points.",
+   "On tourne pour que chacun dessine à son tour.",
+   "Le premier joueur à totaliser 10 points remporte la partie."
+  ]
+ },
+ {
+  "id": "kumikumi",
+  "nom": "Kumi Kumi",
+  "categorie": "Rapidité",
+  "description": "Empilez vos six Kumi pour reproduire le motif de la carte, plus vite que les autres.",
+  "joueursMin": 2,
+  "joueursMax": 4,
+  "dureeMin": 15,
+  "ageMin": 6,
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "Chaque joueur dispose de six Kumi colorés à empiler.",
+   "On retourne une carte Thème indiquant le motif de couleurs à reproduire.",
+   "Tous s'activent en même temps ; le premier à crier « Kumi Kumi ! » et à toucher la carte déclenche la vérification.",
+   "Si son empilage est correct, il remporte la carte ; sinon la manche continue pour les autres.",
+   "Le premier joueur à réunir trois cartes Thème gagne la partie."
+  ]
+ },
+ {
+  "id": "keblo",
+  "nom": "Kéblo",
+  "categorie": "Coopératif",
+  "description": "Comptez ensemble jusqu'à 20 sans vous tromper, malgré des contraintes qui s'accumulent.",
+  "joueursMin": 3,
+  "joueursMax": 8,
+  "dureeMin": 15,
+  "ageMin": 8,
+  "scoreVictoire": "max",
+  "scoreMode": "cooperatif",
+  "regles": [
+   "Les joueurs doivent compter tous ensemble de 1 à 20, chacun annonçant un nombre à son tour dans le sens horaire.",
+   "À chaque tour, une nouvelle contrainte s'ajoute (remplacer un nombre par un mot, un geste, se taire…).",
+   "Il faut respecter simultanément toutes les contraintes déjà en jeu sans se tromper.",
+   "La moindre erreur ou hésitation fait échouer la tentative et l'on recommence.",
+   "Le groupe gagne s'il atteint 20 en tenant toutes les contraintes."
+  ]
+ },
+ {
+  "id": "lama",
+  "nom": "Lama",
+  "description": "Défaussez-vous à temps : les cartes en main coûtent cher.",
+  "joueursMin": 2,
+  "joueursMax": 6,
+  "dureeMin": 20,
+  "ageMin": 8,
+  "categorie": "Ambiance",
+  "scoreVictoire": "min",
+  "scoreMode": "compteur",
+  "regles": [
+   "À votre tour : posez une carte de même valeur ou juste supérieure, piochez, ou quittez la manche.",
+   "But : se débarrasser de ses cartes ; celles qui restent en main donnent des points de pénalité.",
+   "Chaque valeur en main compte une fois (le Lama vaut 10) — accumuler est risqué.",
+   "On enchaîne les manches ; le joueur avec le MOINS de points gagne."
+  ]
+ },
+ {
+  "id": "pokercafards",
+  "nom": "Le poker des cafards",
+  "categorie": "Bluff",
+  "description": "Refilez vos bestioles aux autres à coups de bluff… sans en accumuler huit de la même sorte.",
+  "joueursMin": 2,
+  "joueursMax": 6,
+  "dureeMin": 20,
+  "ageMin": 8,
+  "scoreVictoire": "max",
+  "scoreMode": "objectif",
+  "regles": [
+   "Les cartes montrent huit bestioles (cafard, rat, scorpion, araignée…) en plusieurs exemplaires.",
+   "On glisse une carte face cachée à un adversaire en annonçant une bestiole — la vérité ou un bluff.",
+   "Le joueur visé doit deviner si l'annonce est vraie ou fausse ; il peut aussi regarder la carte et la repasser à quelqu'un d'autre en relançant une annonce.",
+   "Celui qui se trompe (ou qui est démasqué) récupère la carte, posée face visible devant lui.",
+   "On perd dès qu'on accumule quatre exemplaires d'une même bestiole ; le dernier joueur épargné gagne."
+  ]
+ },
+ {
+  "id": "leda",
+  "nom": "Leda",
+  "categorie": "Stratégie",
+  "description": "Menez votre clan animal dans un royaume oublié, entre ruse, adaptation et ambition.",
+  "joueursMin": 2,
+  "joueursMax": 4,
+  "dureeMin": 45,
+  "ageMin": 10,
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "Chaque joueur dirige un clan animal (chats, pandas, requins, scorpions…) avec ses ambitions propres.",
+   "On joue ses cartes pour développer sa civilisation, s'adapter et prendre l'avantage sur les rivaux.",
+   "La ruse compte autant que la force : anticipation et placement font la différence.",
+   "Les actions réussies font progresser son clan et rapportent des points.",
+   "Le joueur dont la civilisation prospère le mieux remporte la partie."
+  ]
+ },
+ {
+  "id": "cinqrois",
+  "nom": "Les cinq rois",
+  "categorie": "Cartes",
+  "description": "Un rami évolutif : à chaque manche, une carte de plus et un nouveau joker.",
+  "joueursMin": 2,
+  "joueursMax": 7,
+  "dureeMin": 45,
+  "ageMin": 8,
+  "scoreVictoire": "min",
+  "scoreMode": "compteur",
+  "regles": [
+   "On joue onze manches : la première avec 3 cartes en main, puis une de plus à chaque fois, jusqu'à 13.",
+   "Le rang du joker « sauvage » change à chaque manche (les 3, puis les 4, etc.) et remplace n'importe quelle carte.",
+   "À son tour, on pioche puis on défausse en cherchant à ranger toute sa main en suites et en groupes.",
+   "Dès qu'un joueur pose l'intégralité de sa main, les autres comptabilisent les points de leurs cartes non combinées.",
+   "Après les onze manches, le plus petit total remporte la partie."
+  ]
+ },
+ {
+  "id": "lineit",
+  "nom": "Line-It",
+  "categorie": "Cartes",
+  "description": "Composez des lignes de cartes croissantes ou décroissantes, et sachez vous arrêter à temps.",
+  "joueursMin": 2,
+  "joueursMax": 6,
+  "dureeMin": 20,
+  "ageMin": 8,
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "On dispose de cartes numérotées en quatre couleurs, de jetons Bonus/Malus et de cartes Pari.",
+   "Le but est de réaliser une ligne de cartes, croissante ou décroissante, pour marquer des points.",
+   "À chaque tour, on estime s'il vaut mieux empocher ses points et repartir sur une nouvelle ligne, ou pousser sa chance.",
+   "Les paris et jetons Jackpot ajoutent de la tension à la prise de risque.",
+   "Le joueur au meilleur total de points l'emporte."
+  ]
+ },
+ {
+  "id": "littoral",
+  "nom": "Littoral",
+  "categorie": "Familial",
+  "description": "Aménagez votre côte plage après plage et ramassez le plus beau butin de coquillages.",
+  "joueursMin": 2,
+  "joueursMax": 4,
+  "dureeMin": 30,
+  "ageMin": 8,
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "À son tour, on choisit une tuile (plage, fouille…) que l'on ajoute à son littoral.",
+   "En posant une plage, on ramasse des coquillages dans la mer, à raison d'un par plage de son littoral.",
+   "Il faut garder ses plages les unes à côté des autres pour composer une côte cohérente.",
+   "Les coquillages et les aménagements rapportent des points en fin de partie.",
+   "Le joueur qui a bâti le littoral le plus riche gagne."
+  ]
+ },
+ {
+  "id": "lobo77",
+  "nom": "Lobo 77",
+  "description": "Ne faites jamais dépasser 77 au total commun… ou vous y laisserez un jeton.",
+  "joueursMin": 2,
+  "joueursMax": 8,
+  "dureeMin": 20,
+  "ageMin": 8,
+  "categorie": "Ambiance",
+  "scoreVictoire": "max",
+  "scoreMode": "objectif",
+  "regles": [
+   "On joue des cartes tour à tour en additionnant leur valeur à un total commun.",
+   "Faire dépasser 77 au total, ou tomber pile sur un « doublé » (11, 22, 33…), vous coûte un jeton.",
+   "Des cartes spéciales inversent le sens, changent le total ou sautent un joueur.",
+   "Sans plus de jeton, vous êtes éliminé ; le dernier joueur en lice gagne."
+  ]
+ },
+ {
+  "id": "looot",
+  "nom": "Looot",
+  "description": "Amassez ressources et bâtiments pour faire de votre fjord viking le plus prospère.",
+  "joueursMin": 1,
+  "joueursMax": 5,
+  "dureeMin": 40,
+  "ageMin": 8,
+  "categorie": "Stratégie",
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "Développez votre fjord en amassant des ressources et en capturant des bâtiments.",
+   "À chaque manche, on pioche autant de tuiles Territoire que de joueurs, que l'on se répartit.",
+   "Complétez vos drakkars et achevez vos chantiers pour marquer des points de victoire.",
+   "Le joueur qui rapporte le plus de richesses (le Jarl) en fin de partie l'emporte."
+  ]
+ },
+ {
+  "id": "marrakech",
+  "nom": "Marrakech",
+  "description": "Déployez vos tapis dans le souk et faites payer ceux qui marchent dessus.",
+  "joueursMin": 2,
+  "joueursMax": 4,
+  "dureeMin": 30,
+  "ageMin": 6,
+  "categorie": "Famille",
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "Assam le marchand se déplace sur le souk : orientez-le, lancez le dé, puis avancez-le d'autant de cases.",
+   "Si Assam s'arrête sur un tapis adverse, vous payez un dirham par case du tapis d'un seul tenant.",
+   "Posez ensuite un de vos tapis (2 cases) adjacent à Assam, en recouvrant éventuellement les tapis adverses.",
+   "En fin de partie, additionnez vos dirhams et vos cases de tapis encore visibles : le plus riche gagne."
+  ]
+ },
+ {
+  "id": "mesos",
+  "nom": "Mesos",
+  "categorie": "Stratégie",
+  "description": "Guidez une tribu de la préhistoire à travers trois ères et amassez le plus de prestige.",
+  "joueursMin": 2,
+  "joueursMax": 5,
+  "dureeMin": 60,
+  "ageMin": 12,
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "Les chasseurs-cueilleurs entrent dans une ère nouvelle ; on développe sa tribu au fil de trois Ères.",
+   "On recrute des personnages, gère la nourriture et construit des bâtiments de plus en plus avancés.",
+   "Des événements viennent bousculer la progression des tribus.",
+   "Les actions et constructions rapportent des points de prestige.",
+   "Après la troisième ère et l'événement final, la tribu la plus prestigieuse l'emporte."
+  ]
+ },
+ {
+  "id": "meuhte",
+  "nom": "Meuhte",
+  "categorie": "Ambiance",
+  "description": "Pensez comme le troupeau : répondez comme la majorité pour rafler les points Vache.",
+  "joueursMin": 3,
+  "joueursMax": 10,
+  "dureeMin": 20,
+  "ageMin": 10,
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "À chaque tour, une question est lue à voix haute et chacun écrit sa réponse en secret.",
+   "Le but n'est pas d'avoir raison mais de répondre comme la majorité des joueurs.",
+   "On dévoile les réponses : ceux qui ont voté avec la « meute » marquent des points Vache.",
+   "La Vache rose récompense un accord parfait ou une situation particulière selon la question.",
+   "Le premier joueur à réunir huit points Vache remporte la partie."
+  ]
+ },
+ {
+  "id": "millebornes",
+  "nom": "Mille Bornes",
+  "description": "La route, les crevaisons, les bottes et les coups fourrés. On joue en 5000 points.",
+  "joueursMin": 2,
+  "joueursMax": 6,
+  "dureeMin": 45,
+  "ageMin": 8,
+  "categorie": "Cartes",
+  "scoreVictoire": "max",
+  "scoreMode": "manches",
+  "seuilFin": 5000,
+  "regles": [
+   "Chaque manche, il faut parcourir 1000 bornes en posant des cartes Étape.",
+   "Il faut un Feu Vert pour démarrer, et respecter les Limitations de vitesse.",
+   "Les attaques (Crevaison, Panne d'Essence, Accident, Feu Rouge) se soignent par la parade correspondante.",
+   "Les quatre bottes protègent définitivement de l'attaque associée, et permettent le coup fourré.",
+   "La manche s'arrête à 1000 bornes exactement, ou quand la pioche est épuisée.",
+   "On compte les bornes parcourues, plus les primes : manche terminée, coups fourrés, bottes, allonge, sans les 200.",
+   "La partie s'arrête quand un joueur ou une équipe atteint 5000 points."
+  ]
+ },
+ {
+  "id": "millesabords",
+  "nom": "Mille Sabords",
+  "description": "Stop ou encore avec huit dés de pirate : poussez votre chance sans tirer trois têtes de mort.",
+  "joueursMin": 2,
+  "joueursMax": 5,
+  "dureeMin": 30,
+  "ageMin": 8,
+  "categorie": "Famille",
+  "scoreVictoire": "max",
+  "seuilFin": 6000,
+  "scoreMode": "compteur",
+  "regles": [
+   "À votre tour, relancez les huit dés pour accumuler des points (pièces, diamants, séries d'épées, combinaisons).",
+   "Mais trois têtes de mort mettent fin à votre tour, et vous ne marquez rien.",
+   "Une carte Fortune, piochée en début de tour, modifie vos gains (multiplicateurs, malus…).",
+   "Dès qu'un joueur atteint 6000 points, on termine la manche ; le meilleur score l'emporte."
+  ]
+ },
+ {
+  "id": "miromiro",
+  "nom": "Miro Miro",
+  "categorie": "Réflexion",
+  "description": "Estimez ou calculez quelle carte a la surface la plus proche de la carte Défi.",
+  "joueursMin": 2,
+  "joueursMax": 6,
+  "dureeMin": 15,
+  "ageMin": 8,
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "Chaque carte Zone montre une forme colorée sur une grille de carrés.",
+   "Une carte Défi est révélée : il faut choisir la carte dont la surface s'en rapproche le plus.",
+   "On peut jouer à l'intuition en répondant vite, ou compter précisément les carrés si l'on est sûr de son calcul.",
+   "Les bonnes estimations rapportent des jetons +, les erreurs des jetons -.",
+   "Le joueur avec le meilleur solde de jetons remporte la partie."
+  ]
+ },
+ {
+  "id": "mito",
+  "nom": "Mito",
+  "description": "Débarrassez-vous de vos cartes le premier… en trichant sous le nez de la Gardienne punaise.",
+  "joueursMin": 3,
+  "joueursMax": 5,
+  "dureeMin": 20,
+  "ageMin": 7,
+  "categorie": "Ambiance",
+  "scoreVictoire": "max",
+  "scoreMode": "objectif",
+  "regles": [
+   "But : être le premier à se défausser de toutes ses cartes.",
+   "À votre tour, posez des cartes — et il est permis de tricher astucieusement (en cacher, en glisser).",
+   "Mais gare à la Gardienne punaise : un joueur surpris à tricher est pénalisé.",
+   "Le premier à n'avoir plus aucune carte gagne."
+  ]
+ },
+ {
+  "id": "medievallons",
+  "nom": "Médiévallons",
+  "categorie": "Cartes",
+  "description": "Manœuvrez les guildes et leurs pouvoirs pour l'emporter dans un royaume médiéval.",
+  "joueursMin": 2,
+  "joueursMax": 6,
+  "dureeMin": 20,
+  "ageMin": 8,
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "Le jeu compte plusieurs guildes, chacune dotée d'un pouvoir : Mendiant, Prêtre, Magicien, Artisan, Moine…",
+   "À son tour, on joue une carte guilde et on déclenche son effet (voler une carte, échanger, piocher…).",
+   "La carte Étoile sert de joker et se combine avec n'importe quelle guilde.",
+   "On enchaîne les coups jusqu'à ce que la carte Fin de partie soit atteinte.",
+   "Le joueur qui a réuni les meilleures combinaisons remporte la partie."
+  ]
+ },
+ {
+  "id": "nitronitro",
+  "nom": "Nitro Nitro",
+  "categorie": "Ambiance",
+  "description": "Inventez des questions à trous ni trop faciles, ni trop dures, pour marquer un maximum de points.",
+  "joueursMin": 3,
+  "joueursMax": 8,
+  "dureeMin": 30,
+  "ageMin": 10,
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "À chaque manche, on complète des cartes à trous pour inventer des questions.",
+   "Le but est de viser le juste milieu : une question ni trop évidente, ni impossible.",
+   "Les autres joueurs tentent d'y répondre ; le décompte récompense les questions bien calibrées.",
+   "Une question trop facile ou trop difficile rapporte peu.",
+   "Le joueur qui a marqué le plus de points remporte la partie."
+  ]
+ },
+ {
+  "id": "nonmerci",
+  "nom": "Non merci !",
+  "description": "Prendre la carte et ses points, ou payer un jeton pour dire « non merci ».",
+  "joueursMin": 3,
+  "joueursMax": 7,
+  "dureeMin": 20,
+  "ageMin": 8,
+  "categorie": "Bluff",
+  "scoreVictoire": "min",
+  "scoreMode": "compteur",
+  "regles": [
+   "À votre tour : prenez la carte révélée (sa valeur en points de pénalité) avec les jetons posés dessus, ou posez un jeton pour la refuser.",
+   "Une suite de cartes consécutives ne compte que par sa plus petite valeur.",
+   "Chaque jeton en votre possession retire un point.",
+   "But : avoir le total le plus BAS ; le joueur avec le moins de points gagne."
+  ]
+ },
+ {
+  "id": "odysseus",
+  "nom": "Odysseus",
+  "categorie": "Aventure",
+  "description": "Aidez Ulysse à surmonter quinze grandes aventures pour retrouver le chemin d'Ithaque.",
+  "joueursMin": 1,
+  "joueursMax": 4,
+  "dureeMin": 45,
+  "ageMin": 10,
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "On accompagne Ulysse dans son retour vers Ithaque, à travers quinze grandes aventures.",
+   "Force, chance, ruse et intelligence : on améliore ses compétences tout au long du voyage.",
+   "Chaque épreuve se surmonte en combinant ses cartes et ses aptitudes du moment.",
+   "Réussir une épreuve et remporter un récit rapporte des points de victoire.",
+   "À la fin du périple, le joueur qui a accumulé le plus de points l'emporte."
+  ]
+ },
+ {
+  "id": "oriflamme",
+  "nom": "Oriflamme",
+  "description": "Programmez vos cartes en secret et démasquez vos rivaux pour asseoir votre influence.",
+  "joueursMin": 2,
+  "joueursMax": 5,
+  "dureeMin": 30,
+  "ageMin": 10,
+  "categorie": "Bluff",
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "Chacun dispose d'une famille de cartes aux pouvoirs variés (attaque, embuscade, héritier, complot…).",
+   "À votre tour, glissez une carte face cachée en tête ou en queue de votre file, ou révélez une carte déjà posée.",
+   "La file se résout de gauche à droite : les cartes révélées déclenchent leur effet pour gagner des pièces d'influence, ou en voler.",
+   "Après plusieurs manches, le joueur avec le plus d'influence l'emporte."
+  ]
+ },
+ {
+  "id": "pandemie",
+  "nom": "Pandémie",
+  "description": "Quatre spécialistes s'allient contre quatre maladies. Vous gagnez ensemble, ou vous perdez ensemble.",
+  "joueursMin": 2,
+  "joueursMax": 4,
+  "dureeMin": 45,
+  "ageMin": 8,
+  "categorie": "Coopératif",
+  "scoreVictoire": "max",
+  "scoreMode": "cooperatif",
+  "regles": [
+   "Chaque joueur incarne un spécialiste et dispose de quatre actions par tour.",
+   "Les actions : se déplacer, retirer un cube de maladie, bâtir une station de recherche, échanger une carte ville, ou découvrir un remède.",
+   "Découvrir un remède demande de défausser cinq cartes de la même couleur, dans une station de recherche.",
+   "En fin de tour, on pioche deux cartes joueur, puis les villes de la pioche infection reçoivent un cube.",
+   "Une carte Épidémie accélère l'infection, contamine une nouvelle ville et ramène les villes déjà touchées sur le dessus de la pioche.",
+   "Quand une ville reçoit un quatrième cube, elle éclot : la maladie gagne toutes les villes voisines, en cascade.",
+   "Vous gagnez tous ensemble dès que les quatre remèdes sont découverts.",
+   "Vous perdez tous ensemble à la huitième éclosion, s'il manque des cubes d'une couleur, ou si la pioche joueur s'épuise."
+  ],
+  "roles": [
+   {
+    "nom": "Médecin",
+    "origine": "Retire tous les cubes d'une couleur d'un coup dans une ville."
+   },
+   {
+    "nom": "Scientifique",
+    "origine": "N'a besoin que de quatre cartes pour découvrir un remède."
+   },
+   {
+    "nom": "Répartiteur",
+    "origine": "Déplace le pion d'un autre joueur comme s'il était le sien."
+   },
+   {
+    "nom": "Chercheuse",
+    "origine": "Donne n'importe quelle carte de sa main à un joueur présent dans la même ville."
+   },
+   {
+    "nom": "Expert aux opérations",
+    "origine": "Bâtit une station de recherche sans défausser de carte."
+   },
+   {
+    "nom": "Planificateur d'urgence",
+    "origine": "Conserve une carte Événement déjà jouée, pour la rejouer plus tard."
+   },
+   {
+    "nom": "Militaire",
+    "origine": "Empêche l'infection et les éclosions dans sa ville et les villes voisines."
+   }
+  ]
+ },
+ {
+  "id": "paniclab",
+  "nom": "Panic Lab",
+  "categorie": "Rapidité",
+  "description": "Une amibe s'est échappée : soyez le plus rapide à la repérer parmi les cartes.",
+  "joueursMin": 2,
+  "joueursMax": 8,
+  "dureeMin": 15,
+  "ageMin": 7,
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "Les cartes amibes, toutes différentes par la forme, la couleur et le motif, sont étalées au centre.",
+   "On lance les dés qui désignent l'amibe recherchée (sa couleur et sa forme).",
+   "Tous cherchent en même temps l'amibe correspondante et posent le doigt dessus.",
+   "Attention à l'amibe noire « mutante », qui change la règle de recherche en cours de route.",
+   "Le premier à trouver la bonne amibe gagne la carte ; celui qui en a le plus à la fin l'emporte."
+  ]
+ },
+ {
+  "id": "paon",
+  "nom": "Paon",
+  "categorie": "Familial",
+  "description": "Attirez les oiseaux migrateurs vers vos îles pour récolter le plus de plumes.",
+  "joueursMin": 2,
+  "joueursMax": 5,
+  "dureeMin": 30,
+  "ageMin": 8,
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "Chaque joueur démarre avec trois îles de départ valant 1, 2 et 3 points.",
+   "La partie se joue en trois saisons (trois manches) durant lesquelles on attire les oiseaux vers ses îles.",
+   "On agence ses cartes pour capter un maximum de plumes au fil des saisons.",
+   "Les plumes récoltées se cumulent d'une manche à l'autre.",
+   "Après la troisième saison, le joueur avec le plus de plumes l'emporte."
+  ]
+ },
+ {
+  "id": "papayoo",
+  "nom": "Papayoo",
+  "description": "Un jeu de plis où l'on cherche surtout à ne PAS marquer.",
+  "joueursMin": 3,
+  "joueursMax": 8,
+  "dureeMin": 30,
+  "ageMin": 8,
+  "categorie": "Cartes",
+  "scoreVictoire": "min",
+  "scoreMode": "compteur",
+  "regles": [
+   "Jeu de plis : suivez la couleur demandée si vous le pouvez ; la plus forte carte remporte le pli et les cartes.",
+   "Les cartes Payoo valent leur valeur en points, et le 7 de Payoo (le Papayoo) vaut 40 : tout cela compte en négatif.",
+   "L'idée est de refiler ces cartes plutôt que de les ramasser.",
+   "On enchaîne les manches ; le joueur avec le MOINS de points gagne."
+  ]
+ },
+ {
+  "id": "pickomino",
+  "nom": "Pickomino",
+  "description": "Stop ou encore aux dés pour rafler les tuiles les plus riches en vers.",
+  "joueursMin": 2,
+  "joueursMax": 7,
+  "dureeMin": 20,
+  "ageMin": 8,
+  "categorie": "Famille",
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "Lancez huit dés en stop-ou-encore pour atteindre un total et rafler une tuile (des « vers ») au centre ou chez un adversaire.",
+   "À chaque relance, mettez de côté au moins un dé d'une valeur non encore gardée ; la face « ver » vaut 5.",
+   "Rater son total ou ne plus pouvoir garder de dé fait perdre votre dernière tuile.",
+   "En fin de partie, le joueur avec le plus de vers gagne."
+  ]
+ },
+ {
+  "id": "pippo",
+  "nom": "Pippo",
+  "categorie": "Rapidité",
+  "description": "Retrouvez à toute vitesse l'animal manquant de la ferme du fermier Pippo.",
+  "joueursMin": 2,
+  "joueursMax": 4,
+  "dureeMin": 15,
+  "ageMin": 4,
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "Des cartes montrant chacune quatre animaux sur cinq possibles sont étalées sur la table.",
+   "On retourne une carte de référence : il faut repérer, parmi les cartes étalées, celle où manque l'animal indiqué.",
+   "Tout le monde cherche en même temps et attrape la bonne carte le plus vite possible.",
+   "Une erreur oblige à rendre une carte déjà gagnée.",
+   "À la fin, le joueur qui a récupéré le plus de cartes remporte la partie."
+  ]
+ },
+ {
+  "id": "pointcity",
+  "nom": "Point City",
+  "description": "Draftez des cartes à double usage pour bâtir la ville la plus rentable.",
+  "joueursMin": 2,
+  "joueursMax": 4,
+  "dureeMin": 30,
+  "ageMin": 10,
+  "categorie": "Stratégie",
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "Choisissez des cartes à double face : côté ressource, ou côté bâtiment.",
+   "Dépensez les ressources visibles pour acheter des bâtiments qui rapportent points et bonus en chaîne.",
+   "Combinez vos bâtiments pour construire une ville efficace.",
+   "Le joueur avec le plus de points de victoire en fin de partie gagne."
+  ]
+ },
+ {
+  "id": "potionoupoison",
+  "nom": "Potion Ou Poison",
+  "categorie": "Bluff",
+  "description": "Refilez discrètement vos potions mortelles aux cobayes… et évitez de goûter les vôtres.",
+  "joueursMin": 3,
+  "joueursMax": 6,
+  "dureeMin": 20,
+  "ageMin": 8,
+  "scoreVictoire": "max",
+  "scoreMode": "objectif",
+  "regles": [
+   "Chaque joueur reçoit une potion mortelle, plusieurs potions inoffensives et une carte Gobelin.",
+   "On cherche à faire boire ses potions dangereuses aux autres tout en gardant les siennes hors de danger.",
+   "Les cartes Action permettent d'échanger, d'espionner ou de renverser la situation.",
+   "Le bluff et la déduction déterminent qui goûtera le mauvais breuvage.",
+   "Le dernier joueur à ne pas avoir succombé remporte la partie."
+  ]
+ },
+ {
+  "id": "pylos",
+  "nom": "Pylos",
+  "description": "Un jeu de billes où économiser ses pièces mène au sommet de la pyramide.",
+  "joueursMin": 2,
+  "joueursMax": 2,
+  "dureeMin": 15,
+  "ageMin": 8,
+  "categorie": "Abstrait",
+  "scoreVictoire": "max",
+  "scoreMode": "objectif",
+  "regles": [
+   "Posez tour à tour vos billes sur le plateau, en montant des étages pour former une pyramide.",
+   "Poser une bille au sommet d'un carré de 4 permet de remonter des billes déjà jouées ; aligner ou encadrer permet d'en récupérer.",
+   "Le joueur qui pose la dernière bille, au sommet de la pyramide, gagne (l'adversaire est à court de billes)."
+  ]
+ },
+ {
+  "id": "qawale",
+  "nom": "Qawale",
+  "description": "Empilez et déplacez des pierres pour aligner les vôtres au sommet.",
+  "joueursMin": 2,
+  "joueursMax": 2,
+  "dureeMin": 15,
+  "ageMin": 8,
+  "categorie": "Abstrait",
+  "scoreVictoire": "max",
+  "scoreMode": "objectif",
+  "regles": [
+   "Posez une pierre de votre couleur sur une pile, puis déplacez toute cette pile, pierre par pierre, sur des cases adjacentes.",
+   "But : aligner 4 pierres de votre couleur visibles au sommet des piles (ligne, colonne ou diagonale)."
+  ]
+ },
+ {
+  "id": "quantik",
+  "nom": "Quantik",
+  "description": "Complétez une zone avec les quatre formes avant votre adversaire.",
+  "joueursMin": 2,
+  "joueursMax": 2,
+  "dureeMin": 20,
+  "ageMin": 8,
+  "categorie": "Abstrait",
+  "scoreVictoire": "max",
+  "scoreMode": "objectif",
+  "regles": [
+   "Posez des pièces de 4 formes sur une grille 4×4 divisée en régions.",
+   "Interdit de poser une forme déjà présente par l'adversaire dans la même ligne, colonne ou région.",
+   "But : compléter une ligne, une colonne ou une région avec les 4 formes différentes.",
+   "Le joueur qui pose la 4e forme complétant une zone gagne."
+  ]
+ },
+ {
+  "id": "quarto",
+  "nom": "Quarto",
+  "description": "Un duel d'alignement diabolique : c'est l'adversaire qui choisit la pièce que vous posez.",
+  "joueursMin": 2,
+  "joueursMax": 2,
+  "dureeMin": 15,
+  "ageMin": 8,
+  "categorie": "Abstrait",
+  "scoreVictoire": "max",
+  "scoreMode": "objectif",
+  "regles": [
+   "16 pièces, chacune avec 4 caractères : claire/foncée, ronde/carrée, haute/basse, pleine/creuse.",
+   "Particularité : c'est l'adversaire qui choisit la pièce que vous devez poser.",
+   "À votre tour, placez la pièce reçue sur une case libre, puis choisissez une pièce et donnez-la à l'adversaire.",
+   "But : réaliser un alignement (ligne, colonne ou diagonale) de 4 pièces partageant au moins un caractère commun.",
+   "Le joueur qui complète un tel alignement annonce « Quarto ! » et gagne."
+  ]
+ },
+ {
+  "id": "quixo",
+  "nom": "Quixo",
+  "description": "Alignez cinq cubes à votre symbole en poussant les lignes du plateau.",
+  "joueursMin": 2,
+  "joueursMax": 4,
+  "dureeMin": 10,
+  "ageMin": 8,
+  "categorie": "Abstrait",
+  "scoreVictoire": "max",
+  "scoreMode": "objectif",
+  "regles": [
+   "À votre tour, prenez un cube du bord (neutre ou à votre symbole), marquez-le à votre symbole et réinsérez-le en poussant une ligne.",
+   "But : aligner 5 cubes à votre symbole (ligne, colonne ou diagonale).",
+   "Attention : provoquer un alignement adverse le fait gagner."
+  ]
+ },
+ {
+  "id": "quoridor",
+  "nom": "Quoridor",
+  "description": "Menez votre pion de l'autre côté du plateau en bloquant l'adversaire avec des barrières.",
+  "joueursMin": 2,
+  "joueursMax": 4,
+  "dureeMin": 15,
+  "ageMin": 8,
+  "categorie": "Abstrait",
+  "scoreVictoire": "max",
+  "scoreMode": "objectif",
+  "regles": [
+   "Chaque joueur doit mener son pion jusqu'au côté opposé du plateau.",
+   "À votre tour : soit avancer votre pion d'une case, soit poser une barrière.",
+   "Les barrières ralentissent les adversaires mais ne doivent jamais enfermer totalement un joueur.",
+   "Le premier à atteindre sa ligne d'arrivée opposée gagne."
+  ]
+ },
+ {
+  "id": "qwinto",
+  "nom": "Qwinto",
+  "description": "Inscrivez les sommes des dés dans le bon ordre, sans vous bloquer.",
+  "joueursMin": 2,
+  "joueursMax": 6,
+  "dureeMin": 15,
+  "ageMin": 8,
+  "categorie": "Famille",
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "Le joueur actif lance un à trois dés et annonce leur somme.",
+   "Chacun peut inscrire cette somme dans l'une de ses trois rangées de couleur, en respectant l'ordre croissant.",
+   "Compléter des colonnes et des rangées rapporte des points ; ne plus pouvoir écrire fait stagner.",
+   "Le meilleur total de points l'emporte."
+  ]
+ },
+ {
+  "id": "qwixx",
+  "nom": "Qwixx",
+  "description": "Un roll & write nerveux où chaque lancer profite à tout le monde.",
+  "joueursMin": 2,
+  "joueursMax": 5,
+  "dureeMin": 15,
+  "ageMin": 8,
+  "categorie": "Famille",
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "À chaque lancer, cochez des numéros dans les quatre rangées de couleur de votre feuille.",
+   "Dans une rangée, les numéros se cochent de gauche à droite ; les cases sautées sont définitivement perdues.",
+   "Le joueur actif utilise les dés blancs et de couleur ; les autres n'utilisent que les blancs.",
+   "Chaque rangée rapporte selon le nombre de croix ; les pénalités comptent en négatif. Le meilleur total gagne."
+  ]
+ },
+ {
+  "id": "ratjack",
+  "nom": "Ratjack",
+  "categorie": "Cartes",
+  "description": "Un blackjack de rongeurs : approchez-vous du bon total sans dépasser, et déclenchez les effets.",
+  "joueursMin": 2,
+  "joueursMax": 5,
+  "dureeMin": 20,
+  "ageMin": 8,
+  "scoreVictoire": "max",
+  "scoreMode": "manches",
+  "regles": [
+   "Au casino de Ratcity, on cherche à composer la meilleure main sans « dépasser », comme au blackjack.",
+   "Les cartes portent des effets déclenchés par leur valeur : rejouer, piocher dans la défausse, retourner une carte cachée…",
+   "On décide de continuer à piocher ou de s'arrêter avant de faire sauter sa main.",
+   "La meilleure main de la manche remporte la mise.",
+   "Après plusieurs manches, le joueur au meilleur score l'emporte."
+  ]
+ },
+ {
+  "id": "romirami",
+  "nom": "Romi Rami",
+  "categorie": "Cartes",
+  "description": "Le rami classique : formez suites et brelans pour vous défausser au plus vite.",
+  "joueursMin": 2,
+  "joueursMax": 4,
+  "dureeMin": 30,
+  "ageMin": 8,
+  "scoreVictoire": "min",
+  "scoreMode": "compteur",
+  "regles": [
+   "Chaque joueur reçoit une main de cartes ; le reste forme la pioche et une défausse.",
+   "À son tour, on pioche une carte, on tente de poser des combinaisons (suites de même couleur ou brelans/carrés), puis on défausse.",
+   "On peut compléter ses combinaisons déjà posées et celles des adversaires.",
+   "La manche s'arrête dès qu'un joueur s'est débarrassé de toutes ses cartes.",
+   "Les cartes restant en main comptent en points de pénalité ; après plusieurs manches, le plus petit total gagne."
+  ]
+ },
+ {
+  "id": "saboteur",
+  "nom": "Saboteur",
+  "description": "Nains chercheurs d'or contre saboteurs : creusez vers le filon… ou sabotez en douce.",
+  "joueursMin": 3,
+  "joueursMax": 10,
+  "dureeMin": 30,
+  "ageMin": 8,
+  "categorie": "Bluff",
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "Chacun reçoit un rôle secret : chercheur d'or ou saboteur.",
+   "À votre tour, posez une carte Chemin pour bâtir une galerie vers l'or, ou pour la bloquer / piéger les autres.",
+   "Les chercheurs veulent atteindre le filon ; les saboteurs veulent les en empêcher sans se faire démasquer.",
+   "À la fin de la manche, le camp gagnant se partage des pépites ; après trois manches, le plus riche gagne."
+  ]
+ },
+ {
+  "id": "saladedecafards",
+  "nom": "Salade de cafards",
+  "categorie": "Bluff",
+  "description": "Débarrassez-vous de vos cartes en annonçant un légume… sans jamais dire l'interdit.",
+  "joueursMin": 2,
+  "joueursMax": 6,
+  "dureeMin": 15,
+  "ageMin": 6,
+  "scoreVictoire": "max",
+  "scoreMode": "objectif",
+  "regles": [
+   "Les cartes légumes (poivron, tomate, salade, chou-fleur) sont distribuées face cachée à tous les joueurs.",
+   "À son tour, on pose une carte face cachée en annonçant un légume : soit le vrai, soit un bluff.",
+   "Trois interdits : on ne peut pas nommer le légume qui vient d'être annoncé, ni répéter deux fois de suite le même mot.",
+   "Le joueur suivant peut croire l'annonce, ou la contester en retournant la carte ; celui qui s'est trompé ramasse la carte.",
+   "Le premier joueur qui parvient à se défausser de toutes ses cartes gagne la partie."
+  ]
+ },
+ {
+  "id": "scrabble",
+  "nom": "Scrabble",
+  "description": "Des lettres, une grille, des cases qui multiplient. Le mot juste au bon endroit.",
+  "joueursMin": 2,
+  "joueursMax": 4,
+  "dureeMin": 60,
+  "ageMin": 10,
+  "categorie": "Lettres",
+  "scoreVictoire": "max",
+  "regles": [
+   "Chaque joueur garde sept lettres en main.",
+   "À ton tour, forme un mot sur la grille, en croisant ou prolongeant les mots déjà posés.",
+   "Le premier mot doit passer par la case centrale.",
+   "Les cases colorées doublent ou triplent la lettre, ou le mot entier ; elles ne comptent qu'à la pose.",
+   "Poser ses sept lettres d'un coup rapporte 50 points de prime (le « scrabble »).",
+   "La partie s'arrête quand un joueur a posé sa dernière lettre, sac vide. On retranche à chacun la valeur des lettres restantes."
+  ]
+ },
+ {
+  "id": "serpentina",
+  "nom": "Serpentina",
+  "categorie": "Enfants",
+  "description": "Assemblez des serpents colorés — tête, corps et queue — et récoltez-en le plus.",
+  "joueursMin": 2,
+  "joueursMax": 5,
+  "dureeMin": 15,
+  "ageMin": 4,
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "Les cartes montrent des morceaux de serpents (têtes, corps, queues) de différentes couleurs.",
+   "À son tour, on retourne une carte et on l'ajoute aux serpents en cours si la couleur correspond.",
+   "Un serpent est complet lorsqu'il a une tête, au moins un corps et une queue de la même couleur.",
+   "Celui qui complète un serpent le remporte et le met de côté.",
+   "Quand toutes les cartes sont jouées, le joueur qui a rassemblé le plus de serpents gagne."
+  ]
+ },
+ {
+  "id": "set",
+  "nom": "Set",
+  "description": "Repérez les combinaisons plus vite que les autres.",
+  "joueursMin": 1,
+  "joueursMax": 8,
+  "dureeMin": 15,
+  "ageMin": 8,
+  "categorie": "Rapidité",
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "Douze cartes sont étalées ; chaque carte a quatre caractères (nombre, forme, couleur, remplissage).",
+   "Un « Set » = trois cartes pour lesquelles chaque caractère est, soit identique sur les trois, soit tout différent.",
+   "Dès que vous en voyez un, annoncez « Set ! » et ramassez les trois cartes ; on complète et on continue.",
+   "Le joueur qui a ramassé le plus de Sets gagne."
+  ]
+ },
+ {
+  "id": "shapeit",
+  "nom": "Shape It",
+  "categorie": "Coopératif",
+  "description": "Devinez tous le même mot à partir de cartes en relief, et annoncez-le en chœur.",
+  "joueursMin": 2,
+  "joueursMax": 8,
+  "dureeMin": 20,
+  "ageMin": 8,
+  "scoreVictoire": "max",
+  "scoreMode": "cooperatif",
+  "regles": [
+   "Les mots sont regroupés par familles de formes similaires sur des cartes à toucher.",
+   "Chaque joueur observe la carte et se fait une idée du mot qu'elle représente.",
+   "Au signal, tout le monde compte jusqu'à trois et annonce son mot en même temps.",
+   "Si tous disent le même mot, la manche est gagnée et la carte est mise de côté ; un jeton Silence permet de s'abstenir.",
+   "L'équipe gagne si elle valide assez de cartes ensemble."
+  ]
+ },
+ {
+  "id": "similo",
+  "nom": "Similo",
+  "description": "Faites deviner un personnage secret à l'aide d'indices… d'autres personnages.",
+  "joueursMin": 2,
+  "joueursMax": 8,
+  "dureeMin": 15,
+  "ageMin": 7,
+  "categorie": "Coopératif",
+  "scoreVictoire": "max",
+  "scoreMode": "cooperatif",
+  "regles": [
+   "Coopératif : un joueur connaît le personnage secret, les autres doivent le retrouver.",
+   "Chaque manche, l'indiceur joue une carte Personnage : posée verticalement = « ressemble au secret », horizontalement = « différent ».",
+   "Les autres éliminent des personnages de la table selon ces indices.",
+   "Il faut réduire les cartes jusqu'au bon personnage en cinq manches, sans jamais éliminer le secret."
+  ]
+ },
+ {
+  "id": "skullking",
+  "nom": "Skull King",
+  "description": "Dix manches, un contrat à annoncer avant chaque pli. Tenir sa promesse rapporte ; se tromper coûte cher.",
+  "joueursMin": 2,
+  "joueursMax": 8,
+  "dureeMin": 40,
+  "ageMin": 8,
+  "categorie": "Cartes",
+  "scoreVictoire": "max",
+  "scoreMode": "manches",
+  "regles": [
+   "Dix manches. À la manche n, chacun reçoit n cartes.",
+   "Avant de jouer, chacun annonce en secret le nombre de plis qu'il pense remporter, puis on révèle les annonces ensemble.",
+   "On joue les plis à la couleur demandée. Les cartes noires (atouts) battent les autres couleurs.",
+   "Les cartes spéciales priment : Pirates, Sirènes, Skull King, Fuite et Tigresse.",
+   "Contrat tenu : 20 points par pli annoncé, plus les bonus. Contrat manqué : 10 points de pénalité par pli d'écart.",
+   "Annoncer zéro et le tenir rapporte 10 points par carte en main ; se tromper les fait perdre.",
+   "Après la dixième manche, le plus grand total gagne."
+  ]
+ },
+ {
+  "id": "splendor",
+  "nom": "Splendor",
+  "description": "Des jetons, des cartes, des nobles. Le premier à 15 points de prestige gagne.",
+  "joueursMin": 2,
+  "joueursMax": 4,
+  "dureeMin": 30,
+  "ageMin": 10,
+  "categorie": "Stratégie",
+  "scoreVictoire": "max",
+  "seuilFin": 15,
+  "regles": [
+   "À ton tour, une seule action : prendre 3 jetons de couleurs différentes, prendre 2 jetons de la même couleur, réserver une carte, ou acheter une carte.",
+   "Les cartes achetées offrent un bonus permanent, qui réduit le coût des achats suivants.",
+   "Réserver une carte donne un jeton or, joker à l'achat.",
+   "Les nobles viennent d'eux-mêmes quand on possède les bonus qu'ils exigent : 3 points chacun.",
+   "Dès qu'un joueur atteint 15 points, on termine le tour de table : le plus grand total gagne.",
+   "En cas d'égalité, celui qui a acheté le moins de cartes l'emporte."
+  ]
+ },
+ {
+  "id": "squadro",
+  "nom": "Squadro",
+  "description": "Faites traverser vos pions et revenir, sans vous faire renvoyer au départ.",
+  "joueursMin": 2,
+  "joueursMax": 2,
+  "dureeMin": 15,
+  "ageMin": 8,
+  "categorie": "Abstrait",
+  "scoreVictoire": "max",
+  "scoreMode": "objectif",
+  "regles": [
+   "Chacun a 5 pions à faire traverser le plateau puis revenir à leur point de départ.",
+   "Chaque pion avance du nombre de cases indiqué sur sa ligne ; un pion dépassé par un adversaire est renvoyé au départ.",
+   "Le premier à ramener 4 de ses 5 pions gagne."
+  ]
+ },
+ {
+  "id": "stupidevautour",
+  "nom": "Stupide vautour",
+  "description": "Misez juste pour rafler les bonnes cartes… et éviter les vautours.",
+  "joueursMin": 2,
+  "joueursMax": 5,
+  "dureeMin": 15,
+  "ageMin": 8,
+  "categorie": "Bluff",
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "Chacun a une main identique de cartes-enchères numérotées de 1 à 15.",
+   "À chaque tour, une carte Points est révélée ; tous misent une carte-enchère en secret.",
+   "Carte positive : la plus haute enchère l'emporte. Carte négative (vautour) : la plus BASSE la ramasse. Les enchères à égalité s'annulent.",
+   "En fin de partie, le meilleur total de points gagne."
+  ]
+ },
+ {
+  "id": "tantrix",
+  "nom": "Tantrix",
+  "categorie": "Réflexion",
+  "description": "Des tuiles hexagonales à lignes colorées : formez la plus longue ligne de votre couleur.",
+  "joueursMin": 1,
+  "joueursMax": 4,
+  "dureeMin": 20,
+  "ageMin": 8,
+  "scoreVictoire": "max",
+  "scoreMode": "objectif",
+  "regles": [
+   "Chaque joueur reçoit une couleur secrète parmi les traits présents sur les tuiles.",
+   "À son tour, on pioche puis on pose une tuile en respectant la règle des couleurs : chaque bord accolé doit relier deux traits de même couleur.",
+   "On cherche à prolonger sa propre ligne (ou boucle) de couleur tout en gênant celle des autres.",
+   "En fin de partie, le joueur qui a réalisé la plus longue ligne ou boucle de sa couleur l'emporte.",
+   "Version Discovery : la boîte propose aussi des défis solo de difficulté croissante."
+  ]
+ },
+ {
+  "id": "thecrew",
+  "nom": "The Crew",
+  "description": "Un jeu de plis coopératif : chacun doit remporter précisément les cartes de sa mission, sans rien se dire.",
+  "joueursMin": 2,
+  "joueursMax": 5,
+  "dureeMin": 20,
+  "ageMin": 10,
+  "categorie": "Coopératif",
+  "scoreVictoire": "max",
+  "scoreMode": "cooperatif",
+  "regles": [
+   "On distribue toutes les cartes, puis on répartit les cartes-mission de la manche en cours.",
+   "Chaque mission exige qu'un joueur précis remporte un pli contenant une carte précise.",
+   "On joue à la couleur demandée. Les fusées sont atout ; le plus fort atout emporte le pli.",
+   "La communication est interdite, sauf un jeton de communication : poser une carte devant soi en indiquant si c'est sa plus haute, sa plus basse, ou son unique carte de cette couleur.",
+   "Vous gagnez ensemble si toutes les missions sont accomplies avant la fin des plis.",
+   "Vous perdez ensemble dès qu'une mission devient impossible."
+  ]
+ },
+ {
+  "id": "timesup",
+  "nom": "Time's Up!",
+  "description": "Les mêmes personnalités, trois manches, et de moins en moins de mots pour les faire deviner.",
+  "joueursMin": 2,
+  "joueursMax": 2,
+  "dureeMin": 45,
+  "ageMin": 12,
+  "categorie": "Ambiance",
+  "scoreVictoire": "max",
+  "scoreMode": "manches",
+  "equipes": true,
+  "regles": [
+   "Deux équipes. On constitue un paquet de cartes-personnalités que tout le monde devra deviner.",
+   "Manche 1 : faire deviner en parlant, sans prononcer les mots de la carte. Temps limité par tour.",
+   "Manche 2 : les mêmes cartes, mais un seul mot par carte.",
+   "Manche 3 : les mêmes cartes, en mimant, sans un son.",
+   "Une carte devinée rapporte un point à l'équipe et sort du paquet pour la manche en cours.",
+   "On additionne les points des trois manches : l'équipe la plus haute gagne."
+  ]
+ },
+ {
+  "id": "toutim",
+  "nom": "Toutim",
+  "categorie": "Ambiance",
+  "description": "Faites deviner vos objets par leurs seules caractéristiques… bonnes ou mauvaises.",
+  "joueursMin": 3,
+  "joueursMax": 6,
+  "dureeMin": 20,
+  "ageMin": 7,
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "Chaque joueur a des cartes à double face : un Objet d'un côté, une Caractéristique de l'autre.",
+   "Une carte de référence est posée ; à son tour, on tente de faire deviner un objet en s'appuyant sur des caractéristiques.",
+   "Les autres proposent des réponses ; les bonnes déductions rapportent des points.",
+   "On alterne les rôles au fil des tours.",
+   "Le joueur qui a marqué le plus de points remporte la partie."
+  ]
+ },
+ {
+  "id": "triolet",
+  "nom": "Triolet",
+  "categorie": "Chiffres",
+  "description": "Le « Scrabble des nombres » : posez des tuiles pour que chaque ligne totalise 15.",
+  "joueursMin": 2,
+  "joueursMax": 4,
+  "dureeMin": 45,
+  "ageMin": 7,
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "Chaque joueur pioche des tuiles numérotées qu'il garde cachées derrière son chevalet.",
+   "À son tour, on pose une à trois tuiles alignées sur le plateau.",
+   "Toute rangée complétée doit totaliser exactement 15 (et un groupe de trois tuiles ne peut jamais dépasser 15).",
+   "On marque la somme des tuiles concernées par la pose ; réussir un « Triolet » (trois tuiles totalisant 15) rapporte un gros bonus.",
+   "Le joueur avec le plus de points à la fin de la partie gagne."
+  ]
+ },
+ {
+  "id": "varuna",
+  "nom": "Varuna",
+  "categorie": "Stratégie",
+  "description": "À bord d'un sous-marin, explorez une planète-océan et marquez le plus de Points de Mission.",
+  "joueursMin": 2,
+  "joueursMax": 4,
+  "dureeMin": 45,
+  "ageMin": 10,
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "On explore Varuna, une planète recouverte d'océans et peuplée de dinosaures aquatiques, en sous-marin.",
+   "À son tour, on joue ses cartes pour mener des missions d'exploration et d'étude.",
+   "Bien enchaîner ses actions permet de récolter davantage de Points de Mission.",
+   "Les adversaires visent les mêmes découvertes : il faut choisir ses priorités.",
+   "Le joueur qui totalise le plus de Points de Mission remporte la partie."
+  ]
+ },
+ {
+  "id": "villainous",
+  "nom": "Villainous",
+  "description": "Incarnez un célèbre méchant Disney et accomplissez votre objectif secret avant vos adversaires.",
+  "joueursMin": 2,
+  "joueursMax": 6,
+  "dureeMin": 50,
+  "ageMin": 10,
+  "categorie": "Stratégie",
+  "scoreVictoire": "max",
+  "scoreMode": "objectif",
+  "image": "https://www.bcd-jeux.fr/14143-pdt_771/villainous-ravensburger.jpg",
+  "extensions": [
+   "Mauvais jusqu'à l'os",
+   "La Fin est Proche",
+   "Cruellement Infects",
+   "Monstrueusement Malsains",
+   "Plus Grands, Plus Méchants",
+   "Larmes de Fond"
+  ],
+  "roles": [
+   {
+    "nom": "Maléfique",
+    "origine": "La Belle au bois dormant",
+    "objectif": "Commencer son tour avec une Malédiction sur chacun des 4 lieux de son royaume."
+   },
+   {
+    "nom": "Capitaine Crochet",
+    "origine": "Peter Pan",
+    "objectif": "Vaincre Peter Pan au lieu du Jolly Roger."
+   },
+   {
+    "nom": "Prince Jean",
+    "origine": "Robin des Bois",
+    "objectif": "Commencer son tour avec au moins 20 jetons de Pouvoir."
+   },
+   {
+    "nom": "Jafar",
+    "origine": "Aladdin",
+    "objectif": "Hypnotiser le Génie et posséder la Lampe magique à la Caverne aux Merveilles."
+   },
+   {
+    "nom": "Reine de Cœur",
+    "origine": "Alice au pays des merveilles",
+    "objectif": "Réussir une exécution en ayant une arche de croquet à chaque lieu."
+   },
+   {
+    "nom": "Ursula",
+    "origine": "La Petite Sirène",
+    "objectif": "Posséder le Trident et la Couronne à son Palais en début de tour."
+   },
+   {
+    "nom": "La Méchante Reine",
+    "origine": "Blanche-Neige",
+    "objectif": "Préparer la pomme empoisonnée en jouant 4 ingrédients différents, retrouver Blanche-Neige et l'éliminer avec la carte « Croque ! ».",
+    "extension": "Mauvais jusqu'à l'os"
+   },
+   {
+    "nom": "Hadès",
+    "origine": "Hercule",
+    "objectif": "Commencer son tour avec au moins 3 Titans non entravés sur le Mont Olympe.",
+    "extension": "Mauvais jusqu'à l'os"
+   },
+   {
+    "nom": "Dr Facilier",
+    "origine": "La Princesse et la Grenouille",
+    "objectif": "Contrôler le Talisman et jouer la carte « Régner sur la Nouvelle-Orléans ».",
+    "extension": "Mauvais jusqu'à l'os"
+   },
+   {
+    "nom": "Scar",
+    "origine": "Le Roi Lion",
+    "objectif": "Trouver et vaincre Mufasa, puis vaincre d'autres héros jusqu'à totaliser 15 points de force dans sa pile Succession.",
+    "extension": "La Fin est Proche"
+   },
+   {
+    "nom": "Yzma",
+    "origine": "Kuzco, l'empereur mégalo",
+    "objectif": "Débusquer Kuzco dans ses pioches du Destin, le jouer, puis l'éliminer grâce à Kronk.",
+    "extension": "La Fin est Proche"
+   },
+   {
+    "nom": "Ratigan",
+    "origine": "Basil, détective privé",
+    "objectif": "Jouer la Reine robot et la conduire à Buckingham Palace, où elle doit rester jusqu'au début de son tour.",
+    "extension": "La Fin est Proche"
+   },
+   {
+    "nom": "Cruella d'Enfer",
+    "origine": "Les 101 Dalmatiens",
+    "objectif": "Réunir 99 chiots pour confectionner son manteau de fourrure.",
+    "extension": "Cruellement Infects"
+   },
+   {
+    "nom": "Capitaine Pat",
+    "origine": "Mickey Mouse",
+    "objectif": "Accomplir l'objectif du lieu où se trouve son pion : il change au fil de la partie.",
+    "extension": "Cruellement Infects"
+   },
+   {
+    "nom": "Mère Gothel",
+    "origine": "Raiponce",
+    "objectif": "Gagner la confiance de Raiponce afin de la garder sous son emprise.",
+    "extension": "Cruellement Infects"
+   },
+   {
+    "nom": "Gaston",
+    "origine": "La Belle et la Bête",
+    "objectif": "Courtiser Belle et la convaincre qu'il est l'homme à épouser.",
+    "extension": "Monstrueusement Malsains"
+   },
+   {
+    "nom": "Lady Tremaine",
+    "origine": "Cendrillon",
+    "objectif": "Convaincre le Prince d'épouser l'une de ses filles plutôt que Cendrillon.",
+    "extension": "Monstrueusement Malsains"
+   },
+   {
+    "nom": "Le Roi Cornu",
+    "origine": "Taram et le Chaudron magique",
+    "objectif": "Lever une armée de morts-vivants en réanimant des guerriers sur plusieurs lieux de son royaume.",
+    "extension": "Monstrueusement Malsains"
+   },
+   {
+    "nom": "Syndrome",
+    "origine": "Les Indestructibles",
+    "objectif": "Vaincre un Omnidroïde amélioré ainsi que tous les héros présents dans son royaume.",
+    "extension": "Plus Grands, Plus Méchants"
+   },
+   {
+    "nom": "Lotso",
+    "origine": "Toy Story 3",
+    "objectif": "Piéger quatre héros réduits à 0 point de force, ainsi que Buzz l'Éclair, dans la salle des Chenilles.",
+    "extension": "Plus Grands, Plus Méchants"
+   },
+   {
+    "nom": "Madame Mim",
+    "origine": "Merlin l'Enchanteur",
+    "objectif": "Surpasser Merlin en magie et l'emporter lors du duel de sorciers.",
+    "extension": "Plus Grands, Plus Méchants"
+   },
+   {
+    "nom": "Davy Jones",
+    "origine": "Pirates des Caraïbes",
+    "objectif": "Réunir 5 trésors à l'aide du Kraken.",
+    "extension": "Larmes de Fond"
+   },
+   {
+    "nom": "Tamatoa",
+    "origine": "Vaiana",
+    "objectif": "Ramener le crochet de Maui et le cœur de Te Fiti dans son repaire.",
+    "extension": "Larmes de Fond"
+   }
+  ],
+  "regles": [
+   "Chaque joueur contrôle un méchant Disney avec son plateau (le Royaume), son deck Machiavélique et un deck du Destin.",
+   "À ton tour, déplace ton pion sur un lieu de ton plateau.",
+   "Effectue les actions du lieu : gagner du Pouvoir, jouer des cartes, activer des capacités.",
+   "Tu peux jouer une carte du Destin contre un adversaire pour le gêner.",
+   "Chaque méchant a un objectif unique : le premier à le remplir gagne."
+  ]
+ },
+ {
+  "id": "wazabi",
+  "nom": "Wazabi",
+  "description": "Un jeu de dés explosif : videz votre réserve avant les autres.",
+  "joueursMin": 2,
+  "joueursMax": 6,
+  "dureeMin": 30,
+  "ageMin": 8,
+  "categorie": "Ambiance",
+  "scoreVictoire": "max",
+  "scoreMode": "objectif",
+  "regles": [
+   "But : être le premier à se débarrasser de tous ses dés.",
+   "À votre tour, lancez vos dés et réalisez des combinaisons pour en retirer de votre réserve.",
+   "Des faces spéciales déclenchent des actions qui peuvent gêner les adversaires (leur refiler des dés).",
+   "Le premier joueur sans aucun dé remporte la partie."
+  ]
+ },
+ {
+  "id": "wizard",
+  "nom": "Wizard",
+  "categorie": "Cartes",
+  "description": "Un jeu de plis où il faut prédire exactement le nombre de levées que l'on va remporter.",
+  "joueursMin": 3,
+  "joueursMax": 6,
+  "dureeMin": 45,
+  "ageMin": 10,
+  "scoreVictoire": "max",
+  "scoreMode": "manches",
+  "regles": [
+   "À chaque manche, on distribue une carte de plus qu'à la précédente (1 au premier tour, 2 au deuxième…).",
+   "Avant de jouer, chaque joueur annonce combien de plis il pense remporter dans la manche.",
+   "On joue ensuite les plis en suivant la couleur ; les Magiciens remportent toujours le pli, les Nains le perdent toujours.",
+   "Réussir exactement son pari rapporte 20 points plus 10 par pli annoncé ; se tromper coûte 10 points par pli d'écart.",
+   "Après le nombre de manches prévu, le joueur avec le plus haut total gagne."
+  ]
+ },
+ {
+  "id": "yams",
+  "nom": "Yams",
+  "description": "Lancez cinq dés et remplissez votre feuille : 1 à 6, brelan, carré, full, suites, yams et chance.",
+  "joueursMin": 1,
+  "joueursMax": 8,
+  "dureeMin": 30,
+  "ageMin": 8,
+  "categorie": "Dés",
+  "scoreVictoire": "max",
+  "scoreMode": "grille",
+  "categories": [
+   {
+    "cle": "d1",
+    "label": "Total des 1",
+    "section": "Partie haute"
+   },
+   {
+    "cle": "d2",
+    "label": "Total des 2",
+    "section": "Partie haute"
+   },
+   {
+    "cle": "d3",
+    "label": "Total des 3",
+    "section": "Partie haute"
+   },
+   {
+    "cle": "d4",
+    "label": "Total des 4",
+    "section": "Partie haute"
+   },
+   {
+    "cle": "d5",
+    "label": "Total des 5",
+    "section": "Partie haute"
+   },
+   {
+    "cle": "d6",
+    "label": "Total des 6",
+    "section": "Partie haute"
+   },
+   {
+    "cle": "brelan",
+    "label": "Brelan",
+    "aide": "somme des dés",
+    "section": "Partie basse"
+   },
+   {
+    "cle": "carre",
+    "label": "Carré",
+    "aide": "somme des dés",
+    "section": "Partie basse"
+   },
+   {
+    "cle": "full",
+    "label": "Full",
+    "aide": "25",
+    "section": "Partie basse"
+   },
+   {
+    "cle": "petiteSuite",
+    "label": "Petite suite",
+    "aide": "30",
+    "section": "Partie basse"
+   },
+   {
+    "cle": "grandeSuite",
+    "label": "Grande suite",
+    "aide": "40",
+    "section": "Partie basse"
+   },
+   {
+    "cle": "yams",
+    "label": "Yams",
+    "aide": "50",
+    "section": "Partie basse"
+   },
+   {
+    "cle": "chance",
+    "label": "Chance",
+    "aide": "somme des dés",
+    "section": "Partie basse"
+   }
+  ],
+  "bonus": {
+   "label": "Bonus (≥ 63)",
+   "surCles": [
+    "d1",
+    "d2",
+    "d3",
+    "d4",
+    "d5",
+    "d6"
+   ],
+   "seuil": 63,
+   "points": 35
   },
-  {
-    "id": "catan",
-    "nom": "Catan",
-    "description": "Bâtissez des colonies, échangez des ressources et étendez votre territoire.",
-    "joueursMin": 3,
-    "joueursMax": 4,
-    "dureeMin": 75,
-    "ageMin": 10,
-    "categorie": "Stratégie",
-    "scoreVictoire": "max",
-    "seuilFin": 10,
-    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/A%20game%20of%20Settlers%20of%20Catan.jpg?width=600",
-    "regles": [
-      "À ton tour, lance les deux dés : chaque joueur récolte les ressources des tuiles portant ce numéro et voisines de ses colonies.",
-      "Échange des ressources avec les autres joueurs ou avec la banque.",
-      "Construis des routes, des colonies et des villes, ou achète des cartes développement.",
-      "Le premier à atteindre 10 points de victoire remporte la partie."
-    ]
-  },
-  {
-    "id": "6quiprend",
-    "nom": "6 qui prend !",
-    "description": "Posez vos cartes sans récolter de têtes de bœuf : ici, les points sont des pénalités.",
-    "joueursMin": 2,
-    "joueursMax": 10,
-    "dureeMin": 45,
-    "ageMin": 10,
-    "categorie": "Cartes",
-    "scoreVictoire": "min",
-    "seuilFin": 66,
-    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/6%20nimmt!.jpg?width=600",
-    "regles": [
-      "Chaque manche, tous les joueurs choisissent une carte en secret, puis on les révèle.",
-      "Les cartes se posent dans l'ordre croissant sur quatre rangées, à la suite de la carte la plus proche et inférieure.",
-      "Poser la 6e carte d'une rangée fait ramasser les 5 précédentes : leurs têtes de bœuf sont des points de pénalité.",
-      "À la fin des 10 cartes, chacun note ses têtes de bœuf.",
-      "Dès qu'un joueur atteint 66, la partie s'arrête : le joueur avec le MOINS de points gagne."
-    ]
-  },
-  {
-    "id": "villainous",
-    "nom": "Villainous",
-    "description": "Incarnez un célèbre méchant Disney et accomplissez votre objectif secret avant vos adversaires.",
-    "joueursMin": 2,
-    "joueursMax": 6,
-    "dureeMin": 50,
-    "ageMin": 10,
-    "categorie": "Stratégie",
-    "scoreVictoire": "max",
-    "scoreMode": "objectif",
-    "image": "https://www.bcd-jeux.fr/14143-pdt_771/villainous-ravensburger.jpg",
-    "extensions": [
-      "Mauvais jusqu'à l'os",
-      "La Fin est Proche",
-      "Cruellement Infects",
-      "Monstrueusement Malsains",
-      "Plus Grands, Plus Méchants",
-      "Larmes de Fond"
-    ],
-    "roles": [
-      {
-        "nom": "Maléfique",
-        "origine": "La Belle au bois dormant",
-        "objectif": "Commencer son tour avec une Malédiction sur chacun des 4 lieux de son royaume."
-      },
-      {
-        "nom": "Capitaine Crochet",
-        "origine": "Peter Pan",
-        "objectif": "Vaincre Peter Pan au lieu du Jolly Roger."
-      },
-      {
-        "nom": "Prince Jean",
-        "origine": "Robin des Bois",
-        "objectif": "Commencer son tour avec au moins 20 jetons de Pouvoir."
-      },
-      {
-        "nom": "Jafar",
-        "origine": "Aladdin",
-        "objectif": "Hypnotiser le Génie et posséder la Lampe magique à la Caverne aux Merveilles."
-      },
-      {
-        "nom": "Reine de Cœur",
-        "origine": "Alice au pays des merveilles",
-        "objectif": "Réussir une exécution en ayant une arche de croquet à chaque lieu."
-      },
-      {
-        "nom": "Ursula",
-        "origine": "La Petite Sirène",
-        "objectif": "Posséder le Trident et la Couronne à son Palais en début de tour."
-      },
-      {
-        "nom": "La Méchante Reine",
-        "origine": "Blanche-Neige",
-        "objectif": "Préparer la pomme empoisonnée en jouant 4 ingrédients différents, retrouver Blanche-Neige et l'éliminer avec la carte « Croque ! ».",
-        "extension": "Mauvais jusqu'à l'os"
-      },
-      {
-        "nom": "Hadès",
-        "origine": "Hercule",
-        "objectif": "Commencer son tour avec au moins 3 Titans non entravés sur le Mont Olympe.",
-        "extension": "Mauvais jusqu'à l'os"
-      },
-      {
-        "nom": "Dr Facilier",
-        "origine": "La Princesse et la Grenouille",
-        "objectif": "Contrôler le Talisman et jouer la carte « Régner sur la Nouvelle-Orléans ».",
-        "extension": "Mauvais jusqu'à l'os"
-      },
-      {
-        "nom": "Scar",
-        "origine": "Le Roi Lion",
-        "objectif": "Trouver et vaincre Mufasa, puis vaincre d'autres héros jusqu'à totaliser 15 points de force dans sa pile Succession.",
-        "extension": "La Fin est Proche"
-      },
-      {
-        "nom": "Yzma",
-        "origine": "Kuzco, l'empereur mégalo",
-        "objectif": "Débusquer Kuzco dans ses pioches du Destin, le jouer, puis l'éliminer grâce à Kronk.",
-        "extension": "La Fin est Proche"
-      },
-      {
-        "nom": "Ratigan",
-        "origine": "Basil, détective privé",
-        "objectif": "Jouer la Reine robot et la conduire à Buckingham Palace, où elle doit rester jusqu'au début de son tour.",
-        "extension": "La Fin est Proche"
-      },
-      {
-        "nom": "Cruella d'Enfer",
-        "origine": "Les 101 Dalmatiens",
-        "objectif": "Réunir 99 chiots pour confectionner son manteau de fourrure.",
-        "extension": "Cruellement Infects"
-      },
-      {
-        "nom": "Capitaine Pat",
-        "origine": "Mickey Mouse",
-        "objectif": "Accomplir l'objectif du lieu où se trouve son pion : il change au fil de la partie.",
-        "extension": "Cruellement Infects"
-      },
-      {
-        "nom": "Mère Gothel",
-        "origine": "Raiponce",
-        "objectif": "Gagner la confiance de Raiponce afin de la garder sous son emprise.",
-        "extension": "Cruellement Infects"
-      },
-      {
-        "nom": "Gaston",
-        "origine": "La Belle et la Bête",
-        "objectif": "Courtiser Belle et la convaincre qu'il est l'homme à épouser.",
-        "extension": "Monstrueusement Malsains"
-      },
-      {
-        "nom": "Lady Tremaine",
-        "origine": "Cendrillon",
-        "objectif": "Convaincre le Prince d'épouser l'une de ses filles plutôt que Cendrillon.",
-        "extension": "Monstrueusement Malsains"
-      },
-      {
-        "nom": "Le Roi Cornu",
-        "origine": "Taram et le Chaudron magique",
-        "objectif": "Lever une armée de morts-vivants en réanimant des guerriers sur plusieurs lieux de son royaume.",
-        "extension": "Monstrueusement Malsains"
-      },
-      {
-        "nom": "Syndrome",
-        "origine": "Les Indestructibles",
-        "objectif": "Vaincre un Omnidroïde amélioré ainsi que tous les héros présents dans son royaume.",
-        "extension": "Plus Grands, Plus Méchants"
-      },
-      {
-        "nom": "Lotso",
-        "origine": "Toy Story 3",
-        "objectif": "Piéger quatre héros réduits à 0 point de force, ainsi que Buzz l'Éclair, dans la salle des Chenilles.",
-        "extension": "Plus Grands, Plus Méchants"
-      },
-      {
-        "nom": "Madame Mim",
-        "origine": "Merlin l'Enchanteur",
-        "objectif": "Surpasser Merlin en magie et l'emporter lors du duel de sorciers.",
-        "extension": "Plus Grands, Plus Méchants"
-      },
-      {
-        "nom": "Davy Jones",
-        "origine": "Pirates des Caraïbes",
-        "objectif": "Réunir 5 trésors à l'aide du Kraken.",
-        "extension": "Larmes de Fond"
-      },
-      {
-        "nom": "Tamatoa",
-        "origine": "Vaiana",
-        "objectif": "Ramener le crochet de Maui et le cœur de Te Fiti dans son repaire.",
-        "extension": "Larmes de Fond"
-      }
-    ],
-    "regles": [
-      "Chaque joueur contrôle un méchant Disney avec son plateau (le Royaume), son deck Machiavélique et un deck du Destin.",
-      "À ton tour, déplace ton pion sur un lieu de ton plateau.",
-      "Effectue les actions du lieu : gagner du Pouvoir, jouer des cartes, activer des capacités.",
-      "Tu peux jouer une carte du Destin contre un adversaire pour le gêner.",
-      "Chaque méchant a un objectif unique : le premier à le remplir gagne."
-    ]
-  },
-  {
-    "id": "yams",
-    "nom": "Yams",
-    "description": "Lancez cinq dés et remplissez votre feuille : 1 à 6, brelan, carré, full, suites, yams et chance.",
-    "joueursMin": 1,
-    "joueursMax": 8,
-    "dureeMin": 30,
-    "ageMin": 8,
-    "categorie": "Dés",
-    "scoreVictoire": "max",
-    "scoreMode": "grille",
-    "categories": [
-      {
-        "cle": "d1",
-        "label": "Total des 1",
-        "section": "Partie haute"
-      },
-      {
-        "cle": "d2",
-        "label": "Total des 2",
-        "section": "Partie haute"
-      },
-      {
-        "cle": "d3",
-        "label": "Total des 3",
-        "section": "Partie haute"
-      },
-      {
-        "cle": "d4",
-        "label": "Total des 4",
-        "section": "Partie haute"
-      },
-      {
-        "cle": "d5",
-        "label": "Total des 5",
-        "section": "Partie haute"
-      },
-      {
-        "cle": "d6",
-        "label": "Total des 6",
-        "section": "Partie haute"
-      },
-      {
-        "cle": "brelan",
-        "label": "Brelan",
-        "aide": "somme des dés",
-        "section": "Partie basse"
-      },
-      {
-        "cle": "carre",
-        "label": "Carré",
-        "aide": "somme des dés",
-        "section": "Partie basse"
-      },
-      {
-        "cle": "full",
-        "label": "Full",
-        "aide": "25",
-        "section": "Partie basse"
-      },
-      {
-        "cle": "petiteSuite",
-        "label": "Petite suite",
-        "aide": "30",
-        "section": "Partie basse"
-      },
-      {
-        "cle": "grandeSuite",
-        "label": "Grande suite",
-        "aide": "40",
-        "section": "Partie basse"
-      },
-      {
-        "cle": "yams",
-        "label": "Yams",
-        "aide": "50",
-        "section": "Partie basse"
-      },
-      {
-        "cle": "chance",
-        "label": "Chance",
-        "aide": "somme des dés",
-        "section": "Partie basse"
-      }
-    ],
-    "bonus": {
-      "label": "Bonus (≥ 63)",
-      "surCles": [
-        "d1",
-        "d2",
-        "d3",
-        "d4",
-        "d5",
-        "d6"
-      ],
-      "seuil": 63,
-      "points": 35
-    },
-    "image": "https://m.media-amazon.com/images/I/51nF2ugGh6L._AC_SL1000_.jpg",
-    "regles": [
-      "À ton tour, lance les cinq dés. Tu peux relancer les dés de ton choix jusqu'à deux fois (trois lancers en tout).",
-      "Inscris ensuite ton résultat dans une case libre de ta feuille.",
-      "Partie haute (1 à 6) : additionne les dés de la valeur choisie. Bonus de 35 si le total haut atteint 63.",
-      "Partie basse : Brelan et Carré = somme des dés ; Full = 25 ; Petite suite = 30 ; Grande suite = 40 ; Yams = 50 ; Chance = somme des dés.",
-      "Quand toutes les cases sont remplies, le plus grand total gagne."
-    ]
-  },
-  {
-    "id": "skullking",
-    "nom": "Skull King",
-    "description": "Dix manches, un contrat à annoncer avant chaque pli. Tenir sa promesse rapporte ; se tromper coûte cher.",
-    "joueursMin": 2,
-    "joueursMax": 8,
-    "dureeMin": 40,
-    "ageMin": 8,
-    "categorie": "Cartes",
-    "scoreVictoire": "max",
-    "scoreMode": "manches",
-    "regles": [
-      "Dix manches. À la manche n, chacun reçoit n cartes.",
-      "Avant de jouer, chacun annonce en secret le nombre de plis qu'il pense remporter, puis on révèle les annonces ensemble.",
-      "On joue les plis à la couleur demandée. Les cartes noires (atouts) battent les autres couleurs.",
-      "Les cartes spéciales priment : Pirates, Sirènes, Skull King, Fuite et Tigresse.",
-      "Contrat tenu : 20 points par pli annoncé, plus les bonus. Contrat manqué : 10 points de pénalité par pli d'écart.",
-      "Annoncer zéro et le tenir rapporte 10 points par carte en main ; se tromper les fait perdre.",
-      "Après la dixième manche, le plus grand total gagne."
-    ]
-  },
-  {
-    "id": "belote",
-    "nom": "Belote",
-    "description": "Le classique à quatre, en deux équipes. Première équipe à 1000 points.",
-    "joueursMin": 2,
-    "joueursMax": 2,
-    "dureeMin": 45,
-    "ageMin": 10,
-    "categorie": "Cartes",
-    "scoreVictoire": "max",
-    "scoreMode": "manches",
-    "seuilFin": 1000,
-    "equipes": true,
-    "regles": [
-      "Quatre joueurs, deux équipes assises en croix. Jeu de 32 cartes.",
-      "Après la donne, on retourne une carte : chacun peut prendre à cette couleur, qui devient l'atout.",
-      "À l'atout : Valet 20, Neuf 14, As 11, Dix 10, Roi 4, Dame 3. Hors atout : As 11, Dix 10, Roi 4, Dame 3, Valet 2.",
-      "On doit fournir la couleur demandée, couper si l'on ne l'a pas, et monter à l'atout.",
-      "Belote et Rebelote (Roi et Dame d'atout) valent 20 points à annoncer.",
-      "Le dernier pli vaut 10 points (« dix de der »). Le total d'une donne fait 162 points.",
-      "L'équipe preneuse doit faire plus de la moitié des points, sinon elle chute et l'adversaire empoche tout.",
-      "La première équipe à 1000 points gagne la partie."
-    ]
-  },
-  {
-    "id": "7wonders",
-    "nom": "7 Wonders",
-    "description": "Trois âges, des cartes qu'on se passe, une merveille à bâtir. On compte les points à la fin.",
-    "joueursMin": 3,
-    "joueursMax": 7,
-    "dureeMin": 40,
-    "ageMin": 10,
-    "categorie": "Stratégie",
-    "scoreVictoire": "max",
-    "regles": [
-      "Chaque joueur dirige une cité et sa merveille, qu'il bâtit en plusieurs étapes.",
-      "À chaque tour, on choisit une carte de sa main en secret, puis on passe le reste de la main à son voisin.",
-      "Une carte se construit (en payant ses ressources), s'utilise pour une étape de merveille, ou se défausse contre 3 pièces.",
-      "On achète les ressources manquantes à ses voisins immédiats.",
-      "En fin d'âge, les conflits militaires opposent chaque cité à ses deux voisines.",
-      "Après le troisième âge, on additionne : militaire, pièces, merveille, bâtiments civils, commerciaux, guildes et science.",
-      "Le plus grand total gagne ; en cas d'égalité, le plus riche l'emporte."
-    ]
-  },
-  {
-    "id": "codenames",
-    "nom": "Codenames",
-    "description": "Deux équipes, une grille de mots, un seul indice à la fois. Trouver ses agents avant l'autre équipe.",
-    "joueursMin": 2,
-    "joueursMax": 2,
-    "dureeMin": 20,
-    "ageMin": 10,
-    "categorie": "Ambiance",
-    "scoreVictoire": "max",
-    "scoreMode": "objectif",
-    "equipes": true,
-    "regles": [
-      "25 cartes-mots forment une grille. Une carte-clé, vue des seuls maîtres-espions, indique qui appartient à quelle équipe.",
-      "Le maître-espion donne un indice d'un seul mot, suivi d'un nombre : le nombre de mots visés.",
-      "Son équipe touche les mots qu'elle croit être les siens, un par un.",
-      "Un mot adverse ou neutre met fin au tour. Le mot Assassin fait perdre immédiatement.",
-      "La première équipe à trouver tous ses agents gagne."
-    ]
-  },
-  {
-    "id": "dixit",
-    "nom": "Dixit",
-    "description": "Une phrase sur une image onirique : ni trop claire, ni trop obscure. Premier à 30 points.",
-    "joueursMin": 3,
-    "joueursMax": 6,
-    "dureeMin": 30,
-    "ageMin": 8,
-    "categorie": "Ambiance",
-    "scoreVictoire": "max",
-    "seuilFin": 30,
-    "regles": [
-      "Le conteur choisit une carte de sa main et prononce une phrase, un mot ou un son qui l'évoque.",
-      "Les autres joueurs proposent chacun une carte censée coller à cette phrase.",
-      "On mélange les cartes, on les révèle, et chacun vote pour celle qu'il croit être celle du conteur.",
-      "Si tout le monde ou personne ne trouve : le conteur ne marque rien, les autres marquent 2 points.",
-      "Sinon, le conteur et ceux qui l'ont trouvé marquent 3 points.",
-      "Chaque joueur marque 1 point par vote reçu sur sa propre carte.",
-      "Le premier à 30 points gagne."
-    ]
-  },
-  {
-    "id": "carcassonne",
-    "nom": "Carcassonne",
-    "description": "Poser une tuile, placer un partisan, fermer une ville. Un paysage qui se construit.",
-    "joueursMin": 2,
-    "joueursMax": 5,
-    "dureeMin": 40,
-    "ageMin": 7,
-    "categorie": "Stratégie",
-    "scoreVictoire": "max",
-    "regles": [
-      "À ton tour, pioche une tuile et pose-la contre une tuile déjà posée, en respectant les raccords.",
-      "Tu peux ensuite y placer un partisan : voleur sur une route, chevalier dans une ville, moine dans une abbaye, paysan dans un pré.",
-      "Une route ou une ville terminée est marquée immédiatement, et les partisans reviennent à leur propriétaire.",
-      "Une abbaye entourée de huit tuiles rapporte 9 points.",
-      "En fin de partie, on compte les constructions inachevées et les prés.",
-      "Le plus grand total gagne."
-    ]
-  },
-  {
-    "id": "azul",
-    "nom": "Azul",
-    "description": "Des azulejos à poser, des lignes à compléter, et surtout des tuiles à ne pas laisser tomber.",
-    "joueursMin": 2,
-    "joueursMax": 4,
-    "dureeMin": 35,
-    "ageMin": 8,
-    "categorie": "Stratégie",
-    "scoreVictoire": "max",
-    "regles": [
-      "À ton tour, prends toutes les tuiles d'une même couleur sur une fabrique, ou toutes celles de cette couleur au centre.",
-      "Place-les sur une seule ligne de motif ; les tuiles en trop tombent sur ta ligne de plancher et coûtent des points.",
-      "Quand toutes les tuiles ont été prises, chaque ligne de motif complète envoie une tuile sur le mur.",
-      "Cette tuile marque des points selon les tuiles déjà voisines, en ligne et en colonne.",
-      "La partie s'arrête à la fin du tour où un joueur complète une ligne horizontale du mur.",
-      "Bonus final : 2 points par ligne complète, 7 par colonne, 10 par couleur posée cinq fois."
-    ]
-  },
-  {
-    "id": "splendor",
-    "nom": "Splendor",
-    "description": "Des jetons, des cartes, des nobles. Le premier à 15 points de prestige gagne.",
-    "joueursMin": 2,
-    "joueursMax": 4,
-    "dureeMin": 30,
-    "ageMin": 10,
-    "categorie": "Stratégie",
-    "scoreVictoire": "max",
-    "seuilFin": 15,
-    "regles": [
-      "À ton tour, une seule action : prendre 3 jetons de couleurs différentes, prendre 2 jetons de la même couleur, réserver une carte, ou acheter une carte.",
-      "Les cartes achetées offrent un bonus permanent, qui réduit le coût des achats suivants.",
-      "Réserver une carte donne un jeton or, joker à l'achat.",
-      "Les nobles viennent d'eux-mêmes quand on possède les bonus qu'ils exigent : 3 points chacun.",
-      "Dès qu'un joueur atteint 15 points, on termine le tour de table : le plus grand total gagne.",
-      "En cas d'égalité, celui qui a acheté le moins de cartes l'emporte."
-    ]
-  },
-  {
-    "id": "millebornes",
-    "nom": "Mille Bornes",
-    "description": "La route, les crevaisons, les bottes et les coups fourrés. On joue en 5000 points.",
-    "joueursMin": 2,
-    "joueursMax": 6,
-    "dureeMin": 45,
-    "ageMin": 8,
-    "categorie": "Cartes",
-    "scoreVictoire": "max",
-    "scoreMode": "manches",
-    "seuilFin": 5000,
-    "regles": [
-      "Chaque manche, il faut parcourir 1000 bornes en posant des cartes Étape.",
-      "Il faut un Feu Vert pour démarrer, et respecter les Limitations de vitesse.",
-      "Les attaques (Crevaison, Panne d'Essence, Accident, Feu Rouge) se soignent par la parade correspondante.",
-      "Les quatre bottes protègent définitivement de l'attaque associée, et permettent le coup fourré.",
-      "La manche s'arrête à 1000 bornes exactement, ou quand la pioche est épuisée.",
-      "On compte les bornes parcourues, plus les primes : manche terminée, coups fourrés, bottes, allonge, sans les 200.",
-      "La partie s'arrête quand un joueur ou une équipe atteint 5000 points."
-    ]
-  },
-  {
-    "id": "thecrew",
-    "nom": "The Crew",
-    "description": "Un jeu de plis coopératif : chacun doit remporter précisément les cartes de sa mission, sans rien se dire.",
-    "joueursMin": 2,
-    "joueursMax": 5,
-    "dureeMin": 20,
-    "ageMin": 10,
-    "categorie": "Coopératif",
-    "scoreVictoire": "max",
-    "scoreMode": "cooperatif",
-    "regles": [
-      "On distribue toutes les cartes, puis on répartit les cartes-mission de la manche en cours.",
-      "Chaque mission exige qu'un joueur précis remporte un pli contenant une carte précise.",
-      "On joue à la couleur demandée. Les fusées sont atout ; le plus fort atout emporte le pli.",
-      "La communication est interdite, sauf un jeton de communication : poser une carte devant soi en indiquant si c'est sa plus haute, sa plus basse, ou son unique carte de cette couleur.",
-      "Vous gagnez ensemble si toutes les missions sont accomplies avant la fin des plis.",
-      "Vous perdez ensemble dès qu'une mission devient impossible."
-    ]
-  },
-  {
-    "id": "justone",
-    "nom": "Just One",
-    "description": "Faire deviner un mot en écrivant un indice chacun — mais les indices identiques s'annulent.",
-    "joueursMin": 3,
-    "joueursMax": 7,
-    "dureeMin": 20,
-    "ageMin": 8,
-    "categorie": "Coopératif",
-    "scoreVictoire": "max",
-    "scoreMode": "cooperatif",
-    "regles": [
-      "À chaque manche, un joueur devine ; les autres voient le mot mystère.",
-      "Chacun écrit en secret un seul mot comme indice.",
-      "On compare les indices : tous les doublons sont retirés, et le devineur ne les verra jamais.",
-      "Le devineur propose une réponse, une seule fois.",
-      "Bonne réponse : la carte est gagnée. Mauvaise réponse : la carte est perdue, et la suivante est écartée.",
-      "Passer ne fait perdre que la carte en cours. Vous jouez treize cartes, ensemble."
-    ]
-  },
-  {
-    "id": "timesup",
-    "nom": "Time's Up!",
-    "description": "Les mêmes personnalités, trois manches, et de moins en moins de mots pour les faire deviner.",
-    "joueursMin": 2,
-    "joueursMax": 2,
-    "dureeMin": 45,
-    "ageMin": 12,
-    "categorie": "Ambiance",
-    "scoreVictoire": "max",
-    "scoreMode": "manches",
-    "equipes": true,
-    "regles": [
-      "Deux équipes. On constitue un paquet de cartes-personnalités que tout le monde devra deviner.",
-      "Manche 1 : faire deviner en parlant, sans prononcer les mots de la carte. Temps limité par tour.",
-      "Manche 2 : les mêmes cartes, mais un seul mot par carte.",
-      "Manche 3 : les mêmes cartes, en mimant, sans un son.",
-      "Une carte devinée rapporte un point à l'équipe et sort du paquet pour la manche en cours.",
-      "On additionne les points des trois manches : l'équipe la plus haute gagne."
-    ]
-  },
-  {
-    "id": "scrabble",
-    "nom": "Scrabble",
-    "description": "Des lettres, une grille, des cases qui multiplient. Le mot juste au bon endroit.",
-    "joueursMin": 2,
-    "joueursMax": 4,
-    "dureeMin": 60,
-    "ageMin": 10,
-    "categorie": "Lettres",
-    "scoreVictoire": "max",
-    "regles": [
-      "Chaque joueur garde sept lettres en main.",
-      "À ton tour, forme un mot sur la grille, en croisant ou prolongeant les mots déjà posés.",
-      "Le premier mot doit passer par la case centrale.",
-      "Les cases colorées doublent ou triplent la lettre, ou le mot entier ; elles ne comptent qu'à la pose.",
-      "Poser ses sept lettres d'un coup rapporte 50 points de prime (le « scrabble »).",
-      "La partie s'arrête quand un joueur a posé sa dernière lettre, sac vide. On retranche à chacun la valeur des lettres restantes."
-    ]
-  }
+  "image": "https://m.media-amazon.com/images/I/51nF2ugGh6L._AC_SL1000_.jpg",
+  "regles": [
+   "À ton tour, lance les cinq dés. Tu peux relancer les dés de ton choix jusqu'à deux fois (trois lancers en tout).",
+   "Inscris ensuite ton résultat dans une case libre de ta feuille.",
+   "Partie haute (1 à 6) : additionne les dés de la valeur choisie. Bonus de 35 si le total haut atteint 63.",
+   "Partie basse : Brelan et Carré = somme des dés ; Full = 25 ; Petite suite = 30 ; Grande suite = 40 ; Yams = 50 ; Chance = somme des dés.",
+   "Quand toutes les cases sont remplies, le plus grand total gagne."
+  ]
+ },
+ {
+  "id": "yogi",
+  "nom": "Yogi",
+  "description": "Enchaînez les contraintes loufoques et tenez-les jusqu'au bout, sans craquer.",
+  "joueursMin": 2,
+  "joueursMax": 6,
+  "dureeMin": 20,
+  "ageMin": 7,
+  "categorie": "Ambiance",
+  "scoreVictoire": "max",
+  "scoreMode": "objectif",
+  "regles": [
+   "À votre tour, piochez une carte et adoptez la contrainte (souvent loufoque) qu'elle indique.",
+   "Cette contrainte doit être respectée jusqu'à la fin de la partie ; elles s'accumulent au fil des tours.",
+   "Un joueur qui ne parvient plus à tenir l'une de ses contraintes est éliminé.",
+   "Le dernier joueur encore en lice gagne."
+  ]
+ },
+ {
+  "id": "zimzamzoum",
+  "nom": "Zim Zam Zoum",
+  "categorie": "Enfants",
+  "description": "Un cache-cache d'observation : trouvez les cartes où se cache l'animal du dé.",
+  "joueursMin": 1,
+  "joueursMax": 4,
+  "dureeMin": 10,
+  "ageMin": 4,
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "On étale douze cartes face cachée en grille ; chacune montre un, deux ou les trois amis Zim, Zam et Zoum.",
+   "À son tour, on lance le dé qui désigne un animal à retrouver.",
+   "On retourne les cartes pour dénicher celles où figure l'animal, en mémorisant les positions.",
+   "Trouver la bonne carte permet de la garder.",
+   "À la fin, le joueur qui a rassemblé le plus de cartes gagne."
+  ]
+ },
+ {
+  "id": "oeufpouroeuf",
+  "nom": "Œuf Pour Œuf",
+  "categorie": "Rapidité",
+  "description": "Comptez vite les œufs des poules et raflez les cartes… sans perdre le fil.",
+  "joueursMin": 2,
+  "joueursMax": 6,
+  "dureeMin": 15,
+  "ageMin": 6,
+  "scoreVictoire": "max",
+  "scoreMode": "compteur",
+  "regles": [
+   "Les cartes montrent des poules de couleur portant chacune un certain nombre d'œufs.",
+   "À son tour, on révèle une carte et on annonce la bonne réponse selon la règle en cours.",
+   "L'œuf au plat « qui pouic » et le poussin Léonard déclenchent des effets spéciaux.",
+   "Répondre juste et vite permet de gagner des cartes ; se tromper fait tout perdre le fil.",
+   "Le joueur qui a rassemblé le plus d'œufs remporte la partie."
+  ]
+ }
 ]

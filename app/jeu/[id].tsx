@@ -16,6 +16,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { DialogueConfirmation } from "@/components/dialogue-confirmation";
 import { Entete } from "@/components/entete";
+import { PoweredByBgg } from "@/components/powered-by-bgg";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { VisuelJeu } from "@/components/visuel-jeu";
 import { type AppColors } from "@/constants/theme-colors";
@@ -285,6 +286,10 @@ export default function FicheJeu() {
           <Text style={styles.supprimerTexte}>Supprimer ce jeu</Text>
         </TouchableOpacity>
       </View>
+
+      {jeu.id.startsWith("bgg") && (
+        <PoweredByBgg url={`https://boardgamegeek.com/boardgame/${jeu.id.slice(3)}`} />
+      )}
 
       <DialogueConfirmation
         visible={abandonOuvert}

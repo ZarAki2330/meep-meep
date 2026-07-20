@@ -1,0 +1,335 @@
+# Catalogue Gigamic — liste des jeux (noms en français)
+
+_Compilé le 17/07/2026 depuis gigamic.com (Réflexion, Ambiance, Junior & Famille, Jeux Star, Nouveautés)._
+
+**225 jeux de base · 22 extensions · 71 versions & éditions dérivées.** Seuls les accessoires purs (tapis, posters, casse-têtes Huzzle) sont exclus.
+
+> Les noms sont en version française. Les règles ne sont pas incluses (rédigées au cas par cas). Liste indicative, pas une garantie d'exhaustivité du stock du jour.
+
+
+## Jeux de base
+
+- 2 sans 3
+- 5 ou Moins
+- 6 qui prend
+- Akropolis
+- Altay
+- Après-Vous
+- Archéo
+- Au Pif
+- Audimat
+- aurignac
+- Aurum
+- Avant Garde
+- Ballons
+- Bango
+- Bazar Bizarre
+- Bella vista
+- Bellevue
+- Bernard
+- Bluffer
+- Bohnanza
+- Boss Fighters QR
+- Cabanga
+- Canardage
+- Captains' War
+- Capybaraka
+- Carapate
+- Carro combo
+- Cartétoile
+- Champ d'honneur
+- Chiche ou Pois Chiche
+- Chrono-Mots
+- Clac Clac
+- Cocotaki
+- CODO Berlin 63
+- Crazy Cups
+- Cyclades
+- D'orge et de blé
+- Dans la Cour d'École
+- Défifoo
+- Dékal
+- Détrak
+- Diamangue
+- Dice Pool Party
+- Différence
+- Dodelido
+- Donjons & Siphons
+- Dorfromantik, le jeu de société
+- Double Face
+- Dr Gribouille
+- Dragons des Mers
+- Duel d'Escrocs
+- Duke
+- Enclume & Image
+- Enquêtes à BANDIVILLE
+- Éclair de Génie
+- Fish & Cheat
+- Flamme Rouge BMX
+- Gagne ta maman
+- Gagne ton papa
+- Galèrapagos
+- Gang de castors
+- Génération Mimes
+- Gosu X
+- Greenville 1989
+- GWENT : Le Jeu de Cartes Légendaire
+- Halli Galli
+- Hilo
+- Imagidés
+- Improo
+- Incantibus
+- Inimaginable
+- Instable
+- Ipso
+- Île en Vue Moussaillons !
+- Jeu de la ficelle
+- Jokes de papa !
+- Katamino
+- Kéblo
+- Kingdom Crossing
+- Klask
+- Kontour
+- Koowah
+- Kumi Kumi
+- L'Imposteur
+- LA CLEF : Tome 1, Astolie
+- La Coincoinche
+- La Colline aux Feux Follets : Le Jeu de Cartes
+- La Fabrique à Rêves
+- La Fin des Artichauts
+- La Scopette
+- La Triplette
+- Lama
+- Lama Cadabra
+- Lamalaya
+- Le Baron
+- Le Boulet
+- Le Casse de Trop
+- Le Gourdineur
+- Le Jeu de Charles
+- Le mystère des goûts - sucré/salé acide/amer
+- Le pique-nique de FACTEUR SOURIS
+- Le poker des cafards
+- Le Traquenard
+- Leaders
+- Leda
+- Les chants de Loss
+- Les cinq rois
+- Les Cités Rivales
+- Les Jardins Suspendus
+- Line-It
+- Littoral
+- Lobo 77
+- Looot
+- Lumios
+- Machu Pichu
+- Magnum Opus : le Grand OEuvre
+- Maître Makatsu
+- Mamie Moule Maki
+- Marrakech
+- Mesos
+- Metal Adventures : Mutant Apocalypse
+- Meuhte
+- Médiévallons
+- Mémoires d'une chamane
+- Méouté
+- Mille Sabords
+- Miller Zoo
+- Miro Miro
+- Miroir Magique
+- Misfit Heroes
+- Mission autour du monde - épices et piquant
+- Mito
+- Moka
+- Monique
+- My Murder Mystery
+- Naishi
+- Nephews In Peril
+- Nicole
+- Nitro Nitro
+- Non merci !
+- Northgard : Uncharted Lands
+- Nut Rush !
+- Nymphéas Noirs
+- Odysseus
+- Oeuf Pour Oeuf
+- Oltréé
+- Orapa Mine
+- Oriflamme
+- Origine
+- Padupe
+- Paillettes Claquettes
+- Panic Lab
+- Paon
+- Papayoo
+- Pépite
+- Pickomino
+- Pigeon Explosion
+- Pippo
+- Plouf Canard
+- Point City
+- Potion Ou Poison
+- Poule Poule
+- Poum Poum Crounch
+- Pour la Reine
+- Privacy No Limit
+- Pylos
+- Qawale
+- Qomet
+- Quadri
+- Quantik
+- Quarto
+- QUEEN, Marie-Antoinette
+- Qui des Mieux ?
+- Quixo
+- Quiz Room en Boîte
+- Quoridor
+- Quoridor Pac-man
+- Qwinto
+- Qwixx
+- Ratak
+- Ratapolis
+- Ratjack
+- Rebelles Princesses
+- Reporter
+- Révolte
+- Roll N Bump
+- Rollie
+- Romi Rami
+- Saboteur
+- Salade de cafards
+- Secousses en cuisine - les secrets des aliments gras
+- Secret Identity
+- Serpentina
+- Set
+- Shackleton Base
+- Shape It
+- Space Lab
+- Specific
+- Speek
+- Squadro
+- Staraoké
+- Stereo Mind
+- Stupide vautour
+- Sur les Traces de Darwin
+- Sur les traces de Marie Curie
+- Suspects
+- Talaref
+- Tantrix Solo
+- Tantrix Stratégie
+- Tetaki
+- Texto
+- The Dream
+- Toutim
+- Traq
+- Treetopia
+- Triolet
+- Tulikko
+- Varuna
+- Vazy
+- Verso
+- Wazabi
+- Winky Billy
+- Wizard
+- Yogi
+- Zim Zam Zoum
+
+## Extensions
+
+- Akropolis - Athena
+- Akropolis - Panthéon
+- Champ d'honneur extension : Félonie
+- Champ d'honneur extension : Noblesse
+- Champ d'honneur extension : Siège
+- Cyclades : Creatures & Heroes
+- Cyclades : Maelström
+- Cyclades : Maelström DELUXE
+- Cyclades : Troops & Fleets
+- Dorfromantik : Le Duel
+- Galèrapagos Extension : Tribu et personnages
+- Gosu X : Extension Abunakkashii
+- Gosu X : Extension Astraia
+- Gosu X : Extension RUKGNARL BONESREAPER
+- Oriflamme Alliance
+- Oriflamme Embrasement
+- RATJACK : Extension coup du lapin
+- Roll'n Bump Duel
+- Saboteur 2 : les mineurs contre-attaquent
+- Saboteur le Duel
+- Sur les Traces de Darwin - Correspondances
+- Wazabi extension : Supplément piment
+
+## Versions & éditions dérivées (mini, pocket, éditions thématiques, scénarios de série…)
+
+- 6 qui prend : Anniversaire
+- 6 qui prend junior
+- 6 qui surprend !
+- Bazar Bizarre 2.0
+- Bazar Bizarre Mini
+- Bellevue - Parthenay
+- Bellevue - Wimereux
+- Critical - Fondation S1
+- Critical - Fondation S2
+- Critical - Sanctuaire S1
+- Critical - Sanctuaire S2
+- Dékal XL
+- Difference Junior
+- Différence - Edition Astérix
+- Dimoi : Édition Amis
+- Dimoi : Édition Couples
+- Dimoi : Édition Enfants
+- Dimoi : Édition Familles
+- Dimoi : Édition Pimentée
+- Faux-culte : le Pire Contre-attaque
+- For The Story : Alibis
+- For The Story : Sur la Route
+- Halli Galli Junior
+- Katamino Pocket
+- MAGICARTA : Le fantôme de la sorcière
+- Micro Hero : Hercule
+- NAISHI : Légendes et voyageurs
+- Pickomino Mini
+- Pylos mini
+- Qawale mini
+- Quantik mini
+- Quarto mini
+- Quixo Mini
+- Quoridor Mini
+- SIMILO : Animaux
+- Similo : Animaux Aquatiques
+- SIMILO : Animaux sauvages
+- SIMILO : Contes
+- Similo : Harry Potter
+- SIMILO : Histoire
+- Similo : Jurassic World
+- Similo : Le Seigneur des Anneaux
+- Similo : Monstres
+- SIMILO : Mythes
+- Solacia - Le Démon de glace
+- Solacia - Le Sorcier maudit
+- Sous Scellés - 63 âmes
+- Sous Scellés - L'Ultime Chatiment
+- Sous Scellés - La Clef
+- Sous Scellés - La fille du Troisième
+- Sous Scellés - Le gardien des caves
+- Sous Scellés - Les Maudits de Fosse-Aux-Ronces
+- Squadro mini
+- SUSPECTS POCKET : Hors jeu à Liverpool
+- SUSPECTS POCKET : L'opération Ravel
+- SUSPECTS POCKET : La disparition du Pr Fairchild
+- Talaref 2010
+- Talaref 80
+- Tantrix Pocket
+- Texto 2.0
+- Tossit - Football Edition
+- Tossit : Bleu-Jaune
+- Tossit : Rose-Bleu
+- Tossit : Rouge-Cyan
+- Tossit : Violet-Vert
+- TOSSIT Edition limitée Lavande
+- TOSSIT Edition limitée Menthe
+- TOSSIT Edition limitée Noix de Coco
+- Tossit Pack Famille
+- Very Bad Lands - Brachio
+- Very Bad Lands - T-Rex

@@ -1,0 +1,191 @@
+# Jeux à intégrer au catalogue « tout prêt ».
+# Une entrée par ligne. Tout ce qui suit un « # » est ignoré.
+#
+# Chaque ligne peut être :
+#   - un identifiant BGG numérique (dans l'URL : .../boardgame/266192/... -> 266192), ou
+#   - un NOM de jeu, résolu automatiquement en id via la recherche BGG.
+#
+# Lancer :  node scripts/generer-catalogue.mjs
+#     ou :  node scripts/generer-catalogue.mjs --hot   (ajoute les jeux du moment, liste « Hot » BGG)
+#
+# Les jeux déjà présents dans catalogue.json sont ignorés (rien n'est écrasé).
+# Le script affiche, pour chaque nom, l'id et le jeu retenus : vérifie-les.
+#
+# ─────────────────────────────────────────────────────────────────────────────
+# Sélection de ~95 titres POPULAIRES EN FRANCE, pour compléter la bibliothèque
+# déjà livrée dans l'app. Sources : meilleures ventes Philibert 2025, lauréats
+# As d'Or (Cannes), classiques grand public et valeurs sûres du hobby.
+#
+# NB : ce n'est PAS un « top 1000 » (cette donnée n'existe pas de façon fiable) —
+# c'est une base large à ajuster selon tes goûts. Retire les lignes non voulues.
+# Les jeux déjà inclus dans l'app (Catan, Carcassonne, 7 Wonders, Pandémie,
+# Azul, Splendor, Dixit, Codenames, Just One, Time's Up, The Crew, Skull King,
+# Villainous, 6 qui prend, Mille Bornes, Scrabble, Yams, Belote) sont omis.
+#
+# Astuce séries (Unlock!, Exit, Clank!, Marvel Champions…) : la recherche peut
+# renvoyer le jeu générique. Vérifie l'id affiché, ou mets l'id d'un opus précis.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Familiaux / accessibles
+Ticket to Ride
+7 Wonders Duel
+Kingdomino
+Takenoko
+King of Tokyo
+Small World
+Jaipur
+Sushi Go!
+Camel Up
+The Quest for El Dorado
+Skyjo
+Trio
+Qwirkle
+Rummikub
+Lost Cities
+
+# Ambiance / party
+Dobble
+Concept
+The Werewolves of Miller's Hollow
+The Mind
+Love Letter
+Jungle Speed
+Blanc-Manger Coco
+Perudo
+Halli Galli
+Saboteur
+Decrypto
+So Clover!
+The Gang
+
+# Enquête / coopératif / thématique
+Mysterium
+Unlock!
+Exit: The Game
+MicroMacro: Crime City
+Marvel Champions: The Card Game
+Blood Rage
+Sky Team
+Bomb Busters
+Hanabi
+Spirit Island
+Zombicide
+Nemesis
+Cthulhu: Death May Die
+Dead of Winter
+
+# Meilleures ventes France 2025 (Philibert)
+Flip 7
+Sea Salt & Paper
+Faraway
+Castle Combo
+Harmonies
+Regicide
+Odin
+Zenith
+Rebirth
+Courtisans
+Lord of the Rings: Duel for Middle-earth
+SETI: Search for Extraterrestrial Intelligence
+
+# Grands classiques grand public
+Monopoly
+Cluedo
+UNO
+
+# Initiés / experts
+Terraforming Mars
+Wingspan
+Everdell
+Cascadia
+Scythe
+Brass: Birmingham
+Ark Nova
+Gloomhaven
+Root
+Res Arcana
+It's a Wonderful World
+Lost Ruins of Arnak
+Sagrada
+Patchwork
+Century: Spice Road
+Cartographers
+The Isle of Cats
+Living Forest
+Paleo
+Parks
+Calico
+Clank!
+Photosynthesis
+Kingdom Builder
+Dominion
+Barrage
+Dune: Imperium
+Great Western Trail
+Agricola
+Puerto Rico
+Power Grid
+Concordia
+Viticulture
+Heat: Pedal to the Metal
+Beyond the Sun
+Star Realms
+Splendor Duel
+7 Wonders Architects
+
+# ─────────────────────────────────────────────────────────────────────────────
+# GIGAMIC — gamme éditeur (jeux qu'ils éditent)
+# Beaucoup d'abstraits sont à 2 joueurs, victoire/défaite : mode « objectif »
+# plutôt que « compteur » au moment de les renseigner à la main.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Classiques de réflexion (souvent en bois)
+Quarto
+Quoridor
+Quixo
+Pylos
+Katamino
+Gyges
+Squadro
+Quantik
+Qawale
+# Série GIPF (Kris Burm)
+GIPF
+Tamsk
+Zertz
+Dvonn
+Yinsh
+Punct
+Tzaar
+
+# Familiaux / initiés / ambiance
+Akropolis
+LOOOT
+Verso
+Marrakech
+Hellapagos
+La Maison des Souris
+Bomb Busters
+Odysseus
+Leda
+Medievallons
+The Dream
+Bella Vista
+Linked Minds
+Task Team
+Line-it
+Twin It!
+Ghooost!
+Yogi
+Mixmo
+Panic Lab
+
+# GIGAMIC — distribués en France (sélection attestée, PAS exhaustif)
+Bohnanza
+Klask
+Villa Paletti
+Niagara
+The Great Dalmuti
+Keyflower
+Roll for the Galaxy
+Trajan
