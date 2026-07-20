@@ -15,8 +15,14 @@ import {
 } from "react";
 
 import { type Jeu } from "@/data/jeux";
+import { catalogueEnCache, rafraichirCatalogue } from "@/lib/catalogue";
 import { definirFavori, listerFavoris } from "@/db/favoris";
-import { amorcerBibliotheque, listerJeux, supprimerJeu as dbSupprimerJeu } from "@/db/jeux";
+import {
+  amorcerBibliotheque,
+  listerJeux,
+  supprimerJeu as dbSupprimerJeu,
+  synchroniserDepuisCatalogue,
+} from "@/db/jeux";
 import { effacerEtat } from "@/db/partie-en-cours";
 import { supprimerImage } from "@/lib/images";
 import { nettoyerToutesLesImages } from "@/lib/menage-images";
@@ -59,11 +65,40 @@ export function JeuxProvider({ children }: { children: ReactNode }) {
   }, []);
 
   // Au premier lancement, la base est vide : on y dépose les jeux d'origine
-  // avant de la lire, sinon le catalogue s'ouvrirait sur rien.
+  // avant de la lire, sinon le catalogue s'ouvrirait sur rien. Puis on met à jour
+  // les métadonnées (éditeur, photo) des jeux déjà présents avec le catalogue
+  // distant, pour que les corrections faites en ligne remontent sans réajout.
   useEffect(() => {
+    let vivant = true;
+
+    async function synchroniser() {
+      // 1) Avec le dernier catalogue connu : immédiat, marche hors-ligne.
+      const cache = await catalogueEnCache().catch(() => [] as Jeu[]);
+      if (cache.length) {
+        const n = await synchroniserDepuisCatalogue(cache).catch(() => 0);
+        if (n > 0 && vivant) rafraichir();
+      }
+      // 2) Puis une mise à jour distante, et on resynchronise si elle apporte du neuf.
+      const maj = await rafraichirCatalogue().catch(() => false);
+      if (maj) {
+        const frais = await catalogueEnCache().catch(() => [] as Jeu[]);
+        if (frais.length) {
+          const n = await synchroniserDepuisCatalogue(frais).catch(() => 0);
+          if (n > 0 && vivant) rafraichir();
+        }
+      }
+    }
+
     amorcerBibliotheque()
       .catch(() => {})
-      .finally(rafraichir);
+      .finally(() => {
+        rafraichir();
+        synchroniser().catch(() => {});
+      });
+
+    return () => {
+      vivant = false;
+    };
   }, [rafraichir]);
 
   const basculerFavori = useCallback((id: string) => {

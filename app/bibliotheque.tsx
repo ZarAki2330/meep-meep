@@ -162,6 +162,7 @@ export default function Bibliotheque() {
                 </Text>
                 <Text style={styles.meta} numberOfLines={1}>
                   {item.categorie} · {joueurs(item)} · {item.dureeMin} min
+                  {item.editeur ? ` · ${item.editeur}` : ""}
                 </Text>
                 <Text style={styles.badge}>{LIBELLES_MODE[item.scoreMode ?? "compteur"]}</Text>
               </View>

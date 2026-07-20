@@ -367,6 +367,7 @@ export default function Catalogue() {
               )}
               <Text style={styles.meta}>
                 {item.joueursMin}–{item.joueursMax} joueurs · {item.dureeMin} min · {item.categorie}
+                {item.editeur ? ` · ${item.editeur}` : ""}
               </Text>
               {/* Quand on trie par usage, on montre ce qui justifie l'ordre. */}
               {tri !== "defaut" && tri !== "alpha" && (

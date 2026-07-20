@@ -121,6 +121,39 @@ export async function supprimerJeu(id: string) {
   await db.runAsync("DELETE FROM jeux WHERE id = ?", [id]);
 }
 
+/**
+ * Met à jour les métadonnées « gérées par le catalogue » — l'éditeur et la photo —
+ * des jeux déjà en base, à partir du catalogue distant. On ne touche qu'à ces deux
+ * champs, et seulement pour les jeux dont l'identifiant existe dans le catalogue :
+ * les jeux ajoutés à la main (identifiant « perso… ») ne sont jamais concernés, et
+ * le reste de la fiche (règles, personnages, mode de score…) reste intact.
+ * Renvoie le nombre de jeux effectivement modifiés.
+ */
+export async function synchroniserDepuisCatalogue(catalogue: Jeu[]): Promise<number> {
+  const db = await getDb();
+  const existants = await db.getAllAsync<{ id: string; editeur: string | null; image: string }>(
+    "SELECT id, editeur, image FROM jeux",
+  );
+  const parId = new Map(existants.map((r) => [r.id, r]));
+
+  let modifies = 0;
+  for (const j of catalogue) {
+    const actuel = parId.get(j.id);
+    if (!actuel) continue;
+    const editeur = j.editeur ?? null;
+    const image = j.image ?? "";
+    // Rien à écrire si les deux champs sont déjà à jour.
+    if ((actuel.editeur ?? null) === editeur && (actuel.image ?? "") === image) continue;
+    await db.runAsync("UPDATE jeux SET editeur = ?, image = ? WHERE id = ?", [
+      editeur,
+      image,
+      j.id,
+    ]);
+    modifies++;
+  }
+  return modifies;
+}
+
 const CLE_AMORCAGE = "amorcage_bibliotheque";
 
 /** Dépose en base les jeux autrefois codés en dur, sans condition. */

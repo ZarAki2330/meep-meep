@@ -2,9 +2,9 @@
 
 Liste des fonctionnalités à faire et des améliorations.
 
-**Progression : 71 / 80 — 89 %**
+**Progression : 72 / 83 — 87 %**
 
-`██████████████████░░`
+`█████████████████░░░`
 
 ## Bugs à corriger
 
@@ -12,11 +12,13 @@ Liste des fonctionnalités à faire et des améliorations.
 
 ## Priorité haute
 
+- [ ] **Protéger la propriété de l'application** — affirmer que Meep Meep t'appartient et interdire la copie/redistribution. Concrètement : ajouter un fichier `LICENSE` propriétaire (« tous droits réservés »), un en-tête de copyright, une mention « © Zaraki — Tous droits réservés » dans l'écran « À propos », et vérifier que le dépôt GitHub est en **privé** (un dépôt public est copiable par défaut). ⚠️ Pour une vraie protection juridique (marque, CGU), l'avis d'un professionnel est recommandé — je ne suis pas juriste.
 - [ ] **Publier sur le Play Store** — compte développeur Google Play (25 $, une fois). Build `production` en `.aab`, puis `eas submit`. Demandent une fiche : captures d'écran, description, politique de confidentialité (l'app ne collecte rien, mais la déclaration reste obligatoire), et le questionnaire de classification par âge.
 - [ ] **Publier sur l'App Store** — adhésion Apple Developer (99 $/an). Même chose côté fiche, plus une revue humaine d'Apple : compter quelques jours et de possibles allers-retours. Le logo « Powered by BGG » devient obligatoire dès que l'app est publique.
 
 ## Qualité du projet
 
+- [ ] **Optimiser l'écran « Ajouter un jeu tout prêt »** — l'écran rame un peu, surtout à l'application d'un tri/filtre (`app/bibliotheque.tsx`). Pistes : mémoïser la carte de rendu (`renderItem` extrait en composant `memo`), régler la `FlatList` (`initialNumToRender`, `maxToRenderPerBatch`, `windowSize`, `removeClippedSubviews`, `getItemLayout` si hauteur fixe), et vérifier le chargement des images distantes (cache `expo-image`, éviter un rechargement à chaque re-render). Mesurer avant/après.
 - [ ] **Tester le fonctionnement des extensions et éditions** — vérifier le regroupement sous le jeu de base (masquage dans la liste, remontée par la recherche, section « Extensions & éditions » sur la fiche), la migration base (`jeu_type`, `jeu_parent`) et l'ajout depuis la bibliothèque.
 
 ## Nouvelles fonctionnalités
@@ -33,7 +35,8 @@ _(rien en attente)_
 
 ## Terminé
 
-- [x] Champ éditeur sur tous les jeux : champ `editeur` ajouté au type `Jeu`, à la base (colonne `editeur` + migration), affiché sur la fiche sous le nom, et saisissable dans le formulaire d'ajout/édition (`import.tsx`, avec puces des éditeurs déjà utilisés). Renseigné pour les 308 jeux — « Gigamic » pour les 291 jeux du catalogue Gigamic, l'éditeur réel pour les 17 autres (Repos Production, Libellud, Kosmos…).
+- [x] Champ éditeur sur tous les jeux : champ `editeur` ajouté au type `Jeu`, à la base (colonne `editeur` + migration), affiché sur la fiche sous le nom **et dans les listes** (catalogue + bibliothèque), et saisissable dans le formulaire d'ajout/édition (`import.tsx`, avec puces des éditeurs déjà utilisés). Renseigné pour les 308 jeux — « Gigamic » pour les 291 jeux du catalogue Gigamic, l'éditeur réel pour les 17 autres (Repos Production, Libellud, Kosmos…).
+- [x] Synchronisation des métadonnées au démarrage : au lancement, les jeux déjà en base voient leur **éditeur et leur photo** rafraîchis depuis le catalogue distant (`synchroniserDepuisCatalogue` dans `db/jeux.ts`, branché dans `context/jeux.tsx`). Ne touche qu'à ces deux champs et jamais aux jeux ajoutés à la main. Corrige aussi la photo des anciens jeux (ex. « 6 qui prend » qui gardait une image Wikimedia) sans avoir à les réajouter.
 - [x] Trier « Ajouter un jeu tout prêt » : rangée « Trier par » sur l'écran `bibliotheque.tsx` avec quatre tris — A → Z, Catégorie, Durée, Joueurs (`lib/tri-bibliotheque.ts`, fonction pure testée). Pas de tri « nouveautés » : le catalogue ne porte aucune date, à ajouter au type `Jeu` d'abord si besoin.
 - [x] Une photo pour tous les jeux : vraies photos du catalogue Gigamic récupérées pour 287 des 309 jeux (`image` renseigné dans `catalogue.json`), et repli visuel amélioré — une tuile colorée par catégorie (`lib/couleur-jeu.ts`, testé, branché dans `components/visuel-jeu.tsx`) pour que chaque jeu sans photo reste distinct. Restent sans photo : les 14 jeux non-Gigamic (Azul, Splendor, Dixit…) et ~7 jeux Gigamic absents du catalogue en ligne (5 ou Moins, Orapa Mine, Solacia, Mémoires d'une chamane, Bellevue — Parthenay) — à compléter à la main si tu as les visuels.
 - [x] Alimenter le catalogue depuis l'API BGG : étude (`docs/api-bgg-catalogue.md`) + script d'outillage `scripts/generer-catalogue.mjs` qui récupère les jeux depuis BGG (liste d'ids dans `scripts/bgg-ids.txt`), gère les 202/429 et le groupage, et ajoute au `catalogue.json` sans écraser les entrées existantes. BGG remplit la coquille (nom, image, joueurs, durée) ; règles/rôles/mode de score restent à compléter à la main.
