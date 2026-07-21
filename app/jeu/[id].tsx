@@ -42,6 +42,7 @@ export default function FicheJeu() {
   const [extensionsActives, setExtensionsActives] = useState<string[]>([]);
   const [reglesOuvertes, setReglesOuvertes] = useState(true);
   const [rolesOuverts, setRolesOuverts] = useState(false);
+  const [declinaisonsOuvertes, setDeclinaisonsOuvertes] = useState(true);
 
   function basculerExtension(nom: string) {
     setExtensionsActives((prev) =>
@@ -193,50 +194,86 @@ export default function FicheJeu() {
       </View>
 
       <View style={styles.metaLigne}>
-        <Meta valeur={`${jeu.joueursMin}–${jeu.joueursMax}`} label="joueurs" styles={styles} />
-        <Meta valeur={`${jeu.dureeMin} min`} label="durée" styles={styles} />
-        <Meta valeur={`${jeu.ageMin}+`} label="âge" styles={styles} />
+        <Meta
+          icone="person.2.fill"
+          valeur={`${jeu.joueursMin}–${jeu.joueursMax}`}
+          label={jeu.equipes ? "équipes" : "joueurs"}
+          couleur={colors.accentText}
+          styles={styles}
+        />
+        <Meta
+          icone="clock"
+          valeur={`${jeu.dureeMin} min`}
+          label="durée"
+          couleur={colors.accentText}
+          styles={styles}
+        />
+        <Meta
+          icone="birthday.cake"
+          valeur={`${jeu.ageMin}+`}
+          label="âge"
+          couleur={colors.accentText}
+          styles={styles}
+        />
       </View>
 
       <Text style={styles.description}>{jeu.description}</Text>
 
       {declinaisons.length > 0 && (
-        <View style={styles.declinaisonsBloc}>
-          <Text style={styles.sectionTitre}>Extensions & éditions</Text>
-          {declinaisons.map((d) => (
-            <TouchableOpacity
-              key={d.id}
-              style={styles.declinaisonLigne}
-              activeOpacity={0.7}
-              accessibilityRole="button"
-              accessibilityLabel={`${d.nom}, ${LIBELLE_TYPE[d.type === "extension" ? "extension" : "edition"]}. Voir la fiche`}
-              onPress={() => router.push(`/jeu/${d.id}`)}
-            >
-              <VisuelJeu jeu={d} style={styles.declinaisonVisuel} />
-              <View style={{ flex: 1 }}>
-                <Text style={styles.declinaisonNom} numberOfLines={1}>
-                  {d.nom}
-                </Text>
-                <Text style={styles.declinaisonType}>
-                  {LIBELLE_TYPE[d.type === "extension" ? "extension" : "edition"]}
-                </Text>
-              </View>
-              <Text
-                style={styles.declinaisonChevron}
-                accessibilityElementsHidden
-                importantForAccessibility="no-hide-descendants"
-              >
-                ▸
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </View>
+        <>
+          <TouchableOpacity
+            style={styles.sectionRepliable}
+            activeOpacity={0.7}
+            accessibilityRole="button"
+            accessibilityLabel={`Extensions et éditions, ${declinaisons.length}`}
+            accessibilityState={{ expanded: declinaisonsOuvertes }}
+            onPress={() => setDeclinaisonsOuvertes((o) => !o)}
+          >
+            <Text style={styles.sectionTitreRepliable}>
+              Extensions & éditions ({declinaisons.length})
+            </Text>
+            <View style={styles.chevronBadge} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
+              <Text style={styles.chevronTexte}>{declinaisonsOuvertes ? "▾" : "▸"}</Text>
+            </View>
+          </TouchableOpacity>
+          {declinaisonsOuvertes && (
+            <View style={styles.declinaisonsBloc}>
+              {declinaisons.map((d) => (
+                <TouchableOpacity
+                  key={d.id}
+                  style={styles.declinaisonLigne}
+                  activeOpacity={0.7}
+                  accessibilityRole="button"
+                  accessibilityLabel={`${d.nom}, ${LIBELLE_TYPE[d.type === "extension" ? "extension" : "edition"]}. Voir la fiche`}
+                  onPress={() => router.push(`/jeu/${d.id}`)}
+                >
+                  <VisuelJeu jeu={d} style={styles.declinaisonVisuel} />
+                  <View style={{ flex: 1 }}>
+                    <Text style={styles.declinaisonNom} numberOfLines={1}>
+                      {d.nom}
+                    </Text>
+                    <Text style={styles.declinaisonType}>
+                      {LIBELLE_TYPE[d.type === "extension" ? "extension" : "edition"]}
+                    </Text>
+                  </View>
+                  <Text
+                    style={styles.declinaisonChevron}
+                    accessibilityElementsHidden
+                    importantForAccessibility="no-hide-descendants"
+                  >
+                    ▸
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          )}
+        </>
       )}
 
       {extensionsJouables.length > 0 && (
         <View style={styles.extensionsBloc}>
-          <Text style={styles.sectionTitre}>Extensions</Text>
-          <Text style={styles.extensionsSous}>Coche les extensions que tu ajoutes à ta partie.</Text>
+          <Text style={styles.sectionTitre}>Extensions pour la partie</Text>
+          <Text style={styles.extensionsSous}>Coche les extensions que tu ajoutes à la partie que tu vas lancer.</Text>
           {extensionsJouables.map((ext) => {
             const active = extensionsActives.includes(ext);
             return (
@@ -264,8 +301,14 @@ export default function FicheJeu() {
       )}
 
       <TouchableOpacity style={styles.boutonJouer} activeOpacity={0.8} onPress={ouvrirPartie}>
+        <IconSymbol
+          name="play.fill"
+          size={18}
+          color={colors.onAccent}
+          style={{ marginRight: 8 }}
+        />
         <Text style={styles.boutonJouerTexte}>
-          {enCours ? "▶  Reprendre la partie" : "▶  Lancer une partie"}
+          {enCours ? "Reprendre la partie" : "Lancer une partie"}
         </Text>
       </TouchableOpacity>
 
@@ -399,16 +442,21 @@ export default function FicheJeu() {
 }
 
 function Meta({
+  icone,
   valeur,
   label,
+  couleur,
   styles,
 }: {
+  icone: "person.2.fill" | "clock" | "birthday.cake";
   valeur: string;
   label: string;
+  couleur: string;
   styles: ReturnType<typeof makeStyles>;
 }) {
   return (
     <View style={styles.metaBloc}>
+      <IconSymbol name={icone} size={18} color={couleur} />
       <Text style={styles.metaValeur}>{valeur}</Text>
       <Text style={styles.metaLabel}>{label}</Text>
     </View>
@@ -444,14 +492,16 @@ function makeStyles(c: AppColors) {
       paddingVertical: 12,
       alignItems: "center",
     },
-    metaValeur: { fontSize: 16, fontWeight: "600", color: c.accentText },
+    metaValeur: { fontSize: 16, fontWeight: "600", color: c.accentText, marginTop: 6 },
     metaLabel: { fontSize: 12, color: c.textMuted, marginTop: 2 },
     description: { fontSize: 15, color: c.textSecondary, lineHeight: 22, marginTop: 16 },
     boutonJouer: {
+      flexDirection: "row",
       backgroundColor: c.accent,
       borderRadius: 12,
       paddingVertical: 14,
       alignItems: "center",
+      justifyContent: "center",
       marginTop: 20,
     },
     boutonJouerTexte: { color: c.onAccent, fontSize: 16, fontWeight: "600" },

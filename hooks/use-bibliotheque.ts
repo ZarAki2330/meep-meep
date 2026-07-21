@@ -23,10 +23,13 @@ catalogueEnCache()
   })
   .catch(() => {});
 
-export function useBibliotheque(): Jeu[] {
+export function useBibliotheque(): { liste: Jeu[]; chargement: boolean } {
   // Au montage : le dernier catalogue connu s'il existe, sinon la bibliothèque
   // livrée (repli hors-ligne, uniquement au tout premier lancement sans cache).
   const [liste, setListe] = useState<Jeu[]>(() => catalogueMemoire ?? BIBLIOTHEQUE);
+  // En chargement seulement quand rien n'est encore en mémoire : sur les ouvertures
+  // suivantes (mémoire déjà remplie), l'écran s'affiche directement, sans spinner.
+  const [chargement, setChargement] = useState<boolean>(() => catalogueMemoire === null);
 
   useEffect(() => {
     let actif = true;
@@ -36,8 +39,16 @@ export function useBibliotheque(): Jeu[] {
       catalogueMemoire = fusion;
       if (actif) setListe(fusion);
     };
-    // Affiche tout de suite le dernier catalogue connu…
-    catalogueEnCache().then(appliquer);
+    // Affiche tout de suite le dernier catalogue connu… et le chargement est fini
+    // dès que cette lecture a répondu (qu'il y ait un cache ou non).
+    catalogueEnCache()
+      .then((c) => {
+        appliquer(c);
+        if (actif) setChargement(false);
+      })
+      .catch(() => {
+        if (actif) setChargement(false);
+      });
     // …puis tente une mise à jour en arrière-plan, sans bloquer.
     rafraichirCatalogue().then((maj) => {
       if (maj) catalogueEnCache().then(appliquer);
@@ -47,5 +58,5 @@ export function useBibliotheque(): Jeu[] {
     };
   }, []);
 
-  return liste;
+  return { liste, chargement };
 }

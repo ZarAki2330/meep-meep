@@ -14,6 +14,7 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { AvatarJoueur } from "@/components/avatar-joueur";
+import { AvatarRole } from "@/components/avatar-role";
 import { DialogueBilan } from "@/components/dialogue-bilan";
 import { DialoguePremierJoueur } from "@/components/dialogue-premier-joueur";
 import { Entete } from "@/components/entete";
@@ -309,6 +310,7 @@ export default function PartieObjectif() {
                     disabled={!!prisPar}
                     onPress={() => choixPourJoueur && definirRole(choixPourJoueur, r.nom)}
                   >
+                    <AvatarRole role={r} taille={38} style={prisPar ? styles.roleAvatarPris : undefined} />
                     <View style={{ flex: 1, paddingRight: 8 }}>
                       <Text style={[styles.roleLigneNom, prisPar && styles.rolePris]}>{r.nom}</Text>
                       {r.origine && <Text style={styles.roleLigneOrigine}>{r.origine}</Text>}
@@ -404,10 +406,12 @@ function makeStyles(c: AppColors) {
     roleLigne: {
       flexDirection: "row",
       alignItems: "center",
+      gap: 12,
       paddingVertical: 12,
       borderTopWidth: 1,
       borderTopColor: c.border,
     },
+    roleAvatarPris: { opacity: 0.4 },
     roleLigneNom: { fontSize: 15, fontWeight: "600", color: c.textPrimary },
     roleLigneOrigine: { fontSize: 12, color: c.textMuted, marginTop: 2 },
     roleLigneObjectif: { fontSize: 12, color: c.textSecondary, marginTop: 4, lineHeight: 16 },

@@ -25,6 +25,9 @@ export type RoleJeu = {
   origine?: string;
   objectif?: string;
   extension?: string;
+  // Photo ou logo du personnage (URL, ou chemin d'une image copiée dans l'app).
+  // Si vide, un avatar coloré avec l'initiale du personnage s'affiche.
+  image?: string;
 };
 
 export type Jeu = {

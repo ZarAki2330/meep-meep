@@ -69,3 +69,12 @@ export function couleurJeu(jeu: Jeu): string {
   // Catégorie vide ou inconnue : teinte stable tirée de la palette.
   return PALETTE[hachage(cat || jeu.id) % PALETTE.length];
 }
+
+/**
+ * Couleur de l'avatar d'un personnage sans photo, tirée de son nom. Le même
+ * personnage garde toujours la même teinte ; deux personnages voisins tombent
+ * sur des teintes distinctes. Assez foncée pour une initiale blanche lisible.
+ */
+export function couleurRole(nom: string): string {
+  return PALETTE[hachage(nom.trim().toLowerCase() || "role") % PALETTE.length];
+}

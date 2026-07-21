@@ -81,7 +81,7 @@ export function parserExtensions(texte: string): string[] {
 export function rolesVersTexte(roles: RoleJeu[]): string {
   return roles
     .map((r) => {
-      const parts = [r.nom, r.origine ?? "", r.objectif ?? "", r.extension ?? ""];
+      const parts = [r.nom, r.origine ?? "", r.objectif ?? "", r.extension ?? "", r.image ?? ""];
       // Les champs vides de la fin ne servent à rien : « Médecin | Soigne » suffit.
       while (parts.length > 1 && !parts[parts.length - 1]) parts.pop();
       return parts.join(" | ");
@@ -89,17 +89,18 @@ export function rolesVersTexte(roles: RoleJeu[]): string {
     .join("\n");
 }
 
-/** « Nom | origine | objectif | extension ». Tout est facultatif sauf le nom. */
+/** « Nom | origine | objectif | extension | image ». Tout est facultatif sauf le nom. */
 export function parserRoles(texte: string): RoleJeu[] {
   const roles: RoleJeu[] = [];
   for (const ligne of lignes(texte)) {
-    const [nom, origine, objectif, extension] = champs(ligne);
+    const [nom, origine, objectif, extension, image] = champs(ligne);
     if (!nom) continue;
     roles.push({
       nom,
       origine: origine || undefined,
       objectif: objectif || undefined,
       extension: extension || undefined,
+      image: image || undefined,
     });
   }
   return roles;

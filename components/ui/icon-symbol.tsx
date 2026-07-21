@@ -39,6 +39,8 @@ const MAPPING = {
   'chevron.right': 'chevron-right',
   'play.fill': 'play-arrow',
   'questionmark': 'help-outline',
+  'clock': 'schedule',
+  'birthday.cake': 'cake',
 } as IconMapping;
 
 /**

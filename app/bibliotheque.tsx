@@ -5,7 +5,15 @@
 
 import { useRouter } from "expo-router";
 import { memo, useCallback, useMemo, useState } from "react";
-import { FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import {
+  ActivityIndicator,
+  FlatList,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 import { DialogueConfirmation } from "@/components/dialogue-confirmation";
 import { Entete } from "@/components/entete";
@@ -101,7 +109,7 @@ export default function Bibliotheque() {
   const styles = useMemo(() => makeStyles(colors), [colors]);
   const router = useRouter();
   const { jeux, rafraichir } = useJeux();
-  const bibliotheque = useBibliotheque();
+  const { liste: bibliotheque, chargement } = useBibliotheque();
 
   const [recherche, setRecherche] = useState("");
   const [tri, setTri] = useState<TriBiblioCle>("alpha");
@@ -239,23 +247,30 @@ export default function Bibliotheque() {
         </View>
       )}
 
-      <FlatList
-        data={resultatsTries}
-        keyExtractor={(j) => j.id}
-        contentContainerStyle={styles.liste}
-        ListHeaderComponent={
-          <Text style={styles.intro}>
-            {restants > 0
-              ? `${restants} jeu${restants > 1 ? "x" : ""} à découvrir. Une fois ajouté, un jeu t'appartient : à toi de le modifier ou de le supprimer.`
-              : "Tous les jeux de la bibliothèque sont déjà dans ton catalogue."}
-          </Text>
-        }
-        ListEmptyComponent={<Text style={styles.vide}>Aucun jeu ne porte ce nom.</Text>}
-        renderItem={renderItem}
-        initialNumToRender={16}
-        maxToRenderPerBatch={12}
-        windowSize={11}
-      />
+      {chargement ? (
+        <View style={styles.chargement}>
+          <ActivityIndicator color={colors.accent} />
+          <Text style={styles.chargementTexte}>Chargement du catalogue…</Text>
+        </View>
+      ) : (
+        <FlatList
+          data={resultatsTries}
+          keyExtractor={(j) => j.id}
+          contentContainerStyle={styles.liste}
+          ListHeaderComponent={
+            <Text style={styles.intro}>
+              {restants > 0
+                ? `${restants} jeu${restants > 1 ? "x" : ""} à découvrir. Une fois ajouté, un jeu t'appartient : à toi de le modifier ou de le supprimer.`
+                : "Tous les jeux de la bibliothèque sont déjà dans ton catalogue."}
+            </Text>
+          }
+          ListEmptyComponent={<Text style={styles.vide}>Aucun jeu ne porte ce nom.</Text>}
+          renderItem={renderItem}
+          initialNumToRender={16}
+          maxToRenderPerBatch={12}
+          windowSize={11}
+        />
+      )}
 
       <DialogueConfirmation
         visible={!!propositionBase}
@@ -347,6 +362,8 @@ function makeStyles(c: AppColors) {
     liste: { padding: 16, paddingBottom: 40, gap: 10 },
     intro: { fontSize: 13, color: c.textMuted, lineHeight: 18, marginBottom: 6 },
     vide: { fontSize: 14, color: c.textMuted, textAlign: "center", marginTop: 24 },
+    chargement: { flex: 1, alignItems: "center", justifyContent: "center", gap: 12 },
+    chargementTexte: { fontSize: 14, color: c.textMuted },
     carte: {
       flexDirection: "row",
       alignItems: "center",

@@ -93,6 +93,10 @@ export default function AjouterJeu() {
   const [collageOuvert, setCollageOuvert] = useState(false);
   const [texteColle, setTexteColle] = useState("");
   const [erreurCollage, setErreurCollage] = useState<string | null>(null);
+  // Sections repliables : à l'ajout on garde le formulaire épuré (replié) pour
+  // ne pas intimider ; à la modification on ouvre tout, pour relire le jeu.
+  const [presentationOuverte, setPresentationOuverte] = useState(modeEdition);
+  const [avanceOuvert, setAvanceOuvert] = useState(modeEdition);
 
   // Choisit une photo dans la galerie et la copie dans le stockage de l'app,
   // sinon l'image disparaîtrait avec le cache du téléphone.
@@ -170,6 +174,9 @@ export default function AjouterJeu() {
     setErreurCollage(null);
     try {
       appliquerJeu(texteVersJeu(texteColle));
+      // On ouvre les sections repliées pour que tout le contenu rempli soit relu.
+      setPresentationOuverte(true);
+      setAvanceOuvert(true);
       setCollageOuvert(false);
       setTexteColle("");
     } catch (e) {
@@ -262,16 +269,45 @@ export default function AjouterJeu() {
       <ScrollView style={styles.page} contentContainerStyle={styles.contenu}>
         {!modeEdition && (
           <>
-            <TouchableOpacity style={styles.bggBouton} onPress={() => router.push("/bibliotheque")}>
-              <Text style={styles.bggTexte}>Ajouter un jeu tout prêt</Text>
-              <Text style={styles.bggChevron}>▸</Text>
+            <TouchableOpacity
+              style={styles.raccourciPrincipal}
+              activeOpacity={0.85}
+              accessibilityRole="button"
+              accessibilityLabel="Ajouter un jeu tout prêt en piochant dans le catalogue. Option recommandée."
+              onPress={() => router.push("/bibliotheque")}
+            >
+              <View style={styles.raccourciTexte}>
+                <View style={styles.raccourciBadge}>
+                  <Text style={styles.raccourciBadgeTexte}>Le plus simple</Text>
+                </View>
+                <Text style={styles.raccourciPrincipalTitre}>Ajouter un jeu tout prêt</Text>
+                <Text style={styles.raccourciPrincipalDetail}>
+                  Des centaines de jeux déjà prêts — règles, photo et feuille de score inclus.
+                </Text>
+              </View>
+              <Text style={styles.raccourciPrincipalChevron}>▸</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.bggBouton} onPress={() => setCollageOuvert(true)}>
-              <Text style={styles.bggTexte}>Coller un jeu partagé</Text>
-              <Text style={styles.bggChevron}>▸</Text>
+
+            <TouchableOpacity
+              style={styles.raccourciSecondaire}
+              activeOpacity={0.7}
+              accessibilityRole="button"
+              accessibilityLabel="Coller un jeu partagé pour remplir le formulaire"
+              onPress={() => setCollageOuvert(true)}
+            >
+              <Text style={styles.raccourciSecondaireTexte}>Coller un jeu partagé</Text>
+              <Text style={styles.raccourciSecondaireChevron}>▸</Text>
             </TouchableOpacity>
+
+            <View style={styles.separateur}>
+              <View style={styles.separateurTrait} />
+              <Text style={styles.separateurTexte}>ou crée-le toi-même</Text>
+              <View style={styles.separateurTrait} />
+            </View>
           </>
         )}
+
+        <Text style={styles.blocTitre}>L&apos;essentiel</Text>
 
         <Champ label="Nom du jeu" styles={styles} obligatoire>
           <TextInput
@@ -313,32 +349,6 @@ export default function AjouterJeu() {
           />
         </Champ>
 
-        <Champ label="Éditeur (optionnel)" styles={styles}>
-          {editeursExistants.length > 0 && (
-            <View style={[styles.chipsWrap, { marginBottom: 10 }]}>
-              {editeursExistants.map((ed) => {
-                const actif = editeur.trim().toLowerCase() === ed.toLowerCase();
-                return (
-                  <TouchableOpacity
-                    key={ed}
-                    style={[styles.chip, actif && styles.chipActif]}
-                    onPress={() => setEditeur(actif ? "" : ed)}
-                  >
-                    <Text style={[styles.chipTexte, actif && styles.chipTexteActif]}>{ed}</Text>
-                  </TouchableOpacity>
-                );
-              })}
-            </View>
-          )}
-          <TextInput
-            style={styles.input}
-            value={editeur}
-            onChangeText={setEditeur}
-            placeholder="Ex. Gigamic"
-            placeholderTextColor={colors.placeholder}
-          />
-        </Champ>
-
         <View style={styles.ligne}>
           <Champ label="Joueurs min" styles={styles} style={{ flex: 1 }}>
             <TextInput
@@ -357,29 +367,6 @@ export default function AjouterJeu() {
             />
           </Champ>
         </View>
-
-        <Champ label="Jeu en équipes ?" styles={styles} aide="equipes">
-          <TouchableOpacity
-            style={styles.bonusBascule}
-            activeOpacity={0.7}
-            accessibilityRole="checkbox"
-            accessibilityState={{ checked: equipes }}
-            accessibilityLabel="Le score se compte par équipe"
-            onPress={() => setEquipes((e) => !e)}
-          >
-            <View
-              style={[styles.case, equipes && styles.caseActive]}
-              accessibilityElementsHidden
-              importantForAccessibility="no-hide-descendants"
-            >
-              {equipes && <Text style={styles.caseCoche}>✓</Text>}
-            </View>
-            <Text style={styles.bonusTexte}>
-              Le score se compte par équipe (belote, Codenames…). Le nombre de joueurs ci-dessus
-              correspond alors au nombre d&apos;équipes.
-            </Text>
-          </TouchableOpacity>
-        </Champ>
 
         <View style={styles.ligne}>
           <Champ label="Durée (min)" styles={styles} style={{ flex: 1 }}>
@@ -400,124 +387,120 @@ export default function AjouterJeu() {
           </Champ>
         </View>
 
-        <Champ label="Image (optionnel)" styles={styles}>
-          <View style={styles.imageLigne}>
-            {image ? (
-              <Image source={{ uri: image }} style={styles.apercu} resizeMode="cover" />
-            ) : (
-              <View style={[styles.apercu, styles.apercuVide]}>
-                <Text style={styles.apercuVideTexte}>Aucune</Text>
+        <Section
+          titre="Présentation"
+          sousTitre="Éditeur, image, description, règles"
+          ouvert={presentationOuverte}
+          onToggle={() => setPresentationOuverte((v) => !v)}
+          styles={styles}
+        >
+          <Champ label="Éditeur (optionnel)" styles={styles}>
+            {editeursExistants.length > 0 && (
+              <View style={[styles.chipsWrap, { marginBottom: 10 }]}>
+                {editeursExistants.map((ed) => {
+                  const actif = editeur.trim().toLowerCase() === ed.toLowerCase();
+                  return (
+                    <TouchableOpacity
+                      key={ed}
+                      style={[styles.chip, actif && styles.chipActif]}
+                      onPress={() => setEditeur(actif ? "" : ed)}
+                    >
+                      <Text style={[styles.chipTexte, actif && styles.chipTexteActif]}>{ed}</Text>
+                    </TouchableOpacity>
+                  );
+                })}
               </View>
             )}
+            <TextInput
+              style={styles.input}
+              value={editeur}
+              onChangeText={setEditeur}
+              placeholder="Ex. Gigamic"
+              placeholderTextColor={colors.placeholder}
+            />
+          </Champ>
 
-            <View style={{ flex: 1, gap: 8 }}>
-              <TouchableOpacity style={styles.imageBouton} onPress={choisirImage}>
-                <Text style={styles.imageBoutonTexte}>Choisir dans la galerie</Text>
-              </TouchableOpacity>
+          <Champ label="Image (optionnel)" styles={styles}>
+            <View style={styles.imageLigne}>
               {image ? (
-                <TouchableOpacity onPress={() => setImage("")}>
-                  <Text style={styles.imageRetirer}>Retirer l&apos;image</Text>
+                <Image source={{ uri: image }} style={styles.apercu} resizeMode="cover" />
+              ) : (
+                <View style={[styles.apercu, styles.apercuVide]}>
+                  <Text style={styles.apercuVideTexte}>Aucune</Text>
+                </View>
+              )}
+
+              <View style={{ flex: 1, gap: 8 }}>
+                <TouchableOpacity style={styles.imageBouton} onPress={choisirImage}>
+                  <Text style={styles.imageBoutonTexte}>Choisir dans la galerie</Text>
                 </TouchableOpacity>
-              ) : null}
+                {image ? (
+                  <TouchableOpacity onPress={() => setImage("")}>
+                    <Text style={styles.imageRetirer}>Retirer l&apos;image</Text>
+                  </TouchableOpacity>
+                ) : null}
+              </View>
             </View>
-          </View>
 
-          {erreurImage && <Text style={styles.erreur}>{erreurImage}</Text>}
+            {erreurImage && <Text style={styles.erreur}>{erreurImage}</Text>}
 
-          <Text style={[styles.aide, { marginTop: 12, marginBottom: 4 }]}>
-            Ou colle l&apos;adresse d&apos;une image trouvée sur le web.
-          </Text>
-          <TextInput
-            style={styles.input}
-            value={image}
-            onChangeText={setImage}
-            placeholder="https://…"
-            placeholderTextColor={colors.placeholder}
-            autoCapitalize="none"
-          />
-        </Champ>
-
-        <Champ label="Description" styles={styles}>
-          <TextInput
-            style={[styles.input, styles.multi]}
-            value={description}
-            onChangeText={setDescription}
-            placeholder="En une phrase"
-            placeholderTextColor={colors.placeholder}
-            multiline
-          />
-        </Champ>
-
-        <Champ label="Règles (une par ligne)" styles={styles}>
-          <TextInput
-            style={[styles.input, styles.multiGrand]}
-            value={regles}
-            onChangeText={setRegles}
-            placeholder={"À ton tour…\nLa partie se termine quand…"}
-            placeholderTextColor={colors.placeholder}
-            multiline
-          />
-        </Champ>
-
-        <Champ label="Extensions (une par ligne)" styles={styles} aide="extensions">
-          <Text style={styles.aide}>
-            Elles se cochent sur la fiche du jeu, avant de lancer une partie. Laisse vide si le jeu
-            n&apos;en a pas.
-          </Text>
-          <TextInput
-            style={[styles.input, styles.multi]}
-            value={extensionsTexte}
-            onChangeText={setExtensionsTexte}
-            placeholder={"Mauvais jusqu'à l'os\nLa Fin est Proche"}
-            placeholderTextColor={colors.placeholder}
-            multiline
-          />
-        </Champ>
-
-        <Champ label="Personnages (un par ligne)" styles={styles} aide="extensions">
-          <Text style={styles.aide}>
-            Un nom, puis, séparés par une barre verticale : son origine, son objectif, et
-            l&apos;extension qui l&apos;apporte. Seul le nom est obligatoire.
-          </Text>
-          <TextInput
-            style={[styles.input, styles.multiGrand]}
-            value={rolesTexte}
-            onChangeText={setRolesTexte}
-            placeholder={
-              "Maléfique | La Belle au bois dormant | Poser une Malédiction sur ses 4 lieux\nHadès | Hercule | Réunir 3 Titans | Mauvais jusqu'à l'os"
-            }
-            placeholderTextColor={colors.placeholder}
-            multiline
-          />
-          {inconnues.length > 0 && (
-            <Text style={styles.avertissement}>
-              {inconnues.length === 1
-                ? `L'extension « ${inconnues[0]} » n'est pas déclarée ci-dessus : ses personnages ne s'afficheront jamais.`
-                : `Ces extensions ne sont pas déclarées ci-dessus : ${inconnues.map((e) => `« ${e} »`).join(", ")}. Leurs personnages ne s'afficheront jamais.`}
+            <Text style={[styles.aide, { marginTop: 12, marginBottom: 4 }]}>
+              Ou colle l&apos;adresse d&apos;une image trouvée sur le web.
             </Text>
-          )}
-        </Champ>
+            <TextInput
+              style={styles.input}
+              value={image}
+              onChangeText={setImage}
+              placeholder="https://…"
+              placeholderTextColor={colors.placeholder}
+              autoCapitalize="none"
+            />
+          </Champ>
 
-        <Champ label="Rôles partageables ?" styles={styles} aide="extensions">
+          <Champ label="Description" styles={styles}>
+            <TextInput
+              style={[styles.input, styles.multi]}
+              value={description}
+              onChangeText={setDescription}
+              placeholder="En une phrase"
+              placeholderTextColor={colors.placeholder}
+              multiline
+            />
+          </Champ>
+
+          <Champ label="Règles (une par ligne)" styles={styles}>
+            <TextInput
+              style={[styles.input, styles.multiGrand]}
+              value={regles}
+              onChangeText={setRegles}
+              placeholder={"À ton tour…\nLa partie se termine quand…"}
+              placeholderTextColor={colors.placeholder}
+              multiline
+            />
+          </Champ>
+        </Section>
+
+        <Text style={styles.blocTitre}>Score</Text>
+
+        <Champ label="Jeu en équipes ?" styles={styles} aide="equipes">
           <TouchableOpacity
             style={styles.bonusBascule}
             activeOpacity={0.7}
             accessibilityRole="checkbox"
-            accessibilityState={{ checked: rolesPartageables }}
-            accessibilityLabel="Un même rôle peut être attribué à plusieurs joueurs"
-            onPress={() => setRolesPartageables((v) => !v)}
+            accessibilityState={{ checked: equipes }}
+            accessibilityLabel="Le score se compte par équipe"
+            onPress={() => setEquipes((e) => !e)}
           >
             <View
-              style={[styles.case, rolesPartageables && styles.caseActive]}
+              style={[styles.case, equipes && styles.caseActive]}
               accessibilityElementsHidden
               importantForAccessibility="no-hide-descendants"
             >
-              {rolesPartageables && <Text style={styles.caseCoche}>✓</Text>}
+              {equipes && <Text style={styles.caseCoche}>✓</Text>}
             </View>
             <Text style={styles.bonusTexte}>
-              Un même rôle peut être donné à plusieurs joueurs (ex. L&apos;Imposteur : plusieurs
-              citoyens, un imposteur). Sinon, chaque rôle n&apos;est attribuable qu&apos;à une seule
-              personne.
+              Le score se compte par équipe (belote, Codenames…). Le nombre de joueurs ci-dessus
+              correspond alors au nombre d&apos;équipes.
             </Text>
           </TouchableOpacity>
         </Champ>
@@ -715,6 +698,78 @@ export default function AjouterJeu() {
           </Champ>
         )}
 
+        <Section
+          titre="Extensions et personnages"
+          sousTitre="Optionnel — pour les jeux à modules ou à rôles cachés"
+          ouvert={avanceOuvert}
+          onToggle={() => setAvanceOuvert((v) => !v)}
+          styles={styles}
+        >
+          <Champ label="Extensions (une par ligne)" styles={styles} aide="extensions">
+            <Text style={styles.aide}>
+              Elles se cochent sur la fiche du jeu, avant de lancer une partie. Laisse vide si le jeu
+              n&apos;en a pas.
+            </Text>
+            <TextInput
+              style={[styles.input, styles.multi]}
+              value={extensionsTexte}
+              onChangeText={setExtensionsTexte}
+              placeholder={"Mauvais jusqu'à l'os\nLa Fin est Proche"}
+              placeholderTextColor={colors.placeholder}
+              multiline
+            />
+          </Champ>
+
+          <Champ label="Personnages (un par ligne)" styles={styles} aide="extensions">
+            <Text style={styles.aide}>
+              Un nom, puis, séparés par une barre verticale : son origine, son objectif,
+              l&apos;extension qui l&apos;apporte, et l&apos;adresse d&apos;une photo ou d&apos;un logo.
+              Seul le nom est obligatoire. Sans photo, une pastille colorée à son initiale s&apos;affiche.
+            </Text>
+            <TextInput
+              style={[styles.input, styles.multiGrand]}
+              value={rolesTexte}
+              onChangeText={setRolesTexte}
+              placeholder={
+                "Maléfique | La Belle au bois dormant | Poser une Malédiction sur ses 4 lieux\nHadès | Hercule | Réunir 3 Titans | Mauvais jusqu'à l'os"
+              }
+              placeholderTextColor={colors.placeholder}
+              multiline
+            />
+            {inconnues.length > 0 && (
+              <Text style={styles.avertissement}>
+                {inconnues.length === 1
+                  ? `L'extension « ${inconnues[0]} » n'est pas déclarée ci-dessus : ses personnages ne s'afficheront jamais.`
+                  : `Ces extensions ne sont pas déclarées ci-dessus : ${inconnues.map((e) => `« ${e} »`).join(", ")}. Leurs personnages ne s'afficheront jamais.`}
+              </Text>
+            )}
+          </Champ>
+
+          <Champ label="Rôles partageables ?" styles={styles} aide="extensions">
+            <TouchableOpacity
+              style={styles.bonusBascule}
+              activeOpacity={0.7}
+              accessibilityRole="checkbox"
+              accessibilityState={{ checked: rolesPartageables }}
+              accessibilityLabel="Un même rôle peut être attribué à plusieurs joueurs"
+              onPress={() => setRolesPartageables((v) => !v)}
+            >
+              <View
+                style={[styles.case, rolesPartageables && styles.caseActive]}
+                accessibilityElementsHidden
+                importantForAccessibility="no-hide-descendants"
+              >
+                {rolesPartageables && <Text style={styles.caseCoche}>✓</Text>}
+              </View>
+              <Text style={styles.bonusTexte}>
+                Un même rôle peut être donné à plusieurs joueurs (ex. L&apos;Imposteur : plusieurs
+                citoyens, un imposteur). Sinon, chaque rôle n&apos;est attribuable qu&apos;à une seule
+                personne.
+              </Text>
+            </TouchableOpacity>
+          </Champ>
+        </Section>
+
         <TouchableOpacity style={styles.bouton} onPress={enregistrer}>
           <Text style={styles.boutonTexte}>
             {modeEdition ? "Enregistrer les modifications" : "Ajouter le jeu"}
@@ -773,6 +828,50 @@ export default function AjouterJeu() {
         </KeyboardAvoidingView>
       </Modal>
     </KeyboardAvoidingView>
+  );
+}
+
+// Bloc repliable regroupant des champs secondaires, pour alléger le formulaire.
+function Section({
+  titre,
+  sousTitre,
+  ouvert,
+  onToggle,
+  styles,
+  children,
+}: {
+  titre: string;
+  sousTitre?: string;
+  ouvert: boolean;
+  onToggle: () => void;
+  styles: ReturnType<typeof makeStyles>;
+  children: ReactNode;
+}) {
+  return (
+    <View style={styles.section}>
+      <TouchableOpacity
+        style={styles.sectionHead}
+        activeOpacity={0.7}
+        accessibilityRole="button"
+        accessibilityState={{ expanded: ouvert }}
+        accessibilityLabel={titre}
+        accessibilityHint={ouvert ? "Réduire la section" : "Déployer la section"}
+        onPress={onToggle}
+      >
+        <View style={{ flex: 1 }}>
+          <Text style={styles.sectionTitre}>{titre}</Text>
+          {sousTitre ? <Text style={styles.sectionSousTitre}>{sousTitre}</Text> : null}
+        </View>
+        <Text
+          style={[styles.sectionChevron, { transform: [{ rotate: ouvert ? "90deg" : "0deg" }] }]}
+          accessibilityElementsHidden
+          importantForAccessibility="no-hide-descendants"
+        >
+          ▸
+        </Text>
+      </TouchableOpacity>
+      {ouvert && <View style={styles.sectionCorps}>{children}</View>}
+    </View>
   );
 }
 
@@ -858,18 +957,93 @@ function makeStyles(c: AppColors) {
   return StyleSheet.create({
     page: { flex: 1, backgroundColor: c.page },
     contenu: { padding: 16, paddingBottom: 40 },
-    bggBouton: {
+    raccourciPrincipal: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 12,
+      backgroundColor: c.accent,
+      borderRadius: 14,
+      paddingVertical: 16,
+      paddingHorizontal: 16,
+      marginBottom: 10,
+    },
+    raccourciTexte: { flex: 1 },
+    raccourciBadge: {
+      alignSelf: "flex-start",
+      backgroundColor: c.onAccent,
+      borderRadius: 6,
+      paddingHorizontal: 8,
+      paddingVertical: 2,
+      marginBottom: 8,
+    },
+    raccourciBadgeTexte: {
+      fontSize: 11,
+      fontWeight: "700",
+      color: c.accent,
+      textTransform: "uppercase",
+      letterSpacing: 0.4,
+    },
+    raccourciPrincipalTitre: { fontSize: 17, fontWeight: "700", color: c.onAccent },
+    raccourciPrincipalDetail: {
+      fontSize: 13,
+      color: c.onAccent,
+      opacity: 0.9,
+      marginTop: 3,
+      lineHeight: 18,
+    },
+    raccourciPrincipalChevron: { fontSize: 20, color: c.onAccent },
+    raccourciSecondaire: {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
-      backgroundColor: c.accentSoft,
+      gap: 12,
+      backgroundColor: c.surfaceAlt,
+      borderWidth: 1,
+      borderColor: c.border,
       borderRadius: 12,
-      paddingVertical: 13,
+      paddingVertical: 12,
       paddingHorizontal: 14,
-      marginBottom: 18,
+      marginBottom: 4,
     },
-    bggTexte: { fontSize: 14, fontWeight: "600", color: c.accentText },
-    bggChevron: { fontSize: 14, color: c.accentText },
+    raccourciSecondaireTexte: { fontSize: 14, fontWeight: "600", color: c.textSecondary },
+    raccourciSecondaireChevron: { fontSize: 14, color: c.textMuted },
+    separateur: { flexDirection: "row", alignItems: "center", gap: 10, marginVertical: 16 },
+    separateurTrait: { flex: 1, height: 1, backgroundColor: c.border },
+    separateurTexte: { fontSize: 12, color: c.textMuted },
+    blocTitre: {
+      fontSize: 12,
+      fontWeight: "700",
+      color: c.textMuted,
+      textTransform: "uppercase",
+      letterSpacing: 0.6,
+      marginTop: 6,
+      marginBottom: 12,
+    },
+    section: {
+      borderWidth: 1,
+      borderColor: c.border,
+      borderRadius: 12,
+      backgroundColor: c.surface,
+      marginBottom: 16,
+      overflow: "hidden",
+    },
+    sectionHead: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 12,
+      paddingVertical: 14,
+      paddingHorizontal: 14,
+    },
+    sectionTitre: { fontSize: 15, fontWeight: "600", color: c.textPrimary },
+    sectionSousTitre: { fontSize: 12, color: c.textMuted, marginTop: 2 },
+    sectionChevron: { fontSize: 16, color: c.textMuted },
+    sectionCorps: {
+      paddingHorizontal: 14,
+      paddingBottom: 4,
+      borderTopWidth: 1,
+      borderTopColor: c.border,
+      paddingTop: 14,
+    },
     champ: { marginBottom: 14 },
     ligne: { flexDirection: "row", gap: 12 },
     labelLigne: { flexDirection: "row", alignItems: "center", gap: 8 },
