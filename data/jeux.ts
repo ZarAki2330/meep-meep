@@ -43,6 +43,10 @@ export type Jeu = {
   editeur?: string;
   // Règles présentées en points courts (une entrée = un point).
   regles: string[];
+  // Lien vers les règles officielles de l'éditeur (page ou PDF). Optionnel :
+  // s'il est renseigné, un bouton « Règles officielles » s'affiche sur la fiche.
+  // On ne réhéberge jamais le document : on pointe vers la source de l'éditeur.
+  reglesUrl?: string;
   // URL d'une image de couverture, ou chemin d'une photo copiée dans l'app.
   // Si vide, un visuel coloré s'affiche.
   image?: string;

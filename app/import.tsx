@@ -73,6 +73,7 @@ export default function AjouterJeu() {
   const [image, setImage] = useState("");
   const [description, setDescription] = useState("");
   const [regles, setRegles] = useState("");
+  const [reglesUrl, setReglesUrl] = useState("");
   const [sens, setSens] = useState<"max" | "min">("max");
   const [seuil, setSeuil] = useState("");
   const [equipes, setEquipes] = useState(false);
@@ -129,6 +130,7 @@ export default function AjouterJeu() {
     setImage(j.image ?? "");
     setDescription(j.description ?? "");
     setRegles((j.regles ?? []).join("\n"));
+    setReglesUrl(j.reglesUrl ?? "");
     setSens(j.scoreVictoire === "min" ? "min" : "max");
     setSeuil(j.seuilFin ? String(j.seuilFin) : "");
     setEquipes(j.equipes === true);
@@ -239,6 +241,7 @@ export default function AjouterJeu() {
         .split("\n")
         .map((l) => l.trim())
         .filter(Boolean),
+      reglesUrl: reglesUrl.trim() || undefined,
       scoreVictoire: mode === "compteur" || mode === "manches" ? sens : "max",
       // Le seuil de fin ne veut rien dire hors des modes à points.
       seuilFin:
@@ -476,6 +479,22 @@ export default function AjouterJeu() {
               placeholder={"À ton tour…\nLa partie se termine quand…"}
               placeholderTextColor={colors.placeholder}
               multiline
+            />
+          </Champ>
+
+          <Champ label="Lien des règles officielles (optionnel)" styles={styles}>
+            <Text style={styles.aide}>
+              Adresse de la page ou du PDF de règles chez l&apos;éditeur. Un bouton « Règles
+              officielles » apparaîtra sur la fiche. Laisse vide s&apos;il n&apos;y en a pas.
+            </Text>
+            <TextInput
+              style={styles.input}
+              value={reglesUrl}
+              onChangeText={setReglesUrl}
+              placeholder="https://…"
+              placeholderTextColor={colors.placeholder}
+              autoCapitalize="none"
+              keyboardType="url"
             />
           </Champ>
         </Section>

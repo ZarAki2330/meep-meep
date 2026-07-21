@@ -5,6 +5,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { useCallback, useState } from "react";
 import {
   ActivityIndicator,
+  Linking,
   ScrollView,
   Share,
   StyleSheet,
@@ -355,6 +356,19 @@ export default function FicheJeu() {
               <Text style={styles.regleTexte}>{point}</Text>
             </View>
           ))}
+          {jeu.reglesUrl ? (
+            <TouchableOpacity
+              style={styles.reglesOfficielles}
+              activeOpacity={0.7}
+              accessibilityRole="link"
+              accessibilityLabel="Ouvrir les règles officielles"
+              onPress={() => Linking.openURL(jeu.reglesUrl!).catch(() => {})}
+            >
+              <IconSymbol name="square.and.arrow.up" size={16} color={colors.accentText} />
+              <Text style={styles.reglesOfficiellesTexte}>Règles officielles (éditeur)</Text>
+              <Text style={styles.reglesOfficiellesFleche}>↗</Text>
+            </TouchableOpacity>
+          ) : null}
         </View>
       )}
 
@@ -545,6 +559,19 @@ function makeStyles(c: AppColors) {
       marginRight: 12,
     },
     regleTexte: { flex: 1, fontSize: 15, color: c.textSecondary, lineHeight: 22 },
+    reglesOfficielles: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 8,
+      alignSelf: "flex-start",
+      backgroundColor: c.accentSoft,
+      borderRadius: 10,
+      paddingVertical: 10,
+      paddingHorizontal: 14,
+      marginTop: 2,
+    },
+    reglesOfficiellesTexte: { fontSize: 14, fontWeight: "600", color: c.accentText },
+    reglesOfficiellesFleche: { fontSize: 14, color: c.accentText },
     roleCarte: {
       flexDirection: "row",
       alignItems: "flex-start",
