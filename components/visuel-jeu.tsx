@@ -18,11 +18,13 @@ export function VisuelJeu({ jeu, style }: { jeu: Jeu; style?: StyleProp<ViewStyl
   // pour rester distinct dans les listes.
   const couleur = couleurJeu(jeu);
   const montrerImage = !!jeu.image && !erreur;
-  // Les PNG ont souvent un fond transparent (logos, détourés) : on les pose sur
-  // un fond blanc et on les affiche en entier, sans rogner, façon photo produit.
-  // Les JPEG (photos de boîte pleines) restent en « cover » sur la tuile colorée.
-  const estPng = !!jeu.image && /\.png(\?|$)/i.test(jeu.image);
-  const fond = montrerImage && estPng ? "#ffffff" : couleur;
+  // Les formats à transparence possible (PNG, WebP, SVG, GIF — logos, visuels
+  // détourés) s'affichent en entier, sans rogner, façon photo produit. Les JPEG
+  // (photos de boîte pleines) restent en « cover » et remplissent la tuile.
+  const enContain = !!jeu.image && /\.(png|webp|svg|gif)(\?|#|$)/i.test(jeu.image);
+  // Le fond blanc est lié à l'affichage « en entier » : les bandes autour de
+  // l'image (et les zones transparentes) sont blanches, jamais la tuile colorée.
+  const fond = montrerImage && enContain ? "#ffffff" : couleur;
 
   return (
     <View
@@ -47,7 +49,7 @@ export function VisuelJeu({ jeu, style }: { jeu: Jeu; style?: StyleProp<ViewStyl
         <Image
           source={{ uri: jeu.image }}
           style={StyleSheet.absoluteFill}
-          contentFit={estPng ? "contain" : "cover"}
+          contentFit={enContain ? "contain" : "cover"}
           transition={200}
           onError={() => setErreur(true)}
         />
