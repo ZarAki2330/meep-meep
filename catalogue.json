@@ -1283,6 +1283,27 @@
     "editeur": "Czech Games Edition"
   },
   {
+    "id": "codo-berlin-63",
+    "nom": "CODO Berlin 63",
+    "editeur": "Sorry We Are French",
+    "categorie": "Stratégie",
+    "joueursMin": 2,
+    "joueursMax": 2,
+    "dureeMin": 20,
+    "ageMin": 14,
+    "scoreMode": "objectif",
+    "scoreVictoire": "max",
+    "image": "https://www.gigamic.com/3532-home_default/codo-berlin-63.jpg",
+    "description": "Un duel d'espionnage à deux, de part et d'autre du rideau de fer, au Berlin de la Guerre froide.",
+    "regles": [
+      "Jeu à deux : deux espions rivaux s'affrontent en pleine Guerre froide.",
+      "À son tour, on déplace ses agents sur le plateau et on active leurs pouvoirs.",
+      "Le bluff est central : on masque ses intentions pour tromper l'adversaire.",
+      "On l'emporte en éliminant le chef adverse ou en épuisant ses ressources.",
+      "Une joute tendue et nerveuse en une vingtaine de minutes."
+    ]
+  },
+  {
     "id": "concept",
     "nom": "Concept",
     "description": "Faites deviner n'importe quel mot à l'aide d'icônes universelles, sans parler.",
@@ -2136,6 +2157,28 @@
     "editeur": "Gigamic"
   },
   {
+    "id": "edamame",
+    "nom": "Edamame",
+    "editeur": "Sorry We Are French",
+    "categorie": "Stratégie",
+    "joueursMin": 2,
+    "joueursMax": 4,
+    "dureeMin": 40,
+    "ageMin": 10,
+    "scoreMode": "objectif",
+    "scoreVictoire": "max",
+    "image": "https://www.gigamic.com/1527-home_default/edamame.jpg",
+    "description": "Un jeu de stratégie décalé : des fèves de soja élèvent des dragons pour remporter le grand championnat.",
+    "regles": [
+      "But : élever le dragon le plus puissant et remporter le championnat final.",
+      "Une partie se joue en trois tours ; à chaque tour, on recrute des Edamames pour renforcer son clan.",
+      "On envoie ses Edamames (et parfois ceux des adversaires) travailler pour récolter des ressources.",
+      "Avec ces ressources, on achète des améliorations pour faire grandir son dragon.",
+      "À la fin de chaque tour, tous les joueurs visent un objectif commun qui procure des avantages.",
+      "La partie se conclut par des affrontements : le dragon le mieux élevé l'emporte."
+    ]
+  },
+  {
     "id": "enclumeimage",
     "nom": "Enclume & Image",
     "categorie": "Ambiance",
@@ -2197,6 +2240,50 @@
       "En fin de partie, le joueur avec la cité la plus riche en points l'emporte."
     ],
     "image": "https://www.espritjeu.com/upload/image/everdell--2e-ed--p-image-98422-grande.jpg"
+  },
+  {
+    "id": "evergreen",
+    "nom": "Evergreen",
+    "editeur": "Sorry We Are French",
+    "categorie": "Stratégie",
+    "joueursMin": 1,
+    "joueursMax": 4,
+    "dureeMin": 45,
+    "ageMin": 10,
+    "scoreMode": "compteur",
+    "scoreVictoire": "max",
+    "image": "https://www.gigamic.com/2159-home_default/evergreen.jpg",
+    "description": "Faites pousser l'écosystème le plus verdoyant sur votre planète : graines, arbres et lumière du soleil.",
+    "regles": [
+      "But : composer le monde le plus vert et le plus fertile.",
+      "À son tour, on choisit une carte qui détermine le type de végétation à planter ce tour.",
+      "On plante des graines, on fait grandir des arbres et on place d'autres éléments naturels.",
+      "À la fin de chaque saison, les arbres captent la lumière du soleil et marquent selon leur exposition.",
+      "Le joueur au monde le plus verdoyant en fin de partie l'emporte."
+    ]
+  },
+  {
+    "id": "evergreen-fleurs-cerisiers-bambous",
+    "nom": "Evergreen : Fleurs de cerisiers et Bambous",
+    "editeur": "Sorry We Are French",
+    "categorie": "Extension",
+    "type": "extension",
+    "jeuParent": "evergreen",
+    "joueursMin": 1,
+    "joueursMax": 4,
+    "dureeMin": 45,
+    "ageMin": 10,
+    "scoreMode": "compteur",
+    "scoreVictoire": "max",
+    "image": "https://www.gigamic.com/4092-home_default/evergreen-fleurs-de-cerisiers-et-bambous.jpg",
+    "description": "Extension d'Evergreen : de nouveaux éléments naturels — cerisiers en fleurs et bambous — et des façons inédites de marquer.",
+    "regles": [
+      "Nécessite le jeu de base Evergreen.",
+      "Ajoute des cerisiers en fleurs et des bambous à planter sur sa planète.",
+      "Ces nouveaux éléments apportent des combinaisons et des objectifs de score inédits.",
+      "Ils s'intègrent aux règles existantes sans les alourdir.",
+      "Le but reste de composer l'écosystème le plus verdoyant."
+    ]
   },
   {
     "id": "exploding-kittens",
@@ -3529,6 +3616,27 @@
     "editeur": "Gigamic"
   },
   {
+    "id": "le-match-du-siecle",
+    "nom": "Le Match du Siècle",
+    "editeur": "Deep Print Games",
+    "categorie": "Stratégie",
+    "joueursMin": 2,
+    "joueursMax": 2,
+    "dureeMin": 40,
+    "ageMin": 10,
+    "scoreMode": "objectif",
+    "scoreVictoire": "max",
+    "image": "https://www.gigamic.com/2881-home_default/le-match-du-siecle.jpg",
+    "description": "Un duel de cartes asymétrique qui rejoue le championnat du monde d'échecs de 1972 (Fischer contre Spassky).",
+    "regles": [
+      "Jeu à deux asymétrique : chaque joueur pilote son propre deck de cartes.",
+      "À chaque manche, on choisit d'engager des échanges pour prendre l'avantage…",
+      "…ou d'y renoncer pour déclencher de puissants effets.",
+      "On enchaîne ainsi des « matchs » individuels tout au long de la partie.",
+      "Le joueur qui remporte le plus de matchs gagne."
+    ]
+  },
+  {
     "id": "piqueniquefacteursouris",
     "nom": "Le pique-nique de Facteur Souris",
     "categorie": "Coopératif",
@@ -4224,6 +4332,27 @@
     "editeur": "Gigamic"
   },
   {
+    "id": "middle-ages",
+    "nom": "Middle Ages",
+    "editeur": "Studio H",
+    "categorie": "Stratégie",
+    "joueursMin": 2,
+    "joueursMax": 5,
+    "dureeMin": 30,
+    "ageMin": 10,
+    "scoreMode": "compteur",
+    "scoreVictoire": "max",
+    "image": "https://www.gigamic.com/2953-home_default/middle-ages.jpg",
+    "description": "Un jeu de placement de tuiles : bâtissez le fief médiéval le plus prospère.",
+    "regles": [
+      "But : développer le domaine médiéval le plus rentable.",
+      "À son tour, on place son seigneur sur une tuile pour la revendiquer et l'ajouter à son domaine.",
+      "On développe fermes, villages, églises, marchés et bâtiments militaires, chacun avec ses effets.",
+      "Certaines tuiles permettent d'attaquer les adversaires ou de créer des synergies rémunératrices.",
+      "Le score dépend des combinaisons de tuiles ; le meilleur domaine gagne."
+    ]
+  },
+  {
     "id": "millebornes",
     "nom": "Mille Bornes",
     "description": "La route, les crevaisons, les bottes et les coups fourrés. On joue en 5000 points.",
@@ -4793,6 +4922,27 @@
     ],
     "image": "https://www.gigamic.com/3726-home_default/oltree.jpg",
     "editeur": "Gigamic"
+  },
+  {
+    "id": "once-upon-a-draft",
+    "nom": "Once Upon A Draft",
+    "editeur": "Studio H",
+    "categorie": "Cartes",
+    "joueursMin": 3,
+    "joueursMax": 6,
+    "dureeMin": 30,
+    "ageMin": 10,
+    "scoreMode": "compteur",
+    "scoreVictoire": "max",
+    "image": "https://www.gigamic.com/3136-home_default/once-upon-a-draft.jpg",
+    "description": "Un jeu de cartes en trois chapitres avec des personnages de contes et légendes.",
+    "regles": [
+      "But : marquer le plus de points au fil de trois chapitres.",
+      "À son tour, on sélectionne des cartes de sa main et on les joue, parfois face aux adversaires.",
+      "Les personnages déclenchent des pouvoirs qui rapportent des points.",
+      "On combine ses cartes pour créer des synergies et des points supplémentaires.",
+      "Le joueur au plus haut score après les trois chapitres gagne."
+    ]
   },
   {
     "id": "orapamine",
@@ -6993,6 +7143,48 @@
     ],
     "image": "https://www.gigamic.com/3460-home_default/stupide-vautour.jpg",
     "editeur": "Gigamic"
+  },
+  {
+    "id": "sur-les-traces-de-darwin",
+    "nom": "Sur les Traces de Darwin",
+    "editeur": "Sorry We Are French",
+    "categorie": "Stratégie",
+    "joueursMin": 2,
+    "joueursMax": 5,
+    "dureeMin": 30,
+    "ageMin": 8,
+    "scoreMode": "compteur",
+    "scoreVictoire": "max",
+    "image": "https://www.gigamic.com/2276-home_default/sur-les-traces-de-darwin.jpg",
+    "description": "Jeunes naturalistes à bord du Beagle, partez découvrir des animaux aux côtés de Darwin.",
+    "regles": [
+      "But : marquer le plus de points en découvrant des animaux et en publiant des théories.",
+      "À son tour, on étudie un animal ou on s'inspire d'un personnage, puis on fait avancer le Beagle vers de nouvelles régions.",
+      "Le choix des tuiles détermine ses découvertes et ses déplacements.",
+      "On marque via les animaux, la cartographie, les publications, les théories et des jetons bonus.",
+      "Le naturaliste au meilleur total l'emporte."
+    ]
+  },
+  {
+    "id": "sur-les-traces-de-marie-curie",
+    "nom": "Sur les traces de Marie Curie",
+    "editeur": "Sorry We Are French",
+    "categorie": "Stratégie",
+    "joueursMin": 2,
+    "joueursMax": 5,
+    "dureeMin": 30,
+    "ageMin": 8,
+    "scoreMode": "compteur",
+    "scoreVictoire": "max",
+    "image": "https://www.gigamic.com/3171-home_default/sur-les-traces-de-marie-curie.jpg",
+    "description": "Dans la même veine que Darwin : assistez Marie Curie et menez vos propres recherches scientifiques.",
+    "regles": [
+      "But : marquer le plus de points en faisant progresser la science dans les pas de Marie Curie.",
+      "À son tour, on mène des expériences et on collecte ressources et découvertes.",
+      "Le choix des cartes et tuiles oriente ses avancées.",
+      "On marque grâce aux publications, aux éléments étudiés, aux théories et à des bonus.",
+      "Le joueur au meilleur total scientifique gagne."
+    ]
   },
   {
     "id": "sushigo",
