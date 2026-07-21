@@ -2,7 +2,7 @@
 
 Liste des fonctionnalités à faire et des améliorations.
 
-**Progression : 80 / 89 — 90 %**
+**Progression : 82 / 90 — 91 %**
 
 `██████████████████░░`
 
@@ -18,7 +18,6 @@ _Aucun bug en attente. 🎉_
 
 ## Qualité du projet
 
-- [ ] **Optimiser l'écran « Ajouter un jeu tout prêt »** — l'écran rame un peu, surtout à l'application d'un tri/filtre (`app/bibliotheque.tsx`). Pistes : mémoïser la carte de rendu (`renderItem` extrait en composant `memo`), régler la `FlatList` (`initialNumToRender`, `maxToRenderPerBatch`, `windowSize`, `removeClippedSubviews`, `getItemLayout` si hauteur fixe), et vérifier le chargement des images distantes (cache `expo-image`, éviter un rechargement à chaque re-render). Mesurer avant/après.
 - [ ] **Tester le fonctionnement des extensions et éditions** — vérifier le regroupement sous le jeu de base (masquage dans la liste, remontée par la recherche, section « Extensions & éditions » sur la fiche), la migration base (`jeu_type`, `jeu_parent`) et l'ajout depuis la bibliothèque.
 
 ## Nouvelles fonctionnalités
@@ -34,6 +33,8 @@ _(rien en attente)_
 
 ## Terminé
 
+- [x] Corrigé — flash des anciens jeux à l'ouverture de « Ajouter un jeu tout prêt » : le hook `useBibliotheque` démarrait sur la bibliothèque livrée (18 vieux jeux, ex. « 6 qui prend » avec son ancienne image) avant l'arrivée du catalogue distant. On garde désormais le dernier catalogue connu en mémoire de session, amorcé dès le chargement du module (`hooks/use-bibliotheque.ts`) : plus de flash de données périmées. La bibliothèque livrée ne sert plus que de repli au tout premier lancement sans cache.
+- [x] Optimisé — l'écran « Ajouter un jeu tout prêt » ramait à l'application d'un tri/filtre : la carte de rendu est extraite en composant `memo` (`CarteJeu`), l'objet `styles` et les callbacks (`ajouter`, `voirFiche`, `renderItem`) sont mémoïsés, et la `FlatList` est réglée (`initialNumToRender`, `maxToRenderPerBatch`, `windowSize` — sans `removeClippedSubviews`, qui provoquait un affichage partiel « 12 puis le reste » sur Android). Au tri, les objets `Jeu` gardent la même référence : les ~300 cartes ne se re-rendent plus, elles se repositionnent seulement. Les images distantes restent en cache (`expo-image`) puisque les cartes ne remontent plus.
 - [x] Plus aucun jeu pré-installé : `IDS_AMORCAGE` (data/bibliotheque.ts) est vidé — au premier lancement, le catalogue démarre vierge, l'utilisateur ajoute ce qu'il veut depuis « Ajouter un jeu tout prêt ». ⚠️ N'affecte que les nouvelles installations : un appareil qui avait déjà les 5 jeux amorcés (Pandémie, Catan, 6 qui prend, Villainous, Yams) les garde tant qu'on ne les supprime pas à la main (ou qu'on n'efface pas les données de l'app).
 - [x] Corrigé — bandeau de navigation (Android) au fond incohérent : selon l'écran, la barre transparente laissait voir le fond **par défaut de React Navigation** (blanc en clair, noir en sombre) au lieu du thème. On passe désormais à `ThemeProvider` un thème dont `background`/`card` valent `colors.page` (`app/_layout.tsx`) : la barre reste transparente et laisse toujours voir le fond au thème, et les icônes s'adaptent (claires en sombre, sombres en clair).
 - [x] Extensions dans l'historique des parties : les extensions cochées au lancement sont mémorisées avec la partie (colonne `extensions` de la table `parties` + migration) et affichées dans le détail d'une partie (`app/(tabs)/explore.tsx`). Transmises depuis les cinq modes de score (compteur, objectif, coopératif, manches, feuille de score) via `usePartie`.
