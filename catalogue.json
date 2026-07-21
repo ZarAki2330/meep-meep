@@ -7713,134 +7713,157 @@
       {
         "nom": "Maléfique",
         "origine": "La Belle au bois dormant",
-        "objectif": "Commencer son tour avec une Malédiction sur chacun des 4 lieux de son royaume."
+        "objectif": "Commencer son tour avec une Malédiction sur chacun des 4 lieux de son royaume.",
+        "image": "https://static.wikia.nocookie.net/disney-villainous/images/e/e0/Maleficentmover.png/revision/latest/scale-to-width-down/1000?cb=20210504142750"
       },
       {
         "nom": "Capitaine Crochet",
         "origine": "Peter Pan",
-        "objectif": "Vaincre Peter Pan au lieu du Jolly Roger."
+        "objectif": "Vaincre Peter Pan au lieu du Jolly Roger.",
+        "image": "https://static.wikia.nocookie.net/disney-villainous/images/7/7d/Captain_Hookmover.png/revision/latest/scale-to-width-down/1000?cb=20210504142500"
       },
       {
         "nom": "Prince Jean",
         "origine": "Robin des Bois",
-        "objectif": "Commencer son tour avec au moins 20 jetons de Pouvoir."
+        "objectif": "Commencer son tour avec au moins 20 jetons de Pouvoir.",
+        "image": "https://static.wikia.nocookie.net/disney-villainous/images/0/06/Prince_Johnmover.png/revision/latest/scale-to-width-down/1000?cb=20210504142806"
       },
       {
         "nom": "Jafar",
         "origine": "Aladdin",
-        "objectif": "Hypnotiser le Génie et posséder la Lampe magique à la Caverne aux Merveilles."
+        "objectif": "Hypnotiser le Génie et posséder la Lampe magique à la Caverne aux Merveilles.",
+        "image": "https://static.wikia.nocookie.net/disney-villainous/images/1/11/Jafarmover.png/revision/latest/scale-to-width-down/1000?cb=20210504142736"
       },
       {
         "nom": "Reine de Cœur",
         "origine": "Alice au pays des merveilles",
-        "objectif": "Réussir une exécution en ayant une arche de croquet à chaque lieu."
+        "objectif": "Réussir une exécution en ayant une arche de croquet à chaque lieu.",
+        "image": "https://static.wikia.nocookie.net/disney-villainous/images/7/7e/Queen_of_Heartsmover.png/revision/latest/scale-to-width-down/1000?cb=20210504142836"
       },
       {
         "nom": "Ursula",
         "origine": "La Petite Sirène",
-        "objectif": "Posséder le Trident et la Couronne à son Palais en début de tour."
+        "objectif": "Posséder le Trident et la Couronne à son Palais en début de tour.",
+        "image": "https://static.wikia.nocookie.net/disney-villainous/images/c/c3/Ursulamover.png/revision/latest/scale-to-width-down/1000?cb=20210504142849"
       },
       {
         "nom": "La Méchante Reine",
         "origine": "Blanche-Neige",
         "objectif": "Préparer la pomme empoisonnée en jouant 4 ingrédients différents, retrouver Blanche-Neige et l'éliminer avec la carte « Croque ! ».",
-        "extension": "Mauvais jusqu'à l'os"
+        "extension": "Mauvais jusqu'à l'os",
+        "image": "https://static.wikia.nocookie.net/disney-villainous/images/7/77/Evil_Queenmover.png/revision/latest/scale-to-width-down/1000?cb=20210504142926"
       },
       {
         "nom": "Hadès",
         "origine": "Hercule",
         "objectif": "Commencer son tour avec au moins 3 Titans non entravés sur le Mont Olympe.",
-        "extension": "Mauvais jusqu'à l'os"
+        "extension": "Mauvais jusqu'à l'os",
+        "image": "https://static.wikia.nocookie.net/disney-villainous/images/7/7f/Hadesmover.png/revision/latest/scale-to-width-down/1000?cb=20210504143134"
       },
       {
         "nom": "Dr Facilier",
         "origine": "La Princesse et la Grenouille",
         "objectif": "Contrôler le Talisman et jouer la carte « Régner sur la Nouvelle-Orléans ».",
-        "extension": "Mauvais jusqu'à l'os"
+        "extension": "Mauvais jusqu'à l'os",
+        "image": "https://static.wikia.nocookie.net/disney-villainous/images/8/82/Dr_Faciliermover.png/revision/latest/scale-to-width-down/1000?cb=20210504142913"
       },
       {
         "nom": "Scar",
         "origine": "Le Roi Lion",
         "objectif": "Trouver et vaincre Mufasa, puis vaincre d'autres héros jusqu'à totaliser 15 points de force dans sa pile Succession.",
-        "extension": "La Fin est Proche"
+        "extension": "La Fin est Proche",
+        "image": "https://static.wikia.nocookie.net/disney-villainous/images/a/a0/Scarmover.png/revision/latest/scale-to-width-down/1000?cb=20210504143159"
       },
       {
         "nom": "Yzma",
         "origine": "Kuzco, l'empereur mégalo",
         "objectif": "Débusquer Kuzco dans ses pioches du Destin, le jouer, puis l'éliminer grâce à Kronk.",
-        "extension": "La Fin est Proche"
+        "extension": "La Fin est Proche",
+        "image": "https://static.wikia.nocookie.net/disney-villainous/images/b/b2/Yzmamover.png/revision/latest/scale-to-width-down/1000?cb=20210504143209"
       },
       {
         "nom": "Ratigan",
         "origine": "Basil, détective privé",
         "objectif": "Jouer la Reine robot et la conduire à Buckingham Palace, où elle doit rester jusqu'au début de son tour.",
-        "extension": "La Fin est Proche"
+        "extension": "La Fin est Proche",
+        "image": "https://static.wikia.nocookie.net/disney-villainous/images/d/dd/Ratiganmover.png/revision/latest/scale-to-width-down/1000?cb=20210504143149"
       },
       {
         "nom": "Cruella d'Enfer",
         "origine": "Les 101 Dalmatiens",
         "objectif": "Réunir 99 chiots pour confectionner son manteau de fourrure.",
-        "extension": "Cruellement Infects"
+        "extension": "Cruellement Infects",
+        "image": "https://static.wikia.nocookie.net/disney-villainous/images/a/a8/Cruella_De_Vilmover.png/revision/latest/scale-to-width-down/1000?cb=20210504143247"
       },
       {
         "nom": "Capitaine Pat",
         "origine": "Mickey Mouse",
         "objectif": "Accomplir l'objectif du lieu où se trouve son pion : il change au fil de la partie.",
-        "extension": "Cruellement Infects"
+        "extension": "Cruellement Infects",
+        "image": "https://static.wikia.nocookie.net/disney-villainous/images/5/56/Petemover.png/revision/latest/scale-to-width-down/1000?cb=20210504143347"
       },
       {
         "nom": "Mère Gothel",
         "origine": "Raiponce",
         "objectif": "Gagner la confiance de Raiponce afin de la garder sous son emprise.",
-        "extension": "Cruellement Infects"
+        "extension": "Cruellement Infects",
+        "image": "https://static.wikia.nocookie.net/disney-villainous/images/e/e1/Mother_Gothelmover.png/revision/latest/scale-to-width-down/1000?cb=20210504143307"
       },
       {
         "nom": "Gaston",
         "origine": "La Belle et la Bête",
         "objectif": "Courtiser Belle et la convaincre qu'il est l'homme à épouser.",
-        "extension": "Monstrueusement Malsains"
+        "extension": "Monstrueusement Malsains",
+        "image": "https://static.wikia.nocookie.net/disney-villainous/images/2/2d/Gastonmover.png/revision/latest/scale-to-width-down/1000?cb=20210504143359"
       },
       {
         "nom": "Lady Tremaine",
         "origine": "Cendrillon",
         "objectif": "Convaincre le Prince d'épouser l'une de ses filles plutôt que Cendrillon.",
-        "extension": "Monstrueusement Malsains"
+        "extension": "Monstrueusement Malsains",
+        "image": "https://static.wikia.nocookie.net/disney-villainous/images/f/fb/Lady_Tremainemover.png/revision/latest/scale-to-width-down/1000?cb=20210504143424"
       },
       {
         "nom": "Le Roi Cornu",
         "origine": "Taram et le Chaudron magique",
         "objectif": "Lever une armée de morts-vivants en réanimant des guerriers sur plusieurs lieux de son royaume.",
-        "extension": "Monstrueusement Malsains"
+        "extension": "Monstrueusement Malsains",
+        "image": "https://static.wikia.nocookie.net/disney-villainous/images/f/fe/Horned_Kingmover.png/revision/latest/scale-to-width-down/1000?cb=20210504143410"
       },
       {
         "nom": "Syndrome",
         "origine": "Les Indestructibles",
         "objectif": "Vaincre un Omnidroïde amélioré ainsi que tous les héros présents dans son royaume.",
-        "extension": "Plus Grands, Plus Méchants"
+        "extension": "Plus Grands, Plus Méchants",
+        "image": "https://static.wikia.nocookie.net/disney-villainous/images/7/73/Syndrome_mover.jpeg/revision/latest?cb=20260518235134"
       },
       {
         "nom": "Lotso",
         "origine": "Toy Story 3",
         "objectif": "Piéger quatre héros réduits à 0 point de force, ainsi que Buzz l'Éclair, dans la salle des Chenilles.",
-        "extension": "Plus Grands, Plus Méchants"
+        "extension": "Plus Grands, Plus Méchants",
+        "image": "https://static.wikia.nocookie.net/disney-villainous/images/5/59/Lotsomover.png/revision/latest?cb=20220306054732"
       },
       {
         "nom": "Madame Mim",
         "origine": "Merlin l'Enchanteur",
         "objectif": "Surpasser Merlin en magie et l'emporter lors du duel de sorciers.",
-        "extension": "Plus Grands, Plus Méchants"
+        "extension": "Plus Grands, Plus Méchants",
+        "image": "https://static.wikia.nocookie.net/disney-villainous/images/7/7c/Madam_Mimmover.png/revision/latest?cb=20220306054848"
       },
       {
         "nom": "Davy Jones",
         "origine": "Pirates des Caraïbes",
         "objectif": "Réunir 5 trésors à l'aide du Kraken.",
-        "extension": "Larmes de Fond"
+        "extension": "Larmes de Fond",
+        "image": "https://static.wikia.nocookie.net/disney-villainous/images/6/6b/Davy_jones_mover.jpg/revision/latest?cb=20260524010447"
       },
       {
         "nom": "Tamatoa",
         "origine": "Vaiana",
         "objectif": "Ramener le crochet de Maui et le cœur de Te Fiti dans son repaire.",
-        "extension": "Larmes de Fond"
+        "extension": "Larmes de Fond",
+        "image": "https://static.wikia.nocookie.net/disney-villainous/images/a/a2/Tamatoa_mover.jpg/revision/latest?cb=20260524010559"
       }
     ],
     "regles": [
