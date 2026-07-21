@@ -10,9 +10,9 @@ Liste des fonctionnalités à faire et des améliorations.
 
 _Estimations approximatives, en heures de travail équivalent développeur (pas le temps réel de nos échanges). À réévaluer à chaque mise à jour de la feuille de route._
 
-- **Réalisé** (87 tâches) : **~218 h** — l'essentiel : le catalogue de 373 jeux avec règles en français (~105 h à lui seul), les 5 modes de score, extensions/éditions, historique et statistiques, thème + accessibilité, tests.
-- **Restant** (12 tâches) : **~36 h** (hors tâche récurrente « ajouter des jeux »).
-- **Total projet** : **~250 h**.
+- **Réalisé** (89 tâches) : **~225 h** — l'essentiel : le catalogue de 379 jeux avec règles en français (~105 h à lui seul), les 5 modes de score, extensions/éditions, historique et statistiques, thème + accessibilité, refonte de l'écran d'ajout, avatars de personnages, tests.
+- **Restant** (10 tâches) : **~29 h** (hors tâche récurrente « ajouter des jeux »).
+- **Total projet** : **~254 h**.
 
 Détail des tâches restantes :
 
@@ -25,10 +25,8 @@ Détail des tâches restantes :
 | Publier sur l'App Store | ~5 h |
 | Revoir l'optimisation de la bibliothèque | ~2 h |
 | Tester extensions et éditions | ~3 h |
-| Revoir l'interface d'ajout d'un jeu | ~3 h |
 | Ajouter de nouveaux jeux (récurrent) | variable |
 | Règles officielles en PDF (étude) | ~3 h |
-| Améliorer les interfaces | ~4 h |
 | Revoir le design et le logo | ~6 h |
 
 ## Bugs à corriger
@@ -51,9 +49,9 @@ _Aucun bug en attente. 🎉_
 ## Nouvelles fonctionnalités
 
 - [ ] **Ajouter de nouveaux jeux au catalogue** _(tâche récurrente)_ — enrichir régulièrement `catalogue.json` : nouvelles sorties, gammes complétées, et finalisation des fiches provisoires (voir `claude/gigamic-fiches-provisoires.md`). _Dernier recensement Gigamic (juil. 2026)_ : catalogue passé à **347 jeux** — 17 jeux Gigamic manquants ajoutés après comparaison complète des catégories du site (Ah Ouais ?, Bravo Bravo, Nautilus Island, Maudits Criquets, Talaref, Une patate à vélo, File Filou !, La maison des souris, Explodino, Explogéo, Doudou, La colline aux feux follets, Le hérisson qui roule à pic, Le Rallye des vers de terre, La Chasse aux Gigamons, Memozistoire, Pique Plume). _Lot mixte autres éditeurs (juil. 2026)_ : catalogue passé à **367 jeux** — 20 grands titres non-Gigamic ajoutés (Ark Nova, Cascadia, Everdell, Root, Brass : Birmingham, Scythe, It's a Wonderful World, Dune : Imperium, Camel Up, Sky Team, Harmonies, Faraway, Qwirkle, Rummikub, Dobble, Blokus, Puissance 4, Trivial Pursuit, Exploding Kittens, Bang!) — photos officielles ajoutées (Esprit Jeu / retailers). Restent sans photo : ~20 classiques non-Gigamic plus anciens (Uno, Monopoly, Cluedo, Takenoko, Wingspan, Terraforming Mars…) à compléter.
-- [ ] **Revoir l'interface d'ajout d'un jeu** — repenser l'écran d'ajout (`import.tsx` et l'entrée « Ajouter un jeu tout prêt ») : organisation, clarté, ergonomie du formulaire et des options.
+- [x] **Revoir l'interface d'ajout d'un jeu** — écran d'ajout (`import.tsx`) réorganisé : le formulaire n'affiche plus tout d'un bloc. Champs regroupés sous des titres (« L'essentiel », « Score ») et deux sections repliables (« Présentation » : éditeur, image, description, règles ; « Extensions et personnages ») — repliées à l'ajout pour un formulaire épuré, ouvertes en modification. Raccourcis « tout prêt » et « coller » clarifiés (sous-titres) avec un séparateur « ou remplis toi-même ». Logique d'enregistrement inchangée, compilation TSX vérifiée.
 - [ ] **Afficher les règles officielles en PDF dans l'app** — se renseigner sur la faisabilité d'intégrer et d'afficher un PDF de règles directement dans la fiche du jeu (visionneuse embarquée, stockage, droits).
-- [ ] **Améliorer les interfaces de l'app** — soigner les écrans, par ex. les personnages dans les jeux : une photo ou un logo par personnage.
+- [x] **Améliorer les interfaces de l'app — personnages** — chaque personnage a désormais un avatar : sa photo/logo s'il en a un (nouveau 5e champ « image » dans le formulaire d'ajout), sinon une pastille colorée à son initiale (couleur déterministe tirée du nom, `lib/couleur-jeu.ts` → `couleurRole`). Nouveau composant `components/avatar-role.tsx`, affiché sur la fiche du jeu (`app/jeu/[id].tsx`) et dans les sélecteurs de rôle (`app/objectif`, `app/coop`). Reste ouvert pour d'autres écrans si besoin (nouvelle tâche à créer).
 - [ ] **Revoir le design de l'application et le logo** — rafraîchir l'identité visuelle : maquette globale (couleurs, typographie, écrans clés) et refonte du logo Meep Meep.
 
 ## En attente
