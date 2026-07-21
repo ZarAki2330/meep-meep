@@ -10,9 +10,9 @@ Liste des fonctionnalités à faire et des améliorations.
 
 _Estimations approximatives, en heures de travail équivalent développeur (pas le temps réel de nos échanges). À réévaluer à chaque mise à jour de la feuille de route._
 
-- **Réalisé** (87 tâches) : **~214 h** — l'essentiel : le catalogue de 347 jeux avec règles en français (~100 h à lui seul), les 5 modes de score, extensions/éditions, historique et statistiques, thème + accessibilité, tests.
+- **Réalisé** (87 tâches) : **~218 h** — l'essentiel : le catalogue de 367 jeux avec règles en français (~104 h à lui seul), les 5 modes de score, extensions/éditions, historique et statistiques, thème + accessibilité, tests.
 - **Restant** (12 tâches) : **~36 h** (hors tâche récurrente « ajouter des jeux »).
-- **Total projet** : **~246 h**.
+- **Total projet** : **~250 h**.
 
 Détail des tâches restantes :
 
@@ -50,7 +50,7 @@ _Aucun bug en attente. 🎉_
 
 ## Nouvelles fonctionnalités
 
-- [ ] **Ajouter de nouveaux jeux au catalogue** _(tâche récurrente)_ — enrichir régulièrement `catalogue.json` : nouvelles sorties, gammes complétées, et finalisation des fiches provisoires (voir `claude/gigamic-fiches-provisoires.md`). _Dernier recensement Gigamic (juil. 2026)_ : catalogue passé à **347 jeux** — 17 jeux Gigamic manquants ajoutés après comparaison complète des catégories du site (Ah Ouais ?, Bravo Bravo, Nautilus Island, Maudits Criquets, Talaref, Une patate à vélo, File Filou !, La maison des souris, Explodino, Explogéo, Doudou, La colline aux feux follets, Le hérisson qui roule à pic, Le Rallye des vers de terre, La Chasse aux Gigamons, Memozistoire, Pique Plume).
+- [ ] **Ajouter de nouveaux jeux au catalogue** _(tâche récurrente)_ — enrichir régulièrement `catalogue.json` : nouvelles sorties, gammes complétées, et finalisation des fiches provisoires (voir `claude/gigamic-fiches-provisoires.md`). _Dernier recensement Gigamic (juil. 2026)_ : catalogue passé à **347 jeux** — 17 jeux Gigamic manquants ajoutés après comparaison complète des catégories du site (Ah Ouais ?, Bravo Bravo, Nautilus Island, Maudits Criquets, Talaref, Une patate à vélo, File Filou !, La maison des souris, Explodino, Explogéo, Doudou, La colline aux feux follets, Le hérisson qui roule à pic, Le Rallye des vers de terre, La Chasse aux Gigamons, Memozistoire, Pique Plume). _Lot mixte autres éditeurs (juil. 2026)_ : catalogue passé à **367 jeux** — 20 grands titres non-Gigamic ajoutés (Ark Nova, Cascadia, Everdell, Root, Brass : Birmingham, Scythe, It's a Wonderful World, Dune : Imperium, Camel Up, Sky Team, Harmonies, Faraway, Qwirkle, Rummikub, Dobble, Blokus, Puissance 4, Trivial Pursuit, Exploding Kittens, Bang!) — photos officielles ajoutées (Esprit Jeu / retailers). Restent sans photo : ~20 classiques non-Gigamic plus anciens (Uno, Monopoly, Cluedo, Takenoko, Wingspan, Terraforming Mars…) à compléter.
 - [ ] **Revoir l'interface d'ajout d'un jeu** — repenser l'écran d'ajout (`import.tsx` et l'entrée « Ajouter un jeu tout prêt ») : organisation, clarté, ergonomie du formulaire et des options.
 - [ ] **Afficher les règles officielles en PDF dans l'app** — se renseigner sur la faisabilité d'intégrer et d'afficher un PDF de règles directement dans la fiche du jeu (visionneuse embarquée, stockage, droits).
 - [ ] **Améliorer les interfaces de l'app** — soigner les écrans, par ex. les personnages dans les jeux : une photo ou un logo par personnage.

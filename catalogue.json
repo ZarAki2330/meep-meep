@@ -168,7 +168,8 @@
       "Si aucune victoire immédiate, on compte les points de prestige à la fin ; le plus élevé gagne."
     ],
     "scoreVictoire": "max",
-    "scoreMode": "objectif"
+    "scoreMode": "objectif",
+    "image": "https://www.espritjeu.com/upload/image/7-wonders-duel-p-image-97965-grande.jpg"
   },
   {
     "id": "ah-ouais",
@@ -324,6 +325,27 @@
     "editeur": "Gigamic"
   },
   {
+    "id": "ark-nova",
+    "nom": "Ark Nova",
+    "editeur": "Super Meeple",
+    "categorie": "Stratégie",
+    "joueursMin": 1,
+    "joueursMax": 4,
+    "dureeMin": 90,
+    "ageMin": 14,
+    "scoreMode": "compteur",
+    "scoreVictoire": "max",
+    "description": "Un jeu expert où l'on conçoit et gère un parc zoologique moderne engagé dans la protection des espèces.",
+    "regles": [
+      "But : développer le zoo le plus attractif et le plus impliqué dans la conservation.",
+      "On joue des cartes Action (Animaux, Parrainage, Cartes, Construction, Association) dont la puissance dépend de leur position sur son plateau.",
+      "On construit des enclos, accueille des animaux et remplit des projets de conservation.",
+      "Deux jauges progressent : l'attractivité et les points de conservation ; la partie se termine quand elles se croisent.",
+      "Le joueur avec le meilleur score combiné l'emporte."
+    ],
+    "image": "https://www.espritjeu.com/upload/image/ark-nova-p-image-78844-grande.jpg"
+  },
+  {
     "id": "aupif",
     "nom": "Au Pif",
     "categorie": "Ambiance",
@@ -469,6 +491,27 @@
     ],
     "image": "https://www.gigamic.com/1372-home_default/ballons.jpg",
     "editeur": "Gigamic"
+  },
+  {
+    "id": "bang",
+    "nom": "Bang!",
+    "editeur": "dV Giochi",
+    "categorie": "Cartes",
+    "joueursMin": 4,
+    "joueursMax": 7,
+    "dureeMin": 30,
+    "ageMin": 8,
+    "scoreMode": "objectif",
+    "scoreVictoire": "max",
+    "description": "Un western à rôles cachés : shérif, hors-la-loi, adjoints et renégat s'affrontent à coups de Bang!",
+    "regles": [
+      "But : remplir l'objectif secret de son rôle (le shérif est connu, les autres cachés).",
+      "Le shérif et ses adjoints veulent éliminer les hors-la-loi et le renégat ; chacun a sa condition de victoire.",
+      "On joue des cartes pour tirer (Bang!), esquiver, se soigner ou équiper son personnage.",
+      "La portée dépend des distances entre joueurs et des armes en jeu.",
+      "La partie se termine dès qu'un camp atteint son objectif."
+    ],
+    "image": "https://www.espritjeu.com/upload/image/bang---p-image-88531-grande.jpg"
   },
   {
     "id": "bango",
@@ -687,6 +730,27 @@
     "editeur": "Gigamic"
   },
   {
+    "id": "blokus",
+    "nom": "Blokus",
+    "editeur": "Mattel",
+    "categorie": "Abstrait",
+    "joueursMin": 2,
+    "joueursMax": 4,
+    "dureeMin": 20,
+    "ageMin": 7,
+    "scoreMode": "compteur",
+    "scoreVictoire": "max",
+    "description": "Un jeu abstrait de placement : posez toutes vos pièces en ne les touchant que par les coins.",
+    "regles": [
+      "But : poser un maximum de ses pièces sur le plateau.",
+      "Chaque nouvelle pièce doit toucher une de ses pièces précédentes uniquement par un coin, jamais par un côté.",
+      "On cherche à s'étendre tout en bloquant les adversaires.",
+      "La partie s'arrête quand plus personne ne peut poser de pièce.",
+      "On compte les cases restantes en main : le joueur qui en a le moins (idéalement zéro) gagne."
+    ],
+    "image": "https://www.espritjeu.com/upload/image/blokus-p-image-90995-grande.jpg"
+  },
+  {
     "id": "bluffer",
     "nom": "Bluffer",
     "categorie": "Ambiance",
@@ -750,6 +814,27 @@
     "editeur": "Gigamic"
   },
   {
+    "id": "brass-birmingham",
+    "nom": "Brass : Birmingham",
+    "editeur": "Super Meeple",
+    "categorie": "Stratégie",
+    "joueursMin": 2,
+    "joueursMax": 4,
+    "dureeMin": 60,
+    "ageMin": 14,
+    "scoreMode": "compteur",
+    "scoreVictoire": "max",
+    "description": "Un chef-d'œuvre de gestion économique pendant la révolution industrielle anglaise.",
+    "regles": [
+      "But : développer le réseau industriel le plus rentable à travers deux ères (canaux puis rails).",
+      "On joue des cartes pour construire des industries (brasseries, mines, filatures…) et des liaisons de transport.",
+      "On vend ses biens, on emprunte, on brasse de la bière pour débloquer certaines actions.",
+      "Le score se compte à la fin de chaque ère selon les industries et les liaisons développées.",
+      "Le joueur au meilleur total final l'emporte."
+    ],
+    "image": "https://www.ludum.fr/43463-product_default/brass-birmingham.jpg"
+  },
+  {
     "id": "bravo-bravo",
     "nom": "Bravo Bravo",
     "categorie": "Ambiance",
@@ -791,6 +876,27 @@
     ],
     "image": "https://www.gigamic.com/3121-home_default/cabanga.jpg",
     "editeur": "Gigamic"
+  },
+  {
+    "id": "camel-up",
+    "nom": "Camel Up",
+    "editeur": "Pretzel Games",
+    "categorie": "Familial",
+    "joueursMin": 2,
+    "joueursMax": 8,
+    "dureeMin": 30,
+    "ageMin": 8,
+    "scoreMode": "compteur",
+    "scoreVictoire": "max",
+    "description": "Une course de chameaux déjantée où l'on parie sur des dromadaires qui se grimpent dessus.",
+    "regles": [
+      "But : finir la course avec le plus d'argent grâce à ses paris.",
+      "À son tour, on secoue la pyramide pour lancer un dé et faire avancer un chameau (parfois en portant les autres empilés).",
+      "On peut parier sur le vainqueur d'une manche, sur le grand gagnant/perdant, ou poser des tuiles piège.",
+      "Les bons paris rapportent gros, les mauvais coûtent de l'argent.",
+      "Le joueur le plus riche à la fin de la course gagne."
+    ],
+    "image": "https://www.okkazeo.com/images/jeux/10521_1.jpg"
   },
   {
     "id": "canardage",
@@ -917,6 +1023,27 @@
     ],
     "image": "https://www.gigamic.com/1217-home_default/carro-combo.jpg",
     "editeur": "Gigamic"
+  },
+  {
+    "id": "cascadia",
+    "nom": "Cascadia",
+    "editeur": "Lucky Duck Games",
+    "categorie": "Familial",
+    "joueursMin": 1,
+    "joueursMax": 4,
+    "dureeMin": 30,
+    "ageMin": 10,
+    "scoreMode": "compteur",
+    "scoreVictoire": "max",
+    "description": "Un jeu de pose de tuiles serein : composez le plus bel écosystème du nord-ouest américain.",
+    "regles": [
+      "But : agencer habitats et faune pour marquer le plus de points.",
+      "À son tour, on prend une paire tuile-habitat + jeton-animal parmi les offres disponibles.",
+      "On place la tuile pour agrandir ses zones d'habitat et on pose l'animal selon ses règles de placement.",
+      "Chaque espèce marque selon un objectif propre (groupes, lignes, voisinages…), et les grands habitats rapportent des bonus.",
+      "Le joueur au plus haut total gagne."
+    ],
+    "image": "https://www.espritjeu.com/upload/image/cascadia-p-image-77106-grande.jpg"
   },
   {
     "id": "catan",
@@ -1109,7 +1236,8 @@
       "Le premier à énoncer la bonne accusation — vérifiée dans l'enveloppe centrale — remporte la partie ; une accusation fausse élimine."
     ],
     "scoreVictoire": "max",
-    "scoreMode": "objectif"
+    "scoreMode": "objectif",
+    "image": "https://www.espritjeu.com/upload/image/cluedo-p-image-86837-grande.jpg"
   },
   {
     "id": "cocotaki",
@@ -1172,7 +1300,8 @@
       "Le plus de points l'emporte — mais on peut aussi jouer simplement pour le plaisir de deviner."
     ],
     "scoreVictoire": "max",
-    "scoreMode": "compteur"
+    "scoreMode": "compteur",
+    "image": "https://www.espritjeu.com/upload/image/concept-p-image-51037-grande.jpg"
   },
   {
     "id": "coyote",
@@ -1605,6 +1734,27 @@
     "editeur": "Libellud"
   },
   {
+    "id": "dobble",
+    "nom": "Dobble",
+    "editeur": "Zygomatic",
+    "categorie": "Rapidité",
+    "joueursMin": 2,
+    "joueursMax": 8,
+    "dureeMin": 15,
+    "ageMin": 6,
+    "scoreMode": "compteur",
+    "scoreVictoire": "max",
+    "description": "Un jeu d'observation ultra-rapide : deux cartes ont toujours exactement un symbole en commun.",
+    "regles": [
+      "But : être le plus rapide à repérer le symbole commun entre deux cartes.",
+      "Chaque carte partage un et un seul symbole identique avec n'importe quelle autre.",
+      "Selon le mini-jeu choisi, on cherche à se défausser de ses cartes ou à en récupérer le plus.",
+      "Dès qu'on voit le symbole commun, on le nomme à voix haute et on agit.",
+      "Le vainqueur dépend du mode, mais la vivacité prime toujours."
+    ],
+    "image": "https://www.espritjeu.com/upload/image/dobble-classique-p-image-72953-grande.png"
+  },
+  {
     "id": "dodelido",
     "nom": "Dodelido",
     "description": "Un jeu de rapidité où tortue et crocodile sèment la pagaille.",
@@ -1642,7 +1792,8 @@
       "La partie s'arrête quand la pile Province est vide (ou trois piles épuisées) ; le plus de points de Victoire gagne."
     ],
     "scoreVictoire": "max",
-    "scoreMode": "compteur"
+    "scoreMode": "compteur",
+    "image": "https://www.espritjeu.com/upload/image/dominion--seconde-edition--p-image-108038-grande.jpg"
   },
   {
     "id": "donjonssiphons",
@@ -1835,6 +1986,27 @@
     "editeur": "Gigamic"
   },
   {
+    "id": "dune-imperium",
+    "nom": "Dune : Imperium",
+    "editeur": "Lucky Duck Games",
+    "categorie": "Stratégie",
+    "joueursMin": 1,
+    "joueursMax": 4,
+    "dureeMin": 60,
+    "ageMin": 14,
+    "scoreMode": "compteur",
+    "scoreVictoire": "max",
+    "description": "Mêlez placement d'ouvriers et deck-building pour dominer la planète Dune.",
+    "regles": [
+      "But : être le premier à 10 points de victoire (ou le mieux placé à la fin).",
+      "On joue des cartes de son deck pour envoyer ses agents sur des lieux d'action.",
+      "On récolte de l'Épice, de l'eau et du Solari, on gagne des alliances et de l'influence auprès des factions.",
+      "En fin de tour, les cartes restantes servent à un conflit et à l'achat de nouvelles cartes.",
+      "Le premier à atteindre 10 points remporte la partie."
+    ],
+    "image": "https://www.espritjeu.com/upload/image/dune-imperium-p-image-76566-grande.jpg"
+  },
+  {
     "id": "decrypto",
     "nom": "Décrypto",
     "description": "Transmettez des codes secrets à votre équipe sans vous faire intercepter.",
@@ -1853,7 +2025,8 @@
     ],
     "scoreVictoire": "max",
     "scoreMode": "objectif",
-    "equipes": true
+    "equipes": true,
+    "image": "https://www.espritjeu.com/upload/image/decrypto-p-image-63684-grande.jpg"
   },
   {
     "id": "defifoo",
@@ -1983,6 +2156,48 @@
     "editeur": "Gigamic"
   },
   {
+    "id": "everdell",
+    "nom": "Everdell",
+    "editeur": "Matagot",
+    "categorie": "Stratégie",
+    "joueursMin": 1,
+    "joueursMax": 4,
+    "dureeMin": 40,
+    "ageMin": 10,
+    "scoreMode": "compteur",
+    "scoreVictoire": "max",
+    "description": "Dans la vallée d'Everdell, bâtissez une cité d'animaux forestiers au fil des saisons.",
+    "regles": [
+      "But : construire la cité la plus prospère avant la fin de l'année.",
+      "On place ses ouvriers pour récolter des ressources (brindilles, résine, cailloux, baies).",
+      "Avec ces ressources, on joue des cartes Construction et Créature qui se combinent en moteurs de points.",
+      "On progresse à travers les quatre saisons, récupérant et gagnant de nouveaux ouvriers à chaque passage.",
+      "En fin de partie, le joueur avec la cité la plus riche en points l'emporte."
+    ],
+    "image": "https://www.espritjeu.com/upload/image/everdell--2e-ed--p-image-98422-grande.jpg"
+  },
+  {
+    "id": "exploding-kittens",
+    "nom": "Exploding Kittens",
+    "editeur": "Asmodee",
+    "categorie": "Cartes",
+    "joueursMin": 2,
+    "joueursMax": 5,
+    "dureeMin": 15,
+    "ageMin": 7,
+    "scoreMode": "objectif",
+    "scoreVictoire": "max",
+    "description": "Une sorte de roulette russe féline et hilarante : évitez de piocher le chaton explosif.",
+    "regles": [
+      "But : être le dernier joueur en vie.",
+      "À son tour, on joue autant de cartes que l'on veut puis on doit piocher une carte.",
+      "Si l'on pioche un Chaton qui explose sans pouvoir le désamorcer, on est éliminé.",
+      "Les cartes Action permettent d'éviter la pioche, d'espionner, de mélanger ou d'attaquer les autres.",
+      "Le dernier survivant remporte la partie."
+    ],
+    "image": "https://www.espritjeu.com/upload/image/exploding-kittens-p-image-99645-grande.jpg"
+  },
+  {
     "id": "explodino",
     "nom": "Explodino",
     "categorie": "Familial",
@@ -2023,6 +2238,27 @@
       "Une bonne réponse fait gagner la carte ; celui qui en a le plus l'emporte, tout en apprenant la géographie."
     ],
     "editeur": "Gigamic"
+  },
+  {
+    "id": "faraway",
+    "nom": "Faraway",
+    "editeur": "Catch Up Games",
+    "categorie": "Cartes",
+    "joueursMin": 2,
+    "joueursMax": 6,
+    "dureeMin": 20,
+    "ageMin": 12,
+    "scoreMode": "compteur",
+    "scoreVictoire": "max",
+    "description": "Un jeu de cartes malin où l'on marque ses points… à rebours de l'ordre où on les a joués.",
+    "regles": [
+      "But : marquer le plus de points avec ses régions et ses sanctuaires.",
+      "À chaque tour, on joue une carte Région devant soi, formant peu à peu une file de huit cartes.",
+      "On peut acquérir des sanctuaires selon les couleurs déjà en jeu.",
+      "Au décompte, on évalue les cartes de la dernière posée à la première : leurs conditions regardent ce qui a été joué avant.",
+      "Le joueur au meilleur total l'emporte."
+    ],
+    "image": "https://www.espritjeu.com/upload/image/faraway-p-image-105901-grande.jpg"
   },
   {
     "id": "file-filou",
@@ -2471,6 +2707,27 @@
     "editeur": "Gigamic"
   },
   {
+    "id": "harmonies",
+    "nom": "Harmonies",
+    "editeur": "Libellud",
+    "categorie": "Familial",
+    "joueursMin": 1,
+    "joueursMax": 4,
+    "dureeMin": 30,
+    "ageMin": 10,
+    "scoreMode": "compteur",
+    "scoreVictoire": "max",
+    "description": "Empilez des jetons colorés pour créer des paysages et accueillir la faune.",
+    "regles": [
+      "But : composer le paysage le plus harmonieux pour marquer le plus de points.",
+      "À son tour, on prend trois jetons couleur et on les empile sur son plateau pour former montagnes, arbres, eau…",
+      "On pose des cartes Animaux et on remplit leurs motifs de terrain pour les valider.",
+      "Chaque type de terrain marque selon ses propres règles (hauteur, groupes, bordures…).",
+      "Le joueur au plus haut total en fin de partie gagne."
+    ],
+    "image": "https://www.espritjeu.com/upload/image/harmonies-p-image-92029-grande.jpg"
+  },
+  {
     "id": "hilo",
     "nom": "Hilo",
     "categorie": "Cartes",
@@ -2618,6 +2875,27 @@
     "editeur": "Gigamic"
   },
   {
+    "id": "its-a-wonderful-world",
+    "nom": "It's a Wonderful World",
+    "editeur": "La Boîte de Jeu",
+    "categorie": "Cartes",
+    "joueursMin": 1,
+    "joueursMax": 5,
+    "dureeMin": 30,
+    "ageMin": 14,
+    "scoreMode": "compteur",
+    "scoreVictoire": "max",
+    "description": "Un jeu de draft et de moteur : bâtissez le meilleur empire en gérant vos chaînes de production.",
+    "regles": [
+      "But : construire l'empire produisant le plus de points de victoire.",
+      "À chaque tour, on drafte des cartes puis on choisit de les construire ou de les recycler en ressources.",
+      "Les cartes construites produisent des ressources à chaque phase de production, dans un ordre précis.",
+      "On enchaîne les productions pour alimenter de nouvelles constructions (effet moteur).",
+      "Après quatre tours, le joueur au plus grand nombre de points gagne."
+    ],
+    "image": "https://www.espritjeu.com/upload/image/it-s-a-wonderful-world-p-image-69808-grande.jpg"
+  },
+  {
     "id": "jokesdepapa",
     "nom": "Jokes de papa !",
     "categorie": "Ambiance",
@@ -2656,7 +2934,8 @@
       "Le premier joueur sans carte gagne."
     ],
     "scoreVictoire": "max",
-    "scoreMode": "objectif"
+    "scoreMode": "objectif",
+    "image": "https://www.espritjeu.com/upload/image/jungle-speed-eco-p-image-95768-grande.jpg"
   },
   {
     "id": "justone",
@@ -2741,7 +3020,8 @@
     ],
     "scoreVictoire": "max",
     "scoreMode": "compteur",
-    "seuilFin": 20
+    "seuilFin": 20,
+    "image": "https://www.espritjeu.com/upload/image/king-of-tokyo-p-image-58881-grande.jpg"
   },
   {
     "id": "kingdomcrossing",
@@ -2782,7 +3062,8 @@
       "Quand tous les dominos sont posés, le plus de points gagne (bonus si le royaume est parfaitement carré)."
     ],
     "scoreVictoire": "max",
-    "scoreMode": "compteur"
+    "scoreMode": "compteur",
+    "image": "https://www.espritjeu.com/upload/image/kingdomino-p-image-104239-grande.jpg"
   },
   {
     "id": "klask",
@@ -3369,7 +3650,8 @@
       "Quand un joueur n'a plus que 2 wagons ou moins, on joue un dernier tour, puis on compte les points."
     ],
     "scoreVictoire": "max",
-    "scoreMode": "compteur"
+    "scoreMode": "compteur",
+    "image": "https://www.espritjeu.com/upload/image/les-aventuriers-du-rail---usa-p-image-107216-grande.jpg"
   },
   {
     "id": "cinqrois",
@@ -3452,7 +3734,8 @@
       "La partie s'arrête quand un camp a éliminé l'autre."
     ],
     "scoreVictoire": "max",
-    "scoreMode": "objectif"
+    "scoreMode": "objectif",
+    "image": "https://www.espritjeu.com/upload/image/les-loups-garous-de-thiercelieux-p-image-78125-grande.jpg"
   },
   {
     "id": "lineit",
@@ -3554,7 +3837,8 @@
       "Le vainqueur de la manche gagne un jeton ; le premier au nombre requis gagne."
     ],
     "scoreVictoire": "max",
-    "scoreMode": "manches"
+    "scoreMode": "manches",
+    "image": "https://www.espritjeu.com/upload/image/love-letter-p-image-101858-grande.jpg"
   },
   {
     "id": "lumios",
@@ -4011,7 +4295,8 @@
       "Un joueur en faillite est éliminé ; le dernier en jeu l'emporte."
     ],
     "scoreVictoire": "max",
-    "scoreMode": "objectif"
+    "scoreMode": "objectif",
+    "image": "https://www.espritjeu.com/upload/image/monopoly-classique-p-image-102366-grande.jpg"
   },
   {
     "id": "mymurdermystery",
@@ -4098,7 +4383,8 @@
       "À la fin, un dernier vote commun désigne le coupable ; toute la table gagne ou perd ensemble."
     ],
     "scoreVictoire": "max",
-    "scoreMode": "cooperatif"
+    "scoreMode": "cooperatif",
+    "image": "https://www.espritjeu.com/upload/image/mysterium-p-image-105960-grande.jpg"
   },
   {
     "id": "medievallons",
@@ -4655,7 +4941,8 @@
       "En fin de partie, le score vaut les boutons possédés moins 2 points par case vide de la grille ; le plus haut gagne."
     ],
     "scoreVictoire": "max",
-    "scoreMode": "compteur"
+    "scoreMode": "compteur",
+    "image": "https://www.espritjeu.com/upload/image/patchwork-p-image-104800-grande.jpg"
   },
   {
     "id": "pickomino",
@@ -4909,6 +5196,27 @@
     ],
     "image": "https://www.gigamic.com/1808-home_default/privacy-no-limit.jpg",
     "editeur": "Gigamic"
+  },
+  {
+    "id": "puissance-4",
+    "nom": "Puissance 4",
+    "editeur": "Hasbro",
+    "categorie": "Abstrait",
+    "joueursMin": 2,
+    "joueursMax": 2,
+    "dureeMin": 10,
+    "ageMin": 6,
+    "scoreMode": "objectif",
+    "scoreVictoire": "max",
+    "description": "Le classique de l'alignement : glissez vos jetons et créez une ligne de quatre avant l'adversaire.",
+    "regles": [
+      "But : aligner quatre de ses jetons avant son adversaire.",
+      "À tour de rôle, chaque joueur lâche un jeton dans une colonne de la grille verticale.",
+      "Le jeton tombe sur la pile existante de la colonne choisie.",
+      "On cherche à réaliser un alignement de quatre (horizontal, vertical ou diagonal) tout en bloquant l'autre.",
+      "Le premier à aligner quatre jetons gagne."
+    ],
+    "image": "https://www.espritjeu.com/upload/image/puissance-4-p-image-112553-grande.jpg"
   },
   {
     "id": "pylos",
@@ -5291,6 +5599,27 @@
     "editeur": "Gigamic"
   },
   {
+    "id": "qwirkle",
+    "nom": "Qwirkle",
+    "editeur": "Iello",
+    "categorie": "Familial",
+    "joueursMin": 2,
+    "joueursMax": 4,
+    "dureeMin": 30,
+    "ageMin": 6,
+    "scoreMode": "compteur",
+    "scoreVictoire": "max",
+    "description": "Un jeu abstrait de tuiles : alignez couleurs et formes comme un croisement de dominos et de Scrabble.",
+    "regles": [
+      "But : marquer le plus de points en posant des tuiles en lignes.",
+      "On aligne des tuiles partageant soit la même couleur, soit la même forme (jamais de doublon dans une ligne).",
+      "Chaque tuile ajoutée à une ligne rapporte des points ; compléter une ligne de six crie « Qwirkle ! » et rapporte un bonus.",
+      "On complète sa main à six tuiles après chaque tour.",
+      "Quand la pioche est vide et qu'un joueur a tout posé, on additionne : le meilleur score gagne."
+    ],
+    "image": "https://www.espritjeu.com/upload/image/qwirkle-p-image-89696-grande.jpg"
+  },
+  {
     "id": "qwixx",
     "nom": "Qwixx",
     "description": "Un roll & write nerveux où chaque lancer profite à tout le monde.",
@@ -5525,6 +5854,48 @@
     "editeur": "Gigamic"
   },
   {
+    "id": "root",
+    "nom": "Root",
+    "editeur": "Matagot",
+    "categorie": "Stratégie",
+    "joueursMin": 2,
+    "joueursMax": 4,
+    "dureeMin": 60,
+    "ageMin": 10,
+    "scoreMode": "compteur",
+    "scoreVictoire": "max",
+    "description": "Une guerre asymétrique pour le contrôle de la forêt : chaque faction joue selon ses propres règles.",
+    "regles": [
+      "But : être le premier à atteindre 30 points de victoire.",
+      "Chaque joueur incarne une faction très différente (Marquise, Aire, Alliance, Vagabond) avec ses actions et son moteur de score.",
+      "On contrôle des clairières, on récolte, on recrute et on affronte les autres factions.",
+      "Les points s'obtiennent de façons variées selon la faction, ce qui crée des équilibres subtils.",
+      "Le premier à 30 points gagne."
+    ],
+    "image": "https://www.espritjeu.com/upload/image/root---extension-riviere-p-image-68635-grande.jpg"
+  },
+  {
+    "id": "rummikub",
+    "nom": "Rummikub",
+    "editeur": "Goliath",
+    "categorie": "Familial",
+    "joueursMin": 2,
+    "joueursMax": 4,
+    "dureeMin": 45,
+    "ageMin": 7,
+    "scoreMode": "objectif",
+    "scoreVictoire": "max",
+    "description": "Un grand classique de combinaisons : posez tous vos numéros en suites et en brelans.",
+    "regles": [
+      "But : être le premier à se débarrasser de toutes ses tuiles.",
+      "On forme des suites (même couleur, numéros consécutifs) ou des groupes (même numéro, couleurs différentes).",
+      "Une fois lancé, on peut réarranger librement les combinaisons déjà posées sur la table.",
+      "Si l'on ne peut pas jouer, on pioche une tuile.",
+      "Le premier à vider son chevalet remporte la manche."
+    ],
+    "image": "https://www.espritjeu.com/upload/image/rummikub-chiffres-p-image-49875-grande.jpg"
+  },
+  {
     "id": "revolte",
     "nom": "Révolte !",
     "categorie": "Cartes",
@@ -5652,6 +6023,27 @@
     ],
     "image": "https://www.espritjeu.com/upload/image/scrabble-classique---cooperatif-p-image-95563-grande.jpg",
     "editeur": "Mattel"
+  },
+  {
+    "id": "scythe",
+    "nom": "Scythe",
+    "editeur": "Matagot",
+    "categorie": "Stratégie",
+    "joueursMin": 1,
+    "joueursMax": 5,
+    "dureeMin": 90,
+    "ageMin": 14,
+    "scoreMode": "compteur",
+    "scoreVictoire": "max",
+    "description": "Dans une Europe de l'Est rétrofuturiste, développez votre faction, ses mechas et son économie.",
+    "regles": [
+      "But : accumuler le plus de pièces en fin de partie via étoiles, territoires et ressources.",
+      "À son tour, on choisit une section de son plateau pour combiner une action « haute » et une action « basse ».",
+      "On produit, se déplace, construit, enrôle et déploie des mechas sur la carte.",
+      "Dès qu'un joueur pose sa 6e étoile (objectifs accomplis), la partie s'arrête.",
+      "On convertit alors étoiles, territoires et ressources en pièces : le plus riche gagne."
+    ],
+    "image": "https://www.espritjeu.com/upload/image/scythe-vf-p-image-106352-grande.jpg"
   },
   {
     "id": "secretidentity",
@@ -6031,6 +6423,27 @@
     "editeur": "Schmidt Spiele"
   },
   {
+    "id": "sky-team",
+    "nom": "Sky Team",
+    "editeur": "Le Scorpion Masqué",
+    "categorie": "Coopératif",
+    "joueursMin": 2,
+    "joueursMax": 2,
+    "dureeMin": 15,
+    "ageMin": 12,
+    "scoreMode": "cooperatif",
+    "scoreVictoire": "max",
+    "description": "Un jeu coopératif pour deux : pilote et copilote posent un avion sans jamais parler.",
+    "regles": [
+      "Jeu strictement coopératif à deux : vous gagnez ou perdez ensemble.",
+      "Chacun incarne le pilote ou le copilote et lance ses dés en secret.",
+      "On place ses dés en silence sur le tableau de bord (moteurs, volets, train, radio…) sans se concerter.",
+      "Il faut gérer l'inclinaison, l'altitude et l'approche pour poser l'avion sans encombre.",
+      "Réussir l'atterrissage fait gagner l'équipe ; une erreur critique fait perdre."
+    ],
+    "image": "https://www.espritjeu.com/upload/image/sky-team-p-image-87860-grande.jpg"
+  },
+  {
     "id": "smallworld",
     "nom": "Small World",
     "description": "Des peuples fantastiques se disputent un monde bien trop petit pour eux tous.",
@@ -6048,7 +6461,8 @@
       "La partie dure un nombre fixe de tours ; le joueur le plus riche l'emporte."
     ],
     "scoreVictoire": "max",
-    "scoreMode": "compteur"
+    "scoreMode": "compteur",
+    "image": "https://www.espritjeu.com/upload/image/smallworld-p-image-63225-grande.jpg"
   },
   {
     "id": "snakesss",
@@ -6461,7 +6875,8 @@
       "Après trois manches, le plus de points l'emporte."
     ],
     "scoreVictoire": "max",
-    "scoreMode": "compteur"
+    "scoreMode": "compteur",
+    "image": "https://www.espritjeu.com/upload/image/sushi-go---bonus-sauce-soja-p-image-54806-grande.jpg"
   },
   {
     "id": "suspects",
@@ -6565,7 +6980,8 @@
       "Quand un joueur a validé le nombre d'objectifs requis, on termine le tour ; le plus de points gagne."
     ],
     "scoreVictoire": "max",
-    "scoreMode": "compteur"
+    "scoreMode": "compteur",
+    "image": "https://www.espritjeu.com/upload/image/takenoko-p-image-101222-grande.jpg"
   },
   {
     "id": "talaref",
@@ -6692,7 +7108,8 @@
       "La partie se termine quand les trois paramètres globaux sont au maximum ; on compte alors note de terraformation, récompenses, tuiles et cartes."
     ],
     "scoreVictoire": "max",
-    "scoreMode": "compteur"
+    "scoreMode": "compteur",
+    "image": "https://www.espritjeu.com/upload/image/terraforming-mars--fr--p-image-61518-grande.jpg"
   },
   {
     "id": "tetaki",
@@ -6928,6 +7345,27 @@
     "editeur": "Gigamic"
   },
   {
+    "id": "trivial-pursuit",
+    "nom": "Trivial Pursuit",
+    "editeur": "Hasbro",
+    "categorie": "Ambiance",
+    "joueursMin": 2,
+    "joueursMax": 6,
+    "dureeMin": 60,
+    "ageMin": 16,
+    "scoreMode": "objectif",
+    "scoreVictoire": "max",
+    "description": "Le grand quiz de culture générale : répondez juste pour remplir votre camembert.",
+    "regles": [
+      "But : être le premier à compléter son pion de six parts de couleur.",
+      "On se déplace sur le plateau et on répond à des questions selon la couleur de la case (histoire, sport, arts…).",
+      "Une bonne réponse sur une case « part » fait gagner le camembert correspondant.",
+      "On enchaîne les tours en tentant de couvrir toutes les catégories.",
+      "Le premier à réunir les six parts et à répondre à la question finale gagne."
+    ],
+    "image": "https://www.espritjeu.com/upload/image/trivial-pursuit-edition-classic-p-image-69401-grande.jpg"
+  },
+  {
     "id": "tulikko",
     "nom": "Tulikko",
     "categorie": "Familial",
@@ -6987,7 +7425,8 @@
       "Le gagnant d'une manche marque la valeur des cartes des autres ; on joue jusqu'à un total convenu (souvent 500)."
     ],
     "scoreVictoire": "max",
-    "scoreMode": "manches"
+    "scoreMode": "manches",
+    "image": "https://www.espritjeu.com/upload/image/uno-p-image-96901-grande.jpg"
   },
   {
     "id": "varuna",
@@ -7337,7 +7776,8 @@
       "Points en fin de partie : valeur des oiseaux, œufs, nourriture cachée, cartes bonus et objectifs."
     ],
     "scoreVictoire": "max",
-    "scoreMode": "compteur"
+    "scoreMode": "compteur",
+    "image": "https://www.espritjeu.com/upload/image/wingspan-p-image-67127-grande.jpg"
   },
   {
     "id": "winkybilly",
