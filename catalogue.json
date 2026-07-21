@@ -1063,7 +1063,8 @@
       "Construis des routes, des colonies et des villes, ou achète des cartes développement.",
       "Le premier à atteindre 10 points de victoire remporte la partie."
     ],
-    "editeur": "Kosmos"
+    "editeur": "Kosmos",
+    "reglesUrl": "https://www.catan.com/sites/default/files/2021-06/catan_base_rules_2020_200707.pdf"
   },
   {
     "id": "champdhonneur",
@@ -1280,7 +1281,8 @@
       "La première équipe à trouver tous ses agents gagne."
     ],
     "image": "https://www.espritjeu.com/upload/image/codenames-p-image-105501-grande.jpg",
-    "editeur": "Czech Games Edition"
+    "editeur": "Czech Games Edition",
+    "reglesUrl": "https://czechgames.com/files/rules/codenames-rules-en.pdf"
   },
   {
     "id": "codo-berlin-63",
@@ -1774,7 +1776,8 @@
       "Le premier à 30 points gagne."
     ],
     "image": "https://www.espritjeu.com/upload/image/dixit--nouvelle-edition-2021--p-image-75827-grande.jpg",
-    "editeur": "Libellud"
+    "editeur": "Libellud",
+    "reglesUrl": "https://www.libellud.com/en/resources/dixit/"
   },
   {
     "id": "dobble",
@@ -3130,7 +3133,8 @@
     "scoreVictoire": "max",
     "scoreMode": "compteur",
     "seuilFin": 20,
-    "image": "https://www.espritjeu.com/upload/image/king-of-tokyo-p-image-58881-grande.jpg"
+    "image": "https://www.espritjeu.com/upload/image/king-of-tokyo-p-image-58881-grande.jpg",
+    "reglesUrl": "https://iellogames.com/games/king-of-tokyo/"
   },
   {
     "id": "kingdomcrossing",
@@ -3781,7 +3785,8 @@
     ],
     "scoreVictoire": "max",
     "scoreMode": "compteur",
-    "image": "https://www.espritjeu.com/upload/image/les-aventuriers-du-rail---usa-p-image-107216-grande.jpg"
+    "image": "https://www.espritjeu.com/upload/image/les-aventuriers-du-rail---usa-p-image-107216-grande.jpg",
+    "reglesUrl": "https://www.daysofwonder.com/game/ticket-to-ride/"
   },
   {
     "id": "cinqrois",
@@ -5167,7 +5172,8 @@
       }
     ],
     "image": "https://www.espritjeu.com/upload/image/pandemic--pandemie--p-image-66186-grande.jpg",
-    "editeur": "Z-Man Games"
+    "editeur": "Z-Man Games",
+    "reglesUrl": "https://www.zmangames.com/en/products/pandemic/"
   },
   {
     "id": "paniclab",
@@ -6180,7 +6186,8 @@
       "Les points s'obtiennent de façons variées selon la faction, ce qui crée des équilibres subtils.",
       "Le premier à 30 points gagne."
     ],
-    "image": "https://www.espritjeu.com/upload/image/root---extension-riviere-p-image-68635-grande.jpg"
+    "image": "https://www.espritjeu.com/upload/image/root---extension-riviere-p-image-68635-grande.jpg",
+    "reglesUrl": "https://rules.ledergames.com/?product=root"
   },
   {
     "id": "rummikub",
@@ -6351,7 +6358,8 @@
       "Dès qu'un joueur pose sa 6e étoile (objectifs accomplis), la partie s'arrête.",
       "On convertit alors étoiles, territoires et ressources en pièces : le plus riche gagne."
     ],
-    "image": "https://www.espritjeu.com/upload/image/scythe-vf-p-image-106352-grande.jpg"
+    "image": "https://www.espritjeu.com/upload/image/scythe-vf-p-image-106352-grande.jpg",
+    "reglesUrl": "https://stonemaiergames.com/games/scythe/rules/"
   },
   {
     "id": "secretidentity",
@@ -6792,7 +6800,8 @@
     ],
     "scoreVictoire": "max",
     "scoreMode": "compteur",
-    "image": "https://www.espritjeu.com/upload/image/smallworld-p-image-63225-grande.jpg"
+    "image": "https://www.espritjeu.com/upload/image/smallworld-p-image-63225-grande.jpg",
+    "reglesUrl": "https://www.daysofwonder.com/game/small-world/"
   },
   {
     "id": "snakesss",
@@ -7082,7 +7091,8 @@
       "En cas d'égalité, celui qui a acheté le moins de cartes l'emporte."
     ],
     "image": "https://www.espritjeu.com/upload/image/splendor-p-image-96446-grande.jpg",
-    "editeur": "Space Cowboys"
+    "editeur": "Space Cowboys",
+    "reglesUrl": "https://www.spacecowboys-games.com/game/splendor/"
   },
   {
     "id": "squadro",
@@ -8310,7 +8320,8 @@
     ],
     "scoreVictoire": "max",
     "scoreMode": "compteur",
-    "image": "https://www.espritjeu.com/upload/image/wingspan-p-image-67127-grande.jpg"
+    "image": "https://www.espritjeu.com/upload/image/wingspan-p-image-67127-grande.jpg",
+    "reglesUrl": "https://stonemaiergames.com/games/wingspan/rules/"
   },
   {
     "id": "winkybilly",
