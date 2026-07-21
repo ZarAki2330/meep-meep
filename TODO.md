@@ -10,7 +10,7 @@ Liste des fonctionnalités à faire et des améliorations.
 
 _Estimations approximatives, en heures de travail équivalent développeur (pas le temps réel de nos échanges). À réévaluer à chaque mise à jour de la feuille de route._
 
-- **Réalisé** (87 tâches) : **~218 h** — l'essentiel : le catalogue de 367 jeux avec règles en français (~104 h à lui seul), les 5 modes de score, extensions/éditions, historique et statistiques, thème + accessibilité, tests.
+- **Réalisé** (87 tâches) : **~218 h** — l'essentiel : le catalogue de 373 jeux avec règles en français (~105 h à lui seul), les 5 modes de score, extensions/éditions, historique et statistiques, thème + accessibilité, tests.
 - **Restant** (12 tâches) : **~36 h** (hors tâche récurrente « ajouter des jeux »).
 - **Total projet** : **~250 h**.
 

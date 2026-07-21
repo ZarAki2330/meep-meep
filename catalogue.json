@@ -1304,6 +1304,28 @@
     "image": "https://www.espritjeu.com/upload/image/concept-p-image-51037-grande.jpg"
   },
   {
+    "id": "courtisans",
+    "nom": "Courtisans",
+    "editeur": "Catch Up Games",
+    "categorie": "Cartes",
+    "joueursMin": 2,
+    "joueursMax": 5,
+    "dureeMin": 20,
+    "ageMin": 8,
+    "scoreMode": "compteur",
+    "scoreVictoire": "max",
+    "image": "https://www.ludum.fr/47248-product_default/courtisans.jpg",
+    "description": "Un jeu de cartes d'intrigue à la cour : placez les bons courtisans en faveur… et vos rivaux en disgrâce.",
+    "regles": [
+      "But : marquer le plus de points en manipulant la faveur des clans à la cour de la Reine.",
+      "La cour se compose de trois rangées : en faveur (en haut), neutre (au milieu) et en disgrâce (en bas).",
+      "À son tour, on joue deux cartes : une dans la cour (devant soi ou un adversaire) et une dans sa réserve personnelle.",
+      "Certaines cartes déclenchent des pouvoirs (assassin, garde, espion…) qui déplacent ou éliminent des courtisans.",
+      "Au décompte, chaque clan compte : majorité en faveur = points positifs, majorité en disgrâce = points négatifs, plus les bonus de sa réserve.",
+      "Le joueur au meilleur total l'emporte."
+    ]
+  },
+  {
     "id": "coyote",
     "nom": "Coyote",
     "description": "Un jeu de bluff et de déduction hilarant : vous voyez les cartes de tous… sauf la vôtre.",
@@ -3715,6 +3737,121 @@
     ],
     "image": "https://www.gigamic.com/3582-home_default/les-jardins-suspendus.jpg",
     "editeur": "Gigamic"
+  },
+  {
+    "editeur": "Zygomatic",
+    "jeuParent": "loupsgarous",
+    "scoreMode": "objectif",
+    "scoreVictoire": "max",
+    "ageMin": 10,
+    "id": "loupsgarousbestof",
+    "nom": "Les Loups-Garous : Best of",
+    "type": "edition",
+    "categorie": "Extension",
+    "joueursMin": 8,
+    "joueursMax": 28,
+    "dureeMin": 30,
+    "image": "https://www.espritjeu.com/upload/image/loup-garou---le-best-of-p-image-59697-grande.jpg",
+    "description": "Édition condensée et autonome : les personnages incontournables dans une petite boîte.",
+    "regles": [
+      "Version autonome, ne nécessite pas le jeu de base.",
+      "Réunit une sélection des personnages les plus emblématiques du jeu.",
+      "Format compact idéal à emporter, avec le pion Capitaine.",
+      "Mêmes règles : débats de jour, méfaits de nuit, jusqu'à l'élimination d'un camp.",
+      "Parfaite pour découvrir ou rejouer rapidement."
+    ]
+  },
+  {
+    "editeur": "Zygomatic",
+    "jeuParent": "loupsgarous",
+    "scoreMode": "objectif",
+    "scoreVictoire": "max",
+    "ageMin": 10,
+    "id": "loupsgarouspacte",
+    "nom": "Les Loups-Garous : Le Pacte",
+    "type": "edition",
+    "categorie": "Extension",
+    "joueursMin": 9,
+    "joueursMax": 47,
+    "dureeMin": 40,
+    "image": "https://www.espritjeu.com/upload/image/le-pacte-p-image-53607-grande.jpg",
+    "description": "Édition compilation autonome : le jeu de base et ses personnages réunis, jusqu'à 47 joueurs.",
+    "regles": [
+      "Version complète autonome regroupant le jeu de base et l'essentiel des personnages des extensions.",
+      "Toutes les cartes ont la même épaisseur et se mélangent librement.",
+      "Permet d'animer de très grandes tablées (jusqu'à 47 joueurs).",
+      "Mêmes règles : les villageois démasquent les loups, les loups dévorent le village.",
+      "Idéale pour un meneur qui veut tout réunir dans une seule boîte."
+    ]
+  },
+  {
+    "editeur": "Zygomatic",
+    "jeuParent": "loupsgarous",
+    "scoreMode": "objectif",
+    "scoreVictoire": "max",
+    "ageMin": 10,
+    "id": "loupsgarousvillage",
+    "nom": "Les Loups-Garous : Le Village",
+    "type": "extension",
+    "categorie": "Extension",
+    "joueursMin": 8,
+    "joueursMax": 18,
+    "dureeMin": 30,
+    "image": "https://www.espritjeu.com/upload/image/le-village--les-loups-garous-de-thiercelieux--p-image-78119-grande.jpg",
+    "description": "Extension : de nouveaux personnages et des bâtiments qui donnent vie au village.",
+    "regles": [
+      "Nécessite le jeu de base (contient aussi des rôles jouables à part).",
+      "Ajoute de nouveaux personnages et des éléments de « village » (bâtiments) offrant des actions supplémentaires.",
+      "Compatible avec l'extension Nouvelle Lune pour combiner les ajouts.",
+      "Enrichit la mise en scène et les possibilités du meneur.",
+      "Le but des villageois et des loups reste identique."
+    ]
+  },
+  {
+    "editeur": "Zygomatic",
+    "jeuParent": "loupsgarous",
+    "scoreMode": "objectif",
+    "scoreVictoire": "max",
+    "ageMin": 10,
+    "id": "loupsgarousnouvellelune",
+    "nom": "Les Loups-Garous : Nouvelle Lune",
+    "type": "extension",
+    "categorie": "Extension",
+    "joueursMin": 8,
+    "joueursMax": 18,
+    "dureeMin": 30,
+    "image": "https://www.espritjeu.com/upload/image/nouvelle-lune--les-loups-garous-de-thiercelieux--p-image-78123-grande.jpg",
+    "description": "Extension : de nouveaux personnages et des cartes événement qui bouleversent le déroulement des nuits.",
+    "regles": [
+      "Nécessite le jeu de base Les Loups-Garous de Thiercelieux.",
+      "Ajoute de nouveaux rôles spéciaux aux pouvoirs inédits.",
+      "Introduit des cartes Événement piochées en cours de partie, qui modifient les règles d'une nuit ou d'un jour.",
+      "Propose aussi des variantes de règles pour renouveler les parties.",
+      "S'intègre au village existant pour plus d'imprévu."
+    ]
+  },
+  {
+    "editeur": "Zygomatic",
+    "jeuParent": "loupsgarous",
+    "scoreMode": "objectif",
+    "scoreVictoire": "max",
+    "ageMin": 10,
+    "id": "loupsgarouspersonnages",
+    "nom": "Les Loups-Garous : Personnages",
+    "type": "extension",
+    "categorie": "Extension",
+    "joueursMin": 8,
+    "joueursMax": 18,
+    "dureeMin": 30,
+    "image": "https://www.espritjeu.com/upload/image/les-loups-garous-de-thiercelieux---personnages-p-image-78121-grande.jpg",
+    "description": "Extension : une pléiade de nouveaux personnages pour varier les rôles et les stratégies.",
+    "regles": [
+      "Nécessite le jeu de base.",
+      "Ajoute de nombreuses nouvelles cartes Personnage aux pouvoirs originaux.",
+      "Le meneur peut composer des villages sur mesure en mêlant ces rôles au jeu de base.",
+      "Idéal pour surprendre les habitués et animer de grandes tablées.",
+      "Les conditions de victoire des deux camps restent inchangées."
+    ]
   },
   {
     "id": "loupsgarous",
