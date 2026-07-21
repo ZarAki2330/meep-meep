@@ -28,6 +28,7 @@ export type PartieEnregistree = {
   note: string | null; // commentaire libre
   evaluation: number | null; // 1 à 5 étoiles
   resultat: Resultat | null; // renseigné uniquement en coopératif
+  extensions: string | null; // JSON des noms d'extensions jouées
 };
 
 /**
@@ -59,10 +60,11 @@ export async function enregistrerPartie(p: {
   duree?: number;
   resultat?: Resultat;
   equipes?: boolean;
+  extensions?: string[];
 }): Promise<number> {
   const db = await getDb();
   const res = await db.runAsync(
-    "INSERT INTO parties (jeu_id, jeu_nom, date, nb_joueurs, gagnant, score_gagnant, details, duree, resultat) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+    "INSERT INTO parties (jeu_id, jeu_nom, date, nb_joueurs, gagnant, score_gagnant, details, duree, resultat, extensions) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
     [
       p.jeuId,
       p.jeuNom,
@@ -73,6 +75,7 @@ export async function enregistrerPartie(p: {
       JSON.stringify(p.joueurs),
       p.duree && p.duree > 0 ? Math.round(p.duree) : null,
       p.resultat ?? null,
+      p.extensions && p.extensions.length > 0 ? JSON.stringify(p.extensions) : null,
     ],
   );
   await memoriserJoueurs(db, p.joueurs, p.equipes === true);

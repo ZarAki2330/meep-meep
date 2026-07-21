@@ -68,6 +68,7 @@ export default function PartieObjectif() {
   } = usePartie({
     jeuId: jeuId ?? "",
     jeu,
+    extensions: extensionsChoisies,
     extraInitial: { gagnantId: null as string | null },
     vierge: (js, e) =>
       e.gagnantId === null &&

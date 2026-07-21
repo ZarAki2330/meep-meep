@@ -495,6 +495,17 @@ function DetailPartie({
   const [evaluation, setEvaluation] = useState(partie.evaluation ?? 0);
   const [note, setNote] = useState(partie.note ?? "");
 
+  // Extensions jouées, mémorisées avec la partie.
+  const extensions = (() => {
+    if (!partie.extensions) return [] as string[];
+    try {
+      const v = JSON.parse(partie.extensions);
+      return Array.isArray(v) ? (v as string[]) : [];
+    } catch {
+      return [] as string[];
+    }
+  })();
+
   function definirScore(index: number, texte: string) {
     const negatif = texte.trimStart().startsWith("-");
     const propre = (negatif ? "-" : "") + texte.replace(/[^0-9]/g, "");
@@ -549,6 +560,9 @@ function DetailPartie({
         {formatDateLongue(partie.date)}
         {partie.duree ? ` · ⏱ ${formatDuree(partie.duree)}` : ""}
       </Text>
+      {extensions.length > 0 && (
+        <Text style={styles.detailExtensions}>Extensions : {extensions.join(", ")}</Text>
+      )}
       {!edition && egalite && (
         <Text style={styles.detailEgalite}>🤝 Partie terminée sur une égalité</Text>
       )}
@@ -958,6 +972,7 @@ function makeStyles(c: AppColors) {
     },
     detailTitre: { fontSize: 20, fontWeight: "700", color: c.textPrimary },
     detailDate: { fontSize: 13, color: c.textMuted, marginTop: 2, textTransform: "capitalize" },
+    detailExtensions: { fontSize: 13, color: c.textSecondary, marginTop: 6, lineHeight: 18 },
     detailSens: { fontSize: 12, color: c.accentText, fontWeight: "600", marginTop: 8 },
     detailEgalite: { fontSize: 13, color: c.textSecondary, fontWeight: "600", marginTop: 8 },
     detailLigne: {

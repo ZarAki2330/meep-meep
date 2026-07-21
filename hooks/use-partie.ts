@@ -51,6 +51,8 @@ function joueursParDefaut(prefixe: string): JoueurPartie[] {
 type Options<E extends object> = {
   jeuId: string;
   jeu?: Jeu;
+  /** Extensions cochées avant la partie, mémorisées avec elle dans l'historique. */
+  extensions?: string[];
   /** L'état propre au mode : grille de scores, nombre de manches, vainqueur désigné… */
   extraInitial: E;
   /** Vrai quand rien n'a été saisi : inutile de retenir une partie à reprendre. */
@@ -65,6 +67,7 @@ type Options<E extends object> = {
 export function usePartie<E extends object>({
   jeuId,
   jeu,
+  extensions,
   extraInitial,
   vierge,
   nettoyer,
@@ -262,6 +265,7 @@ export function usePartie<E extends object>({
           resultat: p.resultat,
           duree,
           equipes: modeEquipes,
+          extensions,
         });
         partieIdRef.current = id;
         setPartieId(id);

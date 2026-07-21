@@ -44,7 +44,8 @@ const LARGEUR_LABEL = 130;
 const LARGEUR_COL = 68;
 
 export default function FeuilleGrille() {
-  const { jeuId } = useLocalSearchParams<{ jeuId: string }>();
+  const { jeuId, extensions } = useLocalSearchParams<{ jeuId: string; extensions?: string }>();
+  const extensionsChoisies = extensions ? extensions.split("|").filter(Boolean) : [];
   const { colors } = useTheme();
   const { jeux } = useJeux();
   const insets = useSafeAreaInsets();
@@ -86,6 +87,7 @@ export default function FeuilleGrille() {
   } = usePartie({
     jeuId: jeuId ?? "",
     jeu,
+    extensions: extensionsChoisies,
     extraInitial: { scores: {} as Scores },
     // Une case supprimée du jeu depuis la dernière partie ne doit ni compter,
     // ni survivre en mémoire : ses points seraient invisibles et perdus.

@@ -121,6 +121,17 @@ export default function FicheJeu() {
   // Extensions et éditions rattachées à ce jeu, présentes dans le catalogue.
   const declinaisons = enfantsDe(jeu.id, jeux);
 
+  // Extensions qu'on peut cocher avant de lancer une partie : celles décrites
+  // dans le jeu lui-même (rôles filtrés, façon Villainous) plus les extensions
+  // installées comme jeux à part et rattachées à ce jeu. Les éditions n'en sont
+  // pas : ce sont des variantes du même jeu, pas des ajouts à une partie.
+  const extensionsJouables = Array.from(
+    new Set([
+      ...(jeu.extensions ?? []),
+      ...declinaisons.filter((d) => d.type === "extension").map((d) => d.nom),
+    ]),
+  );
+
   return (
     <View style={{ flex: 1, backgroundColor: colors.page }}>
       <Entete
@@ -209,11 +220,11 @@ export default function FicheJeu() {
         </View>
       )}
 
-      {jeu.extensions && jeu.extensions.length > 0 && (
+      {extensionsJouables.length > 0 && (
         <View style={styles.extensionsBloc}>
           <Text style={styles.sectionTitre}>Extensions</Text>
           <Text style={styles.extensionsSous}>Coche les extensions que tu ajoutes à ta partie.</Text>
-          {jeu.extensions.map((ext) => {
+          {extensionsJouables.map((ext) => {
             const active = extensionsActives.includes(ext);
             return (
               <TouchableOpacity

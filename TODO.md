@@ -2,7 +2,7 @@
 
 Liste des fonctionnalités à faire et des améliorations.
 
-**Progression : 76 / 85 — 89 %**
+**Progression : 79 / 88 — 90 %**
 
 `██████████████████░░`
 
@@ -34,6 +34,9 @@ _(rien en attente)_
 
 ## Terminé
 
+- [x] Corrigé — bandeau de navigation (Android) au fond incohérent : selon l'écran, la barre transparente laissait voir le fond **par défaut de React Navigation** (blanc en clair, noir en sombre) au lieu du thème. On passe désormais à `ThemeProvider` un thème dont `background`/`card` valent `colors.page` (`app/_layout.tsx`) : la barre reste transparente et laisse toujours voir le fond au thème, et les icônes s'adaptent (claires en sombre, sombres en clair).
+- [x] Extensions dans l'historique des parties : les extensions cochées au lancement sont mémorisées avec la partie (colonne `extensions` de la table `parties` + migration) et affichées dans le détail d'une partie (`app/(tabs)/explore.tsx`). Transmises depuis les cinq modes de score (compteur, objectif, coopératif, manches, feuille de score) via `usePartie`.
+- [x] Cocher les extensions avant de lancer une partie : sur la fiche du jeu principal, la section « Extensions » à cocher liste désormais, en plus des extensions internes (modèle Villainous), les extensions installées comme jeux à part et rattachées au jeu (`extensionsJouables` dans `app/jeu/[id].tsx`). Les éditions en sont exclues (ce sont des variantes, pas des ajouts). Le choix est transmis à la partie : pour un jeu qui modélise ses personnages (Villainous) il filtre les rôles, sinon il enregistre simplement les extensions jouées (bandeau de la partie).
 - [x] Suppression d'un jeu : proposer de supprimer aussi les extensions/éditions rattachées. Si le jeu de base a des déclinaisons installées, le dialogue propose « Tout supprimer » ou « Le jeu seul » (`app/jeu/[id].tsx`). Fermer un dialogue sans choisir (fond/retour) n'ajoute ni ne supprime plus rien : nouveau `onFermer` du `DialogueConfirmation`, distinct des boutons, appliqué aussi au popup d'ajout d'extension.
 - [x] Proposer le jeu de base à l'ajout d'une extension : dans « Ajouter un jeu tout prêt », ajouter une extension/édition dont le jeu de base n'est pas encore dans la ludothèque ouvre un popup qui propose « Ajouter les deux » ou « Seulement l'extension » (certaines extensions se jouent seules, ex. Villainous — donc proposition, pas obligation). Nouvelle variante « accent » du `DialogueConfirmation`. Rappel : la fiche du jeu de base liste déjà ses extensions/éditions installées (section « Extensions & éditions »).
 - [x] Corrigé — des jeux manquaient dans « Ajouter un jeu tout prêt » : le regroupement masquait 73 extensions/éditions (sur 308) hors recherche, alors que cet écran n'a pas de fiche pour les atteindre — elles n'étaient donc ajoutables que par la recherche. `app/bibliotheque.tsx` affiche désormais **tous** les jeux, avec un badge « Extension »/« Édition » pour les distinguer. Le catalogue distant, lui, se chargeait bien. (Le regroupement reste en place sur le catalogue principal, où la fiche du jeu donne accès aux déclinaisons.)

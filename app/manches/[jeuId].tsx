@@ -40,7 +40,8 @@ const LARGEUR_COL = 78;
 const MANCHES_DEPART = 3;
 
 export default function PartieManches() {
-  const { jeuId } = useLocalSearchParams<{ jeuId: string }>();
+  const { jeuId, extensions } = useLocalSearchParams<{ jeuId: string; extensions?: string }>();
+  const extensionsChoisies = extensions ? extensions.split("|").filter(Boolean) : [];
   const { colors } = useTheme();
   const { jeux } = useJeux();
   const insets = useSafeAreaInsets();
@@ -82,6 +83,7 @@ export default function PartieManches() {
   } = usePartie({
     jeuId: jeuId ?? "",
     jeu,
+    extensions: extensionsChoisies,
     extraInitial: { scores: {} as Scores, nbManches: MANCHES_DEPART },
     vierge: (js, e) => {
       const aucunScore = Object.values(e.scores).every((c) =>

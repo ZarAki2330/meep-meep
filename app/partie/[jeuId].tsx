@@ -70,6 +70,7 @@ export default function Partie() {
   } = usePartie({
     jeuId: jeuId ?? "",
     jeu,
+    extensions: extensionsChoisies,
     extraInitial: {},
     vierge: (js) =>
       js.length === 2 &&

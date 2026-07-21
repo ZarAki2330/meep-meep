@@ -61,6 +61,7 @@ export default function PartieCooperative() {
   } = usePartie({
     jeuId: jeuId ?? "",
     jeu,
+    extensions: extensionsChoisies,
     extraInitial: {},
     vierge: (js) => js.length === 2 && js.every((j, i) => !j.role && j.nom === `${prefixe} ${i + 1}`),
   });
