@@ -2,7 +2,7 @@
 
 Liste des fonctionnalités à faire et des améliorations.
 
-**Progression : 79 / 88 — 90 %**
+**Progression : 80 / 89 — 90 %**
 
 `██████████████████░░`
 
@@ -34,6 +34,7 @@ _(rien en attente)_
 
 ## Terminé
 
+- [x] Plus aucun jeu pré-installé : `IDS_AMORCAGE` (data/bibliotheque.ts) est vidé — au premier lancement, le catalogue démarre vierge, l'utilisateur ajoute ce qu'il veut depuis « Ajouter un jeu tout prêt ». ⚠️ N'affecte que les nouvelles installations : un appareil qui avait déjà les 5 jeux amorcés (Pandémie, Catan, 6 qui prend, Villainous, Yams) les garde tant qu'on ne les supprime pas à la main (ou qu'on n'efface pas les données de l'app).
 - [x] Corrigé — bandeau de navigation (Android) au fond incohérent : selon l'écran, la barre transparente laissait voir le fond **par défaut de React Navigation** (blanc en clair, noir en sombre) au lieu du thème. On passe désormais à `ThemeProvider` un thème dont `background`/`card` valent `colors.page` (`app/_layout.tsx`) : la barre reste transparente et laisse toujours voir le fond au thème, et les icônes s'adaptent (claires en sombre, sombres en clair).
 - [x] Extensions dans l'historique des parties : les extensions cochées au lancement sont mémorisées avec la partie (colonne `extensions` de la table `parties` + migration) et affichées dans le détail d'une partie (`app/(tabs)/explore.tsx`). Transmises depuis les cinq modes de score (compteur, objectif, coopératif, manches, feuille de score) via `usePartie`.
 - [x] Cocher les extensions avant de lancer une partie : sur la fiche du jeu principal, la section « Extensions » à cocher liste désormais, en plus des extensions internes (modèle Villainous), les extensions installées comme jeux à part et rattachées au jeu (`extensionsJouables` dans `app/jeu/[id].tsx`). Les éditions en sont exclues (ce sont des variantes, pas des ajouts). Le choix est transmis à la partie : pour un jeu qui modélise ses personnages (Villainous) il filtre les rôles, sinon il enregistre simplement les extensions jouées (bandeau de la partie).

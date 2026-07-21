@@ -594,7 +594,9 @@ export const BIBLIOTHEQUE: Jeu[] = [
  * On les insère en base à l'amorçage pour que le catalogue ne soit pas vide,
  * et pour que les favoris et l'historique des anciennes versions restent valables.
  */
-export const IDS_AMORCAGE = ["pandemie", "catan", "6quiprend", "villainous", "yams"];
+// Volontairement vide : aucun jeu n'est pré-installé. L'utilisateur part d'un
+// catalogue vierge et ajoute ce qu'il veut depuis « Ajouter un jeu tout prêt ».
+export const IDS_AMORCAGE: string[] = [];
 
 /** Un jeu de la bibliothèque, ou undefined. */
 export function jeuBibliotheque(id: string): Jeu | undefined {
