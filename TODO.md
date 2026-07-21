@@ -2,13 +2,38 @@
 
 Liste des fonctionnalités à faire et des améliorations.
 
-**Progression : 84 / 98 — 86 %**
+**Progression : 86 / 98 — 88 %**
 
-`█████████████████░░░`
+`██████████████████░░`
+
+## Estimation du temps de travail
+
+_Estimations approximatives, en heures de travail équivalent développeur (pas le temps réel de nos échanges). À réévaluer à chaque mise à jour de la feuille de route._
+
+- **Réalisé** (86 tâches) : **~203 h** — l'essentiel : le catalogue de 308 jeux avec règles en français (~90 h à lui seul), les 5 modes de score, extensions/éditions, historique et statistiques, thème + accessibilité, tests.
+- **Restant** (12 tâches) : **~35 h** (hors tâche récurrente « ajouter des jeux »).
+- **Total projet** : **~238 h**.
+
+Détail des tâches restantes :
+
+| Tâche | Est. |
+|---|---|
+| Protéger la propriété | ~2 h |
+| Monétisation : modèles | ~2 h |
+| Monétisation : statut d'entreprise | ~2 h |
+| Publier sur le Play Store | ~4 h |
+| Publier sur l'App Store | ~5 h |
+| Revoir l'optimisation de la bibliothèque | ~2 h |
+| Tester extensions et éditions | ~3 h |
+| Petite animation de chargement | ~2 h |
+| Ajouter de nouveaux jeux (récurrent) | variable |
+| Règles officielles en PDF (étude) | ~3 h |
+| Améliorer les interfaces | ~4 h |
+| Revoir le design et le logo | ~6 h |
 
 ## Bugs à corriger
 
-- [ ] **Barre de navigation (Android) transparente seulement après un aller-retour dans l'app** — au lancement, la barre du bas n'est pas transparente ; elle le devient quand on quitte l'app puis qu'on y revient. Le style est donc appliqué au retour au premier plan mais pas (ou trop tôt) au démarrage. Piste : ré-appliquer la config barre système (`SystemUI.setBackgroundColorAsync` + `NavigationBar.setButtonStyleAsync`) sur l'événement `AppState` « active » et/ou après le premier rendu, dans `app/_layout.tsx`.
+_Aucun bug en attente. 🎉_
 
 ## Priorité haute
 
@@ -28,7 +53,6 @@ Liste des fonctionnalités à faire et des améliorations.
 - [ ] **Ajouter de nouveaux jeux au catalogue** _(tâche récurrente)_ — enrichir régulièrement `catalogue.json` : nouvelles sorties, gammes complétées, et finalisation des fiches provisoires (voir `claude/gigamic-fiches-provisoires.md`).
 - [ ] **Petite animation de chargement** — afficher un indicateur discret (spinner/animation) pendant qu'une page charge ses données, notamment « Ajouter un jeu tout prêt » (le temps que le catalogue distant arrive) et partout où l'attente est perceptible.
 - [ ] **Afficher les règles officielles en PDF dans l'app** — se renseigner sur la faisabilité d'intégrer et d'afficher un PDF de règles directement dans la fiche du jeu (visionneuse embarquée, stockage, droits).
-- [ ] **Uniformiser l'affichage des images** — montrer toutes les images « dézoomées », en entier (`contentFit: "contain"` dans `components/visuel-jeu.tsx`), pour voir l'ensemble de la boîte du jeu comme sur les visuels Gigamic, au lieu de les rogner (`cover`). À coordonner avec le fond blanc automatique (les bandes autour d'une image « contain » doivent être blanches, pas la tuile colorée).
 - [ ] **Améliorer les interfaces de l'app** — soigner les écrans, par ex. les personnages dans les jeux : une photo ou un logo par personnage.
 - [ ] **Revoir le design de l'application et le logo** — rafraîchir l'identité visuelle : maquette globale (couleurs, typographie, écrans clés) et refonte du logo Meep Meep.
 
@@ -38,7 +62,9 @@ _(rien en attente)_
 
 ## Terminé
 
-- [x] Corrigé — fond blanc automatique lié à l'affichage « en entier » : dans `components/visuel-jeu.tsx`, le fond blanc n'était piloté que par l'extension `.png`. Il est désormais lié à la décision « afficher en entier » (contain), et la détection couvre tous les formats à transparence (png, webp, svg, gif), y compris avec query string ou fragment. Une image détourée ou avec des bandes est donc posée sur du blanc, jamais sur la tuile colorée. (Les JPEG restent en « cover » : ils remplissent la tuile, sans transparence — voir la tâche « uniformiser l'affichage des images » pour tout passer en entier.)
+- [x] Uniformiser l'affichage des images : toutes les images sont désormais affichées en entier (`contentFit: "contain"` dans `components/visuel-jeu.tsx`), dézoomées, pour voir l'ensemble de la boîte comme les packshots Gigamic, au lieu d'être rognées. Le fond blanc (posé pour toute image) fait office de bandes autour du visuel — cohérent partout (vignettes du catalogue, bibliothèque, fiche).
+- [x] Corrigé — barre de navigation (Android) transparente seulement après un aller-retour : le style n'était appliqué qu'une fois au montage, trop tôt au cold launch pour « prendre ». La config (`SystemUI.setBackgroundColorAsync` + `NavigationBar.setButtonStyleAsync`) est désormais reposée dans `app/_layout.tsx` au montage, une fois ~300 ms après (fenêtre native prête), et à chaque retour au premier plan (`AppState` « active »). La barre est donc transparente et au thème dès le lancement.
+- [x] Corrigé — fond vert/coloré derrière certaines images : dans `components/visuel-jeu.tsx`, le fond est désormais **blanc dès qu'une image est affichée**, quelle que soit l'extension. Pour un JPEG opaque il est invisible (l'image couvre toute la tuile) ; pour une image détourée (certains packshots Gigamic sont transparents mais servis en `.jpg`, ex. « 6 qui prend : Anniversaire », « 6 qui surprend ») on voit du blanc au lieu de la tuile colorée de la catégorie. Le choix « contain vs cover » reste piloté par le format (voir la tâche « uniformiser l'affichage des images » pour tout passer en entier).
 - [x] Vignettes allégées : les 7 images Gigamic encore en grande taille (`large_default`, ~800 px) sont passées en petite (`home_default`, ~250 px). Tout le catalogue Gigamic (291 jeux) est désormais en vignette légère et cohérente — moins de bande passante au premier affichage. Les 17 images non-Gigamic (externes : Esprit Jeu, Philibert…) sont laissées telles quelles pour ne pas risquer de lien cassé. (Rappel : la `FlatList` virtualise déjà l'affichage et `expo-image` ne charge que les vignettes visibles — pas de pagination manuelle nécessaire.)
 - [x] Corrigé — flash des anciens jeux à l'ouverture de « Ajouter un jeu tout prêt » : le hook `useBibliotheque` démarrait sur la bibliothèque livrée (18 vieux jeux, ex. « 6 qui prend » avec son ancienne image) avant l'arrivée du catalogue distant. On garde désormais le dernier catalogue connu en mémoire de session, amorcé dès le chargement du module (`hooks/use-bibliotheque.ts`) : plus de flash de données périmées. La bibliothèque livrée ne sert plus que de repli au tout premier lancement sans cache.
 - [x] Optimisé — l'écran « Ajouter un jeu tout prêt » ramait à l'application d'un tri/filtre : la carte de rendu est extraite en composant `memo` (`CarteJeu`), l'objet `styles` et les callbacks (`ajouter`, `voirFiche`, `renderItem`) sont mémoïsés, et la `FlatList` est réglée (`initialNumToRender`, `maxToRenderPerBatch`, `windowSize` — sans `removeClippedSubviews`, qui provoquait un affichage partiel « 12 puis le reste » sur Android). Au tri, les objets `Jeu` gardent la même référence : les ~300 cartes ne se re-rendent plus, elles se repositionnent seulement. Les images distantes restent en cache (`expo-image`) puisque les cartes ne remontent plus.
