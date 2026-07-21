@@ -2,27 +2,31 @@
 
 Liste des fonctionnalités à faire et des améliorations.
 
-**Progression : 82 / 90 — 91 %**
+**Progression : 83 / 96 — 86 %**
 
-`██████████████████░░`
+`█████████████████░░░`
 
 ## Bugs à corriger
 
-_Aucun bug en attente. 🎉_
+- [ ] **Barre de navigation (Android) transparente seulement après un aller-retour dans l'app** — au lancement, la barre du bas n'est pas transparente ; elle le devient quand on quitte l'app puis qu'on y revient. Le style est donc appliqué au retour au premier plan mais pas (ou trop tôt) au démarrage. Piste : ré-appliquer la config barre système (`SystemUI.setBackgroundColorAsync` + `NavigationBar.setButtonStyleAsync`) sur l'événement `AppState` « active » et/ou après le premier rendu, dans `app/_layout.tsx`.
 
 ## Priorité haute
 
 - [ ] **Protéger la propriété de l'application** — affirmer que Meep Meep t'appartient et interdire la copie/redistribution. Concrètement : ajouter un fichier `LICENSE` propriétaire (« tous droits réservés »), un en-tête de copyright, une mention « © Zaraki — Tous droits réservés » dans l'écran « À propos », et vérifier que le dépôt GitHub est en **privé** (un dépôt public est copiable par défaut). ⚠️ Pour une vraie protection juridique (marque, CGU), l'avis d'un professionnel est recommandé — je ne suis pas juriste.
+- [ ] **Se renseigner sur la monétisation de l'application** — étudier les modèles possibles (app payante, achats intégrés, abonnement, publicité, dons…) et lesquels conviennent à Meep Meep, avec leurs contraintes côté Play Store / App Store.
+- [ ] **Se renseigner sur la nécessité de créer une entreprise pour monétiser** — savoir s'il faut un statut (auto-entrepreneur/micro-entreprise, société…) pour toucher des revenus légalement et éviter les problèmes juridiques/fiscaux, selon le mode de monétisation choisi. ⚠️ Avis d'un professionnel (comptable/juriste) recommandé — je ne suis ni l'un ni l'autre.
 - [ ] **Publier sur le Play Store** — compte développeur Google Play (25 $, une fois). Build `production` en `.aab`, puis `eas submit`. Demandent une fiche : captures d'écran, description, politique de confidentialité (l'app ne collecte rien, mais la déclaration reste obligatoire), et le questionnaire de classification par âge.
 - [ ] **Publier sur l'App Store** — adhésion Apple Developer (99 $/an). Même chose côté fiche, plus une revue humaine d'Apple : compter quelques jours et de possibles allers-retours. Le logo « Powered by BGG » devient obligatoire dès que l'app est publique.
 
 ## Qualité du projet
 
+- [ ] **Revoir l'optimisation de « Ajouter un jeu tout prêt »** — reprendre les performances de l'écran (`app/bibliotheque.tsx`) : vérifier la fluidité au tri/filtre après les changements (carte mémoïsée, réglages `FlatList`), mesurer, et ajuster si besoin (ex. `getItemLayout` si la hauteur des cartes peut être fixée, taille des lots, gestion des images).
 - [ ] **Tester le fonctionnement des extensions et éditions** — vérifier le regroupement sous le jeu de base (masquage dans la liste, remontée par la recherche, section « Extensions & éditions » sur la fiche), la migration base (`jeu_type`, `jeu_parent`) et l'ajout depuis la bibliothèque.
 
 ## Nouvelles fonctionnalités
 
 - [ ] **Ajouter de nouveaux jeux au catalogue** _(tâche récurrente)_ — enrichir régulièrement `catalogue.json` : nouvelles sorties, gammes complétées, et finalisation des fiches provisoires (voir `claude/gigamic-fiches-provisoires.md`).
+- [ ] **Petite animation de chargement** — afficher un indicateur discret (spinner/animation) pendant qu'une page charge ses données, notamment « Ajouter un jeu tout prêt » (le temps que le catalogue distant arrive) et partout où l'attente est perceptible.
 - [ ] **Afficher les règles officielles en PDF dans l'app** — se renseigner sur la faisabilité d'intégrer et d'afficher un PDF de règles directement dans la fiche du jeu (visionneuse embarquée, stockage, droits).
 - [ ] **Améliorer les interfaces de l'app** — soigner les écrans, par ex. les personnages dans les jeux : une photo ou un logo par personnage.
 - [ ] **Revoir le design de l'application et le logo** — rafraîchir l'identité visuelle : maquette globale (couleurs, typographie, écrans clés) et refonte du logo Meep Meep.
@@ -33,6 +37,7 @@ _(rien en attente)_
 
 ## Terminé
 
+- [x] Vignettes allégées : les 7 images Gigamic encore en grande taille (`large_default`, ~800 px) sont passées en petite (`home_default`, ~250 px). Tout le catalogue Gigamic (291 jeux) est désormais en vignette légère et cohérente — moins de bande passante au premier affichage. Les 17 images non-Gigamic (externes : Esprit Jeu, Philibert…) sont laissées telles quelles pour ne pas risquer de lien cassé. (Rappel : la `FlatList` virtualise déjà l'affichage et `expo-image` ne charge que les vignettes visibles — pas de pagination manuelle nécessaire.)
 - [x] Corrigé — flash des anciens jeux à l'ouverture de « Ajouter un jeu tout prêt » : le hook `useBibliotheque` démarrait sur la bibliothèque livrée (18 vieux jeux, ex. « 6 qui prend » avec son ancienne image) avant l'arrivée du catalogue distant. On garde désormais le dernier catalogue connu en mémoire de session, amorcé dès le chargement du module (`hooks/use-bibliotheque.ts`) : plus de flash de données périmées. La bibliothèque livrée ne sert plus que de repli au tout premier lancement sans cache.
 - [x] Optimisé — l'écran « Ajouter un jeu tout prêt » ramait à l'application d'un tri/filtre : la carte de rendu est extraite en composant `memo` (`CarteJeu`), l'objet `styles` et les callbacks (`ajouter`, `voirFiche`, `renderItem`) sont mémoïsés, et la `FlatList` est réglée (`initialNumToRender`, `maxToRenderPerBatch`, `windowSize` — sans `removeClippedSubviews`, qui provoquait un affichage partiel « 12 puis le reste » sur Android). Au tri, les objets `Jeu` gardent la même référence : les ~300 cartes ne se re-rendent plus, elles se repositionnent seulement. Les images distantes restent en cache (`expo-image`) puisque les cartes ne remontent plus.
 - [x] Plus aucun jeu pré-installé : `IDS_AMORCAGE` (data/bibliotheque.ts) est vidé — au premier lancement, le catalogue démarre vierge, l'utilisateur ajoute ce qu'il veut depuis « Ajouter un jeu tout prêt ». ⚠️ N'affecte que les nouvelles installations : un appareil qui avait déjà les 5 jeux amorcés (Pandémie, Catan, 6 qui prend, Villainous, Yams) les garde tant qu'on ne les supprime pas à la main (ou qu'on n'efface pas les données de l'app).
