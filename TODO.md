@@ -2,7 +2,7 @@
 
 Liste des fonctionnalités à faire et des améliorations.
 
-**Progression : 86 / 98 — 88 %**
+**Progression : 87 / 99 — 88 %**
 
 `██████████████████░░`
 
@@ -10,9 +10,9 @@ Liste des fonctionnalités à faire et des améliorations.
 
 _Estimations approximatives, en heures de travail équivalent développeur (pas le temps réel de nos échanges). À réévaluer à chaque mise à jour de la feuille de route._
 
-- **Réalisé** (86 tâches) : **~203 h** — l'essentiel : le catalogue de 308 jeux avec règles en français (~90 h à lui seul), les 5 modes de score, extensions/éditions, historique et statistiques, thème + accessibilité, tests.
-- **Restant** (12 tâches) : **~35 h** (hors tâche récurrente « ajouter des jeux »).
-- **Total projet** : **~238 h**.
+- **Réalisé** (87 tâches) : **~214 h** — l'essentiel : le catalogue de 347 jeux avec règles en français (~100 h à lui seul), les 5 modes de score, extensions/éditions, historique et statistiques, thème + accessibilité, tests.
+- **Restant** (12 tâches) : **~36 h** (hors tâche récurrente « ajouter des jeux »).
+- **Total projet** : **~246 h**.
 
 Détail des tâches restantes :
 
@@ -25,7 +25,7 @@ Détail des tâches restantes :
 | Publier sur l'App Store | ~5 h |
 | Revoir l'optimisation de la bibliothèque | ~2 h |
 | Tester extensions et éditions | ~3 h |
-| Petite animation de chargement | ~2 h |
+| Revoir l'interface d'ajout d'un jeu | ~3 h |
 | Ajouter de nouveaux jeux (récurrent) | variable |
 | Règles officielles en PDF (étude) | ~3 h |
 | Améliorer les interfaces | ~4 h |
@@ -50,8 +50,8 @@ _Aucun bug en attente. 🎉_
 
 ## Nouvelles fonctionnalités
 
-- [ ] **Ajouter de nouveaux jeux au catalogue** _(tâche récurrente)_ — enrichir régulièrement `catalogue.json` : nouvelles sorties, gammes complétées, et finalisation des fiches provisoires (voir `claude/gigamic-fiches-provisoires.md`).
-- [ ] **Petite animation de chargement** — afficher un indicateur discret (spinner/animation) pendant qu'une page charge ses données, notamment « Ajouter un jeu tout prêt » (le temps que le catalogue distant arrive) et partout où l'attente est perceptible.
+- [ ] **Ajouter de nouveaux jeux au catalogue** _(tâche récurrente)_ — enrichir régulièrement `catalogue.json` : nouvelles sorties, gammes complétées, et finalisation des fiches provisoires (voir `claude/gigamic-fiches-provisoires.md`). _Dernier recensement Gigamic (juil. 2026)_ : catalogue passé à **347 jeux** — 17 jeux Gigamic manquants ajoutés après comparaison complète des catégories du site (Ah Ouais ?, Bravo Bravo, Nautilus Island, Maudits Criquets, Talaref, Une patate à vélo, File Filou !, La maison des souris, Explodino, Explogéo, Doudou, La colline aux feux follets, Le hérisson qui roule à pic, Le Rallye des vers de terre, La Chasse aux Gigamons, Memozistoire, Pique Plume).
+- [ ] **Revoir l'interface d'ajout d'un jeu** — repenser l'écran d'ajout (`import.tsx` et l'entrée « Ajouter un jeu tout prêt ») : organisation, clarté, ergonomie du formulaire et des options.
 - [ ] **Afficher les règles officielles en PDF dans l'app** — se renseigner sur la faisabilité d'intégrer et d'afficher un PDF de règles directement dans la fiche du jeu (visionneuse embarquée, stockage, droits).
 - [ ] **Améliorer les interfaces de l'app** — soigner les écrans, par ex. les personnages dans les jeux : une photo ou un logo par personnage.
 - [ ] **Revoir le design de l'application et le logo** — rafraîchir l'identité visuelle : maquette globale (couleurs, typographie, écrans clés) et refonte du logo Meep Meep.
@@ -62,6 +62,7 @@ _(rien en attente)_
 
 ## Terminé
 
+- [x] Petite animation de chargement : l'écran « Ajouter un jeu tout prêt » affiche un indicateur discret (spinner + « Chargement du catalogue… ») tant que le catalogue n'est pas prêt. Le hook `useBibliotheque` expose désormais un état `chargement` (`hooks/use-bibliotheque.ts`), à false dès que le cache a répondu — donc pas de spinner sur les ouvertures suivantes (mémoire déjà remplie).
 - [x] Uniformiser l'affichage des images : toutes les images sont désormais affichées en entier (`contentFit: "contain"` dans `components/visuel-jeu.tsx`), dézoomées, pour voir l'ensemble de la boîte comme les packshots Gigamic, au lieu d'être rognées. Le fond blanc (posé pour toute image) fait office de bandes autour du visuel — cohérent partout (vignettes du catalogue, bibliothèque, fiche).
 - [x] Corrigé — barre de navigation (Android) transparente seulement après un aller-retour : le style n'était appliqué qu'une fois au montage, trop tôt au cold launch pour « prendre ». La config (`SystemUI.setBackgroundColorAsync` + `NavigationBar.setButtonStyleAsync`) est désormais reposée dans `app/_layout.tsx` au montage, une fois ~300 ms après (fenêtre native prête), et à chaque retour au premier plan (`AppState` « active »). La barre est donc transparente et au thème dès le lancement.
 - [x] Corrigé — fond vert/coloré derrière certaines images : dans `components/visuel-jeu.tsx`, le fond est désormais **blanc dès qu'une image est affichée**, quelle que soit l'extension. Pour un JPEG opaque il est invisible (l'image couvre toute la tuile) ; pour une image détourée (certains packshots Gigamic sont transparents mais servis en `.jpg`, ex. « 6 qui prend : Anniversaire », « 6 qui surprend ») on voit du blanc au lieu de la tuile colorée de la catégorie. Le choix « contain vs cover » reste piloté par le format (voir la tâche « uniformiser l'affichage des images » pour tout passer en entier).

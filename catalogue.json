@@ -151,6 +151,48 @@
     "editeur": "Repos Production"
   },
   {
+    "id": "7wondersduel",
+    "nom": "7 Wonders Duel",
+    "description": "Un duel de civilisations : sciences, armée ou prestige, à vous de choisir votre voie.",
+    "joueursMin": 2,
+    "joueursMax": 2,
+    "dureeMin": 30,
+    "ageMin": 10,
+    "categorie": "Stratégie",
+    "editeur": "Repos Production",
+    "regles": [
+      "But (jeu à 2) : l'emporter par une victoire militaire, une victoire scientifique, ou le plus de points de prestige.",
+      "Trois Âges. À son tour, on prend une carte accessible dans la disposition, puis on la construit, la défausse contre de l'or, ou bâtit une étape de Merveille.",
+      "Aligner 6 symboles scientifiques différents déclenche une victoire immédiate.",
+      "Faire progresser le pion militaire jusqu'à la capitale adverse déclenche aussi une victoire immédiate.",
+      "Si aucune victoire immédiate, on compte les points de prestige à la fin ; le plus élevé gagne."
+    ],
+    "scoreVictoire": "max",
+    "scoreMode": "objectif"
+  },
+  {
+    "id": "ah-ouais",
+    "nom": "Ah Ouais ?",
+    "categorie": "Ambiance",
+    "joueursMin": 2,
+    "joueursMax": 8,
+    "dureeMin": 30,
+    "ageMin": 16,
+    "scoreMode": "compteur",
+    "scoreVictoire": "max",
+    "image": "https://www.gigamic.com/2230-home_default/ah-ouais.jpg",
+    "description": "Un jeu d'ambiance pour adultes où l'on parie sur les goûts et les préférences des autres.",
+    "regles": [
+      "But : marquer le plus de points en devinant les goûts des autres joueurs.",
+      "À chaque manche, un joueur actif reçoit 5 sujets qu'il classe secrètement selon ses préférences.",
+      "Les autres tentent de reconstituer ce classement en misant sur l'ordre qu'ils imaginent.",
+      "On compare ensuite les propositions au classement réel : plus on colle aux goûts du joueur actif, plus on marque de points.",
+      "On découvre au passage des choses inattendues sur ses proches (thèmes réservés aux adultes).",
+      "Après plusieurs manches, le joueur au plus haut score l'emporte."
+    ],
+    "editeur": "Gigamic"
+  },
+  {
     "id": "akropolis",
     "nom": "Akropolis",
     "description": "Bâtissez la plus prestigieuse cité de la Grèce antique en assemblant des quartiers en harmonie.",
@@ -708,6 +750,28 @@
     "editeur": "Gigamic"
   },
   {
+    "id": "bravo-bravo",
+    "nom": "Bravo Bravo",
+    "categorie": "Ambiance",
+    "joueursMin": 2,
+    "joueursMax": 12,
+    "dureeMin": 15,
+    "ageMin": 8,
+    "scoreMode": "compteur",
+    "scoreVictoire": "min",
+    "image": "https://www.gigamic.com/2234-home_default/bravo-bravo.jpg",
+    "description": "Un jeu de réaction déjanté : tout le monde doit dire ou faire la même chose en même temps.",
+    "regles": [
+      "But : finir avec le moins de cartes de pénalité possible.",
+      "À chaque tour, on révèle des cartes qui indiquent une action à dire ou à faire (un geste, un mot, un son…).",
+      "Tout le monde doit exécuter la même chose en même temps, le plus vite possible.",
+      "Le ou les derniers, ou ceux qui se trompent, ramassent une carte pénalité.",
+      "Des cartes « Twist » à gratter modifient les règles en cours de partie.",
+      "À la fin, le joueur avec le moins de cartes pénalité gagne."
+    ],
+    "editeur": "Gigamic"
+  },
+  {
     "id": "cabanga",
     "nom": "Cabanga !",
     "categorie": "Cartes",
@@ -1028,6 +1092,26 @@
     "editeur": "Gigamic"
   },
   {
+    "id": "cluedo",
+    "nom": "Cluedo",
+    "description": "Menez l'enquête dans le manoir pour démasquer le coupable, l'arme et le lieu.",
+    "joueursMin": 3,
+    "joueursMax": 6,
+    "dureeMin": 45,
+    "ageMin": 8,
+    "categorie": "Enquête",
+    "editeur": "Hasbro",
+    "regles": [
+      "But : être le premier à identifier le coupable, l'arme et la pièce du crime.",
+      "On déplace son personnage dans les pièces du manoir et on émet des hypothèses (suspect + arme + lieu).",
+      "Les autres joueurs réfutent tour à tour en montrant discrètement une carte correspondante.",
+      "On note les indices pour éliminer méthodiquement les possibilités.",
+      "Le premier à énoncer la bonne accusation — vérifiée dans l'enveloppe centrale — remporte la partie ; une accusation fausse élimine."
+    ],
+    "scoreVictoire": "max",
+    "scoreMode": "objectif"
+  },
+  {
     "id": "cocotaki",
     "nom": "Cocotaki",
     "categorie": "Ambiance",
@@ -1069,6 +1153,48 @@
     ],
     "image": "https://www.espritjeu.com/upload/image/codenames-p-image-105501-grande.jpg",
     "editeur": "Czech Games Edition"
+  },
+  {
+    "id": "concept",
+    "nom": "Concept",
+    "description": "Faites deviner n'importe quel mot à l'aide d'icônes universelles, sans parler.",
+    "joueursMin": 4,
+    "joueursMax": 12,
+    "dureeMin": 40,
+    "ageMin": 10,
+    "categorie": "Ambiance",
+    "editeur": "Repos Production",
+    "regles": [
+      "But : faire deviner un mot ou une expression en combinant des icônes, sans parler ni mimer.",
+      "L'équipe active pose le point d'interrogation principal sur une icône, puis des cubes sur les icônes qui précisent l'idée.",
+      "Les autres joueurs proposent librement des réponses à voix haute.",
+      "Celui qui trouve marque des points, tout comme les auteurs de l'énigme.",
+      "Le plus de points l'emporte — mais on peut aussi jouer simplement pour le plaisir de deviner."
+    ],
+    "scoreVictoire": "max",
+    "scoreMode": "compteur"
+  },
+  {
+    "id": "coyote",
+    "nom": "Coyote",
+    "description": "Un jeu de bluff et de déduction hilarant : vous voyez les cartes de tous… sauf la vôtre.",
+    "joueursMin": 2,
+    "joueursMax": 10,
+    "dureeMin": 15,
+    "ageMin": 10,
+    "categorie": "Bluff",
+    "editeur": "Gigamic",
+    "image": "https://www.espritjeu.com/upload/image/coyote-p-image-82859-grande.jpg",
+    "regles": [
+      "But : être le dernier joueur en lice, en évitant d’être celui qui fait dépasser le total.",
+      "Chaque joueur place une carte sur son front sans la regarder : il voit les cartes de tous les autres, mais pas la sienne.",
+      "À tour de rôle, on annonce un nombre strictement supérieur au précédent, censé ne pas dépasser la somme de toutes les cartes en jeu.",
+      "À son tour, plutôt que d’annoncer, on peut crier « Coyote ! » pour contester l’annonce précédente : on révèle alors toutes les cartes et on fait le total.",
+      "Si l’annonce contestée dépassait la somme, son auteur perd ; sinon c’est le contestataire qui perd. Le perdant prend un point de pénalité (éliminé au bout de plusieurs).",
+      "Attention aux cartes spéciales (×2, Max=0, Question…) qui bouleversent le calcul."
+    ],
+    "scoreVictoire": "max",
+    "scoreMode": "objectif"
   },
   {
     "id": "crazycups",
@@ -1499,6 +1625,26 @@
     "editeur": "Gigamic"
   },
   {
+    "id": "dominion",
+    "nom": "Dominion",
+    "description": "Construisez le deck le plus efficace pour dominer le royaume (jeu de deck-building).",
+    "joueursMin": 2,
+    "joueursMax": 4,
+    "dureeMin": 30,
+    "ageMin": 13,
+    "categorie": "Cartes",
+    "editeur": "Ystari Games",
+    "regles": [
+      "But : accumuler le plus de points de Victoire en améliorant son deck de cartes au fil de la partie.",
+      "Chacun démarre avec un petit deck identique. À son tour : 1 Action puis 1 Achat.",
+      "On joue ses cartes Action (qui donnent cartes, actions, achats ou pièces), puis on achète une carte du marché avec ses Trésors, avant de défausser sa main.",
+      "Les cartes Victoire n'ont aucun effet pendant la partie mais comptent à la fin.",
+      "La partie s'arrête quand la pile Province est vide (ou trois piles épuisées) ; le plus de points de Victoire gagne."
+    ],
+    "scoreVictoire": "max",
+    "scoreMode": "compteur"
+  },
+  {
     "id": "donjonssiphons",
     "nom": "Donjons & Siphons",
     "categorie": "Ambiance",
@@ -1584,6 +1730,27 @@
     "editeur": "Gigamic"
   },
   {
+    "id": "doudou",
+    "nom": "Doudou",
+    "categorie": "Enfants",
+    "joueursMin": 2,
+    "joueursMax": 4,
+    "dureeMin": 15,
+    "ageMin": 3,
+    "scoreMode": "cooperatif",
+    "scoreVictoire": "max",
+    "image": "https://www.gigamic.com/1926-home_default/doudou.jpg",
+    "description": "Un jeu d'enquête coopératif pour les tout-petits : retrouvez ensemble le doudou caché.",
+    "regles": [
+      "Jeu coopératif d'enquête pour les plus jeunes : on cherche tous ensemble.",
+      "Un doudou a disparu : les joueurs doivent retrouver où il se cache.",
+      "À son tour, on récolte des indices simples (couleur, lieu, objet) qui éliminent des possibilités.",
+      "On échange et on réfléchit ensemble pour recouper les indices.",
+      "L'équipe gagne si elle retrouve la cachette du doudou."
+    ],
+    "editeur": "Gigamic"
+  },
+  {
     "id": "drgribouille",
     "nom": "Dr Gribouille",
     "categorie": "Coopératif",
@@ -1666,6 +1833,27 @@
     ],
     "image": "https://www.gigamic.com/3593-home_default/duke.jpg",
     "editeur": "Gigamic"
+  },
+  {
+    "id": "decrypto",
+    "nom": "Décrypto",
+    "description": "Transmettez des codes secrets à votre équipe sans vous faire intercepter.",
+    "joueursMin": 3,
+    "joueursMax": 8,
+    "dureeMin": 30,
+    "ageMin": 12,
+    "categorie": "Ambiance",
+    "editeur": "Le Scorpion Masqué",
+    "regles": [
+      "But (par équipes) : communiquer ses codes sans que l'équipe adverse ne les perce.",
+      "Chaque équipe possède 4 mots secrets numérotés de 1 à 4. À chaque manche, un joueur tire un code de trois chiffres et donne un indice pour chacun.",
+      "Sa propre équipe doit retrouver l'ordre des chiffres ; l'équipe adverse écoute et tente d'intercepter le code.",
+      "Deux interceptions réussies contre vous font perdre ; deux erreurs de communication dans votre équipe aussi.",
+      "L'équipe qui tient sans se faire percer l'emporte."
+    ],
+    "scoreVictoire": "max",
+    "scoreMode": "objectif",
+    "equipes": true
   },
   {
     "id": "defifoo",
@@ -1792,6 +1980,69 @@
       "L'équipe gagne si elle boucle ses arrestations avant que les complices n'aient fait le tour."
     ],
     "image": "https://www.gigamic.com/4239-home_default/enquetes-a-bandiville.jpg",
+    "editeur": "Gigamic"
+  },
+  {
+    "id": "explodino",
+    "nom": "Explodino",
+    "categorie": "Familial",
+    "joueursMin": 2,
+    "joueursMax": 6,
+    "dureeMin": 15,
+    "ageMin": 8,
+    "scoreMode": "compteur",
+    "scoreVictoire": "max",
+    "image": "https://www.gigamic.com/2031-home_default/explodino.jpg",
+    "description": "Un jeu de déduction : devine la créature préhistorique en posant les bonnes questions.",
+    "regles": [
+      "But : remporter le plus de cartes en devinant les créatures préhistoriques.",
+      "Un joueur pioche une carte représentant un animal préhistorique et donne trois indices à un autre joueur.",
+      "Le joueur qui devine peut poser jusqu'à sept questions (oui/non) pour identifier la créature.",
+      "On suit le nombre de questions restantes sur un plateau.",
+      "Trouver la bonne réponse fait gagner la carte ; le joueur avec le plus de cartes gagne."
+    ],
+    "editeur": "Gigamic"
+  },
+  {
+    "id": "explogeo",
+    "nom": "Explogéo",
+    "categorie": "Familial",
+    "joueursMin": 2,
+    "joueursMax": 6,
+    "dureeMin": 15,
+    "ageMin": 8,
+    "scoreMode": "compteur",
+    "scoreVictoire": "max",
+    "image": "https://www.gigamic.com/2035-home_default/explogeo.jpg",
+    "description": "Un jeu de déduction géographique : devine le pays ou le lieu à l'aide de questions.",
+    "regles": [
+      "But : remporter le plus de cartes en devinant des lieux et pays du monde.",
+      "Un joueur pioche une carte (un pays, une ville, un lieu célèbre…) et donne trois indices.",
+      "L'autre joueur pose jusqu'à sept questions fermées pour deviner de quel lieu il s'agit.",
+      "On note les questions utilisées sur le plateau.",
+      "Une bonne réponse fait gagner la carte ; celui qui en a le plus l'emporte, tout en apprenant la géographie."
+    ],
+    "editeur": "Gigamic"
+  },
+  {
+    "id": "file-filou",
+    "nom": "File Filou !",
+    "categorie": "Enfants",
+    "joueursMin": 2,
+    "joueursMax": 4,
+    "dureeMin": 15,
+    "ageMin": 4,
+    "scoreMode": "objectif",
+    "scoreVictoire": "max",
+    "image": "https://www.gigamic.com/2065-home_default/file-filou.jpg",
+    "description": "Un jeu de cache-cache et de parcours : mets tes animaux à l'abri avant que le loup ne se réveille.",
+    "regles": [
+      "But : mener ses trois animaux jusqu'au bout du chemin de la forêt avant les autres.",
+      "À son tour, on lance le dé et on avance l'un de ses animaux.",
+      "Un animal peut se cacher derrière un buisson à sa forme ou une souche pour ne pas se faire repérer.",
+      "Si le dé montre le loup, celui-ci se réveille : tous les animaux à découvert repartent au départ !",
+      "Le premier joueur à amener ses trois animaux à l'arrivée gagne."
+    ],
     "editeur": "Gigamic"
   },
   {
@@ -2388,6 +2639,26 @@
     "editeur": "Gigamic"
   },
   {
+    "id": "junglespeed",
+    "nom": "Jungle Speed",
+    "description": "Un jeu de rapidité et d'observation : attrapez le totem au bon moment.",
+    "joueursMin": 2,
+    "joueursMax": 8,
+    "dureeMin": 15,
+    "ageMin": 7,
+    "categorie": "Rapidité",
+    "editeur": "Asmodee",
+    "regles": [
+      "But : se débarrasser de toutes ses cartes le premier.",
+      "Chacun retourne une carte à tour de rôle, au centre.",
+      "Dès que deux cartes montrent le même symbole, les joueurs concernés se précipitent sur le totem : le plus rapide se débarrasse de ses cartes, le perdant ramasse.",
+      "Attention aux symboles ressemblants et aux cartes spéciales (duel de couleur, attrape générale, sens inversé).",
+      "Le premier joueur sans carte gagne."
+    ],
+    "scoreVictoire": "max",
+    "scoreMode": "objectif"
+  },
+  {
     "id": "justone",
     "nom": "Just One",
     "description": "Faire deviner un mot en écrivant un indice chacun — mais les indices identiques s'annulent.",
@@ -2452,6 +2723,27 @@
     "editeur": "Gigamic"
   },
   {
+    "id": "kingoftokyo",
+    "nom": "King of Tokyo",
+    "description": "Des monstres géants s'affrontent pour régner sur Tokyo, à coups de dés.",
+    "joueursMin": 2,
+    "joueursMax": 6,
+    "dureeMin": 30,
+    "ageMin": 8,
+    "categorie": "Dés",
+    "editeur": "Iello",
+    "regles": [
+      "But : être le dernier monstre en vie, ou atteindre 20 points de victoire.",
+      "À son tour, on lance 6 dés jusqu'à trois fois (façon Yam) : griffes (attaque), cœurs (soin), éclairs (énergie) et chiffres (points).",
+      "Être dans Tokyo rapporte des points et attaque tous les autres, mais on ne peut pas se soigner et on encaisse toutes les ripostes.",
+      "L'énergie sert à acheter des cartes pouvoir aux effets variés.",
+      "La partie s'arrête dès qu'un monstre atteint 20 points, ou qu'il ne reste qu'un survivant."
+    ],
+    "scoreVictoire": "max",
+    "scoreMode": "compteur",
+    "seuilFin": 20
+  },
+  {
     "id": "kingdomcrossing",
     "nom": "Kingdom Crossing",
     "categorie": "Stratégie",
@@ -2471,6 +2763,26 @@
     ],
     "image": "https://www.gigamic.com/4063-home_default/kingdom-crossing.jpg",
     "editeur": "Gigamic"
+  },
+  {
+    "id": "kingdomino",
+    "nom": "Kingdomino",
+    "description": "Assemblez des dominos de terrains pour bâtir le royaume le plus prospère.",
+    "joueursMin": 2,
+    "joueursMax": 4,
+    "dureeMin": 20,
+    "ageMin": 8,
+    "categorie": "Familial",
+    "editeur": "Blue Orange",
+    "regles": [
+      "But : construire un royaume 5×5 qui rapporte le plus de points.",
+      "À son tour, on pose le domino qu'on avait choisi au tour précédent, en le raccordant à un terrain de même type (ou au château).",
+      "Puis on choisit un nouveau domino parmi ceux proposés : les meilleurs obligent à jouer plus tard au tour suivant.",
+      "Chaque territoire rapporte : nombre de cases × nombre de couronnes qu'il contient.",
+      "Quand tous les dominos sont posés, le plus de points gagne (bonus si le royaume est parfaitement carré)."
+    ],
+    "scoreVictoire": "max",
+    "scoreMode": "compteur"
   },
   {
     "id": "klask",
@@ -2600,6 +2912,27 @@
     "editeur": "Gigamic"
   },
   {
+    "id": "la-chasse-aux-gigamons",
+    "nom": "La Chasse aux Gigamons",
+    "categorie": "Enfants",
+    "joueursMin": 2,
+    "joueursMax": 4,
+    "dureeMin": 15,
+    "ageMin": 5,
+    "scoreMode": "cooperatif",
+    "scoreVictoire": "max",
+    "image": "https://www.gigamic.com/1692-home_default/la-chasse-aux-gigamons.jpg",
+    "description": "Un jeu de mémoire coopératif : capturez ensemble les Gigamons cachés sous les tuiles.",
+    "regles": [
+      "Jeu coopératif de mémoire : on capture les Gigamons tous ensemble.",
+      "Des créatures se cachent sous des tuiles mélangées ; l'équipe doit les retrouver.",
+      "À son tour, on retourne des tuiles en essayant de se souvenir de leur emplacement.",
+      "Il faut coordonner ses retournements pour capturer les bons Gigamons.",
+      "L'équipe gagne si elle réussit à tous les attraper."
+    ],
+    "editeur": "Gigamic"
+  },
+  {
     "id": "lacoincoinche",
     "nom": "La Coincoinche",
     "categorie": "Cartes",
@@ -2618,6 +2951,27 @@
       "Les points s'accumulent manche après manche jusqu'au score de fin fixé, que la meilleure équipe atteint."
     ],
     "image": "https://www.gigamic.com/3099-home_default/la-coincoinche.jpg",
+    "editeur": "Gigamic"
+  },
+  {
+    "id": "la-colline-aux-feux-follets",
+    "nom": "La colline aux feux follets",
+    "categorie": "Enfants",
+    "joueursMin": 1,
+    "joueursMax": 4,
+    "dureeMin": 20,
+    "ageMin": 5,
+    "scoreMode": "cooperatif",
+    "scoreVictoire": "max",
+    "image": "https://www.gigamic.com/1907-home_default/la-colline-aux-feux-follets.jpg",
+    "description": "Un jeu de cartes coopératif : guidez les feux follets au sommet de la colline avant la nuit.",
+    "regles": [
+      "Jeu coopératif (jouable aussi en solo) : les joueurs unissent leurs efforts.",
+      "Il faut guider les feux follets jusqu'en haut de la colline avant la tombée de la nuit.",
+      "À son tour, on joue des cartes pour faire avancer les personnages sur le chemin.",
+      "Les joueurs se concertent pour optimiser leurs déplacements et s'entraider.",
+      "L'équipe gagne si tous les feux follets atteignent le sommet à temps."
+    ],
     "editeur": "Gigamic"
   },
   {
@@ -2660,6 +3014,27 @@
       "On gagne dès qu'on ne possède plus aucun artichaut."
     ],
     "image": "https://www.gigamic.com/3515-home_default/la-fin-des-artichauts.jpg",
+    "editeur": "Gigamic"
+  },
+  {
+    "id": "la-maison-des-souris",
+    "nom": "La maison des souris",
+    "categorie": "Coopératif",
+    "joueursMin": 2,
+    "joueursMax": 6,
+    "dureeMin": 20,
+    "ageMin": 5,
+    "scoreMode": "cooperatif",
+    "scoreVictoire": "max",
+    "image": "https://www.gigamic.com/1279-home_default/maison-des-souris.jpg",
+    "description": "Un jeu de mémoire coopératif : aidez les souris à récupérer ce qu'il leur faut en évitant le chat.",
+    "regles": [
+      "Jeu coopératif de mémoire : les joueurs jouent tous ensemble.",
+      "Les souris doivent se déplacer dans la maison pour collecter ce dont elles ont besoin en évitant le chat.",
+      "À son tour, on retourne des tuiles de mémoire pour retrouver les bons éléments et faire avancer les souris.",
+      "Il faut mémoriser l'emplacement des tuiles déjà vues pour agir efficacement en équipe.",
+      "L'équipe gagne si les souris réussissent leur mission avant que le chat ne les surprenne."
+    ],
     "editeur": "Gigamic"
   },
   {
@@ -2830,6 +3205,27 @@
     "editeur": "Gigamic"
   },
   {
+    "id": "le-herisson-qui-roule-a-pic",
+    "nom": "Le hérisson qui roule à pic",
+    "categorie": "Adresse",
+    "joueursMin": 2,
+    "joueursMax": 4,
+    "dureeMin": 15,
+    "ageMin": 4,
+    "scoreMode": "objectif",
+    "scoreVictoire": "max",
+    "image": "https://www.gigamic.com/1507-home_default/le-herisson-qui-roule-a-pic.jpg",
+    "description": "Un jeu d'adresse pour les petits : fais rouler le hérisson pour ramasser les bons fruits.",
+    "regles": [
+      "But : être le premier à récupérer les fruits demandés par tes cartes.",
+      "Des fruits sont accrochés sur les piquants du hérisson.",
+      "À son tour, on fait rouler le hérisson sur la table : les fruits qui se détachent peuvent être ramassés.",
+      "On garde uniquement les fruits qui correspondent à ce que l'on doit collecter.",
+      "Le premier joueur à réunir tous ses fruits gagne."
+    ],
+    "editeur": "Gigamic"
+  },
+  {
     "id": "piqueniquefacteursouris",
     "nom": "Le pique-nique de Facteur Souris",
     "categorie": "Coopératif",
@@ -2869,6 +3265,27 @@
       "On perd dès qu'on accumule quatre exemplaires d'une même bestiole ; le dernier joueur épargné gagne."
     ],
     "image": "https://www.gigamic.com/4454-home_default/poker-des-cafards.jpg",
+    "editeur": "Gigamic"
+  },
+  {
+    "id": "le-rallye-des-vers-de-terre",
+    "nom": "Le Rallye des vers de terre",
+    "categorie": "Enfants",
+    "joueursMin": 2,
+    "joueursMax": 4,
+    "dureeMin": 15,
+    "ageMin": 4,
+    "scoreMode": "objectif",
+    "scoreVictoire": "max",
+    "image": "https://www.gigamic.com/1544-home_default/rallye-des-vers-de-terre.jpg",
+    "description": "Un jeu de mémoire et d'anticipation : conduis ton ver de terre en tête du rallye dans le potager.",
+    "regles": [
+      "But : mener son ver de terre jusqu'à la ligne d'arrivée avant les autres.",
+      "Le parcours traverse le potager ; à son tour, on retourne une tuile face cachée.",
+      "Si la tuile correspond à ce que l'on cherche, le ver avance : il faut donc mémoriser l'emplacement des tuiles déjà vues.",
+      "De l'anticipation et de la mémoire pour ne pas se tromper de chemin.",
+      "Le premier ver de terre à franchir l'arrivée gagne."
+    ],
     "editeur": "Gigamic"
   },
   {
@@ -2935,6 +3352,26 @@
     "editeur": "Gigamic"
   },
   {
+    "id": "aventuriersdurail",
+    "nom": "Les Aventuriers du Rail",
+    "description": "Reliez des villes à travers le pays en posant vos wagons et en complétant vos billets de destination.",
+    "joueursMin": 2,
+    "joueursMax": 5,
+    "dureeMin": 45,
+    "ageMin": 8,
+    "categorie": "Familial",
+    "editeur": "Days of Wonder",
+    "regles": [
+      "But : marquer le plus de points en capturant des routes ferroviaires et en réussissant ses billets de destination.",
+      "À son tour, une seule action : piocher 2 cartes wagon, OU poser des wagons pour capturer une route (en défaussant des cartes de la bonne couleur et du bon nombre), OU piocher de nouveaux billets de destination.",
+      "Chaque route capturée rapporte des points selon sa longueur ; le plus long chemin continu offre un bonus.",
+      "Un billet de destination réussi (les deux villes reliées) rapporte ses points ; un billet non complété les retire.",
+      "Quand un joueur n'a plus que 2 wagons ou moins, on joue un dernier tour, puis on compte les points."
+    ],
+    "scoreVictoire": "max",
+    "scoreMode": "compteur"
+  },
+  {
     "id": "cinqrois",
     "nom": "Les cinq rois",
     "categorie": "Cartes",
@@ -2996,6 +3433,26 @@
     ],
     "image": "https://www.gigamic.com/3582-home_default/les-jardins-suspendus.jpg",
     "editeur": "Gigamic"
+  },
+  {
+    "id": "loupsgarous",
+    "nom": "Les Loups-Garous de Thiercelieux",
+    "description": "Le village dort… mais des loups-garous rôdent. Bluff et déduction en groupe.",
+    "joueursMin": 8,
+    "joueursMax": 18,
+    "dureeMin": 30,
+    "ageMin": 10,
+    "categorie": "Ambiance",
+    "editeur": "Zygomatic",
+    "regles": [
+      "But : pour les villageois, démasquer et éliminer tous les loups-garous ; pour les loups, dévorer les villageois jusqu'à égaler leur nombre.",
+      "Un meneur de jeu distribue les rôles secrets et anime la partie.",
+      "La nuit, les loups-garous désignent une victime ; des personnages spéciaux agissent aussi (voyante, sorcière, cupidon…).",
+      "Le jour, le village débat, s'accuse, puis vote pour éliminer un suspect.",
+      "La partie s'arrête quand un camp a éliminé l'autre."
+    ],
+    "scoreVictoire": "max",
+    "scoreMode": "objectif"
   },
   {
     "id": "lineit",
@@ -3078,6 +3535,26 @@
     ],
     "image": "https://www.gigamic.com/2926-home_default/looot.jpg",
     "editeur": "Gigamic"
+  },
+  {
+    "id": "loveletter",
+    "nom": "Love Letter",
+    "description": "Faites parvenir votre lettre d'amour à la princesse en écartant vos rivaux.",
+    "joueursMin": 2,
+    "joueursMax": 4,
+    "dureeMin": 20,
+    "ageMin": 10,
+    "categorie": "Bluff",
+    "editeur": "Iello",
+    "regles": [
+      "But : remporter assez de manches (jetons d'affection) pour gagner la partie.",
+      "Le deck ne compte que 16 cartes. À son tour, on pioche 1 carte et on en joue 1, en appliquant son effet : deviner la carte d'un adversaire, comparer, forcer une défausse, se protéger…",
+      "Se faire éliminer met hors jeu pour la manche en cours.",
+      "Une manche s'arrête quand il ne reste qu'un joueur, ou à l'épuisement de la pioche — la plus haute carte en main l'emporte alors.",
+      "Le vainqueur de la manche gagne un jeton ; le premier au nombre requis gagne."
+    ],
+    "scoreVictoire": "max",
+    "scoreMode": "manches"
   },
   {
     "id": "lumios",
@@ -3202,6 +3679,28 @@
     "editeur": "Gigamic"
   },
   {
+    "id": "maudits-criquets",
+    "nom": "Maudits Criquets",
+    "categorie": "Cartes",
+    "joueursMin": 2,
+    "joueursMax": 4,
+    "dureeMin": 20,
+    "ageMin": 8,
+    "scoreMode": "compteur",
+    "scoreVictoire": "max",
+    "image": "https://www.gigamic.com/2242-home_default/maudits-criquets.jpg",
+    "description": "Un jeu de cartes malin : accumulez des légumes… sans vous retrouver avec trois criquets.",
+    "regles": [
+      "But : récolter le plus de jetons de points en accumulant des légumes.",
+      "À chaque tour, tous les joueurs jouent simultanément une carte de mise pour remporter les cartes « jardin » (fruits, légumes ou criquets).",
+      "Deux cartes identiques s'annulent ; un As rafle toutes les cartes en jeu ; une carte X perd contre tout… sauf contre l'As.",
+      "Dès qu'on réunit trois légumes identiques dans sa réserve, on gagne un jeton de point.",
+      "Attention : réunir trois criquets détruit tous vos légumes accumulés !",
+      "Le joueur avec le plus de jetons en fin de partie l'emporte."
+    ],
+    "editeur": "Gigamic"
+  },
+  {
     "id": "maitremakatsu",
     "nom": "Maître Makatsu",
     "categorie": "Cartes",
@@ -3220,6 +3719,27 @@
       "Le joueur qui a le plus impressionné le maître remporte la partie."
     ],
     "image": "https://www.gigamic.com/4297-home_default/maitre-makatsu.jpg",
+    "editeur": "Gigamic"
+  },
+  {
+    "id": "memozistoire",
+    "nom": "Memozistoire",
+    "categorie": "Enfants",
+    "joueursMin": 2,
+    "joueursMax": 4,
+    "dureeMin": 15,
+    "ageMin": 4,
+    "scoreMode": "objectif",
+    "scoreVictoire": "max",
+    "image": "https://www.gigamic.com/4040-home_default/memozistoire.jpg",
+    "description": "Un jeu de mémoire narratif : retiens l'histoire qui se construit carte après carte.",
+    "regles": [
+      "But : se souvenir de l'histoire qui se construit au fil des cartes le plus longtemps possible.",
+      "Les joueurs composent ensemble une petite histoire en ajoutant des cartes (personnages, objets…).",
+      "À son tour, on doit répéter les éléments déjà posés dans le bon ordre avant d'ajouter le sien.",
+      "Se tromper ou oublier un élément fait sortir de la manche.",
+      "On marque des points en tenant l'histoire le plus longtemps ; le meilleur mémorisateur gagne."
+    ],
     "editeur": "Gigamic"
   },
   {
@@ -3474,6 +3994,26 @@
     "editeur": "Gigamic"
   },
   {
+    "id": "monopoly",
+    "nom": "Monopoly",
+    "description": "Achetez, construisez et ruinez vos adversaires dans ce grand classique immobilier.",
+    "joueursMin": 2,
+    "joueursMax": 8,
+    "dureeMin": 90,
+    "ageMin": 8,
+    "categorie": "Familial",
+    "editeur": "Hasbro",
+    "regles": [
+      "But : être le dernier joueur solvable en bâtissant un empire immobilier.",
+      "On avance sur le plateau avec deux dés, on achète terrains, gares et compagnies, et on perçoit des loyers.",
+      "Réunir une famille de couleurs permet de construire maisons et hôtels, qui font grimper les loyers.",
+      "Cases Chance, Caisse de communauté, taxes et Prison rythment la partie.",
+      "Un joueur en faillite est éliminé ; le dernier en jeu l'emporte."
+    ],
+    "scoreVictoire": "max",
+    "scoreMode": "objectif"
+  },
+  {
     "id": "mymurdermystery",
     "nom": "My Murder Mystery",
     "categorie": "Enquête",
@@ -3539,6 +4079,26 @@
     ],
     "image": "https://www.gigamic.com/4557-home_default/my-murder-mystery-protocole-final.jpg",
     "editeur": "Gigamic"
+  },
+  {
+    "id": "mysterium",
+    "nom": "Mysterium",
+    "description": "Un fantôme muet guide des médiums pour élucider un meurtre, avant l'aube.",
+    "joueursMin": 2,
+    "joueursMax": 7,
+    "dureeMin": 45,
+    "ageMin": 10,
+    "categorie": "Coopératif",
+    "editeur": "Libellud",
+    "regles": [
+      "But (coopératif) : ensemble, résoudre le crime avant la fin du temps imparti.",
+      "Un joueur incarne le fantôme, muet ; les autres sont des médiums.",
+      "Le fantôme envoie à chaque médium des cartes « visions » oniriques ; chacun les interprète pour deviner SON suspect, PUIS son lieu, PUIS son arme.",
+      "À mesure que les médiums progressent, l'enquête avance nuit après nuit.",
+      "À la fin, un dernier vote commun désigne le coupable ; toute la table gagne ou perd ensemble."
+    ],
+    "scoreVictoire": "max",
+    "scoreMode": "cooperatif"
   },
   {
     "id": "medievallons",
@@ -3642,6 +4202,27 @@
     "type": "edition",
     "jeuParent": "naishi",
     "image": "https://www.gigamic.com/4446-home_default/naishi-legendes-et-voyageurs.jpg",
+    "editeur": "Gigamic"
+  },
+  {
+    "id": "nautilus-island",
+    "nom": "Nautilus Island",
+    "categorie": "Familial",
+    "joueursMin": 2,
+    "joueursMax": 4,
+    "dureeMin": 20,
+    "ageMin": 8,
+    "scoreMode": "compteur",
+    "scoreVictoire": "max",
+    "image": "https://www.gigamic.com/2246-home_default/nautilus-island.jpg",
+    "description": "Naufragés sur une île volcanique, réparez le sous-marin Nautilus pour vous échapper avant les autres.",
+    "regles": [
+      "But : être le premier naufragé à réunir de quoi remettre le Nautilus en marche et quitter l'île.",
+      "À son tour, on explore les différents recoins du sous-marin pour récupérer objets et ressources.",
+      "On combine ce que l'on collecte pour réparer le sous-marin et progresser vers l'évasion.",
+      "Il faut aller plus vite que les autres naufragés, qui visent le même objectif.",
+      "Le premier à réunir tout le nécessaire et à s'échapper remporte la partie."
+    ],
     "editeur": "Gigamic"
   },
   {
@@ -4057,6 +4638,26 @@
     "editeur": "Gigamic"
   },
   {
+    "id": "patchwork",
+    "nom": "Patchwork",
+    "description": "Un duel malin : composez le plus beau couvre-lit en assemblant des pièces de tissu.",
+    "joueursMin": 2,
+    "joueursMax": 2,
+    "dureeMin": 30,
+    "ageMin": 8,
+    "categorie": "Réflexion",
+    "editeur": "Funforge",
+    "regles": [
+      "But (jeu à 2) : obtenir le meilleur score en remplissant sa grille 9×9 de pièces de tissu.",
+      "On achète l'une des trois pièces situées devant le pion temps, en payant des boutons et en avançant sur la piste du temps.",
+      "C'est toujours le joueur le plus en arrière sur la piste du temps qui rejoue.",
+      "Compléter en premier un carré de 7×7 rapporte un bonus.",
+      "En fin de partie, le score vaut les boutons possédés moins 2 points par case vide de la grille ; le plus haut gagne."
+    ],
+    "scoreVictoire": "max",
+    "scoreMode": "compteur"
+  },
+  {
     "id": "pickomino",
     "nom": "Pickomino",
     "description": "Stop ou encore aux dés pour rafler les tuiles les plus riches en vers.",
@@ -4139,6 +4740,28 @@
       "À la fin, le joueur qui a récupéré le plus de cartes remporte la partie."
     ],
     "image": "https://www.gigamic.com/1367-home_default/pippo.jpg",
+    "editeur": "Gigamic"
+  },
+  {
+    "id": "pique-plume",
+    "nom": "Pique Plume",
+    "categorie": "Enfants",
+    "joueursMin": 2,
+    "joueursMax": 4,
+    "dureeMin": 20,
+    "ageMin": 4,
+    "scoreMode": "objectif",
+    "scoreVictoire": "max",
+    "image": "https://www.gigamic.com/1491-home_default/pique-plume.jpg",
+    "description": "Un grand classique de mémoire : fais avancer ta poule et vole les plumes des autres.",
+    "regles": [
+      "But : faire le tour du poulailler et récupérer les plumes des autres poules.",
+      "Les poules avancent sur un parcours circulaire au centre duquel sont posées des tuiles face cachée.",
+      "À son tour, on retourne une tuile : si elle correspond à la case devant sa poule, on avance et on rejoue.",
+      "Il faut mémoriser l'emplacement des tuiles pour enchaîner les bons déplacements.",
+      "Quand une poule en rattrape une autre, elle lui vole ses plumes.",
+      "Le dernier joueur à conserver ses plumes (ou celui qui les rafle toutes) gagne."
+    ],
     "editeur": "Gigamic"
   },
   {
@@ -5408,6 +6031,48 @@
     "editeur": "Schmidt Spiele"
   },
   {
+    "id": "smallworld",
+    "nom": "Small World",
+    "description": "Des peuples fantastiques se disputent un monde bien trop petit pour eux tous.",
+    "joueursMin": 2,
+    "joueursMax": 5,
+    "dureeMin": 60,
+    "ageMin": 8,
+    "categorie": "Stratégie",
+    "editeur": "Days of Wonder",
+    "regles": [
+      "But : marquer le plus de pièces d'or en dominant le plus de régions possible, au bon moment.",
+      "On choisit un couple peuple + pouvoir spécial, puis on conquiert des régions en y plaçant assez de pions.",
+      "Chaque tour, on gagne des pièces selon le nombre de régions occupées.",
+      "Quand un peuple s'essouffle, on le met « en déclin » et on en prend un nouveau au tour suivant.",
+      "La partie dure un nombre fixe de tours ; le joueur le plus riche l'emporte."
+    ],
+    "scoreVictoire": "max",
+    "scoreMode": "compteur"
+  },
+  {
+    "id": "snakesss",
+    "nom": "Snakesss",
+    "description": "Un jeu de déduction et de manipulation : parmi vous se cachent des serpents qui connaissent déjà les réponses.",
+    "joueursMin": 3,
+    "joueursMax": 8,
+    "dureeMin": 30,
+    "ageMin": 12,
+    "categorie": "Bluff",
+    "editeur": "Gigamic",
+    "image": "https://www.gigamic.com/1874-home_default/snakesss.jpg",
+    "regles": [
+      "But : marquer des points au fil des manches — les humains en trouvant les bonnes réponses, les serpents en piégeant les humains.",
+      "Chaque manche, une question de culture générale à trois réponses possibles est lue à tous.",
+      "En secret, certains joueurs sont des serpents : ils ont vu la bonne réponse et vont tenter d’égarer les autres.",
+      "Une phase de discussion permet à chacun d’orienter (ou de désorienter) le groupe, puis tout le monde vote en secret pour une réponse.",
+      "Les humains marquent s’ils répondent juste, les serpents marquent quand des humains se trompent ; démasquer un serpent peut rapporter gros.",
+      "Après plusieurs manches, on additionne les points ; le meilleur score l’emporte."
+    ],
+    "scoreVictoire": "max",
+    "scoreMode": "compteur"
+  },
+  {
     "id": "solaciademonglace",
     "nom": "Solacia — Le Démon de glace",
     "categorie": "Aventure",
@@ -5779,6 +6444,26 @@
     "editeur": "Gigamic"
   },
   {
+    "id": "sushigo",
+    "nom": "Sushi Go!",
+    "description": "Composez le meilleur repas de sushis en attrapant les bonnes cartes au vol.",
+    "joueursMin": 2,
+    "joueursMax": 5,
+    "dureeMin": 20,
+    "ageMin": 8,
+    "categorie": "Cartes",
+    "editeur": "Cocktail Games",
+    "regles": [
+      "But : marquer le plus de points sur trois services en récoltant les meilleures combinaisons de plats.",
+      "Système de draft : chacun choisit une carte de sa main, la pose face cachée, puis tout le monde passe le reste de sa main à son voisin, simultanément.",
+      "Chaque plat marque à sa façon : makis au plus grand nombre, tempuras par paires, sashimis par trois, nigiris seuls ou boostés par le wasabi…",
+      "Les puddings ne comptent qu'en toute fin de partie.",
+      "Après trois manches, le plus de points l'emporte."
+    ],
+    "scoreVictoire": "max",
+    "scoreMode": "compteur"
+  },
+  {
     "id": "suspects",
     "nom": "Suspects",
     "categorie": "Enquête",
@@ -5860,6 +6545,47 @@
     "type": "edition",
     "jeuParent": "suspects",
     "image": "https://www.gigamic.com/3310-home_default/suspects-pocket-la-disparition-d-pr-fairchild.jpg",
+    "editeur": "Gigamic"
+  },
+  {
+    "id": "takenoko",
+    "nom": "Takenoko",
+    "description": "Cultivez une bambouseraie et régalez le panda impérial en réalisant vos objectifs.",
+    "joueursMin": 2,
+    "joueursMax": 4,
+    "dureeMin": 45,
+    "ageMin": 8,
+    "categorie": "Familial",
+    "editeur": "Bombyx",
+    "regles": [
+      "But : marquer le plus de points en accomplissant des objectifs de parcelles, de jardinier et de panda.",
+      "À son tour, on consulte la météo, puis on réalise 2 actions différentes.",
+      "Actions possibles : poser une nouvelle parcelle, aménager un canal d'irrigation, déplacer le jardinier (le bambou pousse) ou le panda (il mange le bambou), ou piocher une carte objectif.",
+      "Un objectif rempli (agencement de parcelles, bambous cultivés, bambous mangés) rapporte ses points.",
+      "Quand un joueur a validé le nombre d'objectifs requis, on termine le tour ; le plus de points gagne."
+    ],
+    "scoreVictoire": "max",
+    "scoreMode": "compteur"
+  },
+  {
+    "id": "talaref",
+    "nom": "Talaref",
+    "categorie": "Ambiance",
+    "joueursMin": 3,
+    "joueursMax": 10,
+    "dureeMin": 30,
+    "ageMin": 14,
+    "scoreMode": "compteur",
+    "scoreVictoire": "max",
+    "image": "https://www.gigamic.com/2071-home_default/talaref.jpg",
+    "description": "Un quiz d'ambiance sur la culture pop des années 90 et 2000.",
+    "regles": [
+      "But : accumuler le plus de « Ref' » en brillant sur la culture des années 90 et 2000.",
+      "À tour de rôle, on répond à des questions et défis sur la musique, les séries, la pub et les objets cultes de l'époque.",
+      "On peut jouer chacun pour soi ou en équipes.",
+      "On peut défier un adversaire : le gagnant du duel remporte les cartes de l'autre.",
+      "Le joueur (ou l'équipe) avec le plus de « Ref' » à la fin gagne."
+    ],
     "editeur": "Gigamic"
   },
   {
@@ -5947,6 +6673,26 @@
     ],
     "image": "https://www.gigamic.com/818-home_default/tantrix.jpg",
     "editeur": "Gigamic"
+  },
+  {
+    "id": "terraformingmars",
+    "nom": "Terraforming Mars",
+    "description": "Menez une corporation qui rend Mars habitable, siècle après siècle.",
+    "joueursMin": 1,
+    "joueursMax": 5,
+    "dureeMin": 100,
+    "ageMin": 12,
+    "categorie": "Stratégie",
+    "editeur": "Intrafin Games",
+    "regles": [
+      "But : marquer le plus de points en participant à la terraformation de Mars et au développement de sa société.",
+      "On joue des cartes projet, payées en méga-crédits et ressources, qui augmentent sa production et améliorent la planète.",
+      "On pose des tuiles sur la carte : océans, espaces verts (oxygène) et cités.",
+      "Faire monter température, oxygène et océans augmente sa « note de terraformation », base du score.",
+      "La partie se termine quand les trois paramètres globaux sont au maximum ; on compte alors note de terraformation, récompenses, tuiles et cartes."
+    ],
+    "scoreVictoire": "max",
+    "scoreMode": "compteur"
   },
   {
     "id": "tetaki",
@@ -6201,6 +6947,47 @@
     ],
     "image": "https://www.gigamic.com/4196-home_default/tulikko.jpg",
     "editeur": "Gigamic"
+  },
+  {
+    "id": "une-patate-a-velo",
+    "nom": "Une patate à vélo",
+    "categorie": "Enfants",
+    "joueursMin": 2,
+    "joueursMax": 4,
+    "dureeMin": 15,
+    "ageMin": 4,
+    "scoreMode": "cooperatif",
+    "scoreVictoire": "max",
+    "image": "https://www.gigamic.com/1560-home_default/une-patate-a-velo.jpg",
+    "description": "Un jeu coopératif rigolo pour les petits : cette drôle de combinaison est-elle possible ou impossible ?",
+    "regles": [
+      "Jeu coopératif : tout le monde gagne ou perd ensemble.",
+      "On révèle une carte associant deux éléments, formant une situation plus ou moins farfelue.",
+      "Chacun vote en secret pour dire si la combinaison est possible ou impossible, puis tout le monde révèle en même temps.",
+      "Si tous les joueurs sont d'accord, la patate avance d'une case sur son parcours.",
+      "L'équipe gagne si la patate atteint la case 8 ou au-delà."
+    ],
+    "editeur": "Gigamic"
+  },
+  {
+    "id": "uno",
+    "nom": "Uno",
+    "description": "Le grand classique des cartes : videz votre main avant tout le monde.",
+    "joueursMin": 2,
+    "joueursMax": 10,
+    "dureeMin": 20,
+    "ageMin": 7,
+    "categorie": "Cartes",
+    "editeur": "Mattel",
+    "regles": [
+      "But : se défausser de toutes ses cartes, et marquer les points des cartes restantes chez les adversaires.",
+      "On pose une carte de même couleur ou même valeur que la carte du dessus.",
+      "Les cartes spéciales font piocher, passer un tour, inverser le sens ou changer de couleur.",
+      "Quand il ne reste qu'une carte en main, il faut annoncer « Uno ! » sous peine de pénalité.",
+      "Le gagnant d'une manche marque la valeur des cartes des autres ; on joue jusqu'à un total convenu (souvent 500)."
+    ],
+    "scoreVictoire": "max",
+    "scoreMode": "manches"
   },
   {
     "id": "varuna",
@@ -6531,6 +7318,26 @@
     "jeuParent": "wazabi",
     "image": "https://www.gigamic.com/1305-home_default/wazabi-extension-supplement-piment.jpg",
     "editeur": "Gigamic"
+  },
+  {
+    "id": "wingspan",
+    "nom": "Wingspan",
+    "description": "Attirez de magnifiques oiseaux dans les habitats de votre réserve naturelle.",
+    "joueursMin": 1,
+    "joueursMax": 5,
+    "dureeMin": 60,
+    "ageMin": 10,
+    "categorie": "Stratégie",
+    "editeur": "Matagot",
+    "regles": [
+      "But : accumuler le plus de points en développant un moteur d'oiseaux sur trois habitats (forêt, prairie, cours d'eau).",
+      "À son tour, une action parmi : jouer un oiseau, gagner de la nourriture, pondre des œufs, ou piocher des cartes oiseaux — chaque action active en chaîne les pouvoirs des oiseaux déjà posés dans la rangée.",
+      "La partie dure 4 manches, avec une action de moins à chaque manche.",
+      "Un objectif de fin de manche récompense certains oiseaux, œufs ou nids.",
+      "Points en fin de partie : valeur des oiseaux, œufs, nourriture cachée, cartes bonus et objectifs."
+    ],
+    "scoreVictoire": "max",
+    "scoreMode": "compteur"
   },
   {
     "id": "winkybilly",
