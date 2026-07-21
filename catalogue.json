@@ -4107,6 +4107,27 @@
     "editeur": "Gigamic"
   },
   {
+    "id": "lache-pas-la-savonette",
+    "nom": "Lâche pas la savonette",
+    "editeur": "Don't Panic Games",
+    "categorie": "Bluff",
+    "joueursMin": 3,
+    "joueursMax": 6,
+    "dureeMin": 15,
+    "ageMin": 16,
+    "scoreMode": "objectif",
+    "scoreVictoire": "max",
+    "image": "https://www.bcd-jeux.fr/11041-medium_default/lache-pas-la-savonette-don-t-panic-games.jpg",
+    "description": "Un jeu de bluff déjanté en prison : refilez la savonette aux autres et ne restez surtout pas avec.",
+    "regles": [
+      "But : ne pas être celui qui se retrouve coincé avec la savonette à la fin.",
+      "Les joueurs incarnent des détenus qui cherchent à se débarrasser d'une savonette compromettante.",
+      "À son tour, on joue des cartes pour refiler la savonette ou piéger les autres, à coups de bluff et de coups bas.",
+      "Trahisons et retournements de situation s'enchaînent jusqu'au dénouement.",
+      "Le joueur bloqué avec la savonette perd la manche. Humour réservé aux adultes."
+    ]
+  },
+  {
     "id": "machupichu",
     "nom": "Machu Pichu",
     "categorie": "Rapidité",
@@ -6435,6 +6456,28 @@
     ],
     "image": "https://www.gigamic.com/4426-home_default/shape-it.jpg",
     "editeur": "Gigamic"
+  },
+  {
+    "id": "shit-happens",
+    "nom": "Shit Happens",
+    "editeur": "Goliath",
+    "categorie": "Ambiance",
+    "joueursMin": 2,
+    "joueursMax": 9,
+    "dureeMin": 20,
+    "ageMin": 18,
+    "scoreMode": "compteur",
+    "scoreVictoire": "max",
+    "seuilFin": 10,
+    "image": "https://cdn1.philibertnet.com/383949/shit-happens-8711808765245.jpg",
+    "description": "Un jeu d'ambiance pour adultes : classez les pires galères de la vie sur l'échelle de la poisse.",
+    "regles": [
+      "But : être le premier à réunir 10 cartes en évaluant la gravité des situations.",
+      "Chaque carte décrit une galère notée sur le « Shit-o-mètre », de 1 (bénin) à 100 (catastrophe).",
+      "À son tour, on pioche une carte et on doit la placer au bon endroit dans la file des galères déjà classées.",
+      "Si la valeur cachée confirme le bon placement, on remporte la carte ; sinon elle est défaussée.",
+      "Le premier à collecter 10 cartes gagne. Jeu réservé à un public adulte."
+    ]
   },
   {
     "id": "similo",
