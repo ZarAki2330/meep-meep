@@ -2,12 +2,13 @@
 
 Liste des fonctionnalités à faire et des améliorations.
 
-**Progression : 83 / 96 — 86 %**
+**Progression : 83 / 98 — 85 %**
 
 `█████████████████░░░`
 
 ## Bugs à corriger
 
+- [ ] **Fond blanc automatique manquant sur certaines images** — le fond blanc n'est déclenché que pour les fichiers `.png` dans `components/visuel-jeu.tsx`. Une image non-PNG affichée en entier (avec des bandes) ou détourée montre alors la tuile colorée au lieu du blanc. Revoir la détection (par ex. appliquer le fond blanc dès qu'on affiche en « contain », quelle que soit l'extension). Lié à l'uniformisation ci-dessous.
 - [ ] **Barre de navigation (Android) transparente seulement après un aller-retour dans l'app** — au lancement, la barre du bas n'est pas transparente ; elle le devient quand on quitte l'app puis qu'on y revient. Le style est donc appliqué au retour au premier plan mais pas (ou trop tôt) au démarrage. Piste : ré-appliquer la config barre système (`SystemUI.setBackgroundColorAsync` + `NavigationBar.setButtonStyleAsync`) sur l'événement `AppState` « active » et/ou après le premier rendu, dans `app/_layout.tsx`.
 
 ## Priorité haute
@@ -28,6 +29,7 @@ Liste des fonctionnalités à faire et des améliorations.
 - [ ] **Ajouter de nouveaux jeux au catalogue** _(tâche récurrente)_ — enrichir régulièrement `catalogue.json` : nouvelles sorties, gammes complétées, et finalisation des fiches provisoires (voir `claude/gigamic-fiches-provisoires.md`).
 - [ ] **Petite animation de chargement** — afficher un indicateur discret (spinner/animation) pendant qu'une page charge ses données, notamment « Ajouter un jeu tout prêt » (le temps que le catalogue distant arrive) et partout où l'attente est perceptible.
 - [ ] **Afficher les règles officielles en PDF dans l'app** — se renseigner sur la faisabilité d'intégrer et d'afficher un PDF de règles directement dans la fiche du jeu (visionneuse embarquée, stockage, droits).
+- [ ] **Uniformiser l'affichage des images** — montrer toutes les images « dézoomées », en entier (`contentFit: "contain"` dans `components/visuel-jeu.tsx`), pour voir l'ensemble de la boîte du jeu comme sur les visuels Gigamic, au lieu de les rogner (`cover`). À coordonner avec le fond blanc automatique (les bandes autour d'une image « contain » doivent être blanches, pas la tuile colorée).
 - [ ] **Améliorer les interfaces de l'app** — soigner les écrans, par ex. les personnages dans les jeux : une photo ou un logo par personnage.
 - [ ] **Revoir le design de l'application et le logo** — rafraîchir l'identité visuelle : maquette globale (couleurs, typographie, écrans clés) et refonte du logo Meep Meep.
 

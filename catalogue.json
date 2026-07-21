@@ -38,7 +38,7 @@
       "Des cartes Pouvoir permettent d'échanger ou de voler des cartes à un adversaire pour l'aider à descendre.",
       "Dès qu'on pense avoir un total de 5 ou moins, on annonce « 5 ou moins » et on parie d'avoir le plus petit score ; si c'est vrai, on marque 0 pour la manche et les autres comptent leurs cartes restantes."
     ],
-    "image": "https://www.gigamic.com/4669-large_default/5-ou-moins.jpg",
+    "image": "https://www.gigamic.com/4669-home_default/5-ou-moins.jpg",
     "editeur": "Gigamic"
   },
   {
@@ -574,7 +574,7 @@
     ],
     "type": "edition",
     "jeuParent": "bellevue",
-    "image": "https://www.gigamic.com/4672-large_default/bellevue-parthenay.jpg",
+    "image": "https://www.gigamic.com/4672-home_default/bellevue-parthenay.jpg",
     "editeur": "Gigamic"
   },
   {
@@ -2152,7 +2152,7 @@
       "Une pièce avance d'autant de cases que sa taille (1, 2 ou 3) ; en arrivant sur une autre pièce, on peut rebondir et poursuivre avec elle.",
       "But : amener n'importe quelle pièce sur la case « but » adverse."
     ],
-    "image": "https://www.gigamic.com/129-large_default/gyges.jpg",
+    "image": "https://www.gigamic.com/129-home_default/gyges.jpg",
     "editeur": "Gigamic"
   },
   {
@@ -3579,7 +3579,7 @@
       "Il faut relier les éléments pour progresser dans cette quête intérieure, contemplative et poétique.",
       "L'aventure s'achève lorsque les souvenirs perdus sont retrouvés."
     ],
-    "image": "https://www.gigamic.com/4622-large_default/memoires-d-une-chamane.jpg",
+    "image": "https://www.gigamic.com/4622-home_default/memoires-d-une-chamane.jpg",
     "editeur": "Gigamic"
   },
   {
@@ -3808,7 +3808,7 @@
       "Le temps presse : le rival cherche les mêmes gemmes en parallèle.",
       "Le premier à localiser correctement toutes les gemmes l'emporte."
     ],
-    "image": "https://www.gigamic.com/4410-large_default/orapa-mine.jpg",
+    "image": "https://www.gigamic.com/4410-home_default/orapa-mine.jpg",
     "editeur": "Gigamic"
   },
   {
@@ -5423,7 +5423,7 @@
       "Cette boîte propose une affaire particulière : une aventure glaciale.",
       "Fiche provisoire : les règles détaillées seront ajoutées à partir du règlement officiel."
     ],
-    "image": "https://www.gigamic.com/4537-large_default/solacia-le-demon-de-glace.jpg",
+    "image": "https://www.gigamic.com/4537-home_default/solacia-le-demon-de-glace.jpg",
     "editeur": "Gigamic"
   },
   {
@@ -5442,7 +5442,7 @@
       "Cette boîte propose une affaire particulière : une aventure ensorcelée.",
       "Fiche provisoire : les règles détaillées seront ajoutées à partir du règlement officiel."
     ],
-    "image": "https://www.gigamic.com/4533-large_default/solacia-le-sorcier-maudit.jpg",
+    "image": "https://www.gigamic.com/4533-home_default/solacia-le-sorcier-maudit.jpg",
     "editeur": "Gigamic"
   },
   {
