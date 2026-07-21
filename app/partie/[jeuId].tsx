@@ -197,9 +197,28 @@ export default function Partie() {
         renderItem={({ item, index }) => {
           const enTete = !tousEgaux && item.score === meilleur;
           const couleur = COULEURS[index % COULEURS.length];
+          // Rang du joueur selon le sens du score (les ex æquo partagent le rang).
+          const rang =
+            joueurs.filter((j) =>
+              sens === "min" ? j.score < item.score : j.score > item.score,
+            ).length + 1;
           return (
             <View style={[styles.carte, enTete && styles.carteEnTete]}>
               <View style={styles.ligneHaut}>
+                {!tousEgaux && (
+                  <View
+                    style={[styles.rang, rang === 1 && styles.rangPremier]}
+                    accessibilityElementsHidden
+                    importantForAccessibility="no-hide-descendants"
+                  >
+                    <Text
+                      style={[styles.rangTexte, rang === 1 && styles.rangTextePremier]}
+                      allowFontScaling={false}
+                    >
+                      {rang}
+                    </Text>
+                  </View>
+                )}
                 <AvatarJoueur
                   nom={item.nom}
                   photo={photoDe(item.nom)}
@@ -375,6 +394,19 @@ function makeStyles(c: AppColors) {
     },
     carteEnTete: { borderColor: c.success, borderWidth: 2 },
     ligneHaut: { flexDirection: "row", alignItems: "center", gap: 10 },
+    rang: {
+      width: 26,
+      height: 26,
+      borderRadius: 13,
+      backgroundColor: c.surfaceAlt,
+      borderWidth: 1,
+      borderColor: c.border,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    rangPremier: { backgroundColor: c.success, borderColor: c.success },
+    rangTexte: { fontSize: 13, fontWeight: "700", color: c.textSecondary },
+    rangTextePremier: { color: c.onAccent },
     nomInput: { flex: 1, fontSize: 16, fontWeight: "600", color: c.textPrimary, paddingVertical: 4 },
     supprimer: { color: c.textFaint, fontSize: 16, paddingHorizontal: 6 },
     membresBouton: {
