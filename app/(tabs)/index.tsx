@@ -334,9 +334,53 @@ export default function Catalogue() {
         contentContainerStyle={styles.liste}
         keyboardShouldPersistTaps="handled"
         ListEmptyComponent={
-          <View style={styles.vide}>
-            <Text style={styles.videTexte}>Aucun jeu ne correspond à ta recherche.</Text>
-          </View>
+          jeux.length === 0 ? (
+            // Ludothèque vide (premier lancement) : on invite à ajouter un jeu,
+            // plutôt que d'afficher un « aucun résultat » trompeur.
+            <View style={styles.vide}>
+              <View style={styles.videIcone} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
+                <IconSymbol name="die.face.5" size={40} color={colors.accentText} />
+              </View>
+              <Text style={styles.videTitre}>Ta ludothèque est vide</Text>
+              <Text style={styles.videTexte}>
+                Ajoute ton premier jeu pour commencer à jouer et à suivre tes scores.
+              </Text>
+              <TouchableOpacity
+                style={styles.videBouton}
+                activeOpacity={0.85}
+                accessibilityRole="button"
+                accessibilityLabel="Ajouter un jeu"
+                onPress={() => router.push("/import")}
+              >
+                <IconSymbol name="plus" size={18} color={colors.onAccent} />
+                <Text style={styles.videBoutonTexte}>Ajouter un jeu</Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            // Des jeux existent, mais la recherche ou les filtres ne renvoient rien.
+            <View style={styles.vide}>
+              <Text style={styles.videTitre}>Aucun résultat</Text>
+              <Text style={styles.videTexte}>
+                {recherche.trim()
+                  ? `Aucun jeu ne correspond à « ${recherche.trim()} ».`
+                  : "Aucun jeu ne correspond à ces filtres."}
+              </Text>
+              {(personnalise || recherche.trim().length > 0) && (
+                <TouchableOpacity
+                  style={styles.videBoutonLeger}
+                  activeOpacity={0.7}
+                  accessibilityRole="button"
+                  accessibilityLabel="Réinitialiser la recherche et les filtres"
+                  onPress={() => {
+                    reinitialiser();
+                    setRecherche("");
+                  }}
+                >
+                  <Text style={styles.videBoutonLegerTexte}>Réinitialiser</Text>
+                </TouchableOpacity>
+              )}
+            </View>
+          )
         }
         ListFooterComponent={
           jeuxAffiches.length > 0 ? (
@@ -612,8 +656,38 @@ function makeStyles(c: AppColors) {
       marginBottom: 8,
     },
     description: { fontSize: 14, color: c.textSecondary, lineHeight: 20 },
-    vide: { alignItems: "center", paddingTop: 60, paddingHorizontal: 24 },
-    videTexte: { fontSize: 15, color: c.textMuted, textAlign: "center" },
+    vide: { alignItems: "center", paddingTop: 56, paddingHorizontal: 24 },
+    videIcone: {
+      width: 76,
+      height: 76,
+      borderRadius: 38,
+      backgroundColor: c.accentSoft,
+      alignItems: "center",
+      justifyContent: "center",
+      marginBottom: 16,
+    },
+    videTitre: { fontSize: 18, fontWeight: "700", color: c.textPrimary, textAlign: "center", marginBottom: 6 },
+    videTexte: { fontSize: 15, color: c.textMuted, textAlign: "center", lineHeight: 21 },
+    videBouton: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 8,
+      backgroundColor: c.accent,
+      borderRadius: 12,
+      paddingVertical: 12,
+      paddingHorizontal: 20,
+      marginTop: 20,
+    },
+    videBoutonTexte: { color: c.onAccent, fontSize: 15, fontWeight: "600" },
+    videBoutonLeger: {
+      borderWidth: 1,
+      borderColor: c.borderStrong,
+      borderRadius: 12,
+      paddingVertical: 11,
+      paddingHorizontal: 20,
+      marginTop: 18,
+    },
+    videBoutonLegerTexte: { color: c.textSecondary, fontSize: 14, fontWeight: "600" },
     signature: { alignItems: "center", paddingTop: 8, paddingBottom: 4 },
     signatureTexte: { fontSize: 12, color: c.textMuted, letterSpacing: 0.3 },
   });
