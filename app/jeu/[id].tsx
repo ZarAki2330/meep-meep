@@ -14,6 +14,7 @@ import {
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
+import { AvatarRole } from "@/components/avatar-role";
 import { DialogueConfirmation } from "@/components/dialogue-confirmation";
 import { Entete } from "@/components/entete";
 import { PoweredByBgg } from "@/components/powered-by-bgg";
@@ -125,12 +126,24 @@ export default function FicheJeu() {
   // dans le jeu lui-même (rôles filtrés, façon Villainous) plus les extensions
   // installées comme jeux à part et rattachées à ce jeu. Les éditions n'en sont
   // pas : ce sont des variantes du même jeu, pas des ajouts à une partie.
-  const extensionsJouables = Array.from(
-    new Set([
-      ...(jeu.extensions ?? []),
-      ...declinaisons.filter((d) => d.type === "extension").map((d) => d.nom),
-    ]),
-  );
+  //
+  // Une même extension peut exister aux deux endroits : déclarée dans le jeu de
+  // base (« Mauvais jusqu'à l'os ») ET comme fiche rattachée (« Villainous :
+  // Mauvais jusqu'à l'os »). On enlève le préfixe « <nom du jeu> : » de la fiche
+  // pour ne pas la lister en double avec l'extension du jeu de base.
+  const nomsInline = jeu.extensions ?? [];
+  const cle = (s: string) => s.trim().toLowerCase();
+  const inlineSet = new Set(nomsInline.map(cle));
+  const prefixes = [`${jeu.nom} : `, `${jeu.nom} — `, `${jeu.nom} - `, `${jeu.nom}: `];
+  const formeCourte = (nom: string) => {
+    for (const p of prefixes) if (nom.startsWith(p)) return nom.slice(p.length);
+    return nom;
+  };
+  const extensionsDeclinaisons = declinaisons
+    .filter((d) => d.type === "extension")
+    .map((d) => formeCourte(d.nom))
+    .filter((n) => !inlineSet.has(cle(n)));
+  const extensionsJouables = Array.from(new Set([...nomsInline, ...extensionsDeclinaisons]));
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.page }}>
@@ -320,17 +333,20 @@ export default function FicheJeu() {
           {rolesOuverts &&
             rolesVisibles.map((role) => (
               <View key={role.nom} style={styles.roleCarte}>
-                <View style={styles.roleEntete}>
-                  <Text style={styles.roleNom}>{role.nom}</Text>
-                  {role.extension && <Text style={styles.roleBadge}>{role.extension}</Text>}
+                <AvatarRole role={role} taille={46} />
+                <View style={styles.roleCorps}>
+                  <View style={styles.roleEntete}>
+                    <Text style={styles.roleNom}>{role.nom}</Text>
+                    {role.extension && <Text style={styles.roleBadge}>{role.extension}</Text>}
+                  </View>
+                  {role.origine && <Text style={styles.roleOrigine}>{role.origine}</Text>}
+                  {role.objectif && (
+                    <Text style={styles.roleObjectif}>
+                      <Text style={styles.roleObjectifLabel}>Objectif : </Text>
+                      {role.objectif}
+                    </Text>
+                  )}
                 </View>
-                {role.origine && <Text style={styles.roleOrigine}>{role.origine}</Text>}
-                {role.objectif && (
-                  <Text style={styles.roleObjectif}>
-                    <Text style={styles.roleObjectifLabel}>Objectif : </Text>
-                    {role.objectif}
-                  </Text>
-                )}
               </View>
             ))}
         </>
@@ -480,6 +496,9 @@ function makeStyles(c: AppColors) {
     },
     regleTexte: { flex: 1, fontSize: 15, color: c.textSecondary, lineHeight: 22 },
     roleCarte: {
+      flexDirection: "row",
+      alignItems: "flex-start",
+      gap: 12,
       backgroundColor: c.surface,
       borderRadius: 12,
       borderWidth: 1,
@@ -487,6 +506,7 @@ function makeStyles(c: AppColors) {
       padding: 14,
       marginBottom: 10,
     },
+    roleCorps: { flex: 1 },
     roleEntete: { flexDirection: "row", alignItems: "center", justifyContent: "space-between" },
     roleNom: { fontSize: 16, fontWeight: "600", color: c.textPrimary, flex: 1 },
     roleBadge: {
