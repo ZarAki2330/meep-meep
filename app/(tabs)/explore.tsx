@@ -186,6 +186,12 @@ export default function Historique() {
     return Object.entries(victoires).sort((a, b) => b[1] - a[1])[0];
   }, [partiesFiltrees]);
 
+  // Nombre de jeux distincts parmi les parties affichées.
+  const nbJeux = useMemo(
+    () => new Set(partiesFiltrees.map((p) => p.jeu_nom)).size,
+    [partiesFiltrees],
+  );
+
   return (
     <SafeAreaView style={styles.page} edges={["top"]}>
       <View style={styles.header}>
@@ -282,12 +288,21 @@ export default function Historique() {
       {total > 0 && (
         <View style={styles.stats}>
           <View style={styles.statBloc}>
+            <IconSymbol name="clock.fill" size={16} color={colors.accentText} />
             <Text style={styles.statValeur}>{total}</Text>
-            <Text style={styles.statLabel}>parties jouées</Text>
+            <Text style={styles.statLabel}>partie{total > 1 ? "s" : ""}</Text>
           </View>
           <View style={styles.statBloc}>
-            <Text style={styles.statValeur}>{meilleur ? meilleur[0] : "—"}</Text>
-            <Text style={styles.statLabel}>
+            <IconSymbol name="die.face.5" size={16} color={colors.accentText} />
+            <Text style={styles.statValeur}>{nbJeux}</Text>
+            <Text style={styles.statLabel}>jeu{nbJeux > 1 ? "x" : ""}</Text>
+          </View>
+          <View style={styles.statBloc}>
+            <IconSymbol name="star.fill" size={16} color={colors.accentText} />
+            <Text style={styles.statValeur} numberOfLines={1}>
+              {meilleur ? meilleur[0] : "—"}
+            </Text>
+            <Text style={styles.statLabel} numberOfLines={1}>
               {meilleur ? `${meilleur[1]} victoire${meilleur[1] > 1 ? "s" : ""}` : "meilleur joueur"}
             </Text>
           </View>
@@ -322,12 +337,15 @@ export default function Historique() {
         keyboardShouldPersistTaps="handled"
         ListEmptyComponent={
           <View style={styles.vide}>
+            <View style={styles.videIcone} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
+              <IconSymbol name="clock.fill" size={38} color={colors.accentText} />
+            </View>
             <Text style={styles.videTitre}>
               {parties.length === 0 ? "Aucune partie pour l'instant" : "Aucun résultat"}
             </Text>
             <Text style={styles.videTexte}>
               {parties.length === 0
-                ? "Termine une partie depuis un jeu et elle apparaîtra ici."
+                ? "Termine une partie depuis un jeu et elle apparaîtra ici, avec tes statistiques."
                 : "Aucune partie ne correspond à ta recherche."}
             </Text>
           </View>
@@ -891,7 +909,7 @@ function makeStyles(c: AppColors) {
 
     stats: { flexDirection: "row", gap: 12, paddingHorizontal: 16, marginBottom: 8 },
     statBloc: { flex: 1, backgroundColor: c.surfaceAlt, borderRadius: 12, padding: 12 },
-    statValeur: { fontSize: 20, fontWeight: "700", color: c.textPrimary },
+    statValeur: { fontSize: 20, fontWeight: "700", color: c.textPrimary, marginTop: 6 },
     statLabel: { fontSize: 12, color: c.textMuted, marginTop: 2 },
     liste: { paddingHorizontal: 16, paddingBottom: 24, flexGrow: 1 },
     carte: {
@@ -949,7 +967,16 @@ function makeStyles(c: AppColors) {
     score: { fontSize: 13, color: c.textMuted, marginTop: 2 },
     effacer: { padding: 6 },
     effacerTexte: { color: c.textFaint, fontSize: 15 },
-    vide: { alignItems: "center", justifyContent: "center", paddingTop: 80, paddingHorizontal: 24 },
+    vide: { alignItems: "center", justifyContent: "center", paddingTop: 72, paddingHorizontal: 24 },
+    videIcone: {
+      width: 72,
+      height: 72,
+      borderRadius: 36,
+      backgroundColor: c.accentSoft,
+      alignItems: "center",
+      justifyContent: "center",
+      marginBottom: 16,
+    },
     videTitre: { fontSize: 17, fontWeight: "600", color: c.textPrimary, marginBottom: 6 },
     videTexte: { fontSize: 14, color: c.textMuted, textAlign: "center", lineHeight: 20 },
 
