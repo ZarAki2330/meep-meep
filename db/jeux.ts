@@ -18,6 +18,7 @@ type Row = {
   editeur: string | null;
   image: string;
   regles: string;
+  regles_url: string | null;
   score_victoire: string;
   seuil_fin: number | null;
   score_mode: string | null;
@@ -63,6 +64,7 @@ function rowVersJeu(r: Row): Jeu {
     editeur: r.editeur ?? undefined,
     image: r.image,
     regles: parseJson<string[]>(r.regles, []),
+    reglesUrl: r.regles_url ?? undefined,
     scoreVictoire: r.score_victoire === "min" ? "min" : "max",
     seuilFin: r.seuil_fin ?? undefined,
     scoreMode: mode,
@@ -87,8 +89,8 @@ export async function ajouterJeu(j: Jeu) {
   const db = await getDb();
   await db.runAsync(
     `INSERT OR REPLACE INTO jeux
-      (id, nom, description, joueurs_min, joueurs_max, duree_min, age_min, categorie, editeur, image, regles, score_victoire, seuil_fin, score_mode, categories, bonus, equipes, extensions, roles, roles_partageables, jeu_type, jeu_parent)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      (id, nom, description, joueurs_min, joueurs_max, duree_min, age_min, categorie, editeur, image, regles, regles_url, score_victoire, seuil_fin, score_mode, categories, bonus, equipes, extensions, roles, roles_partageables, jeu_type, jeu_parent)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       j.id,
       j.nom,
@@ -101,6 +103,7 @@ export async function ajouterJeu(j: Jeu) {
       j.editeur ?? null,
       j.image ?? "",
       JSON.stringify(j.regles),
+      j.reglesUrl ?? null,
       j.scoreVictoire,
       j.seuilFin ?? null,
       j.scoreMode ?? "compteur",
@@ -122,18 +125,22 @@ export async function supprimerJeu(id: string) {
 }
 
 /**
- * Met à jour les métadonnées « gérées par le catalogue » — l'éditeur et la photo —
- * des jeux déjà en base, à partir du catalogue distant. On ne touche qu'à ces deux
- * champs, et seulement pour les jeux dont l'identifiant existe dans le catalogue :
- * les jeux ajoutés à la main (identifiant « perso… ») ne sont jamais concernés, et
- * le reste de la fiche (règles, personnages, mode de score…) reste intact.
+ * Met à jour les métadonnées « gérées par le catalogue » — l'éditeur, la photo et
+ * le lien des règles officielles — des jeux déjà en base, à partir du catalogue
+ * distant. On ne touche qu'à ces champs, et seulement pour les jeux dont
+ * l'identifiant existe dans le catalogue : les jeux ajoutés à la main (identifiant
+ * « perso… ») ne sont jamais concernés, et le reste de la fiche (règles,
+ * personnages, mode de score…) reste intact.
  * Renvoie le nombre de jeux effectivement modifiés.
  */
 export async function synchroniserDepuisCatalogue(catalogue: Jeu[]): Promise<number> {
   const db = await getDb();
-  const existants = await db.getAllAsync<{ id: string; editeur: string | null; image: string }>(
-    "SELECT id, editeur, image FROM jeux",
-  );
+  const existants = await db.getAllAsync<{
+    id: string;
+    editeur: string | null;
+    image: string;
+    regles_url: string | null;
+  }>("SELECT id, editeur, image, regles_url FROM jeux");
   const parId = new Map(existants.map((r) => [r.id, r]));
 
   let modifies = 0;
@@ -142,11 +149,18 @@ export async function synchroniserDepuisCatalogue(catalogue: Jeu[]): Promise<num
     if (!actuel) continue;
     const editeur = j.editeur ?? null;
     const image = j.image ?? "";
-    // Rien à écrire si les deux champs sont déjà à jour.
-    if ((actuel.editeur ?? null) === editeur && (actuel.image ?? "") === image) continue;
-    await db.runAsync("UPDATE jeux SET editeur = ?, image = ? WHERE id = ?", [
+    const reglesUrl = j.reglesUrl ?? null;
+    // Rien à écrire si les trois champs sont déjà à jour.
+    if (
+      (actuel.editeur ?? null) === editeur &&
+      (actuel.image ?? "") === image &&
+      (actuel.regles_url ?? null) === reglesUrl
+    )
+      continue;
+    await db.runAsync("UPDATE jeux SET editeur = ?, image = ?, regles_url = ? WHERE id = ?", [
       editeur,
       image,
+      reglesUrl,
       j.id,
     ]);
     modifies++;

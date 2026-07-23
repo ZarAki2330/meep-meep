@@ -64,6 +64,7 @@ export function getDb() {
         "jeu_type TEXT",
         "jeu_parent TEXT",
         "editeur TEXT",
+        "regles_url TEXT",
       ]) {
         try {
           await db.execAsync(`ALTER TABLE jeux ADD COLUMN ${colonne};`);
