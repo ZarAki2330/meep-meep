@@ -364,7 +364,7 @@ export default function FicheJeu() {
               accessibilityLabel="Ouvrir les règles officielles"
               onPress={() => Linking.openURL(jeu.reglesUrl!).catch(() => {})}
             >
-              <IconSymbol name="square.and.arrow.up" size={16} color={colors.accentText} />
+              <IconSymbol name="eye" size={18} color={colors.accentText} />
               <Text style={styles.reglesOfficiellesTexte}>Règles officielles (éditeur)</Text>
               <Text style={styles.reglesOfficiellesFleche}>↗</Text>
             </TouchableOpacity>

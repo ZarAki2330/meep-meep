@@ -41,6 +41,7 @@ const MAPPING = {
   'questionmark': 'help-outline',
   'clock': 'schedule',
   'birthday.cake': 'cake',
+  'eye': 'visibility',
 } as IconMapping;
 
 /**
