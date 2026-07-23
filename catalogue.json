@@ -18,7 +18,8 @@
       "Décompte : une carte d'une couleur vaut 1 point, deux cartes 5 points, les cartes en trop comptent en négatif ; le joueur au plus grand total gagne."
     ],
     "image": "https://www.gigamic.com/4461-home_default/2-sans-3.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=150"
   },
   {
     "id": "5oumoins",
@@ -60,7 +61,8 @@
       "À la fin des 10 cartes, chacun note ses têtes de bœuf.",
       "Dès qu'un joueur atteint 66, la partie s'arrête : le joueur avec le MOINS de points gagne."
     ],
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=56"
   },
   {
     "id": "6quiprendanniversaire",
@@ -191,7 +193,8 @@
       "On découvre au passage des choses inattendues sur ses proches (thèmes réservés aux adultes).",
       "Après plusieurs manches, le joueur au plus haut score l'emporte."
     ],
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=362"
   },
   {
     "id": "akropolis",
@@ -213,7 +216,8 @@
       "En fin de partie, on additionne la valeur des quartiers et la Pierre restante : le plus de points l'emporte."
     ],
     "image": "https://www.gigamic.com/1835-home_default/akropolis.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=297"
   },
   {
     "id": "akropolisathena",
@@ -322,7 +326,8 @@
       "L'équipe gagne si les fossiles et les étoiles sont réunis à temps."
     ],
     "image": "https://www.gigamic.com/3922-home_default/archeo.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=631"
   },
   {
     "id": "ark-nova",
@@ -364,7 +369,8 @@
       "Le groupe marque d'autant plus de points qu'il a bien deviné l'ordre."
     ],
     "image": "https://www.gigamic.com/4232-home_default/au-pif.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=696"
   },
   {
     "id": "audimat",
@@ -406,7 +412,8 @@
       "La tribu la plus prospère, avec le meilleur score, l'emporte."
     ],
     "image": "https://www.gigamic.com/1977-home_default/aurignac.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=314"
   },
   {
     "id": "aurum",
@@ -427,7 +434,8 @@
       "Après le nombre de manches prévu, le joueur au meilleur total l'emporte."
     ],
     "image": "https://www.gigamic.com/3174-home_default/aurum.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=527"
   },
   {
     "id": "avantgarde",
@@ -448,7 +456,8 @@
       "Le joueur qui totalise le plus de points remporte la partie."
     ],
     "image": "https://www.gigamic.com/3187-home_default/avant-garde.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=531"
   },
   {
     "id": "azul",
@@ -490,7 +499,8 @@
       "Le joueur qui conserve le plus de ballons remporte la partie."
     ],
     "image": "https://www.gigamic.com/1372-home_default/ballons.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=10"
   },
   {
     "id": "bang",
@@ -532,7 +542,8 @@
       "Le joueur au meilleur total remporte la partie."
     ],
     "image": "https://www.gigamic.com/3561-home_default/bango.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=630"
   },
   {
     "id": "bazarbizarre",
@@ -552,7 +563,8 @@
       "Le joueur avec le plus de cartes une fois la pioche épuisée gagne."
     ],
     "image": "https://www.gigamic.com/587-home_default/bazar-bizarre.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=50"
   },
   {
     "id": "bazarbizarre2",
@@ -619,7 +631,8 @@
       "Le joueur qui a marqué le plus de points en fin de partie gagne."
     ],
     "image": "https://www.gigamic.com/4322-home_default/bella-vista.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=706"
   },
   {
     "id": "bellevue",
@@ -640,7 +653,8 @@
       "Le joueur qui bâtit la plus belle rue, avec le meilleur score, remporte la partie."
     ],
     "image": "https://www.gigamic.com/3719-home_default/bellevue.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=625"
   },
   {
     "id": "bellevueparthenay",
@@ -727,7 +741,8 @@
       "Le joueur qui marque le plus de points grâce à ses propositions validées l'emporte."
     ],
     "image": "https://www.gigamic.com/2178-home_default/bernard.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=369"
   },
   {
     "id": "blokus",
@@ -769,7 +784,8 @@
       "Le joueur qui a marqué le plus de points remporte la partie."
     ],
     "image": "https://www.gigamic.com/1255-home_default/bluffer.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=228"
   },
   {
     "id": "bohnanza",
@@ -790,7 +806,8 @@
       "Après trois tours de pioche complète, le joueur qui a accumulé le plus de pièces d'or l'emporte."
     ],
     "image": "https://www.gigamic.com/3521-home_default/bohnanza.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=465"
   },
   {
     "id": "bossfightersqr",
@@ -854,7 +871,8 @@
       "Des cartes « Twist » à gratter modifient les règles en cours de partie.",
       "À la fin, le joueur avec le moins de cartes pénalité gagne."
     ],
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=385"
   },
   {
     "id": "cabanga",
@@ -875,7 +893,8 @@
       "Le premier joueur à vider sa main remporte la manche."
     ],
     "image": "https://www.gigamic.com/3121-home_default/cabanga.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=509"
   },
   {
     "id": "camel-up",
@@ -917,7 +936,8 @@
       "En fin de partie, le joueur dont il reste le plus de canards vivants (ou le meilleur score) l'emporte."
     ],
     "image": "https://www.gigamic.com/607-home_default/canardage.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=152"
   },
   {
     "id": "captainswar",
@@ -959,7 +979,8 @@
       "On compte les points ; en cas d'égalité, une règle de départage désigne le vainqueur, et le meilleur score gagne."
     ],
     "image": "https://www.gigamic.com/4388-home_default/capybaraka.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=690"
   },
   {
     "id": "carapate",
@@ -980,7 +1001,8 @@
       "Le joueur dont l'animal franchit la Barrière en premier remporte la partie."
     ],
     "image": "https://www.gigamic.com/2952-home_default/carapate.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=484"
   },
   {
     "id": "carcassonne",
@@ -1022,7 +1044,8 @@
       "Le dernier joueur encore en main à la fin d'une manche paie un jeton ; qui n'a plus de jeton perd, et le dernier joueur qui en conserve un remporte la partie."
     ],
     "image": "https://www.gigamic.com/1217-home_default/carro-combo.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=223"
   },
   {
     "id": "cascadia",
@@ -1085,7 +1108,8 @@
       "La partie s'arrête dès qu'un joueur (ou une équipe à quatre) a placé tous ses marqueurs Contrôle sur des Lieux : il remporte la victoire."
     ],
     "image": "https://www.gigamic.com/1055-home_default/champ-dhonneur.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=203"
   },
   {
     "id": "champdhonneurfelonie",
@@ -1196,7 +1220,8 @@
       "L'équipe gagne si elle valide suffisamment de mots avant la fin de la réserve de lettres."
     ],
     "image": "https://www.gigamic.com/919-home_default/chrono-mots.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=174"
   },
   {
     "id": "clacclac",
@@ -1217,7 +1242,8 @@
       "À la fin, le joueur qui a rassemblé le plus de jetons l'emporte."
     ],
     "image": "https://www.gigamic.com/4087-home_default/clac-clac.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=42"
   },
   {
     "id": "cluedo",
@@ -1259,7 +1285,8 @@
       "Le premier joueur à s'être débarrassé de toutes ses cartes remporte la manche."
     ],
     "image": "https://www.gigamic.com/1264-home_default/cocotaki.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=7"
   },
   {
     "id": "codenames",
@@ -1369,7 +1396,8 @@
       "Attention aux cartes spéciales (×2, Max=0, Question…) qui bouleversent le calcul."
     ],
     "scoreVictoire": "max",
-    "scoreMode": "objectif"
+    "scoreMode": "objectif",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=512"
   },
   {
     "id": "crazycups",
@@ -1390,7 +1418,8 @@
       "Le joueur qui a gagné le plus de cartes remporte la partie."
     ],
     "image": "https://www.gigamic.com/906-home_default/crazy-cups.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=102"
   },
   {
     "id": "critical",
@@ -1513,7 +1542,8 @@
       "Le premier à contrôler deux Métropoles remporte la partie."
     ],
     "image": "https://www.gigamic.com/3229-home_default/cyclades.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=543"
   },
   {
     "id": "cycladescreatures",
@@ -1626,7 +1656,8 @@
       "En fin de partie, le joueur au meilleur total de points l'emporte."
     ],
     "image": "https://www.gigamic.com/2206-home_default/dorge-et-de-ble.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=389"
   },
   {
     "id": "danslacourdecole",
@@ -1647,7 +1678,8 @@
       "Le joueur à la plus belle collection remporte la partie."
     ],
     "image": "https://www.gigamic.com/3641-home_default/dans-la-cour-d-ecole.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=607"
   },
   {
     "id": "dicepoolparty",
@@ -1668,7 +1700,8 @@
       "Le joueur au meilleur total de points remporte la partie."
     ],
     "image": "https://www.gigamic.com/4634-home_default/dice-pool-party.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=665"
   },
   {
     "id": "difference",
@@ -1689,7 +1722,8 @@
       "Le premier joueur à avoir posé toutes ses cartes remporte la partie."
     ],
     "image": "https://www.gigamic.com/3464-home_default/difference.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=123"
   },
   {
     "id": "differenceasterix",
@@ -1819,7 +1853,8 @@
       "Le premier à s'être débarrassé de toutes ses cartes gagne."
     ],
     "image": "https://www.gigamic.com/4156-home_default/dodelido.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=164"
   },
   {
     "id": "dominion",
@@ -1881,7 +1916,8 @@
       "Toute la table vise un score commun, à améliorer de partie en partie (mode campagne)."
     ],
     "image": "https://www.gigamic.com/2391-home_default/dorfromantik-le-jeu-de-societe.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=425"
   },
   {
     "id": "dorfromantikduel",
@@ -1946,7 +1982,8 @@
       "On échange et on réfléchit ensemble pour recouper les indices.",
       "L'équipe gagne si elle retrouve la cachette du doudou."
     ],
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=305"
   },
   {
     "id": "drgribouille",
@@ -1967,7 +2004,8 @@
       "L'équipe gagne si elle parvient à soigner tout le monde correctement."
     ],
     "image": "https://www.gigamic.com/3608-home_default/dr-gribouille.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=629"
   },
   {
     "id": "dragonsdesmers",
@@ -1988,7 +2026,8 @@
       "Le joueur qui a accumulé le plus de points l'emporte."
     ],
     "image": "https://www.gigamic.com/3196-home_default/dragons-des-mers.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=534"
   },
   {
     "id": "dueldescrocs",
@@ -2009,7 +2048,8 @@
       "Le joueur qui rafle la plus grosse part gagne la partie."
     ],
     "image": "https://www.gigamic.com/3538-home_default/duel-d-escrocs.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=590"
   },
   {
     "id": "duke",
@@ -2030,7 +2070,8 @@
       "On enchaîne les manches ; le joueur qui atteint le total de points fixé gagne la partie."
     ],
     "image": "https://www.gigamic.com/3593-home_default/duke.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=600"
   },
   {
     "id": "dune-imperium",
@@ -2115,7 +2156,8 @@
       "En fin de partie, on compte les points de sa grille : le plus petit total gagne."
     ],
     "image": "https://www.gigamic.com/3042-home_default/dekal.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=500"
   },
   {
     "id": "dekalxl",
@@ -2158,7 +2200,8 @@
       "Le meilleur total de points l'emporte."
     ],
     "image": "https://www.gigamic.com/1028-home_default/detrak.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=194"
   },
   {
     "id": "edamame",
@@ -2222,7 +2265,8 @@
       "L'équipe gagne si elle boucle ses arrestations avant que les complices n'aient fait le tour."
     ],
     "image": "https://www.gigamic.com/4239-home_default/enquetes-a-bandiville.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=716"
   },
   {
     "id": "everdell",
@@ -2414,7 +2458,8 @@
       "Le joueur qui a marqué le plus de points remporte la partie."
     ],
     "image": "https://www.gigamic.com/2190-home_default/fish-and-cheat.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=381"
   },
   {
     "id": "flammerougebmx",
@@ -2435,7 +2480,8 @@
       "En cas d'égalité sur le même tour, c'est le pilote le plus avancé, à l'intérieur, qui gagne."
     ],
     "image": "https://www.gigamic.com/3199-home_default/flamme-rouge-bmx.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=535"
   },
   {
     "id": "forthestory",
@@ -2538,7 +2584,8 @@
       "Le premier à remplir entièrement sa zone remporte le duel."
     ],
     "image": "https://www.gigamic.com/3433-home_default/gagne-ton-papa.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=26"
   },
   {
     "id": "galerapagos",
@@ -2558,7 +2605,8 @@
       "À la fin, les naufragés qui parviennent à quitter l'île à temps gagnent… si tant est que quelqu'un ait survécu."
     ],
     "image": "https://www.gigamic.com/879-home_default/galerapagos.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=167"
   },
   {
     "id": "galerapagostribu",
@@ -2623,7 +2671,8 @@
       "Le premier joueur à réunir deux jetons Suprématie gagne immédiatement la partie."
     ],
     "image": "https://www.gigamic.com/2055-home_default/gosu-x.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=318"
   },
   {
     "id": "gosuxabunakkashii",
@@ -2713,7 +2762,8 @@
       "L'équipe l'emporte si elle traverse l'aventure sans s'y perdre."
     ],
     "image": "https://www.gigamic.com/1528-home_default/greenville-1989.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=258"
   },
   {
     "id": "gwent",
@@ -2734,7 +2784,8 @@
       "Passer met fin à sa manche ; quand les deux joueurs ont passé, la Force totale la plus élevée remporte la manche et le perdant retire un jeton gemme. Perdre ses deux gemmes fait perdre la partie (au meilleur des trois manches)."
     ],
     "image": "https://www.gigamic.com/3928-home_default/gwent-le-jeu-de-cartes-legendaire.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=622"
   },
   {
     "id": "gyges",
@@ -2754,7 +2805,8 @@
       "But : amener n'importe quelle pièce sur la case « but » adverse."
     ],
     "image": "https://www.gigamic.com/129-home_default/gyges.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=98"
   },
   {
     "id": "generationmimes",
@@ -2795,7 +2847,8 @@
       "Le joueur qui finit par récupérer toutes les cartes gagne."
     ],
     "image": "https://www.gigamic.com/902-home_default/halli-galli.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=41"
   },
   {
     "id": "halligallijunior",
@@ -2860,7 +2913,8 @@
       "On additionne les valeurs restantes ; après plusieurs manches, le plus petit total gagne."
     ],
     "image": "https://www.gigamic.com/3676-home_default/hilo.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=288"
   },
   {
     "id": "imagides",
@@ -2881,7 +2935,8 @@
       "Le vainqueur dépend du mode retenu ; l'essentiel est de faire travailler son imaginaire."
     ],
     "image": "https://www.gigamic.com/1776-home_default/imagides.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=127"
   },
   {
     "id": "improo",
@@ -2965,7 +3020,8 @@
       "Le dernier joueur à ne pas avoir renversé la tour remporte la partie."
     ],
     "image": "https://www.gigamic.com/3580-home_default/instable.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=596"
   },
   {
     "id": "ipso",
@@ -2986,7 +3042,8 @@
       "Le joueur au meilleur total remporte la partie."
     ],
     "image": "https://www.gigamic.com/4434-home_default/ipso.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=719"
   },
   {
     "id": "its-a-wonderful-world",
@@ -3028,7 +3085,8 @@
       "La première équipe à marquer cinq points remporte la partie."
     ],
     "image": "https://www.gigamic.com/921-home_default/jokes-de-papa.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=173"
   },
   {
     "id": "junglespeed",
@@ -3090,7 +3148,8 @@
       "En duel, le premier à remplir sa zone gagne."
     ],
     "image": "https://www.gigamic.com/926-home_default/katamino.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=68"
   },
   {
     "id": "kataminopocket",
@@ -3157,7 +3216,8 @@
       "Les constructions et objectifs rapportent des points ; le joueur au meilleur score l'emporte."
     ],
     "image": "https://www.gigamic.com/4063-home_default/kingdom-crossing.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=661"
   },
   {
     "id": "kingdomino",
@@ -3199,7 +3259,8 @@
       "Le premier à 6 points remporte la partie."
     ],
     "image": "https://www.gigamic.com/2334-home_default/klask.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=147"
   },
   {
     "id": "kontour",
@@ -3220,7 +3281,8 @@
       "Le premier joueur à totaliser 10 points remporte la partie."
     ],
     "image": "https://www.gigamic.com/3508-home_default/kontour.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=175"
   },
   {
     "id": "koowah",
@@ -3262,7 +3324,8 @@
       "Le premier joueur à réunir trois cartes Thème gagne la partie."
     ],
     "image": "https://www.gigamic.com/4396-home_default/kumi-kumi.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=691"
   },
   {
     "id": "keblo",
@@ -3283,7 +3346,8 @@
       "Le groupe gagne s'il atteint 20 en tenant toutes les contraintes."
     ],
     "image": "https://www.gigamic.com/4212-home_default/keblo.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=278"
   },
   {
     "id": "limposteur",
@@ -3305,7 +3369,8 @@
       "Les joueurs gagnent s'ils démasquent l'imposteur ; l'imposteur gagne s'il passe inaperçu ou devine le mot secret."
     ],
     "image": "https://www.gigamic.com/3164-home_default/l-imposteur.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=647"
   },
   {
     "id": "la-chasse-aux-gigamons",
@@ -3326,7 +3391,8 @@
       "Il faut coordonner ses retournements pour capturer les bons Gigamons.",
       "L'équipe gagne si elle réussit à tous les attraper."
     ],
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=280"
   },
   {
     "id": "lacoincoinche",
@@ -3368,7 +3434,8 @@
       "Les joueurs se concertent pour optimiser leurs déplacements et s'entraider.",
       "L'équipe gagne si tous les feux follets atteignent le sommet à temps."
     ],
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=304"
   },
   {
     "id": "fabriquearreves",
@@ -3410,7 +3477,8 @@
       "On gagne dès qu'on ne possède plus aucun artichaut."
     ],
     "image": "https://www.gigamic.com/3515-home_default/la-fin-des-artichauts.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=292"
   },
   {
     "id": "la-maison-des-souris",
@@ -3493,7 +3561,8 @@
       "On enchaîne les manches ; le joueur avec le MOINS de points gagne."
     ],
     "image": "https://www.gigamic.com/3344-home_default/lama.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=212"
   },
   {
     "id": "lamacadabra",
@@ -3514,7 +3583,8 @@
       "Après plusieurs manches, le joueur avec le moins de points l'emporte."
     ],
     "image": "https://www.gigamic.com/3182-home_default/lama-cadabra.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=529"
   },
   {
     "id": "lebaron",
@@ -3535,7 +3605,8 @@
       "Le joueur avec le moins de points négatifs remporte la partie."
     ],
     "image": "https://www.gigamic.com/3906-home_default/le-baron.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=634"
   },
   {
     "id": "leboulet",
@@ -3662,7 +3733,8 @@
       "On gagne tous ensemble si Facteur Souris rejoint ses amis à temps pour le pique-nique."
     ],
     "image": "https://www.gigamic.com/3192-home_default/le-pique-nique-de-facteur-souris.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=530"
   },
   {
     "id": "pokercafards",
@@ -3683,7 +3755,8 @@
       "On perd dès qu'on accumule quatre exemplaires d'une même bestiole ; le dernier joueur épargné gagne."
     ],
     "image": "https://www.gigamic.com/4454-home_default/poker-des-cafards.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=44"
   },
   {
     "id": "le-rallye-des-vers-de-terre",
@@ -3767,7 +3840,8 @@
       "Le joueur dont la civilisation prospère le mieux remporte la partie."
     ],
     "image": "https://www.gigamic.com/4330-home_default/leda.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=676"
   },
   {
     "id": "aventuriersdurail",
@@ -3810,7 +3884,8 @@
       "Après les onze manches, le plus petit total remporte la partie."
     ],
     "image": "https://www.gigamic.com/3915-home_default/les-cinq-rois.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=187"
   },
   {
     "id": "citesrivales",
@@ -3852,7 +3927,8 @@
       "En fin de partie, on additionne les points de victoire (arbres, fleurs, animaux, personnages, irrigation, objectifs) : le plus grand total plaît le plus au couple royal et l'emporte. Un mode solo avec Automa est inclus."
     ],
     "image": "https://www.gigamic.com/3582-home_default/les-jardins-suspendus.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=597"
   },
   {
     "editeur": "Zygomatic",
@@ -4009,7 +4085,8 @@
       "Le joueur au meilleur total de points l'emporte."
     ],
     "image": "https://www.gigamic.com/3919-home_default/line-it.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=401"
   },
   {
     "id": "littoral",
@@ -4030,7 +4107,8 @@
       "Le joueur qui a bâti le littoral le plus riche gagne."
     ],
     "image": "https://www.gigamic.com/3062-home_default/littoral.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=503"
   },
   {
     "id": "lobo77",
@@ -4050,7 +4128,8 @@
       "Sans plus de jeton, vous êtes éliminé ; le dernier joueur en lice gagne."
     ],
     "image": "https://www.gigamic.com/3295-home_default/lobo-77.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=93"
   },
   {
     "id": "looot",
@@ -4070,7 +4149,8 @@
       "Le joueur qui rapporte le plus de richesses (le Jarl) en fin de partie l'emporte."
     ],
     "image": "https://www.gigamic.com/2926-home_default/looot.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=481"
   },
   {
     "id": "loveletter",
@@ -4112,7 +4192,8 @@
       "L'équipe qui atteint son objectif de lumies remporte la partie."
     ],
     "image": "https://www.gigamic.com/4319-home_default/lumios.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=675"
   },
   {
     "id": "lache-pas-la-savonette",
@@ -4154,7 +4235,8 @@
       "Le premier joueur à s'être débarrassé de toutes ses cartes remporte la partie."
     ],
     "image": "https://www.gigamic.com/3996-home_default/machu-pichu.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=637"
   },
   {
     "id": "magicarta",
@@ -4172,7 +4254,8 @@
       "Fiche provisoire : les règles détaillées seront ajoutées à partir du règlement officiel."
     ],
     "image": "https://www.gigamic.com/3552-home_default/magicarta-le-fantome-de-la-sorciere.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=593"
   },
   {
     "id": "magnumopus",
@@ -4214,7 +4297,8 @@
       "On marque des points selon les réponses trouvées ; le meilleur total après cinq tours l'emporte."
     ],
     "image": "https://www.gigamic.com/2072-home_default/mamie-moule-maki.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=646"
   },
   {
     "id": "marrakech",
@@ -4234,7 +4318,8 @@
       "En fin de partie, additionnez vos dirhams et vos cases de tapis encore visibles : le plus riche gagne."
     ],
     "image": "https://www.gigamic.com/2386-home_default/marrakech.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=38"
   },
   {
     "id": "maudits-criquets",
@@ -4256,7 +4341,8 @@
       "Attention : réunir trois criquets détruit tous vos légumes accumulés !",
       "Le joueur avec le plus de jetons en fin de partie l'emporte."
     ],
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=370"
   },
   {
     "id": "maitremakatsu",
@@ -4277,7 +4363,8 @@
       "Le joueur qui a le plus impressionné le maître remporte la partie."
     ],
     "image": "https://www.gigamic.com/4297-home_default/maitre-makatsu.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=700"
   },
   {
     "id": "memozistoire",
@@ -4319,7 +4406,8 @@
       "Après la troisième ère et l'événement final, la tribu la plus prestigieuse l'emporte."
     ],
     "image": "https://www.gigamic.com/3546-home_default/mesos.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=592"
   },
   {
     "id": "meuhte",
@@ -4340,7 +4428,8 @@
       "Le premier joueur à réunir huit points Vache remporte la partie."
     ],
     "image": "https://www.gigamic.com/1579-home_default/meuhte.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=272"
   },
   {
     "id": "microherohercule",
@@ -4358,7 +4447,8 @@
       "Fiche provisoire : les règles détaillées seront ajoutées à partir du règlement officiel."
     ],
     "image": "https://www.gigamic.com/4407-home_default/micro-hero-hercule.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=692"
   },
   {
     "id": "middle-ages",
@@ -4425,7 +4515,8 @@
       "Dès qu'un joueur atteint 6000 points, on termine la manche ; le meilleur score l'emporte."
     ],
     "image": "https://www.gigamic.com/3259-home_default/mille-sabords.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=3"
   },
   {
     "id": "millerzoo",
@@ -4446,7 +4537,8 @@
       "L'équipe gagne si elle maintient le bien-être des animaux et résout les problèmes à temps."
     ],
     "image": "https://www.gigamic.com/2238-home_default/miller-zoo.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=371"
   },
   {
     "id": "miromiro",
@@ -4467,7 +4559,8 @@
       "Le joueur avec le meilleur solde de jetons remporte la partie."
     ],
     "image": "https://www.gigamic.com/4414-home_default/miro-miro.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=694"
   },
   {
     "id": "miroirmagique",
@@ -4488,7 +4581,8 @@
       "Le premier joueur à réunir dix cartes Objet gagne la partie."
     ],
     "image": "https://www.gigamic.com/3887-home_default/miroir-magique.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=641"
   },
   {
     "id": "misfitheroes",
@@ -4509,7 +4603,8 @@
       "Le joueur au meilleur total remporte le titre de nouveau héros du pays."
     ],
     "image": "https://www.gigamic.com/4309-home_default/misfit-heroes.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=673"
   },
   {
     "id": "mito",
@@ -4529,7 +4624,8 @@
       "Le premier à n'avoir plus aucune carte gagne."
     ],
     "image": "https://www.gigamic.com/4215-home_default/mito.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=48"
   },
   {
     "id": "moka",
@@ -4550,7 +4646,8 @@
       "Le joueur qui totalise le plus de points remporte la partie."
     ],
     "image": "https://www.gigamic.com/2943-home_default/moka.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=483"
   },
   {
     "id": "monique",
@@ -4805,7 +4902,8 @@
       "Il faut aller plus vite que les autres naufragés, qui visent le même objectif.",
       "Le premier à réunir tout le nécessaire et à s'échapper remporte la partie."
     ],
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=392"
   },
   {
     "id": "nicole",
@@ -4847,7 +4945,8 @@
       "Le joueur qui a marqué le plus de points remporte la partie."
     ],
     "image": "https://www.gigamic.com/3528-home_default/nitro-nitro.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=588"
   },
   {
     "id": "nonmerci",
@@ -4867,7 +4966,8 @@
       "But : avoir le total le plus BAS ; le joueur avec le moins de points gagne."
     ],
     "image": "https://www.gigamic.com/3693-home_default/non-merci.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=229"
   },
   {
     "id": "northgard",
@@ -4930,7 +5030,8 @@
       "À la fin du périple, le joueur qui a accumulé le plus de points l'emporte."
     ],
     "image": "https://www.gigamic.com/4384-home_default/odysseus.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=688"
   },
   {
     "id": "oltree",
@@ -4951,7 +5052,8 @@
       "L'équipe l'emporte en menant la Chronique à son terme, d'autant mieux qu'elle a rempli les objectifs de sa Mission."
     ],
     "image": "https://www.gigamic.com/3726-home_default/oltree.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=254"
   },
   {
     "id": "once-upon-a-draft",
@@ -4994,7 +5096,8 @@
       "Le premier à localiser correctement toutes les gemmes l'emporte."
     ],
     "image": "https://www.gigamic.com/4410-home_default/orapa-mine.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=693"
   },
   {
     "id": "oriflamme",
@@ -5014,7 +5117,8 @@
       "Après plusieurs manches, le joueur avec le plus d'influence l'emporte."
     ],
     "image": "https://www.gigamic.com/1342-home_default/oriflamme.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=214"
   },
   {
     "id": "oriflammealliance",
@@ -5081,7 +5185,8 @@
       "L'équipe gagne si elle parvient à rendre la planète luxuriante et vivable."
     ],
     "image": "https://www.gigamic.com/3602-home_default/origine.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=599"
   },
   {
     "id": "padupe",
@@ -5199,7 +5304,8 @@
       "Le premier à trouver la bonne amibe gagne la carte ; celui qui en a le plus à la fin l'emporte."
     ],
     "image": "https://www.gigamic.com/3291-home_default/panic-lab.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=4"
   },
   {
     "id": "paon",
@@ -5220,7 +5326,8 @@
       "Après la troisième saison, le joueur avec le plus de plumes l'emporte."
     ],
     "image": "https://www.gigamic.com/4287-home_default/paon.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=669"
   },
   {
     "id": "papayoo",
@@ -5240,7 +5347,8 @@
       "On enchaîne les manches ; le joueur avec le MOINS de points gagne."
     ],
     "image": "https://www.gigamic.com/3520-home_default/papayoo.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=77"
   },
   {
     "id": "patchwork",
@@ -5281,7 +5389,8 @@
       "En fin de partie, le joueur avec le plus de vers gagne."
     ],
     "image": "https://www.gigamic.com/2400-home_default/pickomino.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=516"
   },
   {
     "id": "pickominomini",
@@ -5325,7 +5434,8 @@
       "Le dernier joueur dont le pigeon n'a pas explosé remporte la partie."
     ],
     "image": "https://www.gigamic.com/4307-home_default/pigeon-explosion.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=672"
   },
   {
     "id": "pippo",
@@ -5346,7 +5456,8 @@
       "À la fin, le joueur qui a récupéré le plus de cartes remporte la partie."
     ],
     "image": "https://www.gigamic.com/1367-home_default/pippo.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=14"
   },
   {
     "id": "pique-plume",
@@ -5368,7 +5479,8 @@
       "Quand une poule en rattrape une autre, elle lui vole ses plumes.",
       "Le dernier joueur à conserver ses plumes (ou celui qui les rafle toutes) gagne."
     ],
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=23"
   },
   {
     "id": "ploufcanard",
@@ -5389,7 +5501,8 @@
       "On gagne tous ensemble si les canards atteignent la mare avant que le soleil ne disparaisse."
     ],
     "image": "https://www.gigamic.com/2914-home_default/plouf-canard.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=478"
   },
   {
     "id": "pointcity",
@@ -5409,7 +5522,8 @@
       "Le joueur avec le plus de points de victoire en fin de partie gagne."
     ],
     "image": "https://www.gigamic.com/2807-home_default/point-city.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=461"
   },
   {
     "id": "potionoupoison",
@@ -5430,7 +5544,8 @@
       "Le dernier joueur à ne pas avoir succombé remporte la partie."
     ],
     "image": "https://www.gigamic.com/4452-home_default/potion-ou-poison.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=718"
   },
   {
     "id": "poulepoule",
@@ -5472,7 +5587,8 @@
       "Quand les neuf cartes Ours ont été révélées, la partie s'arrête ; celui qui a le plus de champignons gagne."
     ],
     "image": "https://www.gigamic.com/4339-home_default/poum-poum-crounch.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=681"
   },
   {
     "id": "pourlareine",
@@ -5514,7 +5630,8 @@
       "Le joueur qui totalise le plus de points remporte la partie."
     ],
     "image": "https://www.gigamic.com/1808-home_default/privacy-no-limit.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=54"
   },
   {
     "id": "puissance-4",
@@ -5554,7 +5671,8 @@
       "Le joueur qui pose la dernière bille, au sommet de la pyramide, gagne (l'adversaire est à court de billes)."
     ],
     "image": "https://www.gigamic.com/750-home_default/pylos-classic.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=74"
   },
   {
     "id": "pylosmini",
@@ -5598,7 +5716,8 @@
       "Après la quatrième manche, celui qui a le plus de pépites en banque gagne."
     ],
     "image": "https://www.gigamic.com/4123-home_default/pepite.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=654"
   },
   {
     "id": "qawale",
@@ -5616,7 +5735,8 @@
       "But : aligner 4 pierres de votre couleur visibles au sommet des piles (ligne, colonne ou diagonale)."
     ],
     "image": "https://www.gigamic.com/1974-home_default/qawale.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=311"
   },
   {
     "id": "qawalemini",
@@ -5660,7 +5780,8 @@
       "Le joueur qui réalise le plus de carrés remporte la partie."
     ],
     "image": "https://www.gigamic.com/4183-home_default/qomet.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=660"
   },
   {
     "id": "quadri",
@@ -5681,7 +5802,8 @@
       "Le joueur (ou le score) le plus élevé l'emporte."
     ],
     "image": "https://www.gigamic.com/4364-home_default/quadri.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=686"
   },
   {
     "id": "quantik",
@@ -5745,7 +5867,8 @@
       "Le joueur qui complète un tel alignement annonce « Quarto ! » et gagne."
     ],
     "image": "https://www.gigamic.com/754-home_default/quarto.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=72"
   },
   {
     "id": "quartomini",
@@ -5789,7 +5912,8 @@
       "La partie s'arrête dès qu'un joueur atteint le seuil d'influence (50 à deux, 45 à trois, 40 à quatre joueurs) ou vide une colonne ; le plus de points d'influence l'emporte."
     ],
     "image": "https://www.gigamic.com/3653-home_default/queen-marie-antoinette.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=609"
   },
   {
     "id": "quixo",
@@ -5808,7 +5932,8 @@
       "Attention : provoquer un alignement adverse le fait gagner."
     ],
     "image": "https://www.gigamic.com/761-home_default/quixo.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=79"
   },
   {
     "id": "quixomini",
@@ -5895,7 +6020,8 @@
       "Pac-Man gagne s'il avale les quatre gommes ; les fantômes gagnent s'ils lui prennent ses trois vies."
     ],
     "image": "https://www.gigamic.com/2962-home_default/quoridor-pac-man.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=486"
   },
   {
     "id": "qwinto",
@@ -5915,7 +6041,8 @@
       "Le meilleur total de points l'emporte."
     ],
     "image": "https://www.gigamic.com/3682-home_default/qwinto.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=170"
   },
   {
     "id": "qwirkle",
@@ -5956,7 +6083,8 @@
       "Chaque rangée rapporte selon le nombre de croix ; les pénalités comptent en négatif. Le meilleur total gagne."
     ],
     "image": "https://www.gigamic.com/3369-home_default/qwixx.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=106"
   },
   {
     "id": "ratak",
@@ -5977,7 +6105,8 @@
       "Le camp qui remporte les affrontements l'emporte."
     ],
     "image": "https://www.gigamic.com/4304-home_default/ratak.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=671"
   },
   {
     "id": "ratapolis",
@@ -6019,7 +6148,8 @@
       "Après plusieurs manches, le joueur au meilleur score l'emporte."
     ],
     "image": "https://www.gigamic.com/3140-home_default/ratjack.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=519"
   },
   {
     "id": "ratjackcoupdulapin",
@@ -6063,7 +6193,8 @@
       "Décompte : chaque carte Prince ramassée vaut 1 demande en mariage et la Grenouille en vaut 5 ; après cinq manches, la princesse qui en a le moins (le plus petit score) remporte la victoire."
     ],
     "image": "https://www.gigamic.com/3094-home_default/rebelles-princesses.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=506"
   },
   {
     "id": "reporter",
@@ -6084,7 +6215,8 @@
       "L'enquête est réussie quand l'équipe recoupe correctement toutes les informations pour boucler le reportage."
     ],
     "image": "https://www.gigamic.com/4202-home_default/reporter.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=701"
   },
   {
     "id": "rollnbump",
@@ -6105,7 +6237,8 @@
       "Le score combine la valeur des cartes et un bonus de série ; le meilleur total gagne."
     ],
     "image": "https://www.gigamic.com/2218-home_default/roll-n-bump.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=373"
   },
   {
     "id": "rollnbumpduel",
@@ -6254,7 +6387,8 @@
       "À la fin de la manche, le camp gagnant se partage des pépites ; après trois manches, le plus riche gagne."
     ],
     "image": "https://www.gigamic.com/4223-home_default/saboteur.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=61"
   },
   {
     "id": "saboteur2",
@@ -6321,7 +6455,8 @@
       "Le premier joueur qui parvient à se défausser de toutes ses cartes gagne la partie."
     ],
     "image": "https://www.gigamic.com/4176-home_default/salade-de-cafards.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=45"
   },
   {
     "id": "scrabble",
@@ -6385,7 +6520,8 @@
       "Le joueur qui totalise le plus de points remporte la partie."
     ],
     "image": "https://www.gigamic.com/3061-home_default/secret-identity.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=502"
   },
   {
     "id": "serpentina",
@@ -6406,7 +6542,8 @@
       "Quand toutes les cartes sont jouées, le joueur qui a rassemblé le plus de serpents gagne."
     ],
     "image": "https://www.gigamic.com/1370-home_default/serpentina.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=8"
   },
   {
     "id": "set",
@@ -6426,7 +6563,8 @@
       "Le joueur qui a ramassé le plus de Sets gagne."
     ],
     "image": "https://www.gigamic.com/3375-home_default/set.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=553"
   },
   {
     "id": "shackletonbase",
@@ -6447,7 +6585,8 @@
       "Le joueur au meilleur total de points en fin de partie l'emporte."
     ],
     "image": "https://www.gigamic.com/3232-home_default/shackleton-base.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=539"
   },
   {
     "id": "shapeit",
@@ -6468,7 +6607,8 @@
       "L'équipe gagne si elle valide assez de cartes ensemble."
     ],
     "image": "https://www.gigamic.com/4426-home_default/shape-it.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=698"
   },
   {
     "id": "shit-happens",
@@ -6510,7 +6650,8 @@
       "Il faut réduire les cartes jusqu'au bon personnage en cinq manches, sans jamais éliminer le secret."
     ],
     "image": "https://www.gigamic.com/1191-home_default/similo-contes.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=218"
   },
   {
     "id": "similoanimaux",
@@ -6828,7 +6969,8 @@
       "Après plusieurs manches, on additionne les points ; le meilleur score l’emporte."
     ],
     "scoreVictoire": "max",
-    "scoreMode": "compteur"
+    "scoreMode": "compteur",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=302"
   },
   {
     "id": "solaciademonglace",
@@ -7053,7 +7195,8 @@
       "Le premier à réunir cinq tuiles (quatre à trois ou quatre joueurs) remporte la partie."
     ],
     "image": "https://www.gigamic.com/1487-home_default/specific.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=160"
   },
   {
     "id": "speek",
@@ -7116,7 +7259,8 @@
       "Le premier à ramener 4 de ses 5 pions gagne."
     ],
     "image": "https://www.gigamic.com/1431-home_default/squadro-classic.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=188"
   },
   {
     "id": "squadromini",
@@ -7200,7 +7344,8 @@
       "En fin de partie, le meilleur total de points gagne."
     ],
     "image": "https://www.gigamic.com/3460-home_default/stupide-vautour.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=94"
   },
   {
     "id": "sur-les-traces-de-darwin",
@@ -7285,7 +7430,8 @@
       "L'enquête est réussie si l'on répond correctement aux questions finales de l'affaire."
     ],
     "image": "https://www.gigamic.com/1468-home_default/suspects.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=242"
   },
   {
     "id": "suspectspocketliverpool",
@@ -7411,7 +7557,8 @@
       "Version Discovery : la boîte propose aussi des défis solo de difficulté croissante."
     ],
     "image": "https://www.gigamic.com/818-home_default/tantrix.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=88"
   },
   {
     "id": "tantrixpocket",
@@ -7455,7 +7602,8 @@
       "Le défi consiste à aller le plus loin possible dans la série croissante de boucles."
     ],
     "image": "https://www.gigamic.com/3895-home_default/tantrix-solo.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=639"
   },
   {
     "id": "tantrixstrategie",
@@ -7476,7 +7624,8 @@
       "Le joueur qui réalise la plus longue ligne (ou boucle) de sa couleur l'emporte."
     ],
     "image": "https://www.gigamic.com/818-home_default/tantrix.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=88"
   },
   {
     "id": "terraformingmars",
@@ -7518,7 +7667,8 @@
       "Le joueur qui a assemblé le plus d'animaux remporte la partie."
     ],
     "image": "https://www.gigamic.com/3052-home_default/tetaki.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=501"
   },
   {
     "id": "texto",
@@ -7539,7 +7689,8 @@
       "On enchaîne les cartes ; le joueur qui en a gagné le plus l'emporte."
     ],
     "image": "https://www.gigamic.com/822-home_default/texto.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=142"
   },
   {
     "id": "texto2",
@@ -7709,7 +7860,8 @@
       "Le joueur qui compose le plus beau sanctuaire, avec le meilleur score, l'emporte."
     ],
     "image": "https://www.gigamic.com/2984-home_default/treetopia.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=489"
   },
   {
     "id": "triolet",
@@ -7730,7 +7882,8 @@
       "Le joueur avec le plus de points à la fin de la partie gagne."
     ],
     "image": "https://www.gigamic.com/1432-home_default/triolet.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=96"
   },
   {
     "id": "trivial-pursuit",
@@ -7772,7 +7925,8 @@
       "Le premier à dévoiler tous les secrets (ou le meilleur score) remporte la partie."
     ],
     "image": "https://www.gigamic.com/4196-home_default/tulikko.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=650"
   },
   {
     "id": "une-patate-a-velo",
@@ -7793,7 +7947,8 @@
       "Si tous les joueurs sont d'accord, la patate avance d'une case sur son parcours.",
       "L'équipe gagne si la patate atteint la case 8 ou au-delà."
     ],
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=429"
   },
   {
     "id": "uno",
@@ -7835,7 +7990,8 @@
       "Le joueur qui totalise le plus de Points de Mission remporte la partie."
     ],
     "image": "https://www.gigamic.com/1606-home_default/varuna.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=277"
   },
   {
     "id": "vazy",
@@ -7877,7 +8033,8 @@
       "Le joueur qui accumule le plus de jetons de victoire remporte la partie."
     ],
     "image": "https://www.gigamic.com/3647-home_default/verso.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=608"
   },
   {
     "id": "verybadlands",
@@ -7898,7 +8055,8 @@
       "Quand votre dinosaure est éteint, vous perdez ; il faut donc survivre le plus longtemps possible."
     ],
     "image": "https://www.gigamic.com/3251-home_default/very-bad-lands-t-rex.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=541"
   },
   {
     "id": "verybadlandsbrachio",
@@ -8282,7 +8440,8 @@
       "Le premier joueur sans aucun dé remporte la partie."
     ],
     "image": "https://www.gigamic.com/1101-home_default/wazabi.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=169"
   },
   {
     "id": "wazabipiment",
@@ -8348,7 +8507,8 @@
       "La première équipe à réunir sept jetons Billy remporte la partie."
     ],
     "image": "https://www.gigamic.com/4283-home_default/winky-billy.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=670"
   },
   {
     "id": "wizard",
@@ -8369,7 +8529,8 @@
       "Après le nombre de manches prévu, le joueur avec le plus haut total gagne."
     ],
     "image": "https://www.gigamic.com/3339-home_default/wizard.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=301"
   },
   {
     "id": "yams",
@@ -8497,7 +8658,8 @@
       "Le dernier joueur encore en lice gagne."
     ],
     "image": "https://www.gigamic.com/3470-home_default/yogi.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=166"
   },
   {
     "id": "zimzamzoum",
@@ -8518,7 +8680,8 @@
       "À la fin, le joueur qui a rassemblé le plus de cartes gagne."
     ],
     "image": "https://www.gigamic.com/4106-home_default/zim-zam-zoum.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=653"
   },
   {
     "id": "eclairdegenie",
@@ -8539,7 +8702,8 @@
       "On enchaîne les cartes ; le joueur qui en gagne le plus l'emporte."
     ],
     "image": "https://www.gigamic.com/4207-home_default/eclair-de-genie.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=663"
   },
   {
     "id": "ileenvue",
@@ -8560,7 +8724,8 @@
       "L'équipage gagne s'il mène le bateau à bon port."
     ],
     "image": "https://www.gigamic.com/3225-home_default/ile-en-vue-moussaillons-.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=538"
   },
   {
     "id": "oeufpouroeuf",
@@ -8581,6 +8746,7 @@
       "Le joueur qui a rassemblé le plus d'œufs remporte la partie."
     ],
     "image": "https://www.gigamic.com/4449-home_default/oeuf-pour-oeuf.jpg",
-    "editeur": "Gigamic"
+    "editeur": "Gigamic",
+    "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=591"
   }
 ]
