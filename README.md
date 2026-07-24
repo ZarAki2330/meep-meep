@@ -16,12 +16,12 @@
   <img src="https://img.shields.io/badge/SQLite-local-003B57?logo=sqlite&logoColor=white" alt="SQLite" />
   <img src="https://img.shields.io/badge/100%25-hors--ligne-2ea44f" alt="Hors-ligne" />
   <img src="https://img.shields.io/badge/Accessibilit%C3%A9-WCAG%20AA-2ea44f" alt="Accessibilité" />
-  <img src="https://img.shields.io/badge/catalogue-390%20jeux-7a5195" alt="Catalogue" />
+  <img src="https://img.shields.io/badge/catalogue-410%20jeux-7a5195" alt="Catalogue" />
 </p>
 
 ## Fonctionnalités
 
-- **Catalogue de 390 jeux** avec description, catégorie, éditeur et **règles résumées en français**.
+- **Catalogue de 410 jeux** avec description, catégorie, éditeur et **règles résumées en français**.
 - **5 modes de score** : compteur de points, objectif (sans points), manches, feuille de score (type *Yams*) et coopératif.
 - **Extensions & éditions** rattachées à chaque jeu de base (Villainous, Loup-Garou, Cyclades…).
 - **Personnages / rôles jouables** avec un avatar chacun (photo, logo ou pastille colorée) — pratique pour Villainous, L'Imposteur ou le Loup-Garou.
