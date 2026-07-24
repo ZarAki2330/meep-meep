@@ -137,7 +137,12 @@ export default function Bibliotheque() {
     );
   }, [recherche, bibliotheque]);
 
-  const restants = resultats.filter((j) => !dejaAjoutes.has(j.id)).length;
+  // Nombre de jeux pas encore ajoutés (pour le message d'en-tête). Mémoïsé et
+  // calculé par réduction, sans allouer de tableau intermédiaire à chaque frappe.
+  const restants = useMemo(
+    () => resultats.reduce((n, j) => (dejaAjoutes.has(j.id) ? n : n + 1), 0),
+    [resultats, dejaAjoutes],
+  );
   const resultatsTries = useMemo(() => trierBibliotheque(resultats, tri), [resultats, tri]);
 
   const ajouterUn = useCallback(
@@ -266,9 +271,16 @@ export default function Bibliotheque() {
           }
           ListEmptyComponent={<Text style={styles.vide}>Aucun jeu ne porte ce nom.</Text>}
           renderItem={renderItem}
+          // Permet d'appuyer sur « Ajouter » sans devoir d'abord fermer le clavier
+          // ouvert par la recherche : le premier tap agit directement.
+          keyboardShouldPersistTaps="handled"
           initialNumToRender={16}
           maxToRenderPerBatch={12}
           windowSize={11}
+          removeClippedSubviews
+          // Pas de getItemLayout ici, volontairement : la hauteur d'une carte n'est
+          // pas figée (l'app respecte l'agrandissement de police système pour
+          // l'accessibilité). La coder en dur casserait l'affichage en gros texte.
         />
       )}
 
