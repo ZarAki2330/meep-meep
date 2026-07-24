@@ -1,8 +1,7 @@
-<p align="center">
-  <img src="assets/images/logo-readme.png" alt="Meep Meep" width="112" />
-</p>
-
-<h1 align="center">Meep Meep</h1>
+<h1 align="center">
+  <img src="assets/images/logo-readme.png" alt="" height="38" />
+  &nbsp;Meep Meep
+</h1>
 
 <p align="center">
   <strong>Ta ludothèque de jeux de société, dans ta poche.</strong><br/>
