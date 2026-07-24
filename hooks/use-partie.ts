@@ -41,13 +41,6 @@ export function prefixeJoueur(jeu?: Jeu): string {
   return jeu?.equipes ? "Équipe" : "Joueur";
 }
 
-function joueursParDefaut(prefixe: string): JoueurPartie[] {
-  return [
-    { id: "j1", nom: `${prefixe} 1`, score: 0 },
-    { id: "j2", nom: `${prefixe} 2`, score: 0 },
-  ];
-}
-
 type Options<E extends object> = {
   jeuId: string;
   jeu?: Jeu;
@@ -77,7 +70,10 @@ export function usePartie<E extends object>({
   // Le mode qui a produit l'état sauvegardé. Le changer rend cet état illisible.
   const mode = jeu?.scoreMode ?? "compteur";
 
-  const [joueurs, setJoueurs] = useState<JoueurPartie[]>(() => joueursParDefaut(prefixe));
+  // Une partie démarre sans aucun joueur : c'est à l'utilisateur de les ajouter
+  // (bouton « + Joueur » ou puce d'un joueur déjà enregistré). Aucun « Joueur 1 »
+  // imposé par défaut.
+  const [joueurs, setJoueurs] = useState<JoueurPartie[]>([]);
   const [extra, setExtra] = useState<E>(extraInitial);
 
   const [joueursConnus, setJoueursConnus] = useState<JoueurEnregistre[]>([]);

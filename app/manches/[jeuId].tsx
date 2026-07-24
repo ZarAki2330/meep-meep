@@ -14,6 +14,7 @@ import {
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
+import { AucunJoueur } from "@/components/aucun-joueur";
 import { DialogueEgalite } from "@/components/dialogue-egalite";
 import { DialogueBilan } from "@/components/dialogue-bilan";
 import { DialoguePremierJoueur } from "@/components/dialogue-premier-joueur";
@@ -90,10 +91,11 @@ export default function PartieManches() {
         Object.values(c).every((v) => v === "" || v === undefined),
       );
       return (
-        aucunScore &&
-        e.nbManches === MANCHES_DEPART &&
-        js.length === 2 &&
-        js.every((j, i) => j.nom === `${prefixe} ${i + 1}` && !j.membres?.length)
+        js.length === 0 ||
+        (aucunScore &&
+          e.nbManches === MANCHES_DEPART &&
+          js.length === 2 &&
+          js.every((j, i) => j.nom === `${prefixe} ${i + 1}` && !j.membres?.length))
       );
     },
   });
@@ -149,7 +151,10 @@ export default function PartieManches() {
   }
 
   const { width } = useWindowDimensions();
-  const largeurCol = Math.max(LARGEUR_COL, (width - 24 - LARGEUR_LABEL) / joueurs.length);
+  // Sans joueur, la division donnerait l'infini : on retombe sur la largeur mini.
+  const largeurCol = joueurs.length
+    ? Math.max(LARGEUR_COL, (width - 24 - LARGEUR_LABEL) / joueurs.length)
+    : LARGEUR_COL;
 
   return (
     <View style={styles.page}>
@@ -203,6 +208,14 @@ export default function PartieManches() {
         </View>
       )}
 
+      {joueurs.length === 0 ? (
+        <AucunJoueur
+          prefixe={prefixe}
+          onAjouter={ajouterJoueur}
+          joueursDispo={joueursDispo}
+          onAjouterNomme={ajouterJoueurNomme}
+        />
+      ) : (
       <ScrollView
         style={styles.zoneTableau}
         showsVerticalScrollIndicator
@@ -248,7 +261,7 @@ export default function PartieManches() {
                     </Text>
                   </TouchableOpacity>
                 )}
-                {!termine && joueurs.length > 1 && (
+                {!termine && (
                   <TouchableOpacity
                     accessibilityRole="button"
                     accessibilityLabel={`Retirer ${j.nom}`}
@@ -311,6 +324,7 @@ export default function PartieManches() {
           </View>
         </ScrollView>
       </ScrollView>
+      )}
 
       <View style={[styles.barreBas, { paddingBottom: 16 + insets.bottom }]}>
         {!termine ? (

@@ -14,6 +14,7 @@ import {
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
+import { AucunJoueur } from "@/components/aucun-joueur";
 import { DialogueEgalite } from "@/components/dialogue-egalite";
 import { DialogueBilan } from "@/components/dialogue-bilan";
 import { DialoguePremierJoueur } from "@/components/dialogue-premier-joueur";
@@ -97,9 +98,10 @@ export default function FeuilleGrille() {
         Object.values(c).every((v) => v === ""),
       );
       return (
-        aucunScore &&
-        js.length === 2 &&
-        js.every((j, i) => j.nom === `${prefixe} ${i + 1}` && !j.membres?.length)
+        js.length === 0 ||
+        (aucunScore &&
+          js.length === 2 &&
+          js.every((j, i) => j.nom === `${prefixe} ${i + 1}` && !j.membres?.length))
       );
     },
   });
@@ -158,7 +160,10 @@ export default function FeuilleGrille() {
   }
 
   const { width } = useWindowDimensions();
-  const largeurCol = Math.max(LARGEUR_COL, (width - 24 - LARGEUR_LABEL) / joueurs.length);
+  // Sans joueur, la division donnerait l'infini : on retombe sur la largeur mini.
+  const largeurCol = joueurs.length
+    ? Math.max(LARGEUR_COL, (width - 24 - LARGEUR_LABEL) / joueurs.length)
+    : LARGEUR_COL;
 
   // Regroupe les catégories par section, en gardant l'ordre.
   const sections: { nom: string | null; cats: CategorieScore[] }[] = [];
@@ -204,6 +209,14 @@ export default function FeuilleGrille() {
         </View>
       )}
 
+      {joueurs.length === 0 ? (
+        <AucunJoueur
+          prefixe={prefixe}
+          onAjouter={ajouterJoueur}
+          joueursDispo={joueursDispo}
+          onAjouterNomme={ajouterJoueurNomme}
+        />
+      ) : (
       <ScrollView
         style={styles.zoneTableau}
         showsVerticalScrollIndicator
@@ -249,7 +262,7 @@ export default function FeuilleGrille() {
                     </Text>
                   </TouchableOpacity>
                 )}
-                {!termine && joueurs.length > 1 && (
+                {!termine && (
                   <TouchableOpacity
                     accessibilityRole="button"
                     accessibilityLabel={`Retirer ${j.nom}`}
@@ -325,6 +338,7 @@ export default function FeuilleGrille() {
           </View>
         </ScrollView>
       </ScrollView>
+      )}
 
       <View style={[styles.barreBas, { paddingBottom: 16 + insets.bottom }]}>
         {!termine ? (

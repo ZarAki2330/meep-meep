@@ -13,8 +13,8 @@ import {
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
+import { AucunJoueur } from "@/components/aucun-joueur";
 import { AvatarJoueur } from "@/components/avatar-joueur";
-import { AvatarRole } from "@/components/avatar-role";
 import { DialogueBilan } from "@/components/dialogue-bilan";
 import { DialoguePremierJoueur } from "@/components/dialogue-premier-joueur";
 import { Entete } from "@/components/entete";
@@ -72,9 +72,10 @@ export default function PartieObjectif() {
     extensions: extensionsChoisies,
     extraInitial: { gagnantId: null as string | null },
     vierge: (js, e) =>
-      e.gagnantId === null &&
-      js.length === 2 &&
-      js.every((j, i) => !j.role && !j.membres?.length && j.nom === `${prefixe} ${i + 1}`),
+      js.length === 0 ||
+      (e.gagnantId === null &&
+        js.length === 2 &&
+        js.every((j, i) => !j.role && !j.membres?.length && j.nom === `${prefixe} ${i + 1}`)),
   });
 
   const gagnantId = extra.gagnantId;
@@ -150,7 +151,7 @@ export default function PartieObjectif() {
         </View>
       )}
 
-      {!termine && joueursDispo.length > 0 && (
+      {!termine && joueurs.length > 0 && joueursDispo.length > 0 && (
         <View style={styles.chipsContenu}>
           {joueursDispo.map((nom) => (
             <TouchableOpacity key={nom} style={styles.chip} onPress={() => ajouterJoueurNomme(nom)}>
@@ -160,6 +161,14 @@ export default function PartieObjectif() {
         </View>
       )}
 
+      {joueurs.length === 0 ? (
+        <AucunJoueur
+          prefixe={prefixe}
+          onAjouter={ajouterJoueur}
+          joueursDispo={joueursDispo}
+          onAjouterNomme={ajouterJoueurNomme}
+        />
+      ) : (
       <FlatList
         data={joueurs}
         keyExtractor={(j) => j.id}
@@ -192,8 +201,7 @@ export default function PartieObjectif() {
                 {choisi ? (
                   <Text style={styles.coche}>🏆</Text>
                 ) : (
-                  !termine &&
-                  joueurs.length > 1 && (
+                  !termine && (
                     <TouchableOpacity onPress={() => supprimerJoueur(item.id)}>
                       <Text style={styles.supprimer}>✕</Text>
                     </TouchableOpacity>
@@ -233,6 +241,7 @@ export default function PartieObjectif() {
           );
         }}
       />
+      )}
 
       <View style={[styles.barreBas, { paddingBottom: 16 + insets.bottom }]}>
         {!termine ? (
@@ -310,7 +319,6 @@ export default function PartieObjectif() {
                     disabled={!!prisPar}
                     onPress={() => choixPourJoueur && definirRole(choixPourJoueur, r.nom)}
                   >
-                    <AvatarRole role={r} taille={38} style={prisPar ? styles.roleAvatarPris : undefined} />
                     <View style={{ flex: 1, paddingRight: 8 }}>
                       <Text style={[styles.roleLigneNom, prisPar && styles.rolePris]}>{r.nom}</Text>
                       {r.origine && <Text style={styles.roleLigneOrigine}>{r.origine}</Text>}
@@ -406,12 +414,10 @@ function makeStyles(c: AppColors) {
     roleLigne: {
       flexDirection: "row",
       alignItems: "center",
-      gap: 12,
       paddingVertical: 12,
       borderTopWidth: 1,
       borderTopColor: c.border,
     },
-    roleAvatarPris: { opacity: 0.4 },
     roleLigneNom: { fontSize: 15, fontWeight: "600", color: c.textPrimary },
     roleLigneOrigine: { fontSize: 12, color: c.textMuted, marginTop: 2 },
     roleLigneObjectif: { fontSize: 12, color: c.textSecondary, marginTop: 4, lineHeight: 16 },

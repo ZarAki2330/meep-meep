@@ -20,6 +20,7 @@ import {
 import { DialogueConfirmation } from "@/components/dialogue-confirmation";
 import { Entete } from "@/components/entete";
 import { IconSymbol } from "@/components/ui/icon-symbol";
+import { POLICE_TITRE } from "@/constants/fonts";
 import { ACCENTS, CLES_ACCENT, type AppColors } from "@/constants/theme-colors";
 import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
@@ -246,12 +247,26 @@ export default function Reglages() {
       />
 
       <View style={styles.apropos}>
-        <Image
-          source={require("@/assets/images/logo-header.png")}
-          style={styles.logo}
-          resizeMode="contain"
-          tintColor={colors.accentText}
-        />
+        {/* Même logo que l'accueil : meeple teinté par l'accent + lignes ambre,
+            suivi du mot « Meep Meep » en Fredoka. */}
+        <View style={styles.logoLigne}>
+          <View style={styles.meeple} accessibilityLabel="Meep Meep">
+            <Image
+              source={require("@/assets/images/meeple-body.png")}
+              style={styles.meepleCalque}
+              resizeMode="contain"
+              tintColor={colors.accentText}
+            />
+            <Image
+              source={require("@/assets/images/meeple-lines.png")}
+              style={styles.meepleCalque}
+              resizeMode="contain"
+            />
+          </View>
+          <Text style={styles.wordmark} allowFontScaling={false}>
+            Meep Meep
+          </Text>
+        </View>
         <Text style={styles.version}>Version 1.0.0</Text>
         <Text style={styles.signature}>créé par Zaraki</Text>
       </View>
@@ -380,7 +395,10 @@ function makeStyles(c: AppColors) {
     erreurTexte: { fontSize: 13, color: c.warningText, fontWeight: "600" },
 
     apropos: { alignItems: "center", marginTop: 36 },
-    logo: { height: 30, aspectRatio: 1428 / 249 },
+    logoLigne: { flexDirection: "row", alignItems: "center", gap: 8 },
+    meeple: { width: 42, height: 34, position: "relative" },
+    meepleCalque: { position: "absolute", top: 0, left: 0, width: 42, height: 34 },
+    wordmark: { fontFamily: POLICE_TITRE, fontSize: 24, color: c.accentText, letterSpacing: -0.3 },
     version: { fontSize: 12, color: c.textMuted, marginTop: 10 },
     signature: { fontSize: 12, color: c.textMuted, marginTop: 2 },
   });

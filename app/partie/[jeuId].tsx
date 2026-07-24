@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
+import { AucunJoueur } from "@/components/aucun-joueur";
 import { AvatarJoueur } from "@/components/avatar-joueur";
 import { DialogueBilan } from "@/components/dialogue-bilan";
 import { DialogueEgalite } from "@/components/dialogue-egalite";
@@ -73,8 +74,9 @@ export default function Partie() {
     extensions: extensionsChoisies,
     extraInitial: {},
     vierge: (js) =>
-      js.length === 2 &&
-      js.every((j, i) => j.score === 0 && j.nom === `${prefixe} ${i + 1}` && !j.membres?.length),
+      js.length === 0 ||
+      (js.length === 2 &&
+        js.every((j, i) => j.score === 0 && j.nom === `${prefixe} ${i + 1}` && !j.membres?.length)),
   });
 
   const sens = jeu?.scoreVictoire ?? "max";
@@ -180,7 +182,7 @@ export default function Partie() {
         </View>
       )}
 
-      {!termine && joueursDispo.length > 0 && (
+      {!termine && joueurs.length > 0 && joueursDispo.length > 0 && (
         <View style={styles.chipsContenu}>
           {joueursDispo.map((nom) => (
             <TouchableOpacity key={nom} style={styles.chip} onPress={() => ajouterJoueurNomme(nom)}>
@@ -190,6 +192,14 @@ export default function Partie() {
         </View>
       )}
 
+      {joueurs.length === 0 ? (
+        <AucunJoueur
+          prefixe={prefixe}
+          onAjouter={ajouterJoueur}
+          joueursDispo={joueursDispo}
+          onAjouterNomme={ajouterJoueurNomme}
+        />
+      ) : (
       <FlatList
         data={joueurs}
         keyExtractor={(j) => j.id}
@@ -197,28 +207,9 @@ export default function Partie() {
         renderItem={({ item, index }) => {
           const enTete = !tousEgaux && item.score === meilleur;
           const couleur = COULEURS[index % COULEURS.length];
-          // Rang du joueur selon le sens du score (les ex æquo partagent le rang).
-          const rang =
-            joueurs.filter((j) =>
-              sens === "min" ? j.score < item.score : j.score > item.score,
-            ).length + 1;
           return (
             <View style={[styles.carte, enTete && styles.carteEnTete]}>
               <View style={styles.ligneHaut}>
-                {!tousEgaux && (
-                  <View
-                    style={[styles.rang, rang === 1 && styles.rangPremier]}
-                    accessibilityElementsHidden
-                    importantForAccessibility="no-hide-descendants"
-                  >
-                    <Text
-                      style={[styles.rangTexte, rang === 1 && styles.rangTextePremier]}
-                      allowFontScaling={false}
-                    >
-                      {rang}
-                    </Text>
-                  </View>
-                )}
                 <AvatarJoueur
                   nom={item.nom}
                   photo={photoDe(item.nom)}
@@ -232,7 +223,7 @@ export default function Partie() {
                   onChangeText={(t) => renommer(item.id, t)}
                   editable={!termine}
                 />
-                {!termine && joueurs.length > 1 && (
+                {!termine && (
                   <TouchableOpacity
                     accessibilityRole="button"
                     accessibilityLabel={`Retirer ${item.nom}`}
@@ -304,6 +295,7 @@ export default function Partie() {
           );
         }}
       />
+      )}
 
       <View style={[styles.barreBas, { paddingBottom: 16 + insets.bottom }]}>
         {!termine ? (
@@ -394,19 +386,6 @@ function makeStyles(c: AppColors) {
     },
     carteEnTete: { borderColor: c.success, borderWidth: 2 },
     ligneHaut: { flexDirection: "row", alignItems: "center", gap: 10 },
-    rang: {
-      width: 26,
-      height: 26,
-      borderRadius: 13,
-      backgroundColor: c.surfaceAlt,
-      borderWidth: 1,
-      borderColor: c.border,
-      alignItems: "center",
-      justifyContent: "center",
-    },
-    rangPremier: { backgroundColor: c.success, borderColor: c.success },
-    rangTexte: { fontSize: 13, fontWeight: "700", color: c.textSecondary },
-    rangTextePremier: { color: c.onAccent },
     nomInput: { flex: 1, fontSize: 16, fontWeight: "600", color: c.textPrimary, paddingVertical: 4 },
     supprimer: { color: c.textFaint, fontSize: 16, paddingHorizontal: 6 },
     membresBouton: {
