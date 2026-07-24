@@ -1,14 +1,24 @@
-# 🎲 Meep Meep
+<p align="center">
+  <img src="assets/images/logo-readme.png" alt="Meep Meep" width="112" />
+</p>
 
-![Expo](https://img.shields.io/badge/Expo-SDK%2054-000020?logo=expo&logoColor=white)
-![React Native](https://img.shields.io/badge/React%20Native-0.81-61DAFB?logo=react&logoColor=black)
-![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)
-![SQLite](https://img.shields.io/badge/SQLite-local-003B57?logo=sqlite&logoColor=white)
-![Hors-ligne](https://img.shields.io/badge/100%25-hors--ligne-2ea44f)
-![Accessibilité](https://img.shields.io/badge/Accessibilit%C3%A9-WCAG%20AA-2ea44f)
-![Catalogue](https://img.shields.io/badge/catalogue-390%20jeux-7a5195)
+<h1 align="center">Meep Meep</h1>
 
-**Ta ludothèque de jeux de société, dans ta poche.** Retrouve une grande liste de jeux, lis leurs règles en français, et gère les scores de tes parties en direct — le tout **100 % hors-ligne**, sans compte.
+<p align="center">
+  <strong>Ta ludothèque de jeux de société, dans ta poche.</strong><br/>
+  Retrouve une grande liste de jeux, lis leurs règles en français,<br/>
+  et gère les scores de tes parties en direct — le tout 100&nbsp;% hors-ligne, sans compte.
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Expo-SDK%2054-000020?logo=expo&logoColor=white" alt="Expo" />
+  <img src="https://img.shields.io/badge/React%20Native-0.81-61DAFB?logo=react&logoColor=black" alt="React Native" />
+  <img src="https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/SQLite-local-003B57?logo=sqlite&logoColor=white" alt="SQLite" />
+  <img src="https://img.shields.io/badge/100%25-hors--ligne-2ea44f" alt="Hors-ligne" />
+  <img src="https://img.shields.io/badge/Accessibilit%C3%A9-WCAG%20AA-2ea44f" alt="Accessibilité" />
+  <img src="https://img.shields.io/badge/catalogue-390%20jeux-7a5195" alt="Catalogue" />
+</p>
 
 ## Fonctionnalités
 
