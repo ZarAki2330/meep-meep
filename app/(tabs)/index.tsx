@@ -141,12 +141,21 @@ export default function Catalogue() {
       <View style={styles.header}>
         <View style={{ flex: 1 }}>
           <View style={styles.logoLigne}>
-            <Image
-              source={require("@/assets/images/meeple-logo.png")}
-              style={styles.meeple}
-              resizeMode="contain"
-              accessibilityLabel="Meep Meep"
-            />
+            <View style={styles.meeple} accessibilityLabel="Meep Meep">
+              {/* Le meeple suit la couleur d'accent du thème… */}
+              <Image
+                source={require("@/assets/images/meeple-body.png")}
+                style={StyleSheet.absoluteFill}
+                resizeMode="contain"
+                tintColor={colors.accentText}
+              />
+              {/* …et les lignes de vitesse gardent leur ambre, par-dessus. */}
+              <Image
+                source={require("@/assets/images/meeple-lines.png")}
+                style={StyleSheet.absoluteFill}
+                resizeMode="contain"
+              />
+            </View>
             <Text style={styles.wordmark} allowFontScaling={false}>
               Meep Meep
             </Text>
@@ -539,7 +548,7 @@ function makeStyles(c: AppColors) {
     },
     logoLigne: { flexDirection: "row", alignItems: "center", gap: 8 },
     meeple: { width: 42, height: 34 },
-    wordmark: { fontFamily: POLICE_TITRE, fontSize: 26, color: c.textPrimary, letterSpacing: -0.3 },
+    wordmark: { fontFamily: POLICE_TITRE, fontSize: 26, color: c.accentText, letterSpacing: -0.3 },
     sousTitre: { fontSize: 15, color: c.textMuted, marginTop: 4 },
     headerBoutons: { flexDirection: "row", gap: 8 },
     themeBouton: {
