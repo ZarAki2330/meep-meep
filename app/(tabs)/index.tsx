@@ -7,6 +7,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { DialogueConfirmation } from "@/components/dialogue-confirmation";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { VisuelJeu } from "@/components/visuel-jeu";
+import { POLICE_TITRE } from "@/constants/fonts";
 import { type AppColors } from "@/constants/theme-colors";
 import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
@@ -139,12 +140,17 @@ export default function Catalogue() {
     <SafeAreaView style={styles.page} edges={["top"]}>
       <View style={styles.header}>
         <View style={{ flex: 1 }}>
-          <Image
-            source={require("@/assets/images/logo-header.png")}
-            style={styles.logo}
-            resizeMode="contain"
-            tintColor={colors.accentText}
-          />
+          <View style={styles.logoLigne}>
+            <Image
+              source={require("@/assets/images/meeple-logo.png")}
+              style={styles.meeple}
+              resizeMode="contain"
+              accessibilityLabel="Meep Meep"
+            />
+            <Text style={styles.wordmark} allowFontScaling={false}>
+              Meep Meep
+            </Text>
+          </View>
           <Text style={styles.sousTitre}>Ma ludothèque</Text>
         </View>
         <View style={styles.headerBoutons}>
@@ -531,7 +537,9 @@ function makeStyles(c: AppColors) {
       paddingTop: 12,
       paddingBottom: 8,
     },
-    logo: { height: 34, aspectRatio: 1428 / 249, alignSelf: "flex-start" },
+    logoLigne: { flexDirection: "row", alignItems: "center", gap: 8 },
+    meeple: { width: 42, height: 34 },
+    wordmark: { fontFamily: POLICE_TITRE, fontSize: 26, color: c.textPrimary, letterSpacing: -0.3 },
     sousTitre: { fontSize: 15, color: c.textMuted, marginTop: 4 },
     headerBoutons: { flexDirection: "row", gap: 8 },
     themeBouton: {
