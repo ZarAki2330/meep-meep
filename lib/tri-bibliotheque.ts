@@ -24,6 +24,33 @@ function parNom(a: Jeu, b: Jeu): number {
 }
 
 /**
+ * Première lettre normalisée d'un nom : accents retirés (É → E), en majuscule.
+ * Tout ce qui n'est pas A–Z (chiffres, symboles) est regroupé sous « # ».
+ * Sert au tri alphabétique comme à la barre d'index de l'écran.
+ */
+export function lettreInitiale(nom: string): string {
+  const c = nom
+    .trim()
+    .charAt(0)
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toUpperCase();
+  return c >= "A" && c <= "Z" ? c : "#";
+}
+
+/**
+ * Tri alphabétique de l'écran : d'abord les jeux commençant par une lettre
+ * (A → Z), puis, tout à la fin, ceux qui commencent par un chiffre ou un
+ * symbole (« 6 qui prend », « 7 Wonders »…), rangés entre eux par nom.
+ */
+function parAlpha(a: Jeu, b: Jeu): number {
+  const aChiffre = lettreInitiale(a.nom) === "#";
+  const bChiffre = lettreInitiale(b.nom) === "#";
+  if (aChiffre !== bChiffre) return aChiffre ? 1 : -1;
+  return parNom(a, b);
+}
+
+/**
  * Trie une liste de jeux sans modifier la liste reçue. À valeur égale sur le
  * critère choisi, on départage toujours par ordre alphabétique — l'ordre reste
  * ainsi stable et prévisible.
@@ -50,5 +77,5 @@ export function trierBibliotheque(jeux: Jeu[], tri: TriBiblioCle): Jeu[] {
     );
   }
 
-  return copie.sort(parNom);
+  return copie.sort(parAlpha);
 }

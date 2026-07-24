@@ -23,6 +23,21 @@ describe("trierBibliotheque", () => {
     expect(noms(trierBibliotheque(l, "alpha"))).toEqual(["Abc", "Élan", "Escrime"]);
   });
 
+  it("range les jeux commençant par un chiffre à la fin, entre eux par nom", () => {
+    const l = [
+      jeu({ nom: "7 Wonders" }),
+      jeu({ nom: "Bruges" }),
+      jeu({ nom: "6 qui prend" }),
+      jeu({ nom: "Azul" }),
+    ];
+    expect(noms(trierBibliotheque(l, "alpha"))).toEqual([
+      "Azul",
+      "Bruges",
+      "6 qui prend",
+      "7 Wonders",
+    ]);
+  });
+
   it("trie par catégorie, puis par nom dans chaque catégorie", () => {
     const l = [
       jeu({ nom: "Zonk", categorie: "Ambiance" }),
