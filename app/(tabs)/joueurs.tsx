@@ -23,9 +23,13 @@ import { lignesDe, participantsDe, vainqueursDe } from "@/lib/lignes-partie";
 
 type Stat = { jouees: number; victoires: number; favori: string | null };
 
+// Statistiques d'un joueur sans aucune partie. Constante figée (une seule
+// référence) : évite de recréer l'objet à chaque rendu de chaque carte.
+const AUCUNE: Stat = { jouees: 0, victoires: 0, favori: null };
+
 export default function Joueurs() {
   const { colors } = useTheme();
-  const styles = makeStyles(colors);
+  const styles = useMemo(() => makeStyles(colors), [colors]);
   const router = useRouter();
 
   const [joueurs, setJoueurs] = useState<JoueurEnregistre[]>([]);
@@ -92,8 +96,6 @@ export default function Joueurs() {
     }
     return stats;
   }, [parties]);
-
-  const AUCUNE: Stat = { jouees: 0, victoires: 0, favori: null };
 
   return (
     <SafeAreaView style={styles.page} edges={["top"]}>

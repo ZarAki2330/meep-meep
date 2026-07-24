@@ -34,7 +34,7 @@ const JOUEURS_OPTIONS = [2, 3, 4, 5, 6];
 export default function Catalogue() {
   const { colors } = useTheme();
   const { jeux, estFavori, basculerFavori } = useJeux();
-  const styles = makeStyles(colors);
+  const styles = useMemo(() => makeStyles(colors), [colors]);
   const router = useRouter();
 
   const [recherche, setRecherche] = useState("");
@@ -560,7 +560,6 @@ function makeStyles(c: AppColors) {
       alignItems: "center",
       justifyContent: "center",
     },
-    themeIcone: { fontSize: 18, color: c.accentText },
     rechercheLigne: { flexDirection: "row", gap: 10, paddingHorizontal: 16, marginBottom: 8 },
     rechercheChamp: {
       flex: 1,

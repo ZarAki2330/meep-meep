@@ -17,13 +17,3 @@ export function estJeuDeBase(j: Jeu): boolean {
 export function enfantsDe(id: string, liste: Jeu[]): Jeu[] {
   return liste.filter((j) => j.jeuParent === id);
 }
-
-/**
- * Les entrées à afficher au premier niveau d'une liste : on masque les extensions
- * et éditions dont le jeu de base est présent (elles sont regroupées sous lui).
- * Une extension orpheline (parent absent) reste visible pour ne rien cacher.
- */
-export function premierNiveau(liste: Jeu[]): Jeu[] {
-  const ids = new Set(liste.map((j) => j.id));
-  return liste.filter((j) => estJeuDeBase(j) || !j.jeuParent || !ids.has(j.jeuParent));
-}

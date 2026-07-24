@@ -5,7 +5,7 @@ import { File, Paths } from "expo-file-system";
 import { useRouter } from "expo-router";
 import * as FileSystemLegacy from "expo-file-system/legacy";
 import * as Sharing from "expo-sharing";
-import { useCallback, useEffect, useState, type ComponentProps } from "react";
+import { useCallback, useEffect, useMemo, useState, type ComponentProps } from "react";
 import {
   ActivityIndicator,
   Image,
@@ -40,7 +40,7 @@ const MESSAGE_PARTAGE =
 export default function Reglages() {
   const { colors, mode, toggle, accent, definirAccent } = useTheme();
   const { rafraichir } = useJeux();
-  const styles = makeStyles(colors);
+  const styles = useMemo(() => makeStyles(colors), [colors]);
   const router = useRouter();
 
   const [occupe, setOccupe] = useState(false);

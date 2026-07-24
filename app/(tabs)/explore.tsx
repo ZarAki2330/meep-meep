@@ -48,7 +48,7 @@ const CLES_PERIODE = Object.keys(PERIODES) as PeriodeCle[];
 export default function Historique() {
   const { colors } = useTheme();
   const { jeux } = useJeux();
-  const styles = makeStyles(colors);
+  const styles = useMemo(() => makeStyles(colors), [colors]);
   const [parties, setParties] = useState<PartieEnregistree[]>([]);
   const [detail, setDetail] = useState<PartieEnregistree | null>(null);
 
@@ -513,8 +513,9 @@ function DetailPartie({
   const [evaluation, setEvaluation] = useState(partie.evaluation ?? 0);
   const [note, setNote] = useState(partie.note ?? "");
 
-  // Extensions jouées, mémorisées avec la partie.
-  const extensions = (() => {
+  // Extensions jouées, mémorisées avec la partie. Mémoïsé : le modal se re-rend
+  // à chaque frappe (scores, note…), inutile de reparser ce JSON à chaque fois.
+  const extensions = useMemo(() => {
     if (!partie.extensions) return [] as string[];
     try {
       const v = JSON.parse(partie.extensions);
@@ -522,7 +523,7 @@ function DetailPartie({
     } catch {
       return [] as string[];
     }
-  })();
+  }, [partie.extensions]);
 
   function definirScore(index: number, texte: string) {
     const negatif = texte.trimStart().startsWith("-");
@@ -558,15 +559,19 @@ function DetailPartie({
     onEnregistre();
   }
 
-  // Affichage : tri et mise en avant du (ou des) vainqueur(s).
-  const affichees = [...lignes];
-  if (coop) {
-    // Personne ne devance personne : on garde l'ordre de la table.
-  } else if (objectif) {
-    affichees.sort((a, b) => (a.nom === gagnant ? -1 : b.nom === gagnant ? 1 : 0));
-  } else {
-    affichees.sort((a, b) => (sens === "min" ? a.score - b.score : b.score - a.score));
-  }
+  // Affichage : tri et mise en avant du (ou des) vainqueur(s). Mémoïsé pour ne
+  // pas re-trier à chaque frappe de score/note dans le modal.
+  const affichees = useMemo(() => {
+    const liste = [...lignes];
+    if (coop) {
+      // Personne ne devance personne : on garde l'ordre de la table.
+    } else if (objectif) {
+      liste.sort((a, b) => (a.nom === gagnant ? -1 : b.nom === gagnant ? 1 : 0));
+    } else {
+      liste.sort((a, b) => (sens === "min" ? a.score - b.score : b.score - a.score));
+    }
+    return liste;
+  }, [lignes, coop, objectif, gagnant, sens]);
   const egalite = !coop && !gagnant;
   const meilleur = affichees.length ? affichees[0].score : 0;
 

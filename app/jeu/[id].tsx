@@ -2,7 +2,7 @@
 
 import { useFocusEffect } from "@react-navigation/native";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import {
   ActivityIndicator,
   Linking,
@@ -36,7 +36,7 @@ export default function FicheJeu() {
   const router = useRouter();
   const { colors } = useTheme();
   const { jeux, pret, supprimerJeu, estFavori, basculerFavori } = useJeux();
-  const styles = makeStyles(colors);
+  const styles = useMemo(() => makeStyles(colors), [colors]);
   const insets = useSafeAreaInsets();
   const jeu = jeux.find((j) => j.id === id);
 
@@ -51,8 +51,9 @@ export default function FicheJeu() {
     );
   }
 
-  const rolesVisibles = (jeu?.roles ?? []).filter(
-    (r) => !r.extension || extensionsActives.includes(r.extension),
+  const rolesVisibles = useMemo(
+    () => (jeu?.roles ?? []).filter((r) => !r.extension || extensionsActives.includes(r.extension)),
+    [jeu, extensionsActives],
   );
 
   const [confirmationOuverte, setConfirmationOuverte] = useState(false);

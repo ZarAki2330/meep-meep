@@ -1,7 +1,7 @@
 // app/import.tsx — ajouter un jeu manuellement (hors-ligne)
 
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { useCallback, useEffect, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
 import {
   Image,
   KeyboardAvoidingView,
@@ -44,7 +44,7 @@ function nombre(s: string, defaut: number): number {
 
 export default function AjouterJeu() {
   const { colors } = useTheme();
-  const styles = makeStyles(colors);
+  const styles = useMemo(() => makeStyles(colors), [colors]);
   const router = useRouter();
   const { jeux, rafraichir } = useJeux();
 
@@ -54,14 +54,20 @@ export default function AjouterJeu() {
   const modeEdition = !!jeuExistant;
 
   // Catégories déjà utilisées dans le catalogue, pour les proposer en un clic.
-  const categoriesExistantes = Array.from(new Set(jeux.map((j) => j.categorie))).sort((a, b) =>
-    a.localeCompare(b, "fr"),
+  // Mémoïsé : ne dépend que du catalogue, pas des frappes dans le formulaire.
+  const categoriesExistantes = useMemo(
+    () => Array.from(new Set(jeux.map((j) => j.categorie))).sort((a, b) => a.localeCompare(b, "fr")),
+    [jeux],
   );
 
   // Éditeurs déjà utilisés, proposés en un clic (« Gigamic » revient souvent).
-  const editeursExistants = Array.from(
-    new Set(jeux.map((j) => j.editeur?.trim()).filter((e): e is string => !!e)),
-  ).sort((a, b) => a.localeCompare(b, "fr"));
+  const editeursExistants = useMemo(
+    () =>
+      Array.from(
+        new Set(jeux.map((j) => j.editeur?.trim()).filter((e): e is string => !!e)),
+      ).sort((a, b) => a.localeCompare(b, "fr")),
+    [jeux],
+  );
 
   const [nom, setNom] = useState("");
   const [categorie, setCategorie] = useState("");
@@ -186,15 +192,24 @@ export default function AjouterJeu() {
     }
   }
 
-  // Aperçu des cases saisies, pour proposer les sections du bonus.
-  const catsApercu = mode === "grille" ? parserCategories(categoriesTexte) : [];
-  const sectionsDispo = Array.from(
-    new Set(catsApercu.map((c) => c.section).filter(Boolean) as string[]),
+  // Aperçu des cases saisies, pour proposer les sections du bonus. Ne se
+  // recalcule que si le mode ou le texte des catégories change.
+  const catsApercu = useMemo(
+    () => (mode === "grille" ? parserCategories(categoriesTexte) : []),
+    [mode, categoriesTexte],
+  );
+  const sectionsDispo = useMemo(
+    () => Array.from(new Set(catsApercu.map((c) => c.section).filter(Boolean) as string[])),
+    [catsApercu],
   );
 
   // Aperçu des personnages : on prévient tout de suite si l'un réclame une
   // extension qui n'est pas déclarée — il ne s'afficherait jamais sur la fiche.
-  const inconnues = extensionsInconnues(parserRoles(rolesTexte), parserExtensions(extensionsTexte));
+  // Deux parsings, donc mémoïsés sur les seuls textes concernés.
+  const inconnues = useMemo(
+    () => extensionsInconnues(parserRoles(rolesTexte), parserExtensions(extensionsTexte)),
+    [rolesTexte, extensionsTexte],
+  );
 
   async function enregistrer() {
     if (!nom.trim()) {

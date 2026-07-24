@@ -41,7 +41,7 @@ export default function Statistiques() {
   const { colors } = useTheme();
   // Le catalogue dit si le moins de points gagne : les meilleurs scores en dépendent.
   const { jeux } = useJeux();
-  const styles = makeStyles(colors);
+  const styles = useMemo(() => makeStyles(colors), [colors]);
   const [parties, setParties] = useState<PartieEnregistree[]>([]);
   const [jeuFiltre, setJeuFiltre] = useState<string | null>(null);
 
@@ -110,26 +110,33 @@ export default function Statistiques() {
   const joueurTop = joueursTries[0];
   const moyenneJoueurs = total ? String(Math.round(sommeJoueurs / total)) : "0";
 
-  // Durées : seules les parties chronométrées comptent.
-  const durees = partiesFiltrees.map((p) => p.duree ?? 0).filter((d) => d > 0);
-  const dureeMoyenne = durees.length
-    ? formatDuree(durees.reduce((s, d) => s + d, 0) / durees.length)
-    : "—";
-  const plusLongue = durees.length ? formatDuree(Math.max(...durees)) : "—";
+  // Durées : seules les parties chronométrées comptent. Mémoïsé pour ne pas
+  // reparcourir tout l'historique à chaque rendu.
+  const { dureeMoyenne, plusLongue } = useMemo(() => {
+    const durees = partiesFiltrees.map((p) => p.duree ?? 0).filter((d) => d > 0);
+    return {
+      dureeMoyenne: durees.length
+        ? formatDuree(durees.reduce((s, d) => s + d, 0) / durees.length)
+        : "—",
+      plusLongue: durees.length ? formatDuree(Math.max(...durees)) : "—",
+    };
+  }, [partiesFiltrees]);
 
   // Notes : la moyenne du filtre courant, et le classement des jeux.
-  const notes = notesDe(partiesFiltrees);
+  const notes = useMemo(() => notesDe(partiesFiltrees), [partiesFiltrees]);
   const noteMoyenne = moyenne(notes);
 
-  const notesParJeu: Record<string, number[]> = {};
-  for (const p of partiesFiltrees) {
-    if (typeof p.evaluation === "number" && p.evaluation > 0) {
-      (notesParJeu[p.jeu_nom] ??= []).push(p.evaluation);
+  const jeuxNotes = useMemo(() => {
+    const notesParJeu: Record<string, number[]> = {};
+    for (const p of partiesFiltrees) {
+      if (typeof p.evaluation === "number" && p.evaluation > 0) {
+        (notesParJeu[p.jeu_nom] ??= []).push(p.evaluation);
+      }
     }
-  }
-  const jeuxNotes = Object.entries(notesParJeu)
-    .map(([nom, ns]) => ({ nom, note: moyenne(ns) as number, nb: ns.length }))
-    .sort((a, b) => b.note - a.note || b.nb - a.nb);
+    return Object.entries(notesParJeu)
+      .map(([nom, ns]) => ({ nom, note: moyenne(ns) as number, nb: ns.length }))
+      .sort((a, b) => b.note - a.note || b.nb - a.nb);
+  }, [partiesFiltrees]);
 
   /**
    * Meilleurs scores. Deux pièges :
@@ -143,23 +150,34 @@ export default function Statistiques() {
     : undefined;
   const sens = jeuCourant?.scoreVictoire ?? "max";
 
-  const scores = partiesFiltrees
-    .flatMap((p) => lignesDe(p.details).map((j) => ({ nom: j.nom, score: j.score, date: p.date })))
-    .filter((s) => s.score !== 0)
-    .sort((a, b) => (sens === "min" ? a.score - b.score : b.score - a.score))
-    .slice(0, 5);
+  // Meilleurs scores : relit le JSON de chaque partie, donc mémoïsé (le calcul
+  // le plus lourd de l'écran). Dépend aussi du sens de victoire du jeu filtré.
+  const scores = useMemo(
+    () =>
+      partiesFiltrees
+        .flatMap((p) =>
+          lignesDe(p.details).map((j) => ({ nom: j.nom, score: j.score, date: p.date })),
+        )
+        .filter((s) => s.score !== 0)
+        .sort((a, b) => (sens === "min" ? a.score - b.score : b.score - a.score))
+        .slice(0, 5),
+    [partiesFiltrees, sens],
+  );
 
-  // Activité des 6 derniers mois
-  const mois: { label: string; nb: number }[] = [];
-  const maintenant = new Date();
-  for (let i = 5; i >= 0; i--) {
-    const d = new Date(maintenant.getFullYear(), maintenant.getMonth() - i, 1);
-    const nb = partiesFiltrees.filter((p) => {
-      const dp = new Date(p.date);
-      return dp.getFullYear() === d.getFullYear() && dp.getMonth() === d.getMonth();
-    }).length;
-    mois.push({ label: d.toLocaleDateString("fr-FR", { month: "short" }), nb });
-  }
+  // Activité des 6 derniers mois.
+  const mois = useMemo(() => {
+    const liste: { label: string; nb: number }[] = [];
+    const maintenant = new Date();
+    for (let i = 5; i >= 0; i--) {
+      const d = new Date(maintenant.getFullYear(), maintenant.getMonth() - i, 1);
+      const nb = partiesFiltrees.filter((p) => {
+        const dp = new Date(p.date);
+        return dp.getFullYear() === d.getFullYear() && dp.getMonth() === d.getMonth();
+      }).length;
+      liste.push({ label: d.toLocaleDateString("fr-FR", { month: "short" }), nb });
+    }
+    return liste;
+  }, [partiesFiltrees]);
   const maxMois = Math.max(...mois.map((m) => m.nb), 1);
   const maxJeu = jeuxTries.length ? jeuxTries[0][1] : 1;
 
