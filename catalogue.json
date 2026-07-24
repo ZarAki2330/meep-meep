@@ -9161,7 +9161,7 @@
   {
     "id": "echecs",
     "nom": "Échecs",
-    "categorie": "Abstrait",
+    "categorie": "Stratégie",
     "description": "Le grand classique de la stratégie à deux : mettre le roi adverse échec et mat.",
     "joueursMin": 2,
     "joueursMax": 2,
@@ -9184,7 +9184,7 @@
   {
     "id": "dames",
     "nom": "Dames",
-    "categorie": "Abstrait",
+    "categorie": "Stratégie",
     "description": "Un classique abstrait à deux : capturer tous les pions adverses en diagonale.",
     "joueursMin": 2,
     "joueursMax": 2,
