@@ -26,6 +26,7 @@ import { useTheme } from "@/context/theme";
 import { type Jeu } from "@/data/jeux";
 import { useBibliotheque } from "@/hooks/use-bibliotheque";
 import { ajouterJeu } from "@/db/jeux";
+import { texteJoueurs } from "@/lib/joueurs";
 import {
   lettreInitiale,
   TRIS_BIBLIO,
@@ -43,12 +44,6 @@ const LIBELLES_MODE: Record<NonNullable<Jeu["scoreMode"]>, string> = {
 
 // Étiquette affichée sur les extensions et éditions, pour les distinguer d'un jeu de base.
 const LIBELLE_TYPE = { extension: "Extension", edition: "Édition" } as const;
-
-function joueurs(j: Jeu): string {
-  const unite = j.equipes ? "équipes" : "joueurs";
-  const nombre = j.joueursMin === j.joueursMax ? `${j.joueursMin}` : `${j.joueursMin}–${j.joueursMax}`;
-  return `${nombre} ${unite}`;
-}
 
 // Index alphabétique (barre latérale). Le « # » regroupe les jeux commençant par
 // un chiffre ou un symbole (« 6 qui prend », « 7 Wonders »…).
@@ -89,7 +84,7 @@ const CarteJeu = memo(function CarteJeu({
           ) : null}
         </View>
         <Text style={styles.meta} numberOfLines={1}>
-          {item.categorie} · {joueurs(item)} · {item.dureeMin} min
+          {item.categorie} · {texteJoueurs(item)} · {item.dureeMin} min
           {item.editeur ? ` · ${item.editeur}` : ""}
         </Text>
         <Text style={styles.badge}>{LIBELLES_MODE[item.scoreMode ?? "compteur"]}</Text>

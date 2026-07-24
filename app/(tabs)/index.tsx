@@ -17,6 +17,7 @@ import {
   type PartieEnAttente,
 } from "@/db/partie-en-cours";
 import { statistiquesParJeu } from "@/db/parties";
+import { texteJoueurs } from "@/lib/joueurs";
 import { cheminPartie } from "@/lib/route-partie";
 import { estJeuDeBase } from "@/lib/regroupement";
 import { TRIS, trierJeux, type StatsJeu, type TriCle } from "@/lib/tri-catalogue";
@@ -410,7 +411,7 @@ export default function Catalogue() {
             activeOpacity={0.7}
             accessibilityRole="button"
             accessibilityLabel={`${item.nom}${idsEnAttente.has(item.id) ? ", partie en cours" : ""}`}
-            accessibilityHint={`${item.joueursMin} à ${item.joueursMax} joueurs, ${item.dureeMin} minutes, ${item.categorie}`}
+            accessibilityHint={`${item.joueursMin === item.joueursMax ? `${item.joueursMin}` : `${item.joueursMin} à ${item.joueursMax}`} ${item.equipes ? "équipes" : "joueurs"}, ${item.dureeMin} minutes, ${item.categorie}`}
             onPress={() => router.push(`/jeu/${item.id}`)}
           >
             <VisuelJeu jeu={item} style={styles.carteImage} />
@@ -425,7 +426,7 @@ export default function Catalogue() {
                 </View>
               )}
               <Text style={styles.meta}>
-                {item.joueursMin}–{item.joueursMax} joueurs · {item.dureeMin} min · {item.categorie}
+                {texteJoueurs(item)} · {item.dureeMin} min · {item.categorie}
                 {item.editeur ? ` · ${item.editeur}` : ""}
               </Text>
               {/* Quand on trie par usage, on montre ce qui justifie l'ordre. */}

@@ -26,6 +26,7 @@ import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
 import { effacerEtat, partieEnCours } from "@/db/partie-en-cours";
 import { jeuVersTexte } from "@/lib/jeu-partage";
+import { plageJoueurs } from "@/lib/joueurs";
 import { enfantsDe } from "@/lib/regroupement";
 import { cheminPartie } from "@/lib/route-partie";
 
@@ -198,7 +199,7 @@ export default function FicheJeu() {
       <View style={styles.metaLigne}>
         <Meta
           icone="person.2.fill"
-          valeur={`${jeu.joueursMin}–${jeu.joueursMax}`}
+          valeur={plageJoueurs(jeu)}
           label={jeu.equipes ? "équipes" : "joueurs"}
           couleur={colors.accentText}
           styles={styles}
