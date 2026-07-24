@@ -145,14 +145,14 @@ export default function Catalogue() {
               {/* Le meeple suit la couleur d'accent du thème… */}
               <Image
                 source={require("@/assets/images/meeple-body.png")}
-                style={StyleSheet.absoluteFill}
+                style={styles.meepleCalque}
                 resizeMode="contain"
                 tintColor={colors.accentText}
               />
               {/* …et les lignes de vitesse gardent leur ambre, par-dessus. */}
               <Image
                 source={require("@/assets/images/meeple-lines.png")}
-                style={StyleSheet.absoluteFill}
+                style={styles.meepleCalque}
                 resizeMode="contain"
               />
             </View>
@@ -547,7 +547,8 @@ function makeStyles(c: AppColors) {
       paddingBottom: 8,
     },
     logoLigne: { flexDirection: "row", alignItems: "center", gap: 8 },
-    meeple: { width: 42, height: 34 },
+    meeple: { width: 42, height: 34, position: "relative" },
+    meepleCalque: { position: "absolute", top: 0, left: 0, width: 42, height: 34 },
     wordmark: { fontFamily: POLICE_TITRE, fontSize: 26, color: c.accentText, letterSpacing: -0.3 },
     sousTitre: { fontSize: 15, color: c.textMuted, marginTop: 4 },
     headerBoutons: { flexDirection: "row", gap: 8 },
