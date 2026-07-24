@@ -1,4 +1,4 @@
-import { trierBibliotheque } from "@/lib/tri-bibliotheque";
+import { lettreInitiale, trierBibliotheque } from "@/lib/tri-bibliotheque";
 import { type Jeu } from "@/data/jeux";
 
 function jeu(p: Partial<Jeu>): Jeu {
@@ -70,5 +70,25 @@ describe("trierBibliotheque", () => {
     const avant = noms(l);
     trierBibliotheque(l, "alpha");
     expect(noms(l)).toEqual(avant);
+  });
+});
+
+describe("lettreInitiale", () => {
+  it("ramène les accents à la lettre de base", () => {
+    expect(lettreInitiale("Élan")).toBe("E");
+    expect(lettreInitiale("Îles")).toBe("I");
+  });
+
+  it("met la première lettre en majuscule", () => {
+    expect(lettreInitiale("azul")).toBe("A");
+  });
+
+  it("range chiffres et symboles sous « # »", () => {
+    expect(lettreInitiale("6 qui prend")).toBe("#");
+    expect(lettreInitiale("7 Wonders")).toBe("#");
+  });
+
+  it("ignore les espaces de début", () => {
+    expect(lettreInitiale("  Bruges")).toBe("B");
   });
 });
