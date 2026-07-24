@@ -35,6 +35,7 @@ export const SECTIONS_AIDE: SectionAide[] = [
         "Coopératif : pas de classement, toute la table gagne ou perd ensemble. Pour Pandémie, The Crew.",
       ],
       "« Qui gagne ? » n'apparaît qu'en mode compteur et manches : c'est là qu'un score peut être une pénalité, comme au 6 qui prend. Le seuil de fin de partie s'y règle aussi — 1000 à la belote, 66 au 6 qui prend.",
+      "Une partie démarre sans aucun joueur : ajoute-les toi-même avec le bouton « + Joueur » en bas, ou en touchant un joueur déjà enregistré. Tu peux retirer n'importe quel joueur à tout moment avec la croix, même s'il n'en reste qu'un.",
     ],
   },
   {
@@ -91,7 +92,7 @@ export const SECTIONS_AIDE: SectionAide[] = [
     titre: "Le catalogue",
     blocs: [
       "L'étoile met un jeu en favori. Les filtres croisent favoris, catégorie, nombre de joueurs et durée ; le tri range par ordre alphabétique, par jeux les plus joués, ou par parties récentes.",
-      "Le bouton + propose la bibliothèque de jeux tout prêts, un jeu partagé à coller, ou le formulaire complet.",
+      "Le bouton + propose la bibliothèque de jeux tout prêts, un jeu partagé à coller, ou le formulaire complet. Dans « Ajouter un jeu tout prêt », une barre A→Z sur le bord droit (en tri alphabétique) permet de sauter directement à une lettre ; la lettre où tu te trouves s'y surligne au défilement.",
       "Tous les jeux se valent : celui que tu as créé et celui qui vient de la bibliothèque se modifient et se suppriment de la même façon, depuis leur fiche.",
     ],
   },
