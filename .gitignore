@@ -41,3 +41,9 @@ app-example
 # generated native folders
 /ios
 /android
+
+# Claude / notes internes (à ne pas publier sur GitHub)
+TODO.md
+CLAUDE.md
+AGENTS.md
+.claude/
