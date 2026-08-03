@@ -9,7 +9,7 @@
 
 import { type JoueurScore, type PartieEnregistree } from "@/db/parties";
 
-import { lignesDe as lireLignes } from "./lignes-partie";
+import { ligneAGagne, lignesDe as lireLignes } from "./lignes-partie";
 
 export type StatsParJeu = { jeu: string; parties: number; victoires: number; taux: number };
 
@@ -43,25 +43,24 @@ function sienneParmi(lignes: JoueurScore[], nom: string): JoueurScore | undefine
   return lignes.find((l) => (l.membres?.length ? l.membres.includes(nom) : l.nom === nom));
 }
 
-/** La ligne du joueur : lui-même, ou l'équipe dont il est membre. */
-function ligneDe(p: PartieEnregistree, nom: string): JoueurScore | undefined {
-  return sienneParmi(lignesDe(p), nom);
-}
-
 /** Les personnes derrière une ligne : une équipe en cache plusieurs. */
 function personnes(l: JoueurScore): string[] {
   return l.membres?.length ? l.membres : [l.nom];
 }
 
-/** Une égalité (gagnant vide) n'est une victoire pour personne. */
-function aGagne(p: PartieEnregistree, sienne: JoueurScore): boolean {
-  return p.resultat ? p.resultat === "victoire" : !!p.gagnant && p.gagnant === sienne.nom;
+/**
+ * Une égalité n'est une victoire pour personne, et une partie à objectif peut
+ * se gagner à plusieurs : c'est la marque portée par la ligne qui tranche
+ * (`ligneAGagne` retombe sur le nom pour les parties d'avant ce marquage).
+ */
+function aGagne(p: PartieEnregistree, sienne: JoueurScore, lignes: JoueurScore[]): boolean {
+  return ligneAGagne(p, sienne, lignes);
 }
 
 /** Les parties auxquelles ce joueur a pris part, la plus récente en tête. */
 export function partiesDe(parties: PartieEnregistree[], nom: string): PartieEnregistree[] {
   return parties
-    .filter((p) => ligneDe(p, nom))
+    .filter((p) => sienneParmi(lignesDe(p), nom))
     .sort((a, b) => b.date.localeCompare(a.date));
 }
 
@@ -75,8 +74,9 @@ function series(partiesDuJoueur: PartieEnregistree[], nom: string) {
   let courante = 0;
   // partiesDuJoueur arrive la plus récente en tête : on remonte le temps à l'endroit.
   for (const p of [...partiesDuJoueur].reverse()) {
-    const sienne = ligneDe(p, nom);
-    if (sienne && aGagne(p, sienne)) {
+    const lignes = lignesDe(p);
+    const sienne = sienneParmi(lignes, nom);
+    if (sienne && aGagne(p, sienne, lignes)) {
       courante++;
       if (courante > meilleure) meilleure = courante;
     } else {
@@ -99,7 +99,7 @@ export function statsJoueur(parties: PartieEnregistree[], nom: string): StatsJou
     const lignes = lignesDe(p);
     const sienne = sienneParmi(lignes, nom);
     if (!sienne) continue;
-    const gagne = aGagne(p, sienne);
+    const gagne = aGagne(p, sienne, lignes);
     if (gagne) victoires++;
 
     const j = (parJeu[p.jeu_nom] ??= { parties: 0, victoires: 0 });

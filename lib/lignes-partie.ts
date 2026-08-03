@@ -6,8 +6,11 @@
 //    tableau. Un `JSON.parse` réussi ne garantit rien.
 //  - Qui joue ? Une ligne est un joueur, ou une équipe qui en cache plusieurs.
 //    Un même joueur peut figurer dans deux équipes : il ne compte qu'une fois.
-//  - Qui a gagné ? `gagnant` est le nom de la LIGNE victorieuse. En équipes,
-//    c'est le nom de l'équipe, jamais celui d'un joueur.
+//  - Qui a gagné ? Une partie peut se gagner à plusieurs : les lignes
+//    victorieuses portent `gagnant: true`. La colonne `gagnant` ne retient
+//    qu'un nom — celui de la première d'entre elles — et sert de repli pour
+//    les parties enregistrées avant ce marquage. En équipes, ce nom est celui
+//    de l'équipe, jamais celui d'un joueur.
 
 import { type JoueurScore, type PartieEnregistree } from "@/db/parties";
 
@@ -46,32 +49,86 @@ export function participantsDe(lignes: JoueurScore[]): string[] {
 }
 
 /**
- * Les personnes créditées de la victoire, sans doublon.
+ * Vrai si ces lignes portent la marque du vainqueur.
  *
- * Vide sur une égalité (vainqueur vide), vide sur une défaite coopérative.
- * En coopératif gagné, toute la table l'emporte. En équipes, ce sont les
- * membres de l'équipe victorieuse — jamais l'équipe elle-même.
+ * Les parties enregistrées avant les vainqueurs multiples n'en ont aucune :
+ * on retombe alors sur la comparaison des noms, comme autrefois.
  */
-export function vainqueursDe(partie: PartieLisible): string[] {
+export function lignesMarquees(lignes: JoueurScore[]): boolean {
+  return lignes.some((l) => l.gagnant === true);
+}
+
+/**
+ * Les lignes victorieuses d'une partie compétitive.
+ *
+ * Plusieurs en mode objectif, où l'on gagne parfois en camp. Vide sur une
+ * égalité. Rend une liste vide en coopératif : là, personne ne devance
+ * personne, c'est `resultat` qui tranche.
+ */
+export function lignesGagnantes(partie: PartieLisible): JoueurScore[] {
+  if (partie.resultat) return [];
   const lignes = lignesDe(partie.details);
-
-  if (partie.resultat) {
-    return partie.resultat === "victoire" ? participantsDe(lignes) : [];
-  }
+  if (lignesMarquees(lignes)) return lignes.filter((l) => l.gagnant === true);
   if (!partie.gagnant) return []; // égalité enregistrée
+  // Deux lignes peuvent porter le même nom : elles gagnent alors ensemble.
+  return lignes.filter((l) => l.nom === partie.gagnant);
+}
 
-  // Deux lignes peuvent porter le même nom : la victoire ne se compte qu'une fois.
-  const gagnantes = lignes.filter((l) => l.nom === partie.gagnant);
+/**
+ * Les noms des lignes victorieuses, sans doublon — le nom de l'équipe en
+ * équipes. C'est ce que l'historique affiche ; les statistiques, elles,
+ * créditent les personnes derrière ces lignes (voir `vainqueursDe`).
+ */
+export function nomsGagnantsDe(partie: PartieLisible): string[] {
+  const gagnantes = lignesGagnantes(partie);
   if (gagnantes.length === 0) {
     // Une partie dont la ligne gagnante a disparu : on s'en tient au nom retenu.
-    return [partie.gagnant];
+    return partie.resultat || !partie.gagnant ? [] : [partie.gagnant];
+  }
+  return Array.from(new Set(gagnantes.map((l) => l.nom)));
+}
+
+/**
+ * Les personnes créditées de la victoire, sans doublon.
+ *
+ * Vide sur une égalité (aucune ligne gagnante), vide sur une défaite
+ * coopérative. En coopératif gagné, toute la table l'emporte. En équipes, ce
+ * sont les membres des équipes victorieuses — jamais les équipes elles-mêmes.
+ * Plusieurs lignes peuvent avoir gagné : chacun n'est crédité qu'une fois.
+ */
+export function vainqueursDe(partie: PartieLisible): string[] {
+  if (partie.resultat) {
+    return partie.resultat === "victoire" ? participantsDe(lignesDe(partie.details)) : [];
+  }
+
+  const gagnantes = lignesGagnantes(partie);
+  if (gagnantes.length === 0) {
+    // Une partie dont la ligne gagnante a disparu : on s'en tient au nom retenu.
+    return partie.gagnant ? [partie.gagnant] : [];
   }
   return participantsDe(gagnantes);
 }
 
-/** Vrai si cette personne a remporté la partie, seule ou avec son équipe. */
+/** Vrai si cette personne a remporté la partie, seule ou avec son camp. */
 export function aGagne(partie: PartieLisible, nom: string): boolean {
   return vainqueursDe(partie).includes(nom);
+}
+
+/**
+ * Vrai si CETTE ligne l'a emporté.
+ *
+ * Répond là où `aGagne` ne suffit pas : deux lignes homonymes, ou une équipe
+ * dont on tient déjà la ligne. `lignes` est la table entière — c'est elle qui
+ * dit si la partie porte des marques de vainqueur ou relève de l'ancien format.
+ */
+export function ligneAGagne(
+  partie: PartieLisible,
+  ligne: JoueurScore,
+  lignes: JoueurScore[],
+): boolean {
+  if (partie.resultat) return partie.resultat === "victoire";
+  if (lignesMarquees(lignes)) return ligne.gagnant === true;
+  return !!partie.gagnant && partie.gagnant === ligne.nom;
 }
 
 /** La ligne de cette personne : elle-même, ou l'équipe dont elle est membre. */

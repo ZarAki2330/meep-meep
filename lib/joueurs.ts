@@ -21,3 +21,14 @@ export function plageJoueurs(jeu: Pick<Jeu, "joueursMin" | "joueursMax">): strin
 export function texteJoueurs(jeu: Pick<Jeu, "joueursMin" | "joueursMax" | "equipes">): string {
   return `${plageJoueurs(jeu)} ${uniteJoueurs(jeu)}`;
 }
+
+/**
+ * Une liste de noms comme on la dirait : « Alice », « Alice et Bob »,
+ * « Alice, Bob et Chloé ». Sert à annoncer les vainqueurs d'une partie, qui
+ * peuvent être plusieurs.
+ */
+export function enumererNoms(noms: string[]): string {
+  if (noms.length === 0) return "";
+  if (noms.length === 1) return noms[0];
+  return `${noms.slice(0, -1).join(", ")} et ${noms[noms.length - 1]}`;
+}

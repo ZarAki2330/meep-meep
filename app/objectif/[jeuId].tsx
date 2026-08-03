@@ -1,4 +1,10 @@
-// app/objectif/[jeuId].tsx — partie sans points : on désigne simplement le vainqueur
+// app/objectif/[jeuId].tsx — partie sans points : on désigne simplement le ou
+// les vainqueurs.
+//
+// « Le » vainqueur pendant longtemps, jusqu'à ce que les jeux à camps disent le
+// contraire : L'Imposteur se gagne à deux imposteurs, les hors-la-loi de Bang!
+// l'emportent ensemble, Villainous se joue parfois en alliance. On coche donc
+// autant de gagnants qu'il en faut — un seul reste le cas courant.
 
 import { useLocalSearchParams } from "expo-router";
 import { useState } from "react";
@@ -25,6 +31,7 @@ import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
 import { prefixeJoueur, usePartie } from "@/hooks/use-partie";
 import { formatChrono } from "@/lib/duree";
+import { enumererNoms } from "@/lib/joueurs";
 
 const COULEURS = ["#7a5195", "#1d9e75", "#378add", "#d85a30", "#c4457e"];
 
@@ -70,16 +77,26 @@ export default function PartieObjectif() {
     jeuId: jeuId ?? "",
     jeu,
     extensions: extensionsChoisies,
-    extraInitial: { gagnantId: null as string | null },
+    // `gagnantId` (au singulier) n'existe plus que pour les parties laissées en
+    // plan avant les vainqueurs multiples : `nettoyer` le reverse dans la liste.
+    extraInitial: { gagnantIds: [] as string[], gagnantId: null as string | null },
+    nettoyer: (e) =>
+      e.gagnantId ? { gagnantIds: [...e.gagnantIds, e.gagnantId], gagnantId: null } : e,
     vierge: (js, e) =>
       js.length === 0 ||
-      (e.gagnantId === null &&
+      (e.gagnantIds.length === 0 &&
         js.length === 2 &&
         js.every((j, i) => !j.role && !j.membres?.length && j.nom === `${prefixe} ${i + 1}`)),
   });
 
-  const gagnantId = extra.gagnantId;
-  const setGagnantId = (id: string | null) => setExtra((e) => ({ ...e, gagnantId: id }));
+  const gagnantIds = extra.gagnantIds;
+  const setGagnantIds = (maj: (ids: string[]) => string[]) =>
+    setExtra((e) => ({ ...e, gagnantIds: maj(e.gagnantIds) }));
+
+  /** Coche ou décoche un vainqueur : ils peuvent être plusieurs. */
+  function basculerGagnant(id: string) {
+    setGagnantIds((ids) => (ids.includes(id) ? ids.filter((x) => x !== id) : [...ids, id]));
+  }
 
   const [choixPourJoueur, setChoixPourJoueur] = useState<string | null>(null);
 
@@ -95,27 +112,31 @@ export default function PartieObjectif() {
 
   function supprimerJoueur(id: string) {
     retirerJoueur(id);
-    if (gagnantId === id) setGagnantId(null);
+    setGagnantIds((ids) => ids.filter((x) => x !== id));
   }
 
-  const gagnant = joueurs.find((j) => j.id === gagnantId) ?? null;
+  // Dans l'ordre de la table, pas dans l'ordre des clics : c'est celui qu'on lit.
+  const gagnants = joueurs.filter((j) => gagnantIds.includes(j.id));
 
   async function terminer() {
-    if (!gagnant) return;
+    if (gagnants.length === 0) return;
     await terminerPartie({
       joueurs: joueurs.map((j) => ({
         nom: nomDe(j),
         score: 0,
         role: j.role,
         membres: j.membres?.length ? j.membres : undefined,
+        // La marque portée par la ligne : la colonne « gagnant » de la table ne
+        // retient qu'un nom, et une victoire à plusieurs n'y tiendrait pas.
+        ...(gagnantIds.includes(j.id) ? { gagnant: true as const } : {}),
       })),
-      gagnant: nomDe(gagnant),
+      gagnant: nomDe(gagnants[0]),
       scoreGagnant: 0,
     });
   }
 
   function rejouer() {
-    setGagnantId(null);
+    setGagnantIds(() => []);
     reinitialiser();
   }
 
@@ -141,13 +162,18 @@ export default function PartieObjectif() {
 
       <View style={styles.info}>
         <Text style={styles.infoTexte}>
-          {termine ? "Partie terminée" : "Touche le joueur qui a rempli son objectif"}
+          {termine
+            ? "Partie terminée"
+            : `Touche ${modeEquipes ? "les équipes qui ont" : "les joueurs qui ont"} rempli leur objectif`}
         </Text>
       </View>
 
-      {termine && gagnant && (
+      {termine && gagnants.length > 0 && (
         <View style={styles.banniere}>
-          <Text style={styles.banniereTexte}>🏆 {gagnant.nom} remporte la partie !</Text>
+          <Text style={styles.banniereTexte}>
+            🏆 {enumererNoms(gagnants.map((g) => g.nom))}{" "}
+            {gagnants.length > 1 ? "remportent" : "remporte"} la partie !
+          </Text>
         </View>
       )}
 
@@ -174,16 +200,21 @@ export default function PartieObjectif() {
         keyExtractor={(j) => j.id}
         contentContainerStyle={styles.liste}
         renderItem={({ item, index }) => {
-          const choisi = item.id === gagnantId;
+          const choisi = gagnantIds.includes(item.id);
           return (
             <TouchableOpacity
               style={[styles.carte, choisi && styles.carteChoisie]}
               activeOpacity={0.8}
               disabled={termine}
-              accessibilityRole="radio"
+              // Une case à cocher, et non un choix unique : la victoire se
+              // partage. Le lecteur d'écran annonce « coché » / « non coché ».
+              accessibilityRole="checkbox"
               accessibilityState={{ checked: choisi, disabled: termine }}
               accessibilityLabel={`${item.nom}, vainqueur`}
-              onPress={() => setGagnantId(choisi ? null : item.id)}
+              accessibilityHint={
+                termine ? undefined : "Plusieurs vainqueurs peuvent être désignés"
+              }
+              onPress={() => basculerGagnant(item.id)}
             >
               <View style={styles.ligneHaut}>
                 <AvatarJoueur
@@ -198,14 +229,17 @@ export default function PartieObjectif() {
                   onChangeText={(t) => renommer(item.id, t)}
                   editable={!termine}
                 />
-                {choisi ? (
-                  <Text style={styles.coche}>🏆</Text>
-                ) : (
-                  !termine && (
-                    <TouchableOpacity onPress={() => supprimerJoueur(item.id)}>
-                      <Text style={styles.supprimer}>✕</Text>
-                    </TouchableOpacity>
-                  )
+                {/* Le trophée dit la victoire, la croix retire la ligne : cocher
+                    un vainqueur ne doit pas empêcher de le supprimer. */}
+                {choisi && <Text style={styles.coche}>🏆</Text>}
+                {!termine && (
+                  <TouchableOpacity
+                    onPress={() => supprimerJoueur(item.id)}
+                    accessibilityRole="button"
+                    accessibilityLabel={`Retirer ${item.nom}`}
+                  >
+                    <Text style={styles.supprimer}>✕</Text>
+                  </TouchableOpacity>
                 )}
               </View>
 
@@ -250,9 +284,9 @@ export default function PartieObjectif() {
               <Text style={styles.actionSecondaireTexte}>+ {prefixe}</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={[styles.actionPrincipale, !gagnant && styles.actionDesactivee]}
+              style={[styles.actionPrincipale, gagnants.length === 0 && styles.actionDesactivee]}
               onPress={terminer}
-              disabled={!gagnant}
+              disabled={gagnants.length === 0}
             >
               <Text style={styles.actionPrincipaleTexte}>Terminer la partie</Text>
             </TouchableOpacity>

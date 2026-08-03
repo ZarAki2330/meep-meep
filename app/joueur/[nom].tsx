@@ -19,6 +19,7 @@ import { definirPhotoJoueur, listerJoueurs, type JoueurEnregistre } from "@/db/j
 import { listerParties, type PartieEnregistree } from "@/db/parties";
 import { formatDuree } from "@/lib/duree";
 import { choisirPhoto, DOSSIER_JOUEURS, supprimerImage } from "@/lib/images";
+import { vainqueursDe } from "@/lib/lignes-partie";
 import { statsJoueur } from "@/lib/stats-joueur";
 
 function formatDate(iso: string) {
@@ -262,19 +263,15 @@ export default function FicheJoueur() {
 
 /**
  * Ce que la partie a donné pour ce joueur.
- * Trois pièges : le coopératif se gagne à plusieurs, l'égalité s'enregistre par
- * un vainqueur vide, et en équipes le vainqueur est le nom de l'équipe.
+ * Quatre pièges : le coopératif se gagne à plusieurs, une partie à objectif
+ * aussi, l'égalité s'enregistre sans aucune ligne gagnante, et en équipes le
+ * vainqueur est le nom de l'équipe. `vainqueursDe` répond aux quatre.
  */
 function issuePour(p: PartieEnregistree, nom: string): "Victoire" | "Défaite" | "Égalité" {
   if (p.resultat) return p.resultat === "victoire" ? "Victoire" : "Défaite";
-  if (!p.gagnant) return "Égalité";
-  try {
-    const lignes = JSON.parse(p.details) as { nom: string; membres?: string[] }[];
-    const sienne = lignes.find((l) => (l.membres?.length ? l.membres.includes(nom) : l.nom === nom));
-    return sienne && p.gagnant === sienne.nom ? "Victoire" : "Défaite";
-  } catch {
-    return "Défaite";
-  }
+  const gagnants = vainqueursDe(p);
+  if (gagnants.length === 0) return "Égalité";
+  return gagnants.includes(nom) ? "Victoire" : "Défaite";
 }
 
 function Metrique({

@@ -5,8 +5,22 @@ import { type StatsJeu } from "@/lib/tri-catalogue";
 
 import { getDb } from "./database";
 
-/** Une ligne de score : un joueur, ou une équipe avec ses membres. */
-export type JoueurScore = { nom: string; score: number; role?: string; membres?: string[] };
+/**
+ * Une ligne de score : un joueur, ou une équipe avec ses membres.
+ *
+ * `gagnant` marque les lignes victorieuses. Une partie à objectif peut en
+ * compter plusieurs — L'Imposteur, Bang!, Villainous se gagnent en camp. La
+ * colonne `gagnant` de la table, elle, ne retient qu'un nom : c'est ici que
+ * vit la liste complète. Absent des parties enregistrées avant ce marquage,
+ * où le vainqueur se retrouve par son nom.
+ */
+export type JoueurScore = {
+  nom: string;
+  score: number;
+  role?: string;
+  membres?: string[];
+  gagnant?: boolean;
+};
 
 /**
  * Issue d'une partie coopérative : toute la table gagne ou perd ensemble.

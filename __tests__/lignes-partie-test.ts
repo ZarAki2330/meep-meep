@@ -1,9 +1,13 @@
 import { type JoueurScore } from "@/db/parties";
 import {
   aGagne,
+  ligneAGagne,
   lignesDe,
+  lignesGagnantes,
+  lignesMarquees,
   ligneDe,
   nomPropre,
+  nomsGagnantsDe,
   participantsDe,
   personnesDe,
   vainqueursDe,
@@ -15,6 +19,9 @@ const J = (nom: string, membres?: string[]): JoueurScore => ({
   score: 0,
   ...(membres ? { membres } : {}),
 });
+
+/** Une ligne marquée victorieuse. Une partie à objectif peut en compter plusieurs. */
+const G = (nom: string, membres?: string[]): JoueurScore => ({ ...J(nom, membres), gagnant: true });
 
 const partie = (lignes: JoueurScore[], gagnant = "", resultat: PartieLisible["resultat"] = null) =>
   ({ details: JSON.stringify(lignes), gagnant, resultat }) satisfies PartieLisible;
@@ -114,6 +121,79 @@ describe("vainqueursDe", () => {
   it("survit à un JSON abîmé", () => {
     expect(vainqueursDe({ details: "{{{", gagnant: "Alice", resultat: null })).toEqual(["Alice"]);
     expect(vainqueursDe({ details: "null", gagnant: "", resultat: "victoire" })).toEqual([]);
+  });
+});
+
+describe("vainqueurs multiples", () => {
+  // Le camp l'emporte : L'Imposteur, Bang!, Villainous.
+  const camp = partie([G("Alice"), G("Bob"), J("Chloé")], "Alice");
+
+  it("reconnaît une partie marquée", () => {
+    expect(lignesMarquees(lignesDe(camp.details))).toBe(true);
+    expect(lignesMarquees([J("Alice")])).toBe(false);
+  });
+
+  it("rend toutes les lignes victorieuses", () => {
+    expect(lignesGagnantes(camp).map((l) => l.nom)).toEqual(["Alice", "Bob"]);
+  });
+
+  it("crédite chacun des vainqueurs", () => {
+    expect(vainqueursDe(camp)).toEqual(["Alice", "Bob"]);
+    expect(aGagne(camp, "Bob")).toBe(true);
+    expect(aGagne(camp, "Chloé")).toBe(false);
+  });
+
+  it("nomme les lignes victorieuses, l'équipe et non ses membres", () => {
+    const equipes = partie([G("Rouge", ["Alice"]), G("Bleu", ["Bob"]), J("Vert", ["Chloé"])], "Rouge");
+    expect(nomsGagnantsDe(equipes)).toEqual(["Rouge", "Bleu"]);
+    expect(vainqueursDe(equipes)).toEqual(["Alice", "Bob"]);
+  });
+
+  // Sans marque, on retombe sur la comparaison des noms, comme autrefois.
+  it("laisse les parties d'avant le marquage intactes", () => {
+    const ancienne = partie([J("Alice"), J("Bob")], "Alice");
+    expect(lignesMarquees(lignesDe(ancienne.details))).toBe(false);
+    expect(nomsGagnantsDe(ancienne)).toEqual(["Alice"]);
+    expect(vainqueursDe(ancienne)).toEqual(["Alice"]);
+  });
+
+  it("ne nomme personne sur une égalité ou en coopératif", () => {
+    expect(nomsGagnantsDe(partie([J("Alice"), J("Bob")], ""))).toEqual([]);
+    expect(nomsGagnantsDe(partie([J("Alice")], "", "victoire"))).toEqual([]);
+    expect(lignesGagnantes(partie([G("Alice")], "Alice", "victoire"))).toEqual([]);
+  });
+
+  it("ignore la colonne quand les lignes portent la marque", () => {
+    // La colonne ne retient qu'un nom : c'est la marque qui fait foi.
+    const desaccord = partie([J("Alice"), G("Bob")], "Alice");
+    expect(vainqueursDe(desaccord)).toEqual(["Bob"]);
+  });
+});
+
+describe("ligneAGagne", () => {
+  it("distingue deux lignes homonymes", () => {
+    const lignes = [G("Alice"), J("Alice")];
+    const p = partie(lignes, "Alice");
+    expect(ligneAGagne(p, lignes[0], lignes)).toBe(true);
+    expect(ligneAGagne(p, lignes[1], lignes)).toBe(false);
+  });
+
+  it("retombe sur le nom pour une partie d'avant le marquage", () => {
+    const lignes = [J("Alice"), J("Bob")];
+    const p = partie(lignes, "Alice");
+    expect(ligneAGagne(p, lignes[0], lignes)).toBe(true);
+    expect(ligneAGagne(p, lignes[1], lignes)).toBe(false);
+  });
+
+  it("fait gagner ou perdre toute la table en coopératif", () => {
+    const lignes = [J("Alice"), J("Bob")];
+    expect(ligneAGagne(partie(lignes, "", "victoire"), lignes[1], lignes)).toBe(true);
+    expect(ligneAGagne(partie(lignes, "", "defaite"), lignes[0], lignes)).toBe(false);
+  });
+
+  it("ne fait gagner personne sur une égalité", () => {
+    const lignes = [J("Alice"), J("Bob")];
+    expect(ligneAGagne(partie(lignes, ""), lignes[0], lignes)).toBe(false);
   });
 });
 

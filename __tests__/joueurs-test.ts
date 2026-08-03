@@ -1,4 +1,4 @@
-import { plageJoueurs, texteJoueurs, uniteJoueurs } from "@/lib/joueurs";
+import { enumererNoms, plageJoueurs, texteJoueurs, uniteJoueurs } from "@/lib/joueurs";
 
 describe("plageJoueurs", () => {
   it("n'affiche qu'un seul chiffre quand le min et le max sont égaux", () => {
@@ -24,5 +24,23 @@ describe("uniteJoueurs", () => {
   it("distingue joueurs et équipes", () => {
     expect(uniteJoueurs({})).toBe("joueurs");
     expect(uniteJoueurs({ equipes: true })).toBe("équipes");
+  });
+});
+
+describe("enumererNoms", () => {
+  it("annonce un vainqueur seul", () => {
+    expect(enumererNoms(["Alice"])).toBe("Alice");
+  });
+
+  it("relie deux vainqueurs par « et »", () => {
+    expect(enumererNoms(["Alice", "Bob"])).toBe("Alice et Bob");
+  });
+
+  it("sépare par des virgules jusqu'au dernier", () => {
+    expect(enumererNoms(["Alice", "Bob", "Chloé"])).toBe("Alice, Bob et Chloé");
+  });
+
+  it("ne dit rien d'une liste vide", () => {
+    expect(enumererNoms([])).toBe("");
   });
 });

@@ -7,6 +7,9 @@ const J = (nom: string, membres?: string[]): JoueurScore => ({
   ...(membres ? { membres } : {}),
 });
 
+/** Une ligne marquée victorieuse : une partie à objectif peut en compter plusieurs. */
+const G = (nom: string, membres?: string[]): JoueurScore => ({ ...J(nom, membres), gagnant: true });
+
 function p(
   id: number,
   jeu: string,
@@ -28,6 +31,7 @@ function p(
     note: null,
     evaluation: null,
     resultat,
+    extensions: null,
   };
 }
 
@@ -79,6 +83,60 @@ describe("statsJoueur", () => {
   it("ne compte pas une égalité comme une victoire", () => {
     const seule = [p(1, "Yams", "2026-01-01", "", [J("Alice"), J("Bob")])];
     expect(statsJoueur(seule, "Alice").victoires).toBe(0);
+  });
+
+  // L'Imposteur, Bang!, Villainous : le camp l'emporte, pas une personne.
+  describe("vainqueurs multiples", () => {
+    // La colonne ne retient qu'un nom ; ce sont les marques qui font foi.
+    const camp = [
+      p(1, "L'Imposteur", "2026-02-01", "Alice", [
+        G("Alice"),
+        G("Bob"),
+        J("Chloé"),
+        J("Denis"),
+      ]),
+    ];
+
+    it("crédite chaque vainqueur marqué", () => {
+      expect(statsJoueur(camp, "Alice").victoires).toBe(1);
+      expect(statsJoueur(camp, "Bob").victoires).toBe(1);
+    });
+
+    it("ne crédite pas les perdants", () => {
+      expect(statsJoueur(camp, "Chloé").victoires).toBe(0);
+      expect(statsJoueur(camp, "Denis").victoires).toBe(0);
+    });
+
+    it("crédite les membres des équipes victorieuses", () => {
+      const equipes = [
+        p(1, "Bang!", "2026-02-02", "Hors-la-loi", [
+          G("Hors-la-loi", ["Bob", "Chloé"]),
+          G("Renégat", ["Denis"]),
+          J("Shérif", ["Alice"]),
+        ]),
+      ];
+      expect(statsJoueur(equipes, "Bob").victoires).toBe(1);
+      expect(statsJoueur(equipes, "Denis").victoires).toBe(1);
+      expect(statsJoueur(equipes, "Alice").victoires).toBe(0);
+    });
+
+    // Deux joueurs peuvent porter le même nom : seule la ligne marquée gagne.
+    it("distingue deux lignes homonymes", () => {
+      const homonymes = [
+        p(1, "L'Imposteur", "2026-02-03", "Alice", [G("Alice"), J("Alice"), J("Bob")]),
+      ];
+      expect(statsJoueur(homonymes, "Alice").victoires).toBe(1);
+    });
+
+    it("prolonge la série de chacun des vainqueurs", () => {
+      const suite = [
+        p(1, "L'Imposteur", "2026-02-01", "Alice", [G("Alice"), G("Bob"), J("Chloé")]),
+        p(2, "L'Imposteur", "2026-02-02", "Alice", [G("Alice"), G("Bob"), J("Chloé")]),
+      ];
+      expect(statsJoueur(suite, "Bob").meilleureSerie).toBe(2);
+      expect(statsJoueur(suite, "Bob").serieEnCours).toBe(2);
+      expect(statsJoueur(suite, "Chloé").meilleureSerie).toBe(0);
+    });
   });
 
   it("classe les jeux du plus joué au moins joué", () => {

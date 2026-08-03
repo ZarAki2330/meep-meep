@@ -30,10 +30,11 @@ export const SECTIONS_AIDE: SectionAide[] = [
       [
         "Compteur : des boutons + et − par joueur. Pour Catan, 7 Wonders, tout ce qui se compte au fil de l'eau.",
         "Manches : une ligne par manche, total automatique. Pour la belote, Skull King, le tarot. Les scores négatifs sont acceptés.",
-        "Objectif : pas de points du tout, on désigne le vainqueur à la fin. Pour Villainous, Codenames.",
+        "Objectif : pas de points du tout, on désigne le ou les vainqueurs à la fin. Pour Villainous, Codenames.",
         "Feuille de score : une grille de cases à remplir, avec sections et bonus. Pour le Yams, et tout jeu à feuille.",
         "Coopératif : pas de classement, toute la table gagne ou perd ensemble. Pour Pandémie, The Crew.",
       ],
+      "En mode objectif, la victoire se partage : coche autant de vainqueurs qu'il en faut. À L'Imposteur, à Bang!, à Villainous en alliance, c'est tout un camp qui l'emporte — chacun de ses membres est crédité d'une victoire dans ses statistiques. Un seul vainqueur reste évidemment possible, et l'historique permet de corriger le tout après coup.",
       "« Qui gagne ? » n'apparaît qu'en mode compteur et manches : c'est là qu'un score peut être une pénalité, comme au 6 qui prend. Le seuil de fin de partie s'y règle aussi — 1000 à la belote, 66 au 6 qui prend.",
       "Une partie démarre sans aucun joueur : ajoute-les toi-même avec le bouton « + Joueur » en bas, ou en touchant un joueur déjà enregistré. Tu peux retirer n'importe quel joueur à tout moment avec la croix, même s'il n'en reste qu'un.",
     ],

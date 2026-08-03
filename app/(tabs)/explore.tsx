@@ -23,7 +23,14 @@ import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
 import { type Jeu } from "@/data/jeux";
 import { formatDuree } from "@/lib/duree";
-import { lignesDe, participantsDe, vainqueursDe } from "@/lib/lignes-partie";
+import { enumererNoms } from "@/lib/joueurs";
+import {
+  lignesDe,
+  lignesMarquees,
+  nomsGagnantsDe,
+  participantsDe,
+  vainqueursDe,
+} from "@/lib/lignes-partie";
 import {
   listerParties,
   modifierPartie,
@@ -470,11 +477,27 @@ function formatDate(iso: string) {
   return d.toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
 }
 
-/** Résumé de l'issue, en quelques caractères, pour la liste. */
+/**
+ * Résumé de l'issue, en quelques caractères, pour la liste.
+ * Une partie à objectif peut se gagner à plusieurs : on les nomme tous.
+ */
 function issueCourte(p: PartieEnregistree) {
   if (p.resultat === "victoire") return "🏆 Tous";
   if (p.resultat === "defaite") return "Défaite";
-  return p.gagnant ? `🏆 ${p.gagnant}` : "🤝 Égalité";
+  const noms = nomsGagnantsDe(p);
+  return noms.length ? `🏆 ${enumererNoms(noms)}` : "🤝 Égalité";
+}
+
+/**
+ * Les lignes victorieuses, repérées par leur position et non par leur nom :
+ * deux joueurs peuvent porter le même, et l'édition doit les distinguer.
+ * Vide sur une égalité comme en coopératif, où c'est `resultat` qui tranche.
+ */
+function indicesGagnants(partie: PartieEnregistree, lignes: JoueurScore[]): number[] {
+  if (partie.resultat) return [];
+  if (lignesMarquees(lignes)) return lignes.flatMap((l, i) => (l.gagnant ? [i] : []));
+  if (!partie.gagnant) return [];
+  return lignes.flatMap((l, i) => (l.nom === partie.gagnant ? [i] : []));
 }
 
 function formatDateLongue(iso: string) {
@@ -508,7 +531,11 @@ function DetailPartie({
 
   const [edition, setEdition] = useState(false);
   const [lignes, setLignes] = useState<JoueurScore[]>(lignesDe(partie.details));
-  const [gagnant, setGagnant] = useState(partie.gagnant);
+  // Plusieurs vainqueurs possibles à objectif — L'Imposteur, Bang!, Villainous
+  // se gagnent en camp. Quand ce sont les points qui décident, un seul.
+  const [gagnantsIdx, setGagnantsIdx] = useState<number[]>(() =>
+    indicesGagnants(partie, lignesDe(partie.details)),
+  );
   const [resultat, setResultat] = useState<Resultat | null>(partie.resultat);
   const [evaluation, setEvaluation] = useState(partie.evaluation ?? 0);
   const [note, setNote] = useState(partie.note ?? "");
@@ -534,10 +561,31 @@ function DetailPartie({
     );
   }
 
+  /**
+   * Désigne — ou retire — une ligne victorieuse. À objectif on en coche autant
+   * qu'il en faut ; ailleurs ce sont les points qui départagent, donc un seul,
+   * et toucher un autre joueur remplace le précédent.
+   */
+  function basculerGagnant(index: number) {
+    setGagnantsIdx((prev) => {
+      if (!objectif) return [index];
+      return prev.includes(index)
+        ? prev.filter((i) => i !== index)
+        : [...prev, index].sort((a, b) => a - b);
+    });
+  }
+
   async function enregistrer() {
+    // La marque de victoire est portée par la ligne : la colonne « gagnant »
+    // ne retient qu'un nom, et une victoire à plusieurs n'y tiendrait pas.
+    const marquees = lignes.map((l, i) => {
+      const { gagnant: _ancien, ...reste } = l;
+      return gagnantsIdx.includes(i) ? { ...reste, gagnant: true as const } : reste;
+    });
+    const premier = gagnantsIdx.length ? lignes[gagnantsIdx[0]] : undefined;
     const scores = lignes.map((l) => l.score);
-    const scoreGagnant = gagnant
-      ? (lignes.find((l) => l.nom === gagnant)?.score ?? 0)
+    const scoreGagnant = premier
+      ? premier.score
       : objectif || scores.length === 0
         ? 0
         : sens === "min"
@@ -548,8 +596,8 @@ function DetailPartie({
     const equipes = lignes.some((l) => !!l.membres?.length);
     await modifierPartie(
       partie.id,
-      lignes,
-      coop ? "" : gagnant,
+      marquees,
+      coop || !premier ? "" : premier.nom,
       scoreGagnant,
       resultat,
       undefined,
@@ -561,19 +609,24 @@ function DetailPartie({
 
   // Affichage : tri et mise en avant du (ou des) vainqueur(s). Mémoïsé pour ne
   // pas re-trier à chaque frappe de score/note dans le modal.
+  // La position dans la table voyage avec la ligne : c'est elle qui dit si
+  // cette ligne a gagné, et le tri ci-dessous la mélangerait.
   const affichees = useMemo(() => {
-    const liste = [...lignes];
+    const liste = lignes.map((ligne, i) => ({ ligne, i }));
     if (coop) {
       // Personne ne devance personne : on garde l'ordre de la table.
     } else if (objectif) {
-      liste.sort((a, b) => (a.nom === gagnant ? -1 : b.nom === gagnant ? 1 : 0));
+      const gagne = (n: number) => (gagnantsIdx.includes(n) ? 1 : 0);
+      liste.sort((a, b) => gagne(b.i) - gagne(a.i));
     } else {
-      liste.sort((a, b) => (sens === "min" ? a.score - b.score : b.score - a.score));
+      liste.sort((a, b) =>
+        sens === "min" ? a.ligne.score - b.ligne.score : b.ligne.score - a.ligne.score,
+      );
     }
     return liste;
-  }, [lignes, coop, objectif, gagnant, sens]);
-  const egalite = !coop && !gagnant;
-  const meilleur = affichees.length ? affichees[0].score : 0;
+  }, [lignes, coop, objectif, gagnantsIdx, sens]);
+  const egalite = !coop && gagnantsIdx.length === 0;
+  const meilleur = affichees.length ? affichees[0].ligne.score : 0;
 
   return (
     <>
@@ -606,25 +659,31 @@ function DetailPartie({
         <Text style={styles.detailAide}>
           {coop
             ? "Corrige l'issue de la partie ci-dessous."
-            : "Corrige les scores, puis touche un joueur pour désigner le vainqueur."}
+            : objectif
+              ? "Touche les joueurs qui l'ont emporté : ils peuvent être plusieurs."
+              : "Corrige les scores, puis touche un joueur pour désigner le vainqueur."}
         </Text>
       )}
 
-        {(edition ? lignes : affichees).map((j, i) => {
+        {(edition ? lignes.map((ligne, i) => ({ ligne, i })) : affichees).map(
+          ({ ligne: j, i: rang }, i) => {
           const estGagnant = coop
             ? resultat === "victoire"
-            : edition
-              ? j.nom === gagnant
-              : egalite
-                ? j.score === meilleur
-                : j.nom === gagnant;
+            : !edition && egalite
+              ? j.score === meilleur
+              : gagnantsIdx.includes(rang);
           const Conteneur = edition && !coop ? TouchableOpacity : View;
           return (
             <Conteneur
-              key={`${j.nom}-${i}`}
+              key={`${j.nom}-${rang}`}
               style={[styles.detailLigne, estGagnant && styles.detailGagnant]}
               activeOpacity={0.7}
-              onPress={edition && !coop ? () => setGagnant(j.nom) : undefined}
+              onPress={edition && !coop ? () => basculerGagnant(rang) : undefined}
+              // Case à cocher là où la victoire se partage, choix unique là où
+              // les points départagent : le lecteur d'écran annonce les deux.
+              accessibilityRole={edition && !coop ? (objectif ? "checkbox" : "radio") : undefined}
+              accessibilityState={edition && !coop ? { checked: estGagnant } : undefined}
+              accessibilityLabel={edition && !coop ? `${j.nom}, vainqueur` : undefined}
             >
               <Text style={[styles.detailRang, estGagnant && styles.detailRangGagnant]}>
                 {coop
@@ -652,7 +711,7 @@ function DetailPartie({
                   <TextInput
                     style={styles.detailInput}
                     value={String(j.score)}
-                    onChangeText={(t) => definirScore(i, t)}
+                    onChangeText={(t) => definirScore(rang, t)}
                     keyboardType={Platform.OS === "ios" ? "numbers-and-punctuation" : "numeric"}
                     textAlign="center"
                     selectTextOnFocus
@@ -662,7 +721,8 @@ function DetailPartie({
                 ))}
             </Conteneur>
           );
-        })}
+          },
+        )}
 
       {edition && coop && (
         <View style={styles.issues}>
@@ -697,10 +757,12 @@ function DetailPartie({
 
       {edition && !coop && (
         <TouchableOpacity
-          style={[styles.egaliteChip, !gagnant && styles.egaliteChipActif]}
-          onPress={() => setGagnant("")}
+          style={[styles.egaliteChip, egalite && styles.egaliteChipActif]}
+          onPress={() => setGagnantsIdx([])}
+          accessibilityRole="button"
+          accessibilityState={{ selected: egalite }}
         >
-          <Text style={[styles.egaliteChipTexte, !gagnant && styles.egaliteChipTexteActif]}>
+          <Text style={[styles.egaliteChipTexte, egalite && styles.egaliteChipTexteActif]}>
             🤝 Enregistrer comme une égalité
           </Text>
         </TouchableOpacity>
@@ -763,8 +825,9 @@ function DetailPartie({
           <TouchableOpacity
             style={styles.annulerDetail}
             onPress={() => {
-              setLignes(lignesDe(partie.details));
-              setGagnant(partie.gagnant);
+              const initiales = lignesDe(partie.details);
+              setLignes(initiales);
+              setGagnantsIdx(indicesGagnants(partie, initiales));
               setResultat(partie.resultat);
               setEdition(false);
             }}
