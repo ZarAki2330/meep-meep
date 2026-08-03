@@ -55,11 +55,15 @@
     "seuilFin": 66,
     "image": "https://www.gigamic.com/3690-home_default/6-qui-prend-.jpg",
     "regles": [
-      "Chaque manche, tous les joueurs choisissent une carte en secret, puis on les révèle.",
-      "Les cartes se posent dans l'ordre croissant sur quatre rangées, à la suite de la carte la plus proche et inférieure.",
-      "Poser la 6e carte d'une rangée fait ramasser les 5 précédentes : leurs têtes de bœuf sont des points de pénalité.",
-      "À la fin des 10 cartes, chacun note ses têtes de bœuf.",
-      "Dès qu'un joueur atteint 66, la partie s'arrête : le joueur avec le MOINS de points gagne."
+      "Mise en place : chacun reçoit dix cartes numérotées de 1 à 104, et quatre cartes retournées ouvrent les quatre rangées centrales.",
+      "Chaque manche, tout le monde choisit secrètement une carte de sa main et la pose face cachée devant soi.",
+      "Les cartes sont ensuite révélées et placées une par une, de la plus petite à la plus grande — cet ordre de résolution est le cœur de la tension.",
+      "Une carte rejoint la rangée dont la dernière carte est la plus proche en dessous d'elle, et se pose à sa suite.",
+      "Poser la sixième carte d'une rangée oblige à ramasser les cinq précédentes ; la carte posée devient alors la nouvelle tête de rangée.",
+      "Une carte plus petite que toutes les têtes de rangée n'a nulle part où aller : son propriétaire ramasse la rangée de son choix, en général la moins chargée.",
+      "Chaque carte ramassée vaut des têtes de bœuf : une en général, deux pour les multiples de 5, trois pour les multiples de 10, cinq pour les multiples de 11, et sept pour le 55 qui cumule.",
+      "Les têtes de bœuf sont des points négatifs : ici, on cherche à en avoir le moins possible.",
+      "On enchaîne les manches jusqu'à ce qu'un joueur dépasse soixante-six têtes ; celui qui en a le moins l'emporte."
     ],
     "editeur": "Gigamic",
     "reglesUrl": "https://www.gigamic.com/index.php?controller=attachment&id_attachment=56"
@@ -342,11 +346,15 @@
     "scoreVictoire": "max",
     "description": "Un jeu expert où l'on conçoit et gère un parc zoologique moderne engagé dans la protection des espèces.",
     "regles": [
-      "But : développer le zoo le plus attractif et le plus impliqué dans la conservation.",
-      "On joue des cartes Action (Animaux, Parrainage, Cartes, Construction, Association) dont la puissance dépend de leur position sur son plateau.",
-      "On construit des enclos, accueille des animaux et remplit des projets de conservation.",
-      "Deux jauges progressent : l'attractivité et les points de conservation ; la partie se termine quand elles se croisent.",
-      "Le joueur avec le meilleur score combiné l'emporte."
+      "Mise en place : chacun reçoit son parc à aménager, cinq cartes action rangées dans l'ordre qu'il veut, une main de cartes et deux objectifs de fin de partie.",
+      "À son tour, on joue une carte action de son plateau : sa puissance est le numéro de la case qu'elle occupe, de 1 à 5.",
+      "La carte jouée revient ensuite en case 1 et pousse les autres d'un cran — plus une action attend, plus elle devient puissante.",
+      "Les cinq actions : accueillir un animal, construire un enclos, piocher des cartes, gagner un mécène, ou financer un projet de conservation.",
+      "Un animal exige un enclos assez grand, parfois d'un type précis, et rapporte de l'attractivité, du revenu ou des forces de conservation.",
+      "Deux jauges avancent l'une vers l'autre : l'attractivité monte, les points de conservation descendent en sens inverse.",
+      "Les cartes exposition, les partenariats et les universités élargissent le zoo bien au-delà de ses murs ; les mécènes financent le tout.",
+      "Franchir la case de pause fait recharger les actions de chacun, et l'on relance un cycle.",
+      "Dès que les deux jauges se croisent, on termine le tour de table et l'on mesure l'écart : le plus grand écart l'emporte."
     ],
     "image": "https://www.espritjeu.com/upload/image/ark-nova-p-image-78844-grande.jpg"
   },
@@ -515,11 +523,16 @@
     "scoreVictoire": "max",
     "description": "Un western à rôles cachés : shérif, hors-la-loi, adjoints et renégat s'affrontent à coups de Bang!",
     "regles": [
-      "But : remplir l'objectif secret de son rôle (le shérif est connu, les autres cachés).",
-      "Le shérif et ses adjoints veulent éliminer les hors-la-loi et le renégat ; chacun a sa condition de victoire.",
-      "On joue des cartes pour tirer (Bang!), esquiver, se soigner ou équiper son personnage.",
-      "La portée dépend des distances entre joueurs et des armes en jeu.",
-      "La partie se termine dès qu'un camp atteint son objectif."
+      "Mise en place : chacun reçoit un rôle secret et un personnage face visible, avec ses points de vie et son pouvoir. Seul le shérif se révèle, et il ouvre la partie.",
+      "Les rôles : le shérif et ses adjoints, les hors-la-loi, et le renégat, qui joue pour lui seul.",
+      "Objectifs : le shérif veut éliminer hors-la-loi et renégat ; les hors-la-loi veulent sa peau ; le renégat veut rester le dernier face à lui.",
+      "Le shérif reçoit un point de vie supplémentaire, et chacun pioche au départ autant de cartes qu'il a de points de vie.",
+      "Un tour : piocher deux cartes, jouer autant de cartes qu'on le souhaite, puis défausser jusqu'à n'en garder que ses points de vie.",
+      "Un seul « Bang ! » par tour, sauf arme particulière — et encore faut-il être à portée : la distance se compte par le plus court chemin autour de la table.",
+      "Les armes allongent la portée, les chevaux rapprochent ou éloignent, le baril et le « Raté ! » esquivent les balles.",
+      "La bière rend un point de vie ; duel, indiens, gatling et diligence bousculent toute la table d'un coup.",
+      "Un joueur à zéro point de vie est éliminé et révèle son rôle : abattre un hors-la-loi fait piocher trois cartes, mais le shérif qui tue son propre adjoint perd toutes les siennes.",
+      "La partie s'arrête dès qu'un camp remplit sa condition — plusieurs joueurs peuvent donc l'emporter ensemble."
     ],
     "image": "https://www.espritjeu.com/upload/image/bang---p-image-88531-grande.jpg"
   },
@@ -757,11 +770,15 @@
     "scoreVictoire": "max",
     "description": "Un jeu abstrait de placement : posez toutes vos pièces en ne les touchant que par les coins.",
     "regles": [
-      "But : poser un maximum de ses pièces sur le plateau.",
-      "Chaque nouvelle pièce doit toucher une de ses pièces précédentes uniquement par un coin, jamais par un côté.",
-      "On cherche à s'étendre tout en bloquant les adversaires.",
-      "La partie s'arrête quand plus personne ne peut poser de pièce.",
-      "On compte les cases restantes en main : le joueur qui en a le moins (idéalement zéro) gagne."
+      "Mise en place : un plateau de vingt sur vingt et vingt et une pièces par couleur, de un à cinq carrés chacune.",
+      "Chaque joueur commence par son coin du plateau : sa première pièce doit recouvrir la case d'angle qui lui est attribuée.",
+      "Toutes les pièces suivantes doivent toucher au moins une pièce de sa propre couleur par un coin.",
+      "Interdit en revanche de toucher une de ses propres pièces par un côté — cette contrainte oblige à s'étendre en diagonale, en escalier.",
+      "Aucune restriction avec les couleurs adverses : on peut coller ses pièces contre elles autant qu'on veut, et c'est d'ailleurs la façon de les enfermer.",
+      "La stratégie tient en deux mouvements : ouvrir un maximum de coins libres pour soi, et fermer ceux de l'adversaire.",
+      "On garde en général les grandes pièces pour le début et les petites, plus faciles à caser, pour la fin de partie.",
+      "Un joueur qui ne peut plus rien poser passe son tour ; la partie s'arrête quand plus personne ne peut jouer.",
+      "On compte alors un point négatif par carré resté en main : le meilleur score est le plus proche de zéro, avec une prime pour qui a tout posé."
     ],
     "image": "https://www.espritjeu.com/upload/image/blokus-p-image-90995-grande.jpg"
   },
@@ -843,11 +860,15 @@
     "scoreVictoire": "max",
     "description": "Un chef-d'œuvre de gestion économique pendant la révolution industrielle anglaise.",
     "regles": [
-      "But : développer le réseau industriel le plus rentable à travers deux ères (canaux puis rails).",
-      "On joue des cartes pour construire des industries (brasseries, mines, filatures…) et des liaisons de transport.",
-      "On vend ses biens, on emprunte, on brasse de la bière pour débloquer certaines actions.",
-      "Le score se compte à la fin de chaque ère selon les industries et les liaisons développées.",
-      "Le joueur au meilleur total final l'emporte."
+      "Mise en place : le plateau des Midlands, une tuile industrie par type et par niveau devant chaque joueur, et un paquet de cartes lieux et industries.",
+      "La partie se joue en deux ères, celle des canaux puis celle du rail, chacune close par son propre décompte.",
+      "À son tour, on défausse une carte par action, et l'on réalise deux actions parmi : construire, relier, développer, vendre, emprunter ou explorer.",
+      "Construire réclame la carte du bon lieu ou de la bonne industrie, de l'argent, et parfois du fer et du charbon puisés sur le plateau.",
+      "Charbon et fer se consomment là où ils sont : une tuile vidée se retourne et rapporte alors ses points et son revenu.",
+      "Vendre du textile réclame de la bière, la sienne ou celle d'un marchand relié à son réseau.",
+      "Développer sacrifie une tuile de bas niveau pour accéder plus vite aux industries rentables ; emprunter donne de l'argent tout de suite, contre du revenu ensuite.",
+      "La fin de l'ère des canaux fait compter les liaisons et les tuiles retournées, puis on retire du plateau toutes les tuiles de niveau 1 avant de rejouer l'ère du rail.",
+      "Après le second décompte, le plus grand total de points l'emporte."
     ],
     "image": "https://www.ludum.fr/43463-product_default/brass-birmingham.jpg"
   },
@@ -909,11 +930,15 @@
     "scoreVictoire": "max",
     "description": "Une course de chameaux déjantée où l'on parie sur des dromadaires qui se grimpent dessus.",
     "regles": [
-      "But : finir la course avec le plus d'argent grâce à ses paris.",
-      "À son tour, on secoue la pyramide pour lancer un dé et faire avancer un chameau (parfois en portant les autres empilés).",
-      "On peut parier sur le vainqueur d'une manche, sur le grand gagnant/perdant, ou poser des tuiles piège.",
-      "Les bons paris rapportent gros, les mauvais coûtent de l'argent.",
-      "Le joueur le plus riche à la fin de la course gagne."
+      "Mise en place : les cinq chameaux prennent le départ par un premier jet de dés, et chacun reçoit sa réserve d'argent et ses cartes de pari.",
+      "À son tour, on choisit une action parmi quatre : secouer la pyramide, parier sur la manche, parier sur la course, ou poser sa tuile piège.",
+      "Secouer la pyramide libère un dé : le chameau de cette couleur avance de 1 à 3 cases, et le joueur empoche 1 pièce.",
+      "Les chameaux s'empilent : celui qui arrive sur une case occupée se pose au-dessus, et emporte toute la pile posée sur lui quand il avance.",
+      "La tuile piège se pose sur une case libre, jamais à côté d'une autre tuile : elle avance ou recule d'une case le chameau qui s'y arrête, et rapporte 1 pièce à son propriétaire.",
+      "Parier sur la manche, c'est prendre le jeton du dessus d'une pile : 5, 3 ou 2 pièces selon qu'on a parié tôt ou tard, si ce chameau finit la manche en tête ; 1 pièce s'il finit deuxième, une pièce perdue sinon.",
+      "La manche s'achève quand les cinq dés sont sortis : on règle les paris, on remet tous les dés dans la pyramide, et l'on repart.",
+      "Les paris sur la course se posent face cachée, sur le grand vainqueur ou le grand perdant : seuls les premiers pariants encaissent le gros lot, et se tromper coûte une pièce.",
+      "La course s'arrête dès qu'un chameau franchit la ligne d'arrivée ; on règle alors les paris de course, et le plus riche gagne."
     ],
     "image": "https://www.okkazeo.com/images/jeux/10521_1.jpg"
   },
@@ -1015,12 +1040,15 @@
     "categorie": "Stratégie",
     "scoreVictoire": "max",
     "regles": [
-      "À ton tour, pioche une tuile et pose-la contre une tuile déjà posée, en respectant les raccords.",
-      "Tu peux ensuite y placer un partisan : voleur sur une route, chevalier dans une ville, moine dans une abbaye, paysan dans un pré.",
-      "Une route ou une ville terminée est marquée immédiatement, et les partisans reviennent à leur propriétaire.",
-      "Une abbaye entourée de huit tuiles rapporte 9 points.",
-      "En fin de partie, on compte les constructions inachevées et les prés.",
-      "Le plus grand total gagne."
+      "Mise en place : la tuile de départ trône au centre, chacun prend ses sept partisans, et le reste des tuiles forme une pioche face cachée.",
+      "À son tour, on pioche une tuile et on la pose contre une tuile déjà en place : routes, villes et prés doivent se raccorder sur tous les côtés en contact.",
+      "On peut ensuite installer un partisan sur la tuile que l'on vient de poser : voleur sur une route, chevalier dans une ville, moine dans une abbaye, paysan dans un pré.",
+      "Impossible de s'installer sur une construction déjà occupée — mais deux constructions séparées peuvent fusionner plus tard, et s'y retrouver à plusieurs.",
+      "Une construction achevée se compte aussitôt et libère ses partisans : 2 points par tuile de ville et 2 par blason, 1 point par tuile de route.",
+      "Une abbaye entourée de ses huit voisines rapporte 9 points, et le moine repart dans la réserve.",
+      "Quand la dernière tuile est posée, on compte les constructions inachevées à moitié prix : 1 point par tuile de ville, par blason et par tuile de route.",
+      "Les prés se règlent en tout dernier : chaque paysan rapporte 3 points par ville achevée que son pré dessert.",
+      "Le plus grand total l'emporte ; à égalité, tout le monde gagne."
     ],
     "image": "https://www.espritjeu.com/upload/image/carcassonne-p-image-108126-grande.jpg",
     "editeur": "Hans im Glück"
@@ -1060,11 +1088,15 @@
     "scoreVictoire": "max",
     "description": "Un jeu de pose de tuiles serein : composez le plus bel écosystème du nord-ouest américain.",
     "regles": [
-      "But : agencer habitats et faune pour marquer le plus de points.",
-      "À son tour, on prend une paire tuile-habitat + jeton-animal parmi les offres disponibles.",
-      "On place la tuile pour agrandir ses zones d'habitat et on pose l'animal selon ses règles de placement.",
-      "Chaque espèce marque selon un objectif propre (groupes, lignes, voisinages…), et les grands habitats rapportent des bonus.",
-      "Le joueur au plus haut total gagne."
+      "Mise en place : chacun part d'une tuile de départ à trois cases. Quatre paires tuile + jeton animal sont proposées, et chaque espèce reçoit la carte de score qui la régira toute la partie.",
+      "À son tour, on prend une paire, on pose la tuile contre son terrain, puis on pose le jeton sur une tuile libre qui accepte cet animal.",
+      "Les habitats — montagne, forêt, prairie, zone humide, rivière — cherchent à se toucher : une grande zone d'un même habitat rapporte gros.",
+      "Le jeton nature casse une paire : il permet de prendre la tuile et l'animal de son choix, ou de renouveler entièrement l'offre.",
+      "On ne garde jamais plus de trois jetons nature, et prendre une paire dont le jeton porte un pin en offre un.",
+      "Si quatre jetons animaux identiques sont proposés, on les remplace d'office ; à trois, chacun peut demander le renouvellement.",
+      "La partie s'arrête au bout de vingt tours, quand toutes les tuiles ont été distribuées.",
+      "Décompte : chaque espèce selon sa carte, puis le plus grand corridor de chaque habitat, avec une prime au plus grand de la table, plus 1 point par jeton nature restant.",
+      "Le plus haut total l'emporte."
     ],
     "image": "https://www.espritjeu.com/upload/image/cascadia-p-image-77106-grande.jpg"
   },
@@ -1081,10 +1113,15 @@
     "seuilFin": 10,
     "image": "https://www.espritjeu.com/upload/image/catan-p-image-106398-grande.jpg",
     "regles": [
-      "À ton tour, lance les deux dés : chaque joueur récolte les ressources des tuiles portant ce numéro et voisines de ses colonies.",
-      "Échange des ressources avec les autres joueurs ou avec la banque.",
-      "Construis des routes, des colonies et des villes, ou achète des cartes développement.",
-      "Le premier à atteindre 10 points de victoire remporte la partie."
+      "Mise en place : l'île se compose de 19 tuiles terrain entourées de mer, et chaque tuile reçoit un jeton numéroté, sauf le désert où se pose le voleur.",
+      "Chacun installe deux colonies aux croisements et deux routes le long des arêtes ; la seconde colonie rapporte aussitôt les ressources des tuiles qu'elle touche.",
+      "À son tour, on lance les deux dés : toute colonie (1 ressource) et toute ville (2 ressources) voisine d'une tuile portant ce total produit, quel que soit le joueur actif.",
+      "Sur un 7, personne ne produit : ceux qui tiennent plus de sept cartes en défaussent la moitié, puis le joueur actif déplace le voleur, bloque une tuile et vole une carte à un voisin.",
+      "On échange ensuite librement avec les autres joueurs, ou avec la banque à quatre cartes contre une — trois, voire deux, en possédant le port qui va bien.",
+      "On construit enfin : route (bois + argile), colonie (bois + argile + blé + mouton), ville qui remplace une colonie (2 blés + 3 minerais), ou carte développement (blé + mouton + minerai).",
+      "Les cartes développement cachent des chevaliers, des progrès et des points de victoire ; le troisième chevalier joué décroche la carte de l'armée la plus puissante.",
+      "Points : 1 par colonie, 2 par ville, 2 pour la route la plus longue (cinq segments au minimum) et 2 pour l'armée la plus puissante.",
+      "La partie s'arrête net dès qu'un joueur annonce 10 points pendant son tour."
     ],
     "editeur": "Kosmos",
     "reglesUrl": "https://www.catan.com/sites/default/files/2021-06/catan_base_rules_2020_200707.pdf"
@@ -1256,11 +1293,15 @@
     "categorie": "Enquête",
     "editeur": "Hasbro",
     "regles": [
-      "But : être le premier à identifier le coupable, l'arme et la pièce du crime.",
-      "On déplace son personnage dans les pièces du manoir et on émet des hypothèses (suspect + arme + lieu).",
-      "Les autres joueurs réfutent tour à tour en montrant discrètement une carte correspondante.",
-      "On note les indices pour éliminer méthodiquement les possibilités.",
-      "Le premier à énoncer la bonne accusation — vérifiée dans l'enveloppe centrale — remporte la partie ; une accusation fausse élimine."
+      "Mise en place : on retire au hasard un suspect, une arme et un lieu que l'on glisse dans l'enveloppe centrale — c'est la solution, que personne ne verra avant la fin.",
+      "Toutes les autres cartes sont distribuées ; chacun coche sur sa grille ce qu'il a en main, puisque ces cartes-là ne peuvent pas être la solution.",
+      "À son tour, on lance le dé et on déplace son personnage d'autant de cases dans les couloirs, ou l'on emprunte un passage secret entre deux pièces d'angle.",
+      "En entrant dans une pièce, on peut formuler une suggestion : un suspect, une arme, et la pièce où l'on se trouve. Le suspect et l'arme nommés sont aussitôt déplacés dans cette pièce.",
+      "Le voisin de gauche doit alors montrer discrètement une seule carte correspondante s'il en possède ; sinon on passe au suivant, et ainsi de suite jusqu'à ce qu'une carte soit montrée ou que le tour de table soit bouclé.",
+      "Toute la table voit qui a pu répondre et qui n'a pas pu : cette information vaut souvent autant que la carte elle-même, et se note sur la grille.",
+      "Se faire déplacer par la suggestion d'un adversaire n'est pas une punition : on peut suggérer depuis cette pièce dès son tour suivant, sans avoir eu à s'y rendre.",
+      "Quand on croit tenir la solution, on annonce une accusation, on consulte l'enveloppe en secret et on la valide.",
+      "Une accusation juste gagne la partie sur-le-champ ; une accusation fausse élimine — on reste à table pour montrer ses cartes, mais on ne peut plus gagner."
     ],
     "scoreVictoire": "max",
     "scoreMode": "objectif",
@@ -1301,11 +1342,15 @@
     "scoreMode": "objectif",
     "equipes": true,
     "regles": [
-      "25 cartes-mots forment une grille. Une carte-clé, vue des seuls maîtres-espions, indique qui appartient à quelle équipe.",
-      "Le maître-espion donne un indice d'un seul mot, suivi d'un nombre : le nombre de mots visés.",
-      "Son équipe touche les mots qu'elle croit être les siens, un par un.",
-      "Un mot adverse ou neutre met fin au tour. Le mot Assassin fait perdre immédiatement.",
-      "La première équipe à trouver tous ses agents gagne."
+      "Mise en place : 25 cartes-mots forment une grille de 5 sur 5. Deux équipes se constituent, chacune menée par un maître-espion.",
+      "Les maîtres-espions, et eux seuls, voient la carte-clé : elle indique les agents rouges, les agents bleus, les passants neutres et l'assassin.",
+      "L'équipe qui commence a un agent de plus à retrouver que l'autre.",
+      "À son tour, le maître-espion prononce un indice d'un seul mot, suivi d'un nombre : le nombre de mots que cet indice vise.",
+      "Ensuite, plus rien : ni commentaire, ni intonation, ni geste, ni regard appuyé vers la grille.",
+      "Son équipe touche les cartes une par une, et chaque carte touchée révèle aussitôt sa vraie couleur.",
+      "Toucher un de ses agents permet de continuer ; toucher un neutre ou un agent adverse met fin au tour sur-le-champ.",
+      "L'équipe peut tenter un mot de plus que le nombre annoncé, jamais davantage, et s'arrêter quand elle le souhaite.",
+      "Toucher l'assassin fait perdre immédiatement. Sinon, la première équipe à démasquer tous ses agents l'emporte."
     ],
     "image": "https://www.espritjeu.com/upload/image/codenames-p-image-105501-grande.jpg",
     "editeur": "Czech Games Edition",
@@ -1344,11 +1389,15 @@
     "categorie": "Ambiance",
     "editeur": "Repos Production",
     "regles": [
-      "But : faire deviner un mot ou une expression en combinant des icônes, sans parler ni mimer.",
-      "L'équipe active pose le point d'interrogation principal sur une icône, puis des cubes sur les icônes qui précisent l'idée.",
-      "Les autres joueurs proposent librement des réponses à voix haute.",
-      "Celui qui trouve marque des points, tout comme les auteurs de l'énigme.",
-      "Le plus de points l'emporte — mais on peut aussi jouer simplement pour le plaisir de deviner."
+      "Mise en place : le plateau réunit une centaine d'icônes rangées par thèmes. On y pose le point d'interrogation principal, les points secondaires et des cubes de couleur.",
+      "Deux joueurs voisins forment l'équipe active et piochent une carte, sur laquelle ils choisissent ensemble un mot ou une expression, à l'un des trois niveaux de difficulté.",
+      "Interdiction absolue de parler, d'écrire ou de mimer : seules les icônes parlent.",
+      "L'équipe active pose le point d'interrogation vert sur l'icône qui porte l'idée principale, puis des cubes verts sur les icônes qui la précisent.",
+      "Les points d'interrogation de couleur ouvrent des sous-concepts, chacun précisé par ses propres cubes : c'est ainsi qu'on découpe une expression en morceaux.",
+      "Les autres joueurs proposent des réponses à voix haute, autant qu'ils veulent et quand ils veulent.",
+      "L'équipe active confirme d'un signe de tête, et peut ajouter des icônes tant que personne n'a trouvé.",
+      "Qui trouve prend un jeton de la valeur du niveau choisi ; l'équipe active en prend un aussi, plus modeste.",
+      "L'énigme passe ensuite au binôme suivant. Le plus de points l'emporte — mais rien n'oblige à compter."
     ],
     "scoreVictoire": "max",
     "scoreMode": "compteur",
@@ -1536,10 +1585,15 @@
     "scoreVictoire": "max",
     "scoreMode": "objectif",
     "regles": [
-      "Chaque tour, misez de l'or aux enchères sur les dieux (Poséidon, Arès, Zeus, Athéna, Apollon).",
-      "Le dieu obtenu détermine vos actions possibles : flottes, armées, bâtiments, prêtres, philosophes.",
-      "Construisez et rassemblez les éléments nécessaires pour ériger une Métropole.",
-      "Le premier à contrôler deux Métropoles remporte la partie."
+      "Mise en place : chacun reçoit ses îles de départ, des soldats, une flotte et un peu d'or. Les cartes des dieux tirées pour la manche dépendent du nombre de joueurs.",
+      "Chaque tour, on enchérit à tour de rôle sur les dieux disponibles : surenchérir sur un adversaire le déloge, il devra miser ailleurs.",
+      "Apollon reste toujours accessible : il ne coûte rien et rapporte de l'or, mais interdit de bâtir une métropole ce tour-là.",
+      "Poséidon donne des flottes et le port ; Arès des soldats et la forteresse ; Zeus des prêtres et le temple ; Athéna des philosophes et l'université.",
+      "Les prêtres réduisent le prix des dieux, les forteresses renforcent la défense, les ports améliorent la marine, et quatre philosophes réunis offrent une métropole.",
+      "Les armées ne voyagent que par la mer : il faut une chaîne de flottes pour transporter des soldats d'une île à l'autre.",
+      "Un combat compare les forces en présence, chacun ajoutant en secret une carte de renfort ; le perdant est chassé.",
+      "Une métropole s'obtient aussi en réunissant les quatre bâtiments différents. Les créatures mythologiques, achetées à part, bousculent tous ces plans.",
+      "Le premier joueur à contrôler deux métropoles remporte la partie sur-le-champ."
     ],
     "image": "https://www.gigamic.com/3229-home_default/cyclades.jpg",
     "editeur": "Gigamic",
@@ -1827,11 +1881,15 @@
     "scoreVictoire": "max",
     "description": "Un jeu d'observation ultra-rapide : deux cartes ont toujours exactement un symbole en commun.",
     "regles": [
-      "But : être le plus rapide à repérer le symbole commun entre deux cartes.",
-      "Chaque carte partage un et un seul symbole identique avec n'importe quelle autre.",
-      "Selon le mini-jeu choisi, on cherche à se défausser de ses cartes ou à en récupérer le plus.",
-      "Dès qu'on voit le symbole commun, on le nomme à voix haute et on agit.",
-      "Le vainqueur dépend du mode, mais la vivacité prime toujours."
+      "Mise en place : les cartes rondes portent chacune huit symboles, et deux cartes quelconques ont toujours exactement un symbole en commun — c'est tout le principe du jeu.",
+      "Aucun tour de table : tout le monde joue en même temps, à la vitesse de l'œil et de la voix.",
+      "Trouver le symbole commun ne suffit pas, il faut le nommer à voix haute avant les autres pour que cela compte.",
+      "Les tailles varient volontairement d'une carte à l'autre : un même symbole peut être minuscule ici et énorme là, ce qui trompe le regard.",
+      "Dans La tour infernale, une carte trône au centre et chacun a sa pioche : nommer le symbole commun permet de se débarrasser d'une carte, et le premier à vider sa pile gagne.",
+      "Dans Le puits, la pioche est au centre et l'on récupère la carte à chaque symbole trouvé : c'est la plus grosse pile qui l'emporte.",
+      "Dans La patate chaude, chacun garde une carte en main sans la regarder et cherche à la refiler aux autres ; c'est le joueur avec le moins de cartes qui gagne.",
+      "Dans Le cadeau empoisonné, la mécanique s'inverse encore : on distribue ses cartes aux adversaires plutôt que d'en récupérer.",
+      "Une erreur d'annonce coûte en général une carte de pénalité, à reprendre dans sa pile ou à donner selon le mode choisi."
     ],
     "image": "https://www.espritjeu.com/upload/image/dobble-classique-p-image-72953-grande.png"
   },
@@ -2086,11 +2144,15 @@
     "scoreVictoire": "max",
     "description": "Mêlez placement d'ouvriers et deck-building pour dominer la planète Dune.",
     "regles": [
-      "But : être le premier à 10 points de victoire (ou le mieux placé à la fin).",
-      "On joue des cartes de son deck pour envoyer ses agents sur des lieux d'action.",
-      "On récolte de l'Épice, de l'eau et du Solari, on gagne des alliances et de l'influence auprès des factions.",
-      "En fin de tour, les cartes restantes servent à un conflit et à l'achat de nouvelles cartes.",
-      "Le premier à atteindre 10 points remporte la partie."
+      "Mise en place : chacun prend son chef, un deck de départ presque identique, deux agents et quelques ressources. Cinq cartes Imperium forment le marché.",
+      "Une manche s'ouvre sur le choix du premier joueur, puis chacun joue son tour à son rythme.",
+      "Un tour d'agent : jouer une carte de sa main et envoyer un agent sur un lieu dont le symbole figure sur cette carte — Arrakis, le Landsraad ou l'Observatoire.",
+      "Les lieux rapportent de l'épice, de l'eau, du solari, des troupes, des cartes intrigue, ou de l'influence auprès des quatre factions.",
+      "Chaque palier d'influence offre une faveur, et quatre marques chez une faction décrochent une alliance, qui vaut un point tant qu'on la garde.",
+      "Ses agents posés, on passe à la révélation : on retourne le reste de sa main, on additionne la persuasion pour acheter des cartes, et les épées renforcent les troupes engagées dans le conflit.",
+      "Le conflit du tour compare les forces déployées : le vainqueur prend la meilleure récompense, les suivants se partagent le reste.",
+      "Les cartes intrigue se jouent en secret, certaines pendant le conflit, d'autres pour marquer des points au moment choisi.",
+      "La partie s'arrête à la fin de la manche où quelqu'un atteint 10 points ; sinon, après dix manches, le plus de points l'emporte."
     ],
     "image": "https://www.espritjeu.com/upload/image/dune-imperium-p-image-76566-grande.jpg"
   },
@@ -2105,11 +2167,15 @@
     "categorie": "Ambiance",
     "editeur": "Le Scorpion Masqué",
     "regles": [
-      "But (par équipes) : communiquer ses codes sans que l'équipe adverse ne les perce.",
-      "Chaque équipe possède 4 mots secrets numérotés de 1 à 4. À chaque manche, un joueur tire un code de trois chiffres et donne un indice pour chacun.",
-      "Sa propre équipe doit retrouver l'ordre des chiffres ; l'équipe adverse écoute et tente d'intercepter le code.",
-      "Deux interceptions réussies contre vous font perdre ; deux erreurs de communication dans votre équipe aussi.",
-      "L'équipe qui tient sans se faire percer l'emporte."
+      "Mise en place : deux équipes. Chacune glisse quatre mots secrets dans son écran, numérotés de 1 à 4 et invisibles pour l'adversaire.",
+      "À chaque manche, un joueur de chaque équipe tire un code de trois chiffres — 4-2-1, par exemple — et donne trois indices, un par chiffre, dans l'ordre.",
+      "Ses coéquipiers doivent retrouver le code, c'est-à-dire l'ordre des mots visés : ils connaissent leurs mots, pas le code.",
+      "L'équipe adverse écoute, note tout, et tente elle aussi de deviner le code : c'est l'interception.",
+      "La première manche fait exception : faute d'historique, l'adversaire ne peut pas encore intercepter.",
+      "Toutes les paires indice-chiffre s'accumulent à la vue de tous : plus la partie avance, plus les indices trahissent.",
+      "Une interception réussie donne un jeton noir à l'équipe percée ; une erreur de ses propres coéquipiers lui donne un jeton blanc.",
+      "Deux jetons noirs font perdre, deux jetons blancs aussi : il faut rester clair pour les siens et obscur pour les autres.",
+      "Si personne n'a chuté au bout de huit manches, on départage en devinant les mots de l'équipe adverse."
     ],
     "scoreVictoire": "max",
     "scoreMode": "objectif",
@@ -2281,11 +2347,15 @@
     "scoreVictoire": "max",
     "description": "Dans la vallée d'Everdell, bâtissez une cité d'animaux forestiers au fil des saisons.",
     "regles": [
-      "But : construire la cité la plus prospère avant la fin de l'année.",
-      "On place ses ouvriers pour récolter des ressources (brindilles, résine, cailloux, baies).",
-      "Avec ces ressources, on joue des cartes Construction et Créature qui se combinent en moteurs de points.",
-      "On progresse à travers les quatre saisons, récupérant et gagnant de nouveaux ouvriers à chaque passage.",
-      "En fin de partie, le joueur avec la cité la plus riche en points l'emporte."
+      "Mise en place : la Vallée offre ses lieux de récolte, une forêt tirée au hasard, une pioche de cartes et quatre événements. Chacun débute avec deux ouvriers, en hiver.",
+      "À son tour, on fait une seule chose : placer un ouvrier, jouer une carte, ou préparer la saison suivante.",
+      "Placer un ouvrier récolte brindilles, résine, cailloux, baies ou cartes, sur les lieux encore libres et dans la forêt.",
+      "Jouer une carte coûte ses ressources. Constructions et Créatures se répondent : une construction héberge gratuitement la créature qui lui correspond.",
+      "La cité est limitée à quinze cartes, ce qui oblige à choisir plutôt qu'à tout accumuler.",
+      "Préparer la saison récupère tous ses ouvriers, en ajoute de nouveaux, et déclenche la récolte ou la production propre à cette saison.",
+      "Les événements se réclament en remplissant leur condition ; le voyage récompense ceux qui gardent encore des cartes en main à l'automne.",
+      "Une fois l'automne joué, chacun épuise ses derniers ouvriers, puis la partie s'arrête.",
+      "On compte les points des cartes, les jetons prospérité, les événements et le voyage : la plus belle cité l'emporte."
     ],
     "image": "https://www.espritjeu.com/upload/image/everdell--2e-ed--p-image-98422-grande.jpg"
   },
@@ -2410,11 +2480,15 @@
     "scoreVictoire": "max",
     "description": "Un jeu de cartes malin où l'on marque ses points… à rebours de l'ordre où on les a joués.",
     "regles": [
-      "But : marquer le plus de points avec ses régions et ses sanctuaires.",
-      "À chaque tour, on joue une carte Région devant soi, formant peu à peu une file de huit cartes.",
-      "On peut acquérir des sanctuaires selon les couleurs déjà en jeu.",
-      "Au décompte, on évalue les cartes de la dernière posée à la première : leurs conditions regardent ce qui a été joué avant.",
-      "Le joueur au meilleur total l'emporte."
+      "Mise en place : chacun garde trois cartes Région en main. Régions et sanctuaires forment deux offres au centre de la table.",
+      "Un tour : tout le monde choisit une carte en secret, puis on les révèle et on les pose devant soi, à la droite des précédentes.",
+      "Qui a joué la région au plus petit numéro reprend la main le premier pour se servir dans l'offre : jouer petit fait choisir en premier.",
+      "On pioche ensuite une nouvelle région, et l'on peut acquérir un sanctuaire si l'on possède assez de couleurs déjà en jeu.",
+      "La partie dure huit tours ; chacun aligne au final huit régions, dans l'ordre où il les a jouées.",
+      "Le décompte se lit à rebours : on part de la dernière carte posée et l'on remonte vers la première.",
+      "Une région ne rapporte que si sa condition est satisfaite par les cartes situées avant elle — celles qui ont été jouées plus tôt. D'où le dilemme : bien jouer maintenant, ou bien compter à la fin.",
+      "Les sanctuaires marquent à part, indépendamment de cette lecture.",
+      "Le meilleur total l'emporte."
     ],
     "image": "https://www.espritjeu.com/upload/image/faraway-p-image-105901-grande.jpg"
   },
@@ -2799,10 +2873,15 @@
     "scoreVictoire": "max",
     "scoreMode": "objectif",
     "regles": [
-      "Plateau de 36 cases avec une case « but » de chaque côté ; 12 pièces de trois tailles (simples, doubles, triples).",
-      "Les pièces n'appartiennent à personne : vous ne pouvez déplacer qu'une pièce de la rangée la plus proche de vous.",
-      "Une pièce avance d'autant de cases que sa taille (1, 2 ou 3) ; en arrivant sur une autre pièce, on peut rebondir et poursuivre avec elle.",
-      "But : amener n'importe quelle pièce sur la case « but » adverse."
+      "Mise en place : un plateau de six sur six, avec une case « but » derrière chaque camp ; douze pièces se répartissent en trois tailles, quatre simples, quatre doubles et quatre triples.",
+      "Particularité fondatrice : aucune pièce n'appartient à personne, tout le monde joue les mêmes.",
+      "À son tour, on ne peut déplacer qu'une pièce de la rangée occupée la plus proche de soi — cette rangée bouge donc en permanence au fil de la partie.",
+      "Une pièce se déplace d'exactement autant de cases que sa taille : une case pour une simple, deux pour une double, trois pour une triple.",
+      "Le déplacement suit les lignes et les colonnes, jamais les diagonales, et peut changer de direction en cours de route, sans repasser sur la même case.",
+      "Une pièce ne peut ni traverser ni s'arrêter sur une case occupée — sauf pour rebondir.",
+      "Le rebond : en arrivant pile sur une autre pièce, on peut repartir de cette case avec la valeur de déplacement de la pièce touchée, et enchaîner ainsi plusieurs rebonds.",
+      "Ces chaînes de rebonds permettent de traverser la moitié du plateau en un coup, et rendent chaque position bien plus tendue qu'elle n'en a l'air.",
+      "But : amener n'importe quelle pièce jusqu'à la case but adverse, par un déplacement exact ; le premier à y parvenir gagne."
     ],
     "image": "https://www.gigamic.com/129-home_default/gyges.jpg",
     "editeur": "Gigamic",
@@ -3058,11 +3137,15 @@
     "scoreVictoire": "max",
     "description": "Un jeu de draft et de moteur : bâtissez le meilleur empire en gérant vos chaînes de production.",
     "regles": [
-      "But : construire l'empire produisant le plus de points de victoire.",
-      "À chaque tour, on drafte des cartes puis on choisit de les construire ou de les recycler en ressources.",
-      "Les cartes construites produisent des ressources à chaque phase de production, dans un ordre précis.",
-      "On enchaîne les productions pour alimenter de nouvelles constructions (effet moteur).",
-      "Après quatre tours, le joueur au plus grand nombre de points gagne."
+      "Mise en place : chacun prend son empire, quelques ressources de départ et sa réserve de cubes. La partie dure exactement quatre tours.",
+      "Chaque tour s'ouvre sur un draft : on reçoit sept cartes, on en garde une, on passe le reste, et ainsi de suite jusqu'à épuisement.",
+      "On décide ensuite, carte par carte, de la mettre en chantier ou de la recycler ; recycler donne aussitôt la ressource imprimée en bas de la carte.",
+      "Vient la production, toujours dans le même ordre : matériaux, énergie, science, or, exploration.",
+      "Les ressources produites se posent sur les chantiers ; un chantier complété se construit sur-le-champ et produit dès la phase suivante — d'où les enchaînements.",
+      "Les ressources d'un type non dépensées sont perdues à la fin de leur phase, sauf à les convertir en jetons.",
+      "Les personnages — financiers et généraux — s'obtiennent avec cinq ressources du bon type et valent des points, souvent multipliés par ce que l'on possède.",
+      "Après le quatrième tour, on additionne les points des cartes construites et ceux des personnages.",
+      "Le plus grand empire l'emporte."
     ],
     "image": "https://www.espritjeu.com/upload/image/it-s-a-wonderful-world-p-image-69808-grande.jpg"
   },
@@ -3099,11 +3182,15 @@
     "categorie": "Rapidité",
     "editeur": "Asmodee",
     "regles": [
-      "But : se débarrasser de toutes ses cartes le premier.",
-      "Chacun retourne une carte à tour de rôle, au centre.",
-      "Dès que deux cartes montrent le même symbole, les joueurs concernés se précipitent sur le totem : le plus rapide se débarrasse de ses cartes, le perdant ramasse.",
-      "Attention aux symboles ressemblants et aux cartes spéciales (duel de couleur, attrape générale, sens inversé).",
-      "Le premier joueur sans carte gagne."
+      "Mise en place : le totem se dresse au centre de la table, à portée de toutes les mains, et les cartes sont distribuées face cachée en piles égales.",
+      "À son tour, on retourne la carte du dessus de sa pile d'un geste vers l'extérieur, pour ne pas la découvrir avant les autres.",
+      "Dès que deux cartes visibles montrent le même motif, leurs deux propriétaires se jettent sur le totem : le plus rapide donne toutes ses cartes retournées au perdant.",
+      "Seule la forme compte, jamais la couleur — c'est le piège permanent du jeu, et la source de la plupart des erreurs.",
+      "Certaines formes sont presque identiques à une autre, à un détail près : la confusion est voulue et fait tout le sel des duels.",
+      "La carte flèches déclenche un duel général : tout le monde saisit le totem, et le dernier ramasse la mise.",
+      "La carte couleur oblige chacun à retourner sa carte suivante ; le duel se joue alors sur la couleur et non plus sur la forme.",
+      "Faire tomber le totem ou l'attraper à tort fait ramasser toutes les cartes visibles de la table.",
+      "Le premier à se débarrasser de toutes ses cartes remporte la partie."
     ],
     "scoreVictoire": "max",
     "scoreMode": "objectif",
@@ -3121,12 +3208,15 @@
     "scoreVictoire": "max",
     "scoreMode": "cooperatif",
     "regles": [
-      "À chaque manche, un joueur devine ; les autres voient le mot mystère.",
-      "Chacun écrit en secret un seul mot comme indice.",
-      "On compare les indices : tous les doublons sont retirés, et le devineur ne les verra jamais.",
-      "Le devineur propose une réponse, une seule fois.",
-      "Bonne réponse : la carte est gagnée. Mauvaise réponse : la carte est perdue, et la suivante est écartée.",
-      "Passer ne fait perdre que la carte en cours. Vous jouez treize cartes, ensemble."
+      "Mise en place : treize cartes forment la pile de la partie, et chacun reçoit un chevalet et un feutre effaçable.",
+      "À chaque manche, un joueur devient le devineur : il tourne le dos à la carte et annonce un numéro, sans rien voir.",
+      "Les autres découvrent le mot mystère et écrivent chacun, en secret, un seul mot en guise d'indice.",
+      "Les indices se comparent avant d'être montrés : tout doublon est retiré, et le devineur ne le verra jamais.",
+      "Comptent comme doublons les mots identiques, mais aussi les variantes trop proches — pluriel, conjugaison, faute d'orthographe.",
+      "Le devineur découvre les indices survivants et propose une seule réponse.",
+      "Bonne réponse : la carte rejoint les réussites. Mauvaise réponse : la carte est perdue, et l'on écarte en plus la carte suivante.",
+      "Le devineur peut préférer passer : on ne perd alors que la carte en cours.",
+      "Après les treize cartes, on compte les réussites — la table joue contre le paquet, jamais les uns contre les autres."
     ],
     "image": "https://www.espritjeu.com/upload/image/just-one-p-image-105825-grande.jpg",
     "editeur": "Repos Production"
@@ -3143,9 +3233,15 @@
     "scoreVictoire": "max",
     "scoreMode": "objectif",
     "regles": [
-      "Assemblez les pièces Pentaminos pour remplir sans trou la zone délimitée par le curseur.",
-      "En solo, relevez des défis de difficulté croissante en ajoutant des pièces.",
-      "En duel, le premier à remplir sa zone gagne."
+      "Mise en place : le plateau est une boîte allongée dont un curseur mobile délimite la largeur de la zone à remplir.",
+      "Les pièces sont des pentaminos : douze formes différentes composées chacune de cinq carrés.",
+      "But : couvrir exactement la zone délimitée, sans le moindre trou ni le moindre débordement.",
+      "En solo, le livret propose une progression : on commence à trois pièces sur une zone étroite, puis on élargit le curseur d'un cran en ajoutant une pièce.",
+      "Chaque défi indique quelles pièces utiliser, mais jamais leur disposition — et la plupart admettent plusieurs solutions.",
+      "Les pièces se retournent et pivotent librement : une même forme offre jusqu'à huit orientations.",
+      "L'astuce consiste à placer d'abord les formes les plus contraignantes, celles qui laissent le moins de choix, et à garder les plus souples pour la fin.",
+      "En duel, on partage le plateau en deux zones identiques et l'on court après le même remplissage.",
+      "Le premier à combler sa zone sans trou remporte la manche ; on enchaîne les défis en montant en difficulté."
     ],
     "image": "https://www.gigamic.com/926-home_default/katamino.jpg",
     "editeur": "Gigamic",
@@ -3185,11 +3281,15 @@
     "categorie": "Dés",
     "editeur": "Iello",
     "regles": [
-      "But : être le dernier monstre en vie, ou atteindre 20 points de victoire.",
-      "À son tour, on lance 6 dés jusqu'à trois fois (façon Yam) : griffes (attaque), cœurs (soin), éclairs (énergie) et chiffres (points).",
-      "Être dans Tokyo rapporte des points et attaque tous les autres, mais on ne peut pas se soigner et on encaisse toutes les ripostes.",
-      "L'énergie sert à acheter des cartes pouvoir aux effets variés.",
-      "La partie s'arrête dès qu'un monstre atteint 20 points, ou qu'il ne reste qu'un survivant."
+      "Mise en place : chaque monstre démarre à 10 points de vie et 0 point de victoire, Tokyo est vide, et trois cartes pouvoir sont proposées à l'achat.",
+      "À son tour, on lance six dés et on relance jusqu'à deux fois ceux que l'on veut garder ou non.",
+      "Les faces : griffe pour attaquer, cœur pour se soigner, éclair pour gagner de l'énergie, et chiffres — trois 1 valent 1 point, trois 2 valent 2, et chaque dé identique supplémentaire ajoute 1.",
+      "Un monstre hors de Tokyo qui sort des griffes blesse celui qui l'occupe ; le monstre de Tokyo, lui, blesse tous les autres d'un seul coup.",
+      "Tokyo vide ? Le joueur actif s'y installe aussitôt et gagne 1 point ; y commencer son tour en rapporte 2.",
+      "Dans Tokyo, impossible de se soigner : les cœurs n'y servent plus qu'aux cartes. Un monstre blessé dans Tokyo peut céder sa place à son agresseur.",
+      "L'énergie sert à acheter les cartes pouvoir, permanentes ou immédiates ; deux énergies suffisent aussi à balayer l'offre pour la renouveler.",
+      "Un monstre tombé à 0 point de vie est éliminé et quitte la partie.",
+      "On s'arrête dès qu'un monstre atteint 20 points de victoire, ou qu'il ne reste qu'un seul survivant."
     ],
     "scoreVictoire": "max",
     "scoreMode": "compteur",
@@ -3230,11 +3330,15 @@
     "categorie": "Familial",
     "editeur": "Blue Orange",
     "regles": [
-      "But : construire un royaume 5×5 qui rapporte le plus de points.",
-      "À son tour, on pose le domino qu'on avait choisi au tour précédent, en le raccordant à un terrain de même type (ou au château).",
-      "Puis on choisit un nouveau domino parmi ceux proposés : les meilleurs obligent à jouer plus tard au tour suivant.",
-      "Chaque territoire rapporte : nombre de cases × nombre de couronnes qu'il contient.",
-      "Quand tous les dominos sont posés, le plus de points gagne (bonus si le royaume est parfaitement carré)."
+      "Mise en place : chacun reçoit son château et sa réserve. Les dominos sont mélangés face cachée, puis révélés par lots et rangés du plus faible au plus fort.",
+      "Au premier tour, chacun pose son roi sur un domino de la colonne pour le réserver ; l'ordre des rois donne l'ordre du tour suivant.",
+      "Ensuite, à son tour, on pose le domino réservé au tour précédent, puis on réserve un domino dans la nouvelle colonne.",
+      "Un domino doit toucher le château, ou raccorder au moins une de ses deux moitiés à un terrain de même type déjà posé.",
+      "Le royaume ne dépasse jamais 5 cases sur 5 : un domino qui ne rentre pas dans ce cadre est écarté sans être joué.",
+      "Choisir un domino puissant coûte cher : les meilleurs se trouvent en bas de la colonne et font jouer en dernier au tour suivant.",
+      "Décompte : chaque territoire — des cases de même type reliées entre elles — vaut son nombre de cases multiplié par ses couronnes. Sans couronne, il ne rapporte rien.",
+      "Deux bonus facultatifs : 5 points pour un royaume parfaitement carré, 10 points pour le château pile au centre.",
+      "Le meilleur total gagne ; à égalité, on départage sur le plus grand territoire, puis sur le plus de couronnes."
     ],
     "scoreVictoire": "max",
     "scoreMode": "compteur",
@@ -3253,10 +3357,15 @@
     "seuilFin": 6,
     "scoreMode": "compteur",
     "regles": [
-      "Sous le plateau, une poignée aimantée commande votre pion.",
-      "Marquez un point en envoyant la bille dans le but de l'adversaire.",
-      "Vous marquez aussi si l'adversaire tombe dans son propre trou (« Klask ») ou capte deux des aimants blancs.",
-      "Le premier à 6 points remporte la partie."
+      "Mise en place : le plateau est un terrain de bois creusé d'un but à chaque extrémité, avec une zone centrale où reposent trois petits aimants blancs.",
+      "Chaque joueur commande son pion depuis le dessous du plateau, avec une poignée aimantée qu'il fait glisser sous le bois.",
+      "La bille se pousse au contact du pion : le jeu se joue à la main et au poignet, en continu, sans tour de table.",
+      "Un point se marque en envoyant la bille dans le trou adverse.",
+      "L'adversaire marque aussi un point si l'on tombe dans son propre but : c'est le « klask », et c'est la faute la plus fréquente.",
+      "Capter deux des trois aimants blancs sur son propre pion offre également un point à l'adversaire — d'où l'intérêt de traverser la zone centrale prudemment.",
+      "Perdre le contrôle de son pion, c'est-à-dire décrocher la poignée du dessous, coûte encore un point.",
+      "Après chaque point, on remet la bille en jeu depuis la zone de service du joueur qui vient d'encaisser.",
+      "Le premier à six points remporte la partie."
     ],
     "image": "https://www.gigamic.com/2334-home_default/klask.jpg",
     "editeur": "Gigamic",
@@ -3362,11 +3471,15 @@
     "scoreVictoire": "max",
     "scoreMode": "objectif",
     "regles": [
-      "Tous les joueurs découvrent un mot secret, sauf un : l'imposteur, qui l'ignore.",
-      "En trois manches, chacun donne à tour de rôle un seul mot-indice pour prouver qu'il connaît le mot… sans trop aider l'imposteur.",
-      "L'imposteur doit bluffer de façon crédible pour ne pas être repéré et tenter de deviner le mot.",
-      "Après les indices, tout le monde débat puis vote pour désigner l'imposteur.",
-      "Les joueurs gagnent s'ils démasquent l'imposteur ; l'imposteur gagne s'il passe inaperçu ou devine le mot secret."
+      "Mise en place : on tire une carte au hasard, qui porte un mot. Tout le monde le découvre discrètement, sauf un joueur — l'imposteur — dont la carte est muette.",
+      "Personne ne sait qui est l'imposteur : lui-même ne le découvre qu'en regardant sa carte vide.",
+      "La partie tient en trois tours d'indices. À son tour, chacun prononce un seul mot, en rapport avec le mot secret.",
+      "Tout l'art des initiés : être assez précis pour prouver qu'ils savent, assez flou pour ne pas offrir le mot à l'imposteur.",
+      "L'imposteur, lui, écoute et improvise un indice crédible à partir de ce qu'il vient d'entendre.",
+      "On ne répète jamais un indice déjà donné, et l'on ne prononce évidemment pas le mot secret.",
+      "Après les tours d'indices, le débat s'ouvre, puis tout le monde vote en même temps.",
+      "Démasqué, l'imposteur garde une dernière chance : deviner le mot secret pour renverser la partie.",
+      "Les joueurs l'emportent s'ils le désignent et qu'il se trompe ; l'imposteur gagne s'il passe inaperçu, ou s'il devine le mot."
     ],
     "image": "https://www.gigamic.com/3164-home_default/l-imposteur.jpg",
     "editeur": "Gigamic",
@@ -3406,11 +3519,16 @@
     "scoreVictoire": "max",
     "scoreMode": "manches",
     "regles": [
-      "On joue à quatre, en deux équipes de deux joueurs assis en face à face.",
-      "Avant chaque manche, les joueurs enchérissent en annonçant un contrat (points visés et atout).",
-      "On peut « coincher » l'adversaire quand on juge son contrat intenable, ou « surcoincher » pour doubler la mise.",
-      "On joue ensuite les plis en suivant l'atout et la couleur ; l'équipe preneuse doit atteindre son contrat.",
-      "Les points s'accumulent manche après manche jusqu'au score de fin fixé, que la meilleure équipe atteint."
+      "Mise en place : quatre joueurs, deux équipes de deux assises en face à face, avec un jeu de trente-deux cartes.",
+      "Chaque manche commence par les enchères : on annonce un contrat, c'est-à-dire un nombre de points à réaliser et un atout, ou l'on passe.",
+      "Coincher, c'est parier que l'équipe preneuse échouera : la manche compte alors double. Surcoincher, c'est répondre du tac au tac, et la manche compte quadruple.",
+      "L'ordre des cartes change avec l'atout : à l'atout, le valet puis le neuf dominent tout le reste ; hors atout, on suit la hiérarchie habituelle de l'as jusqu'au sept.",
+      "On doit fournir la couleur demandée si on l'a en main ; à défaut, on doit couper si le pli appartient à l'adversaire.",
+      "Quand le partenaire est déjà maître du pli, on est libre de se défausser plutôt que de couper.",
+      "Les annonces de suites et de carrés se déclarent avant de jouer sa deuxième carte, et rapportent à l'équipe qui possède la meilleure d'entre elles.",
+      "Le décompte des plis fait cent soixante-deux points au total, plus dix points pour le dernier pli, dit « de der ».",
+      "Réussir son contrat rapporte le contrat annoncé à l'équipe preneuse ; le rater donne tout à l'adversaire, coinche et surcoinche multipliant l'addition.",
+      "On enchaîne les manches jusqu'au seuil convenu, en général mille ou trois mille points."
     ],
     "image": "https://www.gigamic.com/3099-home_default/la-coincoinche.jpg",
     "editeur": "Gigamic"
@@ -4056,11 +4174,15 @@
     "categorie": "Ambiance",
     "editeur": "Zygomatic",
     "regles": [
-      "But : pour les villageois, démasquer et éliminer tous les loups-garous ; pour les loups, dévorer les villageois jusqu'à égaler leur nombre.",
-      "Un meneur de jeu distribue les rôles secrets et anime la partie.",
-      "La nuit, les loups-garous désignent une victime ; des personnages spéciaux agissent aussi (voyante, sorcière, cupidon…).",
-      "Le jour, le village débat, s'accuse, puis vote pour éliminer un suspect.",
-      "La partie s'arrête quand un camp a éliminé l'autre."
+      "Mise en place : un meneur distribue une carte rôle à chacun, face cachée. Le nombre de loups-garous dépend de la taille du village — deux pour huit joueurs, davantage ensuite.",
+      "Deux camps s'ignorent : les villageois, qui doivent démasquer et éliminer tous les loups ; les loups-garous, qui doivent dévorer assez de villageois pour devenir aussi nombreux qu'eux.",
+      "La partie alterne nuits et jours, annoncés par le meneur. La nuit, personne ne parle et tout le monde ferme les yeux.",
+      "Première nuit : Cupidon désigne deux amoureux, qui gagneront — ou périront — ensemble, quels que soient leurs camps.",
+      "Chaque nuit ensuite, la Voyante regarde en secret la carte d'un joueur, les loups-garous s'éveillent et choisissent une victime, puis la Sorcière peut la sauver ou empoisonner quelqu'un — une seule fois chacune de ses deux potions.",
+      "Au réveil, le meneur annonce les morts. Un mort révèle sa carte et se tait définitivement ; le Chasseur, lui, emporte quelqu'un avec lui.",
+      "Le jour, le village débat, s'accuse, se défend, puis vote : le plus désigné est éliminé sur-le-champ.",
+      "Le Capitaine, élu par le village, pèse double dans les votes et transmet sa charge en mourant.",
+      "La partie s'arrête dès qu'un camp remplit sa condition. Avec Cupidon en jeu, le couple d'amoureux peut aussi l'emporter seul contre tous."
     ],
     "scoreVictoire": "max",
     "scoreMode": "objectif",
@@ -4312,10 +4434,15 @@
     "scoreVictoire": "max",
     "scoreMode": "compteur",
     "regles": [
-      "Assam le marchand se déplace sur le souk : orientez-le, lancez le dé, puis avancez-le d'autant de cases.",
-      "Si Assam s'arrête sur un tapis adverse, vous payez un dirham par case du tapis d'un seul tenant.",
-      "Posez ensuite un de vos tapis (2 cases) adjacent à Assam, en recouvrant éventuellement les tapis adverses.",
-      "En fin de partie, additionnez vos dirhams et vos cases de tapis encore visibles : le plus riche gagne."
+      "Mise en place : le souk est un damier vide, Assam le marchand se tient au centre, et chacun prend ses tapis et ses trente dirhams.",
+      "Un tour compte trois temps : orienter Assam, lancer le dé, puis l'avancer.",
+      "On peut faire pivoter Assam d'un quart de tour à gauche ou à droite, jamais lui faire faire demi-tour.",
+      "Le dé indique 1, 2, 3 ou 4 cases : Assam avance tout droit, et contourne le souk lorsqu'il en atteint le bord.",
+      "S'il s'arrête sur un tapis adverse, on paie à son propriétaire un dirham par case de ce tapis — en ne comptant que les cases d'un seul tenant.",
+      "On pose enfin l'un de ses tapis sur deux cases voisines, dont l'une au moins touche la case d'Assam.",
+      "Un tapis peut recouvrir un tapis adverse, mais jamais en entier : il doit toujours en rester une case visible.",
+      "La partie s'arrête quand chacun a posé tous ses tapis.",
+      "On additionne alors ses dirhams et ses cases de tapis encore visibles : le plus riche l'emporte."
     ],
     "image": "https://www.gigamic.com/2386-home_default/marrakech.jpg",
     "editeur": "Gigamic",
@@ -4509,10 +4636,15 @@
     "seuilFin": 6000,
     "scoreMode": "compteur",
     "regles": [
-      "À votre tour, relancez les huit dés pour accumuler des points (pièces, diamants, séries d'épées, combinaisons).",
-      "Mais trois têtes de mort mettent fin à votre tour, et vous ne marquez rien.",
-      "Une carte Fortune, piochée en début de tour, modifie vos gains (multiplicateurs, malus…).",
-      "Dès qu'un joueur atteint 6000 points, on termine la manche ; le meilleur score l'emporte."
+      "Mise en place : huit dés dans un gobelet, un paquet de cartes au centre, et le premier joueur retourne une carte avant de lancer.",
+      "La carte tirée modifie le tour : elle peut offrir un trésor bonus, imposer un coffre à remplir, doubler les gains ou piéger le lanceur.",
+      "On lance les huit dés, on met de côté au moins un dé et l'on relance ceux que l'on veut, aussi longtemps qu'au moins deux dés restent à relancer.",
+      "Les crânes ne se relancent jamais : ils s'accumulent d'un lancer à l'autre et se rapprochent inexorablement du seuil fatal.",
+      "Trois crânes mettent fin au tour immédiatement : tout ce qui a été accumulé est perdu, et le joueur marque zéro.",
+      "Un tour arrêté à temps rapporte cent points par lot de trois symboles identiques, deux cents pour quatre, quatre cents pour cinq, jusqu'à quatre mille pour huit.",
+      "Les diamants et les pièces d'or valent cent points chacun en plus, qu'ils fassent partie d'un lot ou non.",
+      "Réunir les huit dés en symboles utiles, sans le moindre crâne, déclenche la Pleine Cargaison et double la valeur du tour.",
+      "Le jeu s'arrête quand quelqu'un franchit six mille points : on termine le tour de table, et le plus haut score l'emporte."
     ],
     "image": "https://www.gigamic.com/3259-home_default/mille-sabords.jpg",
     "editeur": "Gigamic",
@@ -4681,11 +4813,15 @@
     "categorie": "Familial",
     "editeur": "Hasbro",
     "regles": [
-      "But : être le dernier joueur solvable en bâtissant un empire immobilier.",
-      "On avance sur le plateau avec deux dés, on achète terrains, gares et compagnies, et on perçoit des loyers.",
-      "Réunir une famille de couleurs permet de construire maisons et hôtels, qui font grimper les loyers.",
-      "Cases Chance, Caisse de communauté, taxes et Prison rythment la partie.",
-      "Un joueur en faillite est éliminé ; le dernier en jeu l'emporte."
+      "Mise en place : chacun choisit un pion, le pose sur la case Départ et reçoit sa mise de départ ; les cartes Chance et Caisse de communauté sont mélangées face cachée au centre.",
+      "À son tour, on lance les deux dés et on avance d'autant de cases dans le sens de la flèche, puis on applique ce qu'annonce la case d'arrivée.",
+      "Une propriété libre peut être achetée au prix indiqué sur son titre ; si personne n'en veut, la règle officielle prévoit de la mettre aux enchères — variante souvent oubliée, mais elle accélère beaucoup la partie.",
+      "Tomber sur un terrain déjà possédé oblige à payer le loyer à son propriétaire, à condition qu'il le réclame avant le lancer suivant.",
+      "Réunir toutes les cases d'une même couleur autorise la construction : quatre maisons par terrain avant l'hôtel, et les constructions doivent rester équilibrées d'un terrain à l'autre du groupe.",
+      "Un double rejoue immédiatement, mais trois doubles d'affilée envoient directement en prison ; on en sort en payant, en jouant une carte de libération ou en réussissant un double en trois tentatives.",
+      "Manquer d'argent oblige à hypothéquer ses titres ou à revendre ses maisons à la banque pour la moitié de leur prix.",
+      "Les échanges entre joueurs sont libres à tout moment : terrains, argent et cartes de libération se négocient comme on veut.",
+      "Le dernier joueur encore solvable remporte la partie ; pour une partie courte, on peut fixer une heure de fin et comparer les fortunes."
     ],
     "scoreVictoire": "max",
     "scoreMode": "objectif",
@@ -4769,11 +4905,15 @@
     "categorie": "Coopératif",
     "editeur": "Libellud",
     "regles": [
-      "But (coopératif) : ensemble, résoudre le crime avant la fin du temps imparti.",
-      "Un joueur incarne le fantôme, muet ; les autres sont des médiums.",
-      "Le fantôme envoie à chaque médium des cartes « visions » oniriques ; chacun les interprète pour deviner SON suspect, PUIS son lieu, PUIS son arme.",
-      "À mesure que les médiums progressent, l'enquête avance nuit après nuit.",
-      "À la fin, un dernier vote commun désigne le coupable ; toute la table gagne ou perd ensemble."
+      "Mise en place : suspects, lieux et armes sont étalés sur la table. Le fantôme tire pour chaque médium une combinaison différente, que celui-ci devra retrouver.",
+      "Le fantôme ne parle pas, ne mime pas, ne fait aucun signe : il ne s'exprime qu'en distribuant des cartes vision aux illustrations oniriques.",
+      "Chaque nuit, il envoie à chaque médium une ou plusieurs visions ; les médiums, eux, peuvent en discuter librement entre eux.",
+      "Chacun désigne alors la carte qu'il croit être la sienne, et le fantôme valide — ou non — d'un jeton corbeau.",
+      "Bonne réponse : le médium passe à l'étape suivante, d'abord le suspect, puis le lieu, puis l'arme.",
+      "Un médium peut miser des jetons clairvoyance sur les hypothèses des autres, et gagner en perspicacité pour le final.",
+      "Sept nuits, pas une de plus : s'il reste un seul médium en retard, toute la table perd.",
+      "Si tous ont terminé à temps, une dernière vision désigne la vraie combinaison parmi celles retrouvées.",
+      "Les médiums les plus clairvoyants voient plus de cartes lors de ce vote final — mais on gagne et on perd ensemble."
     ],
     "scoreVictoire": "max",
     "scoreMode": "cooperatif",
@@ -4960,10 +5100,16 @@
     "scoreVictoire": "min",
     "scoreMode": "compteur",
     "regles": [
-      "À votre tour : prenez la carte révélée (sa valeur en points de pénalité) avec les jetons posés dessus, ou posez un jeton pour la refuser.",
-      "Une suite de cartes consécutives ne compte que par sa plus petite valeur.",
-      "Chaque jeton en votre possession retire un point.",
-      "But : avoir le total le plus BAS ; le joueur avec le moins de points gagne."
+      "Mise en place : les cartes vont de 3 à 35, et neuf d'entre elles sont retirées au hasard sans être montrées — personne ne sait lesquelles manquent.",
+      "Chacun reçoit une réserve de jetons, cachée derrière sa main ; le nombre dépend du nombre de joueurs.",
+      "Une carte est retournée au centre : à son tour, on n'a que deux options.",
+      "Soit on refuse la carte en posant un de ses jetons dessus, et la décision passe au voisin.",
+      "Soit on prend la carte, avec tous les jetons accumulés dessus, et l'on retourne aussitôt la carte suivante.",
+      "Un joueur à court de jetons est obligé de prendre la carte : c'est le seul moment où le choix disparaît.",
+      "Chaque carte compte sa valeur en points de pénalité, et chaque jeton restant en fin de partie en retire un.",
+      "La règle qui change tout : dans une suite de cartes consécutives que l'on possède, seule la plus petite compte.",
+      "Prendre volontairement une grosse carte devient donc rentable si l'on espère compléter la suite en dessous — c'est le pari central du jeu.",
+      "La partie s'arrête quand les vingt-quatre cartes ont été distribuées ; le plus petit total l'emporte."
     ],
     "image": "https://www.gigamic.com/3693-home_default/non-merci.jpg",
     "editeur": "Gigamic",
@@ -5111,10 +5257,14 @@
     "scoreVictoire": "max",
     "scoreMode": "compteur",
     "regles": [
-      "Chacun dispose d'une famille de cartes aux pouvoirs variés (attaque, embuscade, héritier, complot…).",
-      "À votre tour, glissez une carte face cachée en tête ou en queue de votre file, ou révélez une carte déjà posée.",
-      "La file se résout de gauche à droite : les cartes révélées déclenchent leur effet pour gagner des pièces d'influence, ou en voler.",
-      "Après plusieurs manches, le joueur avec le plus d'influence l'emporte."
+      "Mise en place : chacun reçoit la même famille de dix cartes et n'en garde qu'une partie, selon le nombre de joueurs. La file commune démarre vide.",
+      "À son tour, on glisse une carte face cachée en tête ou en queue de la file — personne ne sait ni ce qu'elle est, ni à qui elle appartient.",
+      "Une fois toutes les cartes posées, on parcourt la file de gauche à droite : à chaque carte, son propriétaire choisit de la révéler ou de la laisser dormir.",
+      "Une carte révélée applique aussitôt son effet, puis reste en jeu et se déclenchera de nouveau aux manches suivantes.",
+      "Une carte laissée cachée reçoit un jeton influence, qui s'accumule et sera empoché le jour où elle sera révélée.",
+      "Les pouvoirs se répondent : l'Assassinat élimine une carte révélée, l'Embuscade punit qui l'attaque, le Complot grossit tant qu'il patiente, l'Héritier rapporte davantage quand il est seul en scène.",
+      "Une carte éliminée quitte définitivement la partie : la famille s'amenuise de manche en manche.",
+      "On enchaîne les manches jusqu'à épuisement des cartes ; le joueur qui a amassé le plus d'influence l'emporte."
     ],
     "image": "https://www.gigamic.com/1342-home_default/oriflamme.jpg",
     "editeur": "Gigamic",
@@ -5341,10 +5491,16 @@
     "scoreVictoire": "min",
     "scoreMode": "compteur",
     "regles": [
-      "Jeu de plis : suivez la couleur demandée si vous le pouvez ; la plus forte carte remporte le pli et les cartes.",
-      "Les cartes Payoo valent leur valeur en points, et le 7 de Payoo (le Papayoo) vaut 40 : tout cela compte en négatif.",
-      "L'idée est de refiler ces cartes plutôt que de les ramasser.",
-      "On enchaîne les manches ; le joueur avec le MOINS de points gagne."
+      "Mise en place : au jeu classique s'ajoute une cinquième couleur, les Payoo, numérotée de 1 à 20 — ce sont elles qui portent presque tous les points.",
+      "On retire au besoin les plus petites cartes pour que la donne tombe juste selon le nombre de joueurs.",
+      "Avant chaque manche, un dé désigne une des quatre couleurs classiques : le 7 de cette couleur devient le Papayoo et vaut à lui seul quarante points.",
+      "Chacun passe ensuite cinq cartes à son voisin, dans un sens qui change à chaque manche : c'est le moment de se débarrasser du pire.",
+      "On joue ensuite des plis : il faut suivre la couleur demandée si on l'a, et la plus forte carte de cette couleur ramasse le pli.",
+      "Sans carte de la couleur demandée, on se défausse de ce que l'on veut — l'occasion rêvée de refiler un gros Payoo.",
+      "Il n'y a pas d'atout : personne ne peut couper, et un pli est donc toujours remporté dans la couleur d'entame.",
+      "Chaque carte Payoo ramassée vaut sa valeur en points négatifs, le Papayoo en vaut quarante, et les autres couleurs ne valent rien.",
+      "Se retrouver seul à couper une couleur devient dangereux : on ramasse alors tout ce que la table veut jeter.",
+      "On enchaîne les manches jusqu'au seuil convenu ; ici, c'est le plus petit total qui gagne."
     ],
     "image": "https://www.gigamic.com/3520-home_default/papayoo.jpg",
     "editeur": "Gigamic",
@@ -5361,11 +5517,15 @@
     "categorie": "Réflexion",
     "editeur": "Funforge",
     "regles": [
-      "But (jeu à 2) : obtenir le meilleur score en remplissant sa grille 9×9 de pièces de tissu.",
-      "On achète l'une des trois pièces situées devant le pion temps, en payant des boutons et en avançant sur la piste du temps.",
-      "C'est toujours le joueur le plus en arrière sur la piste du temps qui rejoue.",
-      "Compléter en premier un carré de 7×7 rapporte un bonus.",
-      "En fin de partie, le score vaut les boutons possédés moins 2 points par case vide de la grille ; le plus haut gagne."
+      "Mise en place : les pièces de tissu forment un cercle autour d'un pion neutre, et chacun prend son plateau 9×9 ainsi que cinq boutons.",
+      "À son tour, on achète l'une des trois pièces qui suivent le pion neutre, lequel saute alors jusqu'à la pièce prise.",
+      "Une pièce coûte des boutons et du temps : on paie son prix, on avance son pion d'autant de cases sur la piste, et on la coud sur son plateau.",
+      "On peut aussi refuser d'acheter : on avance alors juste devant le pion adverse et l'on encaisse un bouton par case parcourue.",
+      "C'est toujours le joueur le plus en arrière sur la piste du temps qui rejoue — un joueur peut donc enchaîner plusieurs tours d'affilée.",
+      "Franchir un bouton de la piste déclenche un revenu : autant de boutons que d'icônes bouton visibles sur son plateau.",
+      "Les sept petits carrés de cuir posés sur la piste se ramassent au passage et bouchent une case isolée.",
+      "Le premier à couvrir un carré de 7 sur 7 empoche le jeton bonus, qui vaut 7 points.",
+      "La partie s'arrête quand les deux pions ont atteint la dernière case. Score : les boutons possédés, moins 2 points par case restée vide."
     ],
     "scoreVictoire": "max",
     "scoreMode": "compteur",
@@ -5383,10 +5543,16 @@
     "scoreVictoire": "max",
     "scoreMode": "compteur",
     "regles": [
-      "Lancez huit dés en stop-ou-encore pour atteindre un total et rafler une tuile (des « vers ») au centre ou chez un adversaire.",
-      "À chaque relance, mettez de côté au moins un dé d'une valeur non encore gardée ; la face « ver » vaut 5.",
-      "Rater son total ou ne plus pouvoir garder de dé fait perdre votre dernière tuile.",
-      "En fin de partie, le joueur avec le plus de vers gagne."
+      "Mise en place : seize tuiles numérotées de 21 à 36 s'alignent au centre ; elles portent de un à quatre vers, qui sont les points du jeu.",
+      "Huit dés, dont les faces vont de 1 à 5 plus une face ver, qui compte pour cinq points mais reste un symbole à part.",
+      "À son tour, on lance les huit dés, puis on met de côté tous les dés d'une même valeur — obligatoirement une valeur pas encore réservée durant ce tour.",
+      "On relance ensuite les dés restants, et l'on continue ainsi tant qu'on le souhaite : c'est un pur stop-ou-encore.",
+      "Impossible de s'arrêter sans avoir réservé au moins un ver : sans lui, le total ne vaut rien.",
+      "Quand on s'arrête, on prend au centre la plus grande tuile inférieure ou égale à son total, et on la pose face visible sur sa propre pile.",
+      "Si le total correspond exactement à la tuile du sommet d'une pile adverse, on la lui vole — c'est souvent plus rentable que de servir au centre.",
+      "Rater son tour, faute de ver ou faute de valeur nouvelle à réserver, coûte la tuile du sommet de sa pile, qui retourne au centre.",
+      "Dans ce cas, la plus grande tuile du centre est en plus retirée du jeu : la réserve fond, et la partie s'accélère.",
+      "Quand la dernière tuile du centre disparaît, on compte les vers visibles et empilés : le plus grand total gagne."
     ],
     "image": "https://www.gigamic.com/2400-home_default/pickomino.jpg",
     "editeur": "Gigamic",
@@ -5646,11 +5812,15 @@
     "scoreVictoire": "max",
     "description": "Le classique de l'alignement : glissez vos jetons et créez une ligne de quatre avant l'adversaire.",
     "regles": [
-      "But : aligner quatre de ses jetons avant son adversaire.",
-      "À tour de rôle, chaque joueur lâche un jeton dans une colonne de la grille verticale.",
-      "Le jeton tombe sur la pile existante de la colonne choisie.",
-      "On cherche à réaliser un alignement de quatre (horizontal, vertical ou diagonal) tout en bloquant l'autre.",
-      "Le premier à aligner quatre jetons gagne."
+      "Mise en place : la grille verticale compte sept colonnes de six cases ; chaque joueur dispose de vingt et un jetons de sa couleur.",
+      "À son tour, on lâche un jeton en haut d'une colonne : il glisse et se pose sur la pile déjà présente, ou au fond si la colonne est vide.",
+      "On ne choisit donc que la colonne, jamais la hauteur — c'est toute la contrainte du jeu.",
+      "But : aligner quatre jetons de sa couleur, horizontalement, verticalement ou en diagonale.",
+      "Chaque coup doit se lire dans les deux sens : construire son alignement et couper celui de l'adversaire, souvent avec le même jeton.",
+      "Attention au cadeau involontaire : remplir une case juste sous une case gagnante pour l'adversaire lui offre la partie au coup suivant.",
+      "La menace double, deux alignements possibles d'un même jeton, est imparable : c'est la manœuvre à chercher et à empêcher.",
+      "Le premier joueur à réaliser un alignement de quatre remporte la partie immédiatement.",
+      "Si les quarante-deux cases se remplissent sans alignement, la partie est déclarée nulle."
     ],
     "image": "https://www.espritjeu.com/upload/image/puissance-4-p-image-112553-grande.jpg"
   },
@@ -5666,9 +5836,15 @@
     "scoreVictoire": "max",
     "scoreMode": "objectif",
     "regles": [
-      "Posez tour à tour vos billes sur le plateau, en montant des étages pour former une pyramide.",
-      "Poser une bille au sommet d'un carré de 4 permet de remonter des billes déjà jouées ; aligner ou encadrer permet d'en récupérer.",
-      "Le joueur qui pose la dernière bille, au sommet de la pyramide, gagne (l'adversaire est à court de billes)."
+      "Mise en place : un plateau creusé de seize alvéoles en carré de quatre sur quatre, et quinze billes pour chaque joueur.",
+      "À son tour, on pose une bille de sa réserve dans une alvéole libre du premier niveau.",
+      "Dès que quatre billes forment un carré plein, on peut poser une bille par-dessus, à l'étage supérieur — la pyramide monte ainsi jusqu'à son sommet unique.",
+      "Plutôt que de puiser dans sa réserve, on peut faire remonter une de ses billes déjà posée à un niveau inférieur, à condition qu'elle ne supporte rien.",
+      "Compléter un carré de quatre billes de sa propre couleur, ou aligner quatre de ses billes sur une même rangée, permet de récupérer une ou deux de ses billes libres.",
+      "Récupérer, c'est économiser : le jeu ne se gagne pas en occupant le plateau, mais en dépensant moins de billes que l'adversaire.",
+      "Une bille prise en sandwich sous une autre est immobilisée pour de bon : l'ordre de construction compte autant que la position.",
+      "Celui qui pose la bille au sommet de la pyramide gagne la partie.",
+      "Par conséquent, un joueur à court de billes a perdu — c'est la même chose vue de l'autre côté."
     ],
     "image": "https://www.gigamic.com/750-home_default/pylos-classic.jpg",
     "editeur": "Gigamic",
@@ -5731,8 +5907,15 @@
     "scoreVictoire": "max",
     "scoreMode": "objectif",
     "regles": [
-      "Posez une pierre de votre couleur sur une pile, puis déplacez toute cette pile, pierre par pierre, sur des cases adjacentes.",
-      "But : aligner 4 pierres de votre couleur visibles au sommet des piles (ligne, colonne ou diagonale)."
+      "Mise en place : un plateau de quatre sur quatre, quatre pierres neutres posées au centre pour amorcer, et huit pierres de sa couleur pour chaque joueur.",
+      "À son tour, on pose une pierre de sa réserve au sommet d'une pile existante — jamais sur une case vide.",
+      "On saisit ensuite la pile entière, sa pierre comprise, et on la sème case par case sur des cases orthogonalement adjacentes.",
+      "On dépose une pierre par case traversée, en commençant par le bas de la pile, jusqu'à ce que la main soit vide.",
+      "Le chemin peut tourner à chaque pas, mais ne revient jamais immédiatement sur la case que l'on vient de quitter.",
+      "Seule la pierre du sommet de chaque pile est visible et compte : une pierre enfouie est neutralisée sans être perdue pour autant.",
+      "But : faire apparaître quatre pierres de sa couleur au sommet de quatre piles alignées, en ligne, en colonne ou en diagonale.",
+      "L'alignement doit exister à la fin de son propre tour : provoquer celui de l'adversaire en semant sa pile est l'erreur classique.",
+      "Un joueur sans pierre en réserve ne peut plus jouer et perd la partie."
     ],
     "image": "https://www.gigamic.com/1974-home_default/qawale.jpg",
     "editeur": "Gigamic",
@@ -5817,10 +6000,15 @@
     "scoreVictoire": "max",
     "scoreMode": "objectif",
     "regles": [
-      "Posez des pièces de 4 formes sur une grille 4×4 divisée en régions.",
-      "Interdit de poser une forme déjà présente par l'adversaire dans la même ligne, colonne ou région.",
-      "But : compléter une ligne, une colonne ou une région avec les 4 formes différentes.",
-      "Le joueur qui pose la 4e forme complétant une zone gagne."
+      "Mise en place : une grille de quatre sur quatre découpée en quatre régions carrées ; chaque camp reçoit huit pièces, soit deux exemplaires de quatre formes différentes.",
+      "À son tour, on pose une seule pièce de sa réserve sur une case libre — les pièces posées ne bougent plus jamais.",
+      "Interdit absolu : poser une forme dans une ligne, une colonne ou une région où l'adversaire a déjà posé cette même forme.",
+      "En revanche, on peut parfaitement doubler l'une de ses propres formes dans une même ligne, colonne ou région : l'interdiction ne vaut qu'entre adversaires.",
+      "Cette asymétrie est tout le jeu : chaque pièce posée ferme des cases à l'adversaire tout en gardant les siennes ouvertes.",
+      "But : être celui qui pose la quatrième forme différente complétant une ligne, une colonne ou une région.",
+      "La couleur des pièces n'entre pas en compte pour la victoire : on peut gagner en complétant une zone majoritairement remplie par l'adversaire.",
+      "Un joueur qui n'a plus aucun coup légal à jouer perd la partie sur-le-champ.",
+      "La partie est courte et sans hasard : elle se gagne en comptant les coups d'avance, comme aux échecs miniatures."
     ],
     "image": "https://www.gigamic.com/1434-home_default/quantik.jpg",
     "editeur": "Gigamic"
@@ -5860,11 +6048,15 @@
     "scoreVictoire": "max",
     "scoreMode": "objectif",
     "regles": [
-      "16 pièces, chacune avec 4 caractères : claire/foncée, ronde/carrée, haute/basse, pleine/creuse.",
-      "Particularité : c'est l'adversaire qui choisit la pièce que vous devez poser.",
-      "À votre tour, placez la pièce reçue sur une case libre, puis choisissez une pièce et donnez-la à l'adversaire.",
-      "But : réaliser un alignement (ligne, colonne ou diagonale) de 4 pièces partageant au moins un caractère commun.",
-      "Le joueur qui complète un tel alignement annonce « Quarto ! » et gagne."
+      "Mise en place : seize pièces au centre de la table, communes aux deux joueurs, et une grille de quatre sur quatre.",
+      "Chaque pièce combine quatre caractères : claire ou foncée, ronde ou carrée, haute ou basse, pleine ou creuse — et chaque combinaison n'existe qu'en un seul exemplaire.",
+      "La trouvaille du jeu : ce n'est jamais soi-même qu'on choisit sa pièce, c'est l'adversaire qui la tend.",
+      "À son tour, on pose donc sur une case libre la pièce que l'on vient de recevoir, puis on choisit dans la réserve celle que l'adversaire devra poser.",
+      "Un alignement gagnant réunit quatre pièces partageant au moins un caractère commun, en ligne, en colonne ou en diagonale.",
+      "Peu importe qui a posé quoi : les pièces n'appartiennent à personne, seul compte l'alignement.",
+      "Il faut annoncer « Quarto ! » pour l'emporter ; un alignement laissé passer par les deux joueurs ne compte plus une fois le coup suivant joué.",
+      "La difficulté vient du double calcul permanent : ne pas offrir la pièce qui achève un alignement, tout en gardant soi-même un coup gagnant.",
+      "Grille entièrement remplie sans alignement annoncé : la partie est nulle. Une variante ajoute les carrés de quatre cases adjacentes aux figures gagnantes."
     ],
     "image": "https://www.gigamic.com/754-home_default/quarto.jpg",
     "editeur": "Gigamic",
@@ -5927,9 +6119,15 @@
     "scoreVictoire": "max",
     "scoreMode": "objectif",
     "regles": [
-      "À votre tour, prenez un cube du bord (neutre ou à votre symbole), marquez-le à votre symbole et réinsérez-le en poussant une ligne.",
-      "But : aligner 5 cubes à votre symbole (ligne, colonne ou diagonale).",
-      "Attention : provoquer un alignement adverse le fait gagner."
+      "Mise en place : vingt-cinq cubes forment une grille de cinq sur cinq, tous face neutre au départ ; chaque camp joue la croix ou le rond.",
+      "À son tour, on prélève un cube situé sur le pourtour de la grille, à condition qu'il montre la face neutre ou son propre symbole — jamais celui de l'adversaire.",
+      "Le cube prélevé est tourné pour afficher son symbole, puis réinséré par l'extrémité d'une ligne ou d'une colonne, ce qui décale tous les cubes de cette rangée.",
+      "Interdiction de remettre le cube exactement d'où il vient : le déplacement doit modifier la position de quelque chose.",
+      "La grille garde toujours vingt-cinq cubes : rien n'est ajouté ni retiré, seuls les symboles et les positions circulent.",
+      "But : aligner cinq cubes à son symbole, en ligne, en colonne ou en diagonale.",
+      "Le piège du jeu tient à la poussée : en décalant une rangée, on complète parfois l'alignement de l'adversaire sans l'avoir vu venir.",
+      "Si un coup crée simultanément un alignement pour chaque camp, c'est celui de l'adversaire qui compte — donc il gagne.",
+      "À quatre, on joue en deux équipes assises en croix, sans se concerter à voix haute."
     ],
     "image": "https://www.gigamic.com/761-home_default/quixo.jpg",
     "editeur": "Gigamic",
@@ -5970,10 +6168,15 @@
     "scoreVictoire": "max",
     "scoreMode": "objectif",
     "regles": [
-      "Chaque joueur doit mener son pion jusqu'au côté opposé du plateau.",
-      "À votre tour : soit avancer votre pion d'une case, soit poser une barrière.",
-      "Les barrières ralentissent les adversaires mais ne doivent jamais enfermer totalement un joueur.",
-      "Le premier à atteindre sa ligne d'arrivée opposée gagne."
+      "Mise en place : le plateau est une grille de neuf sur neuf ; chaque pion démarre au milieu de son côté et doit rejoindre le côté opposé.",
+      "Les barrières se répartissent entre les joueurs : dix chacun à deux, cinq chacun à quatre.",
+      "À son tour, on choisit entre deux actions seulement : avancer son pion d'une case, ou poser une barrière — jamais les deux.",
+      "Un pion se déplace d'une case en ligne droite, horizontalement ou verticalement, jamais en diagonale.",
+      "Une barrière se glisse dans les rainures entre deux cases et bloque la largeur de deux cases ; elle ne peut ni chevaucher ni croiser une barrière déjà posée.",
+      "Règle d'or : une barrière ne doit jamais couper complètement l'accès d'un joueur à sa ligne d'arrivée — il doit toujours rester un chemin, même très long.",
+      "Quand deux pions se font face, on peut sauter par-dessus l'adversaire ; si une barrière se trouve juste derrière lui, on contourne en diagonale.",
+      "Une barrière posée ne se reprend jamais : les dépenser trop tôt laisse sans défense pour la fin de partie.",
+      "Le premier pion à atteindre n'importe quelle case de la ligne opposée gagne immédiatement."
     ],
     "image": "https://www.gigamic.com/3151-home_default/quoridor.jpg",
     "editeur": "Gigamic"
@@ -6057,11 +6260,15 @@
     "scoreVictoire": "max",
     "description": "Un jeu abstrait de tuiles : alignez couleurs et formes comme un croisement de dominos et de Scrabble.",
     "regles": [
-      "But : marquer le plus de points en posant des tuiles en lignes.",
-      "On aligne des tuiles partageant soit la même couleur, soit la même forme (jamais de doublon dans une ligne).",
-      "Chaque tuile ajoutée à une ligne rapporte des points ; compléter une ligne de six crie « Qwirkle ! » et rapporte un bonus.",
-      "On complète sa main à six tuiles après chaque tour.",
-      "Quand la pioche est vide et qu'un joueur a tout posé, on additionne : le meilleur score gagne."
+      "Mise en place : 108 tuiles croisant six formes et six couleurs, chacune en trois exemplaires. Chacun en tire six ; celui qui peut poser la plus longue ligne commence.",
+      "À son tour, on pose autant de tuiles qu'on veut, à condition qu'elles appartiennent toutes à la même ligne, droite et sans trou.",
+      "Une ligne réunit soit des tuiles de même couleur et de formes toutes différentes, soit des tuiles de même forme et de couleurs toutes différentes.",
+      "Aucun doublon dans une ligne : deux tuiles identiques ne peuvent jamais s'y côtoyer.",
+      "On marque, pour chaque ligne touchée par sa pose, un point par tuile qu'elle contient — une tuile posée à un croisement compte donc dans les deux lignes.",
+      "Compléter une ligne de six annonce « Qwirkle ! » et rapporte 6 points de plus, soit 12 points pour cette ligne.",
+      "On peut aussi passer son tour pour échanger des tuiles, et l'on recomplète sa main à six après chaque tour.",
+      "La partie s'arrête quand la pioche est vide et qu'un joueur pose sa dernière tuile : il empoche 6 points de prime.",
+      "Le meilleur total l'emporte."
     ],
     "image": "https://www.espritjeu.com/upload/image/qwirkle-p-image-89696-grande.jpg"
   },
@@ -6077,10 +6284,16 @@
     "scoreVictoire": "max",
     "scoreMode": "compteur",
     "regles": [
-      "À chaque lancer, cochez des numéros dans les quatre rangées de couleur de votre feuille.",
-      "Dans une rangée, les numéros se cochent de gauche à droite ; les cases sautées sont définitivement perdues.",
-      "Le joueur actif utilise les dés blancs et de couleur ; les autres n'utilisent que les blancs.",
-      "Chaque rangée rapporte selon le nombre de croix ; les pénalités comptent en négatif. Le meilleur total gagne."
+      "Mise en place : une feuille de score par joueur, avec quatre rangées de couleur — rouge et jaune numérotées de 2 à 12, verte et bleue de 12 à 2.",
+      "On joue avec six dés : deux blancs et un de chaque couleur.",
+      "Le joueur actif lance les six dés d'un coup, et le résultat sert à toute la table.",
+      "Premier temps : tout le monde, joueur actif compris, peut cocher la somme des deux dés blancs dans la rangée de son choix.",
+      "Second temps : le joueur actif seul peut ensuite cocher un dé blanc combiné à un dé de couleur, dans la rangée de cette couleur.",
+      "Dans chaque rangée, les croix se posent de gauche à droite : sauter des numéros est permis, mais ils sont perdus pour de bon.",
+      "Le dernier numéro d'une rangée ne se coche qu'avec cinq croix déjà présentes ; il verrouille alors la rangée pour toute la table et vaut une croix supplémentaire.",
+      "Un joueur actif qui ne coche rien du tout doit inscrire une pénalité, qui retire cinq points en fin de partie.",
+      "Le score d'une rangée grimpe très vite avec le nombre de croix : une croix vaut 1 point, cinq en valent 15, dix en valent 55.",
+      "La partie s'arrête dès que deux rangées sont verrouillées, ou qu'un joueur cumule quatre pénalités ; le meilleur total l'emporte."
     ],
     "image": "https://www.gigamic.com/3369-home_default/qwixx.jpg",
     "editeur": "Gigamic",
@@ -6318,11 +6531,14 @@
     "scoreVictoire": "max",
     "description": "Une guerre asymétrique pour le contrôle de la forêt : chaque faction joue selon ses propres règles.",
     "regles": [
-      "But : être le premier à atteindre 30 points de victoire.",
-      "Chaque joueur incarne une faction très différente (Marquise, Aire, Alliance, Vagabond) avec ses actions et son moteur de score.",
-      "On contrôle des clairières, on récolte, on recrute et on affronte les autres factions.",
-      "Les points s'obtiennent de façons variées selon la faction, ce qui crée des équilibres subtils.",
-      "Le premier à 30 points gagne."
+      "Mise en place : la forêt compte douze clairières reliées par des sentiers, et chaque joueur déploie sa faction selon sa propre mise en place, très différente des autres.",
+      "Les factions n'ont presque rien en commun : la Marquise exploite le bois et bâtit, la dynastie de l'Aire honore un décret qui ne cesse de grossir, l'Alliance sème la sympathie et déclenche des révoltes, le Vagabond court les quêtes et négocie avec tout le monde.",
+      "Un tour se découpe en Aube, Jour et Crépuscule, et chaque faction remplit ces trois moments à sa manière.",
+      "Les cartes portent une couleur — renard, lapin, souris ou oiseau — qui sert à recruter, bâtir ou fabriquer des objets dans les clairières correspondantes.",
+      "Un combat se règle avec deux dés : l'attaquant prend le meilleur résultat, le défenseur l'autre, chacun limité par le nombre de pions qu'il a sur place.",
+      "Détruire un bâtiment ou un jeton adverse offre un point à l'attaquant : la carte se dispute autant que le score.",
+      "Marquer dépend de sa faction : bâtiments posés, décret honoré, sympathie répandue, objets rangés dans son sac.",
+      "Le premier à 30 points l'emporte. Une carte domination peut remplacer ce compteur : on gagne alors en tenant durablement certaines clairières."
     ],
     "image": "https://www.espritjeu.com/upload/image/root---extension-riviere-p-image-68635-grande.jpg",
     "reglesUrl": "https://rules.ledergames.com/?product=root"
@@ -6340,11 +6556,15 @@
     "scoreVictoire": "max",
     "description": "Un grand classique de combinaisons : posez tous vos numéros en suites et en brelans.",
     "regles": [
-      "But : être le premier à se débarrasser de toutes ses tuiles.",
-      "On forme des suites (même couleur, numéros consécutifs) ou des groupes (même numéro, couleurs différentes).",
-      "Une fois lancé, on peut réarranger librement les combinaisons déjà posées sur la table.",
-      "Si l'on ne peut pas jouer, on pioche une tuile.",
-      "Le premier à vider son chevalet remporte la manche."
+      "Mise en place : chacun prend quatorze tuiles sur son chevalet, face cachée aux autres ; le reste de la pioche attend au centre.",
+      "Une combinaison valide est soit une suite d'au moins trois nombres consécutifs de même couleur, soit un groupe de trois ou quatre fois le même nombre, chacun d'une couleur différente.",
+      "Le premier coup de chaque joueur doit totaliser au moins trente points, en n'utilisant que ses propres tuiles — aucune manipulation de la table n'est permise tant que ce seuil n'est pas franchi.",
+      "Une fois lancé, on peut réorganiser librement toutes les combinaisons présentes sur la table, à condition d'y ajouter au moins une tuile de son chevalet.",
+      "Découper une suite, prêter un bout de groupe, décaler une tuile d'un ensemble à l'autre : tout est autorisé tant qu'à la fin du tour chaque combinaison de la table reste valide.",
+      "Si le tour s'achève sur une combinaison incomplète ou fausse, on remet tout en état et l'on pioche trois tuiles en pénalité.",
+      "Un tour sans pose oblige simplement à piocher une tuile.",
+      "Les deux jokers remplacent n'importe quelle tuile ; un joker posé sur la table peut être récupéré en le remplaçant par la tuile exacte qu'il représentait, et doit alors être rejoué dans le même tour.",
+      "Le premier chevalet vidé termine la manche : le vainqueur marque en positif la somme des tuiles restées chez les autres, qui la marquent en négatif — un joker non posé coûte trente points."
     ],
     "image": "https://www.espritjeu.com/upload/image/rummikub-chiffres-p-image-49875-grande.jpg"
   },
@@ -6381,10 +6601,16 @@
     "scoreVictoire": "max",
     "scoreMode": "compteur",
     "regles": [
-      "Chacun reçoit un rôle secret : chercheur d'or ou saboteur.",
-      "À votre tour, posez une carte Chemin pour bâtir une galerie vers l'or, ou pour la bloquer / piéger les autres.",
-      "Les chercheurs veulent atteindre le filon ; les saboteurs veulent les en empêcher sans se faire démasquer.",
-      "À la fin de la manche, le camp gagnant se partage des pépites ; après trois manches, le plus riche gagne."
+      "Mise en place : on tire les rôles secrets selon le nombre de joueurs — quelques saboteurs glissés parmi les chercheurs d'or. Personne ne sait qui est qui.",
+      "Le plateau démarre avec la carte départ et trois cartes objectif face cachée, posées à distance : une seule cache le filon d'or.",
+      "À son tour, on fait exactement une chose : poser une carte chemin, jouer une carte action, ou défausser sans rien dire.",
+      "Une carte chemin doit se raccorder à la galerie existante ; culs-de-sac et virages font tout le sel de l'affaire.",
+      "Les cartes action cassent la lampe, la pioche ou le wagonnet d'un joueur, ou réparent son matériel : un mineur en panne ne creuse plus.",
+      "La carte éboulement retire une carte chemin déjà posée ; la carte plan permet de consulter en secret l'une des trois cartes objectif.",
+      "On repioche après chaque tour, jusqu'à épuisement de la pioche.",
+      "La manche s'achève quand la galerie atteint l'or, ou quand plus personne n'a de cartes en main.",
+      "Or atteint : les chercheurs se partagent les pépites, en commençant par celui qui a posé la dernière carte. Or manqué : ce sont les saboteurs qui se paient.",
+      "Après trois manches, le mineur le plus riche l'emporte."
     ],
     "image": "https://www.gigamic.com/4223-home_default/saboteur.jpg",
     "editeur": "Gigamic",
@@ -6469,12 +6695,15 @@
     "categorie": "Lettres",
     "scoreVictoire": "max",
     "regles": [
-      "Chaque joueur garde sept lettres en main.",
-      "À ton tour, forme un mot sur la grille, en croisant ou prolongeant les mots déjà posés.",
-      "Le premier mot doit passer par la case centrale.",
-      "Les cases colorées doublent ou triplent la lettre, ou le mot entier ; elles ne comptent qu'à la pose.",
-      "Poser ses sept lettres d'un coup rapporte 50 points de prime (le « scrabble »).",
-      "La partie s'arrête quand un joueur a posé sa dernière lettre, sac vide. On retranche à chacun la valeur des lettres restantes."
+      "Mise en place : chacun pioche sept lettres derrière son chevalet ; le premier mot doit passer par la case centrale étoilée.",
+      "À son tour, on pose un ou plusieurs jetons sur une même ligne ou une même colonne, sans laisser de trou, puis on repioche pour revenir à sept lettres.",
+      "Tout mot nouvellement formé, dans les deux sens de lecture, doit exister au dictionnaire de référence — un placement en crée souvent plusieurs d'un coup, et tous comptent.",
+      "Le score d'un mot additionne la valeur de ses lettres, en appliquant d'abord les cases lettre compte double ou triple, puis les cases mot compte double ou triple.",
+      "Une case de couleur ne sert qu'une fois : elle ne compte que lors du tour où une lettre s'y pose, jamais pour les mots ultérieurs qui la traversent.",
+      "Utiliser ses sept lettres en un seul coup rapporte cinquante points de prime, en plus du décompte normal — le fameux scrabble.",
+      "Les deux jokers remplacent n'importe quelle lettre, valent zéro point et gardent définitivement la valeur annoncée au moment de la pose.",
+      "Plutôt que de poser, on peut passer son tour ou échanger tout ou partie de ses lettres, à condition qu'il en reste assez dans le sac.",
+      "La partie s'arrête quand un joueur place son dernier jeton, sac vide : la valeur des lettres restantes est retirée à leurs propriétaires et ajoutée à celui qui a terminé."
     ],
     "image": "https://www.espritjeu.com/upload/image/scrabble-classique---cooperatif-p-image-95563-grande.jpg",
     "editeur": "Mattel"
@@ -6492,11 +6721,15 @@
     "scoreVictoire": "max",
     "description": "Dans une Europe de l'Est rétrofuturiste, développez votre faction, ses mechas et son économie.",
     "regles": [
-      "But : accumuler le plus de pièces en fin de partie via étoiles, territoires et ressources.",
-      "À son tour, on choisit une section de son plateau pour combiner une action « haute » et une action « basse ».",
-      "On produit, se déplace, construit, enrôle et déploie des mechas sur la carte.",
-      "Dès qu'un joueur pose sa 6e étoile (objectifs accomplis), la partie s'arrête.",
-      "On convertit alors étoiles, territoires et ressources en pièces : le plus riche gagne."
+      "Mise en place : chaque joueur prend une faction et un plateau d'actions différents, ses ouvriers, ses mechs et son personnage, posés sur sa base.",
+      "À son tour, on choisit une section de son plateau — jamais celle utilisée au tour précédent — et l'on peut y faire l'action du haut, celle du bas, ou les deux à la suite.",
+      "Les actions du haut font bouger, produire, troquer ou renforcer ; celles du bas construisent, enrôlent, déploient un mech ou améliorent son propre plateau.",
+      "Produire coûte de plus en plus cher à mesure que l'on possède d'ouvriers : l'expansion se paie.",
+      "Les mechs débloquent des pouvoirs de déplacement et permettent d'emmener ouvriers et ressources avec eux.",
+      "Un combat oppose deux forces sur une même case : chacun engage en secret de la puissance et, éventuellement, une carte de combat. Le plus fort chasse l'autre vers sa base.",
+      "Les étoiles récompensent les accomplissements : objectifs remplis, mechs déployés, bâtiments posés, améliorations, popularité ou puissance au maximum, combats gagnés.",
+      "La sixième étoile posée arrête la partie immédiatement, en fin de tour.",
+      "On convertit alors étoiles, territoires et ressources en pièces, à un taux qui dépend de sa popularité, puis on ajoute son argent : le plus riche gagne."
     ],
     "image": "https://www.espritjeu.com/upload/image/scythe-vf-p-image-106352-grande.jpg",
     "reglesUrl": "https://stonemaiergames.com/games/scythe/rules/"
@@ -6557,10 +6790,16 @@
     "scoreVictoire": "max",
     "scoreMode": "compteur",
     "regles": [
-      "Douze cartes sont étalées ; chaque carte a quatre caractères (nombre, forme, couleur, remplissage).",
-      "Un « Set » = trois cartes pour lesquelles chaque caractère est, soit identique sur les trois, soit tout différent.",
-      "Dès que vous en voyez un, annoncez « Set ! » et ramassez les trois cartes ; on complète et on continue.",
-      "Le joueur qui a ramassé le plus de Sets gagne."
+      "Mise en place : douze cartes sont étalées face visible au centre de la table, piochées dans un paquet de quatre-vingt-une.",
+      "Chaque carte combine quatre caractères : le nombre de symboles, leur forme, leur couleur et leur remplissage.",
+      "Un Set réunit trois cartes pour lesquelles chaque caractère, pris séparément, est soit identique sur les trois cartes, soit entièrement différent.",
+      "Autrement dit : deux cartes rouges et une verte n'est jamais un Set, mais trois rouges ou une de chaque couleur peuvent en former un.",
+      "Personne n'attend son tour : tout le monde cherche en même temps, et le premier à annoncer « Set ! » prend la main.",
+      "On montre alors les trois cartes ; si le Set est valide, on les ramasse et l'on complète l'étalage avec trois nouvelles cartes.",
+      "Un Set annoncé à tort se paie d'une pénalité — le plus simple étant de rendre une carte déjà gagnée, ou de passer le prochain Set.",
+      "Si la table ne voit aucun Set, on ajoute trois cartes supplémentaires à l'étalage, et l'on continue.",
+      "Trois cartes quelconques déterminent toujours une troisième carte unique qui complète le Set : cette carte existe forcément dans le paquet.",
+      "La partie s'achève quand la pioche est vide et qu'aucun Set ne reste sur la table ; celui qui en a ramassé le plus gagne."
     ],
     "image": "https://www.gigamic.com/3375-home_default/set.jpg",
     "editeur": "Gigamic",
@@ -6919,11 +7158,15 @@
     "scoreVictoire": "max",
     "description": "Un jeu coopératif pour deux : pilote et copilote posent un avion sans jamais parler.",
     "regles": [
-      "Jeu strictement coopératif à deux : vous gagnez ou perdez ensemble.",
-      "Chacun incarne le pilote ou le copilote et lance ses dés en secret.",
-      "On place ses dés en silence sur le tableau de bord (moteurs, volets, train, radio…) sans se concerter.",
-      "Il faut gérer l'inclinaison, l'altitude et l'approche pour poser l'avion sans encombre.",
-      "Réussir l'atterrissage fait gagner l'équipe ; une erreur critique fait perdre."
+      "Mise en place : le tableau de bord se dresse entre les deux joueurs. On choisit un aéroport, qui fixe la difficulté, et l'on prépare la piste d'approche.",
+      "L'un est le pilote, à gauche, l'autre le copilote, à droite : chacun a ses emplacements réservés, où l'autre ne peut rien poser.",
+      "Le silence est la règle absolue : on ne se parle qu'entre deux tours, pendant la brève phase de concertation.",
+      "Chaque tour, chacun lance ses quatre dés à l'abri de son écran, puis on les pose à tour de rôle, un par un, sans un mot.",
+      "L'assiette de l'avion réclame deux dés de valeur égale, un de chaque côté, faute de quoi l'appareil penche et finit par décrocher.",
+      "Les moteurs règlent la vitesse, les volets et le train d'atterrissage la freinent, la radio dégage les axes de l'approche, et le café permet de modifier un dé.",
+      "En fin de tour, l'avion descend d'un cran d'altitude et avance d'une case sur la piste d'approche.",
+      "Trop vite, trop lentement, mal aligné, train rentré ou piste trop courte : l'avion est perdu, et l'équipage avec.",
+      "Poser l'appareil fait gagner les deux joueurs ensemble ; il n'y a ni score, ni vainqueur individuel."
     ],
     "image": "https://www.espritjeu.com/upload/image/sky-team-p-image-87860-grande.jpg"
   },
@@ -6938,11 +7181,15 @@
     "categorie": "Stratégie",
     "editeur": "Days of Wonder",
     "regles": [
-      "But : marquer le plus de pièces d'or en dominant le plus de régions possible, au bon moment.",
-      "On choisit un couple peuple + pouvoir spécial, puis on conquiert des régions en y plaçant assez de pions.",
-      "Chaque tour, on gagne des pièces selon le nombre de régions occupées.",
-      "Quand un peuple s'essouffle, on le met « en déclin » et on en prend un nouveau au tour suivant.",
-      "La partie dure un nombre fixe de tours ; le joueur le plus riche l'emporte."
+      "Mise en place : le plateau change de taille selon le nombre de joueurs. Six couples peuple + pouvoir spécial sont visibles, les autres attendent dans la pile.",
+      "Prendre un couple plus bas dans la pile coûte une pièce par couple sauté, posée sur ceux que l'on délaisse — et qui reviendra à celui qui les prendra.",
+      "On entre en jeu par une région du bord du plateau, puis on conquiert de proche en proche.",
+      "Une conquête coûte 2 pions, plus 1 par pion adverse, par montagne, par forteresse ou par campement déjà présents sur la région.",
+      "Le défenseur perd un pion et redéploie le reste. Une dernière tentative, quand les pions manquent, se tente au dé : il ajoute 0, 1, 2 ou 3.",
+      "En fin de tour, on redéploie librement ses pions sur ses régions, puis on encaisse 1 pièce par région tenue, plus les primes de son peuple et de son pouvoir.",
+      "Quand un peuple s'essouffle, on le met en déclin : un seul pion par région, faces retournées, et l'on repart avec un couple neuf au tour suivant.",
+      "Un peuple en déclin rapporte encore des pièces mais ne conquiert plus, et l'on n'en garde qu'un seul à la fois.",
+      "La partie dure un nombre de tours fixé d'avance. On cache ses pièces au fur et à mesure ; le plus riche l'emporte."
     ],
     "scoreVictoire": "max",
     "scoreMode": "compteur",
@@ -7254,9 +7501,15 @@
     "scoreVictoire": "max",
     "scoreMode": "objectif",
     "regles": [
-      "Chacun a 5 pions à faire traverser le plateau puis revenir à leur point de départ.",
-      "Chaque pion avance du nombre de cases indiqué sur sa ligne ; un pion dépassé par un adversaire est renvoyé au départ.",
-      "Le premier à ramener 4 de ses 5 pions gagne."
+      "Mise en place : chaque camp aligne cinq pions sur son bord du plateau, l'un en partant du bas, l'autre en partant de la gauche, si bien que les trajectoires se croisent forcément.",
+      "Chaque pion doit traverser tout le plateau, faire demi-tour, puis revenir à sa case de départ.",
+      "La vitesse dépend de la ligne : les flèches indiquent combien de cases le pion avance à l'aller, et une valeur différente au retour — les lignes rapides à l'aller sont lentes au retour.",
+      "À son tour, on avance un seul pion de son nombre de cases, tout droit, sans jamais changer de ligne.",
+      "Un pion qui s'arrêterait sur un ou plusieurs pions adverses les saute et se pose juste derrière le dernier d'entre eux.",
+      "Tous les pions ainsi sautés retournent à leur case de départ, sur leur propre bord — c'est la seule interaction du jeu, et elle est brutale.",
+      "Un pion qui atteint le bord opposé pivote et repart dans l'autre sens, avec sa nouvelle vitesse.",
+      "Un pion revenu à son point de départ est couché sur le côté : il est arrivé, il ne bougera plus et ne peut plus être renvoyé.",
+      "Le premier joueur à ramener quatre de ses cinq pions à la maison remporte la partie."
     ],
     "image": "https://www.gigamic.com/1431-home_default/squadro-classic.jpg",
     "editeur": "Gigamic",
@@ -7338,10 +7591,16 @@
     "scoreVictoire": "max",
     "scoreMode": "compteur",
     "regles": [
-      "Chacun a une main identique de cartes-enchères numérotées de 1 à 15.",
-      "À chaque tour, une carte Points est révélée ; tous misent une carte-enchère en secret.",
-      "Carte positive : la plus haute enchère l'emporte. Carte négative (vautour) : la plus BASSE la ramasse. Les enchères à égalité s'annulent.",
-      "En fin de partie, le meilleur total de points gagne."
+      "Mise en place : chaque joueur reçoit une main identique de quinze cartes-enchères, numérotées de 1 à 15, dans une couleur qui lui est propre.",
+      "Les cartes Points forment une pioche séparée : elles valent de 1 à 10 points en positif, et de −1 à −5 en négatif, ces dernières étant les vautours.",
+      "Chaque tour commence par le retournement d'une carte Points, que tout le monde voit.",
+      "Chacun choisit alors en secret une carte-enchère de sa main et la pose face cachée devant soi ; on les révèle toutes ensemble.",
+      "Si la carte convoitée est positive, c'est la plus forte enchère qui l'emporte.",
+      "Si c'est un vautour, la logique s'inverse : c'est la plus faible enchère qui doit le ramasser.",
+      "Règle décisive : deux joueurs qui misent la même valeur s'annulent mutuellement et sortent de la comparaison.",
+      "Il arrive donc qu'une petite enchère rafle une grosse carte, simplement parce que les gros ont tous joué la même chose.",
+      "Les cartes-enchères jouées sont défaussées définitivement : la main s'appauvrit, et chacun voit ce qu'il reste aux autres.",
+      "Après quinze tours, toutes les mains sont vides ; on additionne le positif et le négatif, et le meilleur total gagne."
     ],
     "image": "https://www.gigamic.com/3460-home_default/stupide-vautour.jpg",
     "editeur": "Gigamic",
@@ -7401,11 +7660,15 @@
     "categorie": "Cartes",
     "editeur": "Cocktail Games",
     "regles": [
-      "But : marquer le plus de points sur trois services en récoltant les meilleures combinaisons de plats.",
-      "Système de draft : chacun choisit une carte de sa main, la pose face cachée, puis tout le monde passe le reste de sa main à son voisin, simultanément.",
-      "Chaque plat marque à sa façon : makis au plus grand nombre, tempuras par paires, sashimis par trois, nigiris seuls ou boostés par le wasabi…",
-      "Les puddings ne comptent qu'en toute fin de partie.",
-      "Après trois manches, le plus de points l'emporte."
+      "Mise en place : chacun reçoit une main de cartes dont la taille dépend du nombre de joueurs — moins on est nombreux, plus les mains sont grosses.",
+      "Tout le monde choisit une carte en même temps, la révèle, puis passe le reste de sa main à son voisin : c'est le principe de la pioche tournante.",
+      "On récupère alors la main du voisin d'en face et l'on recommence, jusqu'à ce que toutes les cartes soient jouées.",
+      "Les makis rapportent aux deux joueurs qui en ont accumulé le plus de rouleaux : six points au premier, trois au second, à partager en cas d'égalité.",
+      "Les tempuras et les sashimis ne comptent que par lots complets — cinq points pour deux tempuras, dix pour trois sashimis — et zéro pour un lot inachevé.",
+      "Les raviolis récompensent l'accumulation de façon accélérée : un point pour un, trois pour deux, six pour trois, dix pour quatre, quinze pour cinq.",
+      "Les nigiris valent un, deux ou trois points selon le poisson, et le wasabi triple la valeur du prochain nigiri posé dessus — encore faut-il qu'il arrive.",
+      "Les baguettes permettent, à un tour ultérieur, de prendre deux cartes d'un coup en les remettant dans la main : puissant, mais elles ne valent aucun point.",
+      "Après trois manches, le pudding entre en jeu : six points au joueur qui en a le plus, et six points de moins à celui qui en a le moins."
     ],
     "scoreVictoire": "max",
     "scoreMode": "compteur",
@@ -7768,12 +8031,16 @@
     "scoreMode": "manches",
     "equipes": true,
     "regles": [
-      "Deux équipes. On constitue un paquet de cartes-personnalités que tout le monde devra deviner.",
-      "Manche 1 : faire deviner en parlant, sans prononcer les mots de la carte. Temps limité par tour.",
-      "Manche 2 : les mêmes cartes, mais un seul mot par carte.",
-      "Manche 3 : les mêmes cartes, en mimant, sans un son.",
-      "Une carte devinée rapporte un point à l'équipe et sort du paquet pour la manche en cours.",
-      "On additionne les points des trois manches : l'équipe la plus haute gagne."
+      "Mise en place : on constitue ensemble un paquet d'une quarantaine de cartes tirées au hasard, que tout le monde a le droit de lire au départ. Deux équipes se font face.",
+      "Les mêmes cartes servent aux trois manches : ce qui a été deviné une fois reviendra, et la mémoire de la table fait tout le sel du jeu.",
+      "À son tour, on retourne le sablier et l'on fait deviner un maximum de cartes à son équipe, en trente secondes.",
+      "Une carte trouvée est mise de côté, rapporte un point, et l'on enchaîne aussitôt sur la suivante.",
+      "On peut passer une carte, une seule fois par tour, à condition d'y revenir avant la fin du temps.",
+      "Quand le paquet est épuisé, la manche s'arrête ; on remélange l'intégralité des cartes et la manche suivante commence.",
+      "Manche 1 : on parle autant qu'on veut, sans jamais prononcer un mot figurant sur la carte.",
+      "Manche 2 : un seul mot par carte, et rien d'autre — ni geste, ni bruit.",
+      "Manche 3 : le mime pur, en silence complet.",
+      "On additionne les points des trois manches ; l'équipe la plus haute l'emporte."
     ],
     "image": "https://www.espritjeu.com/upload/image/time-s-up-family---vert-p-image-95774-grande.jpg",
     "editeur": "Repos Production"
@@ -7898,11 +8165,16 @@
     "scoreVictoire": "max",
     "description": "Le grand quiz de culture générale : répondez juste pour remplir votre camembert.",
     "regles": [
-      "But : être le premier à compléter son pion de six parts de couleur.",
-      "On se déplace sur le plateau et on répond à des questions selon la couleur de la case (histoire, sport, arts…).",
-      "Une bonne réponse sur une case « part » fait gagner le camembert correspondant.",
-      "On enchaîne les tours en tentant de couvrir toutes les catégories.",
-      "Le premier à réunir les six parts et à répondre à la question finale gagne."
+      "Mise en place : chacun prend un pion circulaire creusé de six encoches et le place sur la case centrale du plateau en étoile.",
+      "Les questions se répartissent en six catégories, chacune associée à une couleur reprise sur les cases du plateau.",
+      "À son tour, on lance le dé et l'on avance d'autant de cases, dans la direction de son choix le long des branches et de l'anneau extérieur.",
+      "On répond ensuite à une question de la couleur de la case d'arrivée, lue par le joueur suivant.",
+      "Une bonne réponse permet de rejouer immédiatement : un tour peut donc durer très longtemps quand la chance et la culture s'alignent.",
+      "Une mauvaise réponse met fin au tour, sans autre conséquence.",
+      "Les six cases spéciales, au bout des branches, sont les seules à distribuer les parts de camembert : c'est là qu'il faut s'arrêter, exactement.",
+      "Une part déjà obtenue ne se regagne pas : retomber sur la même case oblige simplement à répondre pour rejouer.",
+      "Camembert complet, on se dirige vers la case centrale, où il faut arriver par un compte exact.",
+      "Les adversaires choisissent alors la catégorie de la question finale ; une bonne réponse remporte la partie, une mauvaise oblige à ressortir et à revenir."
     ],
     "image": "https://www.espritjeu.com/upload/image/trivial-pursuit-edition-classic-p-image-69401-grande.jpg"
   },
@@ -7961,11 +8233,15 @@
     "categorie": "Cartes",
     "editeur": "Mattel",
     "regles": [
-      "But : se défausser de toutes ses cartes, et marquer les points des cartes restantes chez les adversaires.",
-      "On pose une carte de même couleur ou même valeur que la carte du dessus.",
-      "Les cartes spéciales font piocher, passer un tour, inverser le sens ou changer de couleur.",
-      "Quand il ne reste qu'une carte en main, il faut annoncer « Uno ! » sous peine de pénalité.",
-      "Le gagnant d'une manche marque la valeur des cartes des autres ; on joue jusqu'à un total convenu (souvent 500)."
+      "Mise en place : sept cartes chacun, le reste forme la pioche et la première carte retournée ouvre la défausse.",
+      "À son tour, on pose une carte qui correspond à celle du dessus par la couleur, par le chiffre ou par le symbole.",
+      "Sans carte jouable, on pioche : la carte tirée peut être jouée aussitôt si elle convient, sinon le tour passe.",
+      "Le +2 fait piocher deux cartes au joueur suivant et lui fait sauter son tour ; le Passe l'ignore purement et simplement ; l'Inversion change le sens de rotation.",
+      "Le Joker se pose sur n'importe quoi et impose la couleur de son choix ; le Joker +4 y ajoute quatre cartes de pénalité, mais ne devrait se jouer que si l'on n'a aucune carte de la couleur en cours.",
+      "À deux joueurs, l'Inversion agit comme un Passe et rend simplement la main à celui qui l'a jouée.",
+      "Avant-dernière carte posée, il faut annoncer « Uno » à voix haute ; un adversaire qui le remarque avant le tour suivant fait piocher deux cartes à l'étourdi.",
+      "Le premier à se défausser de toute sa main termine la manche et marque la valeur des cartes restées chez les autres — cinquante points par joker, vingt par carte spéciale, sa valeur pour un chiffre.",
+      "On enchaîne les manches jusqu'à ce que quelqu'un atteigne cinq cents points, ou l'on s'arrête à la première main vidée pour une partie éclair."
     ],
     "scoreVictoire": "max",
     "scoreMode": "manches",
@@ -8276,11 +8552,16 @@
       }
     ],
     "regles": [
-      "Chaque joueur contrôle un méchant Disney avec son plateau (le Royaume), son deck Machiavélique et un deck du Destin.",
-      "À ton tour, déplace ton pion sur un lieu de ton plateau.",
-      "Effectue les actions du lieu : gagner du Pouvoir, jouer des cartes, activer des capacités.",
-      "Tu peux jouer une carte du Destin contre un adversaire pour le gêner.",
-      "Chaque méchant a un objectif unique : le premier à le remplir gagne."
+      "Mise en place : chacun choisit un méchant et prend son royaume de quatre lieux, son deck machiavélique et le deck du destin qui lui est associé.",
+      "Chaque méchant poursuit un objectif unique, imprimé sur sa fiche : deux joueurs ne jouent jamais tout à fait au même jeu.",
+      "Le royaume commence à moitié verrouillé : deux lieux seulement sont accessibles, les autres se libèrent en cours de partie.",
+      "À son tour, on déplace son pion sur un lieu de son royaume, obligatoirement différent de celui où il se trouvait.",
+      "On réalise ensuite, dans l'ordre voulu, les actions imprimées sous ce lieu : gagner du pouvoir, jouer une carte, activer un allié, vaincre un héros, déplacer un objet ou piocher.",
+      "Jouer une carte coûte du pouvoir ; alliés, objets et effets s'installent dans le royaume et y demeurent.",
+      "L'action Destin fait piocher deux cartes du destin d'un adversaire et en pose une chez lui : un héros débarque et verrouille les actions du lieu où il atterrit.",
+      "Vaincre un héros demande une force d'alliés au moins égale à la sienne ; les alliés engagés sont ensuite défaussés.",
+      "On finit son tour en remontant sa main à quatre cartes.",
+      "Le premier joueur à remplir son objectif gagne, immédiatement."
     ],
     "editeur": "Ravensburger"
   },
@@ -8632,11 +8913,15 @@
     },
     "image": "https://www.vertbaudet.fr/fstrz/r/s/media.vertbaudet.fr/Pictures/vertbaudet/1402674/jeu-de-yam.jpg",
     "regles": [
-      "À ton tour, lance les cinq dés. Tu peux relancer les dés de ton choix jusqu'à deux fois (trois lancers en tout).",
-      "Inscris ensuite ton résultat dans une case libre de ta feuille.",
-      "Partie haute (1 à 6) : additionne les dés de la valeur choisie. Bonus de 35 si le total haut atteint 63.",
-      "Partie basse : Brelan et Carré = somme des dés ; Full = 25 ; Petite suite = 30 ; Grande suite = 40 ; Yams = 50 ; Chance = somme des dés.",
-      "Quand toutes les cases sont remplies, le plus grand total gagne."
+      "Mise en place : chacun sa feuille de score, cinq dés et un gobelet pour la table.",
+      "Un tour se compose de trois lancers : on lance les cinq dés, on garde ce que l'on veut, on relance le reste, et ainsi jusqu'au troisième jet.",
+      "À la fin du tour, il faut obligatoirement inscrire un résultat dans une case libre — quitte à y mettre un zéro si rien ne convient.",
+      "La partie haute regroupe les six chiffres : on y note la somme des dés montrant le chiffre concerné, et rien d'autre.",
+      "Totaliser au moins soixante-trois points en partie haute — l'équivalent de trois dés par chiffre — décroche un bonus de trente-cinq points.",
+      "La partie basse récompense les combinaisons : brelan et carré valent la somme des cinq dés, le full vaut vingt-cinq, la petite suite trente, la grande quarante, et le yams cinquante.",
+      "La case Chance accepte n'importe quel lancer et vaut la somme des cinq dés : c'est le refuge des tours ratés, à garder pour un jet généreux.",
+      "Chaque case ne se remplit qu'une seule fois, ce qui oblige à arbitrer en permanence entre encaisser un résultat moyen et sacrifier une case.",
+      "La partie s'achève quand toutes les cases sont remplies ; on additionne partie haute, bonus et partie basse, et le plus haut total l'emporte."
     ],
     "editeur": "Jeu traditionnel"
   },
@@ -9261,12 +9546,16 @@
     "scoreVictoire": "max",
     "scoreMode": "objectif",
     "regles": [
-      "On joue des cartes de vitesse de sa main pour avancer ; monter les rapports fait piocher davantage, mais chauffe le moteur.",
-      "Prendre un virage trop vite oblige à défausser des cartes Chaleur : la surchauffe peut faire caler.",
-      "L'aspiration derrière un concurrent offre un coup d'accélérateur gratuit.",
-      "Des cartes stress et la gestion de la main ajoutent du piquant à chaque tour.",
-      "On enchaîne les tours de circuit sur le nombre de tours prévu.",
-      "Passer la ligne d'arrivée en tête, et la course est gagnée."
+      "Mise en place : chaque pilote prend son deck de vitesse, sa réserve de cartes Chaleur dans le moteur, et se range sur la grille de départ du circuit.",
+      "Le rapport engagé, de 1 à 4, détermine le nombre de cartes que l'on joue face cachée à chaque tour.",
+      "On ne change de rapport que d'un cran à la fois, à la montée comme à la descente : accélérer se prépare plusieurs tours à l'avance.",
+      "Monter en troisième ou en quatrième coûte une carte Chaleur, à prendre dans le moteur et à glisser dans sa défausse.",
+      "Les cartes sont révélées ensemble, additionnées, et chacun avance d'autant de cases — les positions se départagent de l'avant vers l'arrière.",
+      "Chaque virage affiche une vitesse limite : la dépasser oblige à payer une Chaleur par point d'excès, et sans Chaleur disponible, c'est la sortie de piste.",
+      "Sortir de piste ramène à la vitesse minimale et encombre la main de cartes Stress, qui se jouent au hasard et rendent le pilotage imprévisible.",
+      "L'aspiration offre deux cases gratuites quand on termine son mouvement juste derrière un concurrent : le peloton se resserre tout seul.",
+      "Le ralenti, quand on joue un rapport bas, permet de renvoyer des Chaleurs au moteur : c'est le seul moyen de refroidir, et il coûte du temps.",
+      "Le premier à franchir la ligne d'arrivée après le nombre de tours prévu remporte la course ; en championnat, on cumule les points d'étape."
     ],
     "image": "https://www.espritjeu.com/upload/image/heat-p-image-88454-grande.jpg"
   },
@@ -9283,12 +9572,15 @@
     "scoreVictoire": "max",
     "scoreMode": "compteur",
     "regles": [
-      "À chaque tour, on choisit un dé parmi ceux tirés et on le place sur sa grille de vitrail.",
-      "Deux règles : jamais deux dés de même couleur ni de même valeur côte à côte.",
-      "Certaines cases imposent une couleur ou un chiffre précis.",
-      "Des cartes outil permettent, contre des jetons, de contourner une règle une fois.",
-      "Des objectifs publics et un objectif secret dictent ce qui rapporte (couleurs, valeurs, diagonales…).",
-      "Après dix tours, le plus beau vitrail — le plus de points — l'emporte."
+      "Mise en place : chacun choisit une grille de vitrail de 4 sur 5 et reçoit autant de jetons faveur que sa difficulté. On révèle trois objectifs publics et trois cartes outil, et chacun garde un objectif secret.",
+      "Chaque tour, le premier joueur tire des dés du sac : deux par joueur, plus un.",
+      "On choisit un dé et on le pose sur sa grille : le premier dé de la partie doit toucher un bord, tous les suivants doivent toucher un dé déjà posé, au moins par un coin.",
+      "Deux interdits absolus : jamais deux dés de même couleur ni de même valeur orthogonalement voisins.",
+      "Les cases colorées ou chiffrées imposent le dé qui s'y pose ; une case grise accepte n'importe lequel.",
+      "Les cartes outil contournent une règle : un jeton faveur pour une carte neuve, deux pour une carte déjà utilisée par quelqu'un.",
+      "Le tour se joue en aller-retour : chacun pose un dé, puis un second dans l'ordre inverse, et le rôle de premier joueur tourne à chaque tour.",
+      "Après dix tours, on compte les objectifs publics, l'objectif secret — la somme des dés de sa couleur — et les jetons faveur restants, moins 1 point par case vide.",
+      "Le plus beau vitrail, donc le plus haut total, l'emporte."
     ],
     "image": "https://www.espritjeu.com/upload/image/sagrada--2026--p-image-108160-grande.jpg"
   },
@@ -9305,11 +9597,15 @@
     "scoreVictoire": "max",
     "scoreMode": "manches",
     "regles": [
-      "À son tour, on prend des cartes du marché (une seule, ou plusieurs en échange), ou on vend un lot d'une même marchandise.",
-      "Vendre tôt rapporte les jetons les plus chers ; les gros lots donnent des primes.",
-      "Les chameaux ne rapportent rien directement, mais en manquer coûte le bonus du plus grand troupeau.",
-      "Quand trois piles de jetons sont épuisées, la manche s'arrête ; le plus riche remporte un sceau d'excellence.",
-      "Le premier à deux sceaux gagne le duel."
+      "Mise en place : cinq cartes forment le marché, dont trois chameaux au départ. Chacun garde cinq cartes en main, et pose aussitôt ses chameaux devant soi.",
+      "À son tour, on fait exactement l'une de ces choses : prendre une seule marchandise, prendre tous les chameaux du marché, ou échanger au moins deux cartes contre autant au marché.",
+      "La main est limitée à sept cartes, chameaux non compris — ceux-ci s'entassent sans limite devant soi.",
+      "Vendre, c'est poser des cartes d'une même marchandise et prendre autant de jetons, en commençant par les plus chers de la pile.",
+      "Les marchandises précieuses — diamant, or, argent — ne se vendent jamais à l'unité : deux cartes au minimum.",
+      "Vendre trois, quatre ou cinq cartes d'un coup décroche en plus une prime tirée au hasard.",
+      "La manche s'arrête dès que trois piles de jetons sont épuisées, ou que le marché ne peut plus être complété.",
+      "On compare alors les gains, augmentés de 5 points pour le plus grand troupeau de chameaux ; le vainqueur prend un sceau d'excellence.",
+      "Le premier à deux sceaux remporte le duel."
     ],
     "image": "https://www.espritjeu.com/upload/image/jaipur--ed-2019--p-image-68564-grande.jpg"
   },
@@ -9326,11 +9622,14 @@
     "scoreVictoire": "max",
     "scoreMode": "objectif",
     "regles": [
-      "Neuf bornes séparent les deux camps ; de chaque côté, on pose des cartes pour former la meilleure main (suite, brelan, couleur…).",
-      "À son tour, on joue une carte devant une borne, puis on en pioche une.",
-      "Dès qu'un joueur complète son côté avec une combinaison plus forte, il revendique la borne.",
-      "Des cartes tactique spéciales viennent bousculer les règles habituelles.",
-      "On gagne en revendiquant trois bornes voisines, ou cinq bornes en tout."
+      "Mise en place : neuf bornes en ligne séparent les deux camps. Le jeu compte des cartes de 1 à 9 en six couleurs, et chacun garde six cartes en main.",
+      "À son tour, on pose une carte de son côté d'une borne, puis on repioche.",
+      "Chaque borne accueille trois cartes par camp ; une fois ses trois cartes posées, on peut la revendiquer.",
+      "Force des combinaisons, de la plus forte à la plus faible : brelan, suite de même couleur, couleur, suite, puis simple somme.",
+      "À force égale, la borne revient à celui qui a terminé sa formation en premier.",
+      "On peut aussi revendiquer une borne avant que l'adversaire ait fini, en prouvant qu'il ne peut plus faire mieux : les cartes déjà jouées font foi.",
+      "La variante tactique glisse des cartes spéciales — joker, coupe-vent, combat de boue — qu'on ne peut jouer qu'une de plus que l'adversaire.",
+      "On gagne dès que l'on revendique trois bornes voisines, ou cinq bornes en tout."
     ],
     "image": "https://www.espritjeu.com/upload/image/schotten-totten-p-image-71685-grande.jpg"
   },
@@ -9410,11 +9709,16 @@
     "scoreVictoire": "max",
     "scoreMode": "cooperatif",
     "regles": [
-      "On pioche une affaire : des cartes posent des questions (qui est la victime ? où est le coupable ? quel mobile ?).",
-      "Toutes les réponses se cachent dans le dessin : il faut fouiller la carte à la loupe et reconstituer les scènes.",
-      "Une même personne apparaît à plusieurs endroits, comme les images d'un film : suivre ses déplacements révèle l'histoire.",
-      "On résout les affaires ensemble, de la plus simple à la plus tordue.",
-      "Pas de score ni de perdant : tout le plaisir est de démasquer chaque criminel."
+      "Mise en place : on déplie l'immense plan de ville sur la table, on prend les loupes, et on choisit une affaire dans le paquet de cartes.",
+      "Chaque affaire se compose de plusieurs cartes numérotées, à retourner dans l'ordre : elles posent une question à la fois.",
+      "La première carte situe la scène — un lieu, une victime, un objet — et l'on cherche cet élément sur le plan avant de passer à la suite.",
+      "Toutes les réponses se trouvent dans le dessin, aucune n'est écrite : il n'y a rien à deviner, seulement à observer.",
+      "Le plan fonctionne comme une bande dessinée éclatée : un même personnage apparaît à plusieurs endroits, à des moments différents de son histoire.",
+      "Suivre un personnage de vignette en vignette reconstitue son parcours et révèle qui a croisé qui, et quand.",
+      "Le verso de chaque carte donne la réponse : on la retourne pour vérifier avant d'enchaîner, ou pour se débloquer.",
+      "Rien n'oblige à jouer seul : on enquête ensemble, en se montrant les indices, sans compétition ni chronomètre.",
+      "Les affaires sont classées par difficulté et se jouent dans n'importe quel ordre, en une dizaine de minutes chacune.",
+      "Il n'y a ni score ni perdant : la partie est gagnée quand le coupable est démasqué et l'histoire comprise."
     ],
     "image": "https://www.espritjeu.com/upload/image/micro-macro---crime-city-p-image-81216-grande.jpg"
   },
@@ -9495,12 +9799,15 @@
     "scoreVictoire": "max",
     "scoreMode": "objectif",
     "regles": [
-      "Chacun secoue ses cinq dés sous un gobelet et ne regarde que les siens.",
-      "À tour de rôle, on enchérit sur le nombre total de dés d'une valeur cachés sur la table (« trois fois le 4 »…).",
-      "On peut monter l'enchère, ou crier « menteur » si l'on n'y croit pas.",
-      "On révèle alors tous les dés : celui qui s'est trompé, du parieur ou du contestataire, perd un dé.",
-      "Les « 1 » sont des jokers qui comptent pour toutes les valeurs.",
-      "Le dernier joueur à conserver des dés remporte la partie."
+      "Mise en place : chacun prend cinq dés et un gobelet. On secoue, on couvre, et l'on ne regarde que les siens.",
+      "Le premier joueur ouvre en annonçant une quantité et une valeur : « trois fois le 4 », c'est-à-dire au moins trois dés montrant 4 sur toute la table.",
+      "À son tour, on doit surenchérir : augmenter la quantité, ou garder la même quantité en montant la valeur.",
+      "Les 1, appelés Paco, sont des jokers : ils comptent pour toutes les valeurs.",
+      "Annoncer une quantité de Paco divise le seuil par deux ; en repartir vers une autre valeur coûte le double, plus un.",
+      "Plutôt que surenchérir, on peut douter et crier « menteur » : tout le monde découvre alors ses dés, et l'on compte.",
+      "Annonce juste ou dépassée, le contestataire perd un dé ; annonce trop gourmande, c'est l'annonceur qui en perd un.",
+      "Un joueur réduit à un seul dé déclenche une manche spéciale où les Paco ne sont plus des jokers et où la valeur annoncée ne change plus.",
+      "Un joueur sans dé est éliminé ; le dernier à en conserver remporte la partie."
     ],
     "image": "https://www.espritjeu.com/upload/image/perudo-p-image-98305-grande.jpg"
   },
@@ -9517,11 +9824,15 @@
     "scoreVictoire": "max",
     "scoreMode": "compteur",
     "regles": [
-      "À son tour, on retourne une carte et on la pose sur une rangée, ou on prend une rangée entière pour soi.",
-      "On ne récupère qu'une seule rangée par manche, avec au plus trois cartes.",
-      "En fin de partie, seules ses trois couleurs les plus nombreuses rapportent ; les autres coûtent des points.",
-      "Les cartes joker et les « +2 » aident à ajuster son score.",
-      "Tout l'art est de savoir quand se contenter d'une petite rangée. Le meilleur total l'emporte."
+      "Mise en place : la pioche contient des cartes en sept couleurs, plus des jokers et des cartes « +2 ». On aligne autant de rangées vides que de joueurs.",
+      "À son tour, on choisit : retourner une carte de la pioche et la poser sur une rangée, ou prendre une rangée entière et se retirer de la manche.",
+      "Une rangée accueille trois cartes au maximum, et l'on ne pose jamais sur une rangée déjà pleine.",
+      "Qui prend une rangée range ses cartes par couleur devant lui, à découvert, et ne joue plus jusqu'à la fin de la manche.",
+      "La manche s'achève quand chacun a pris sa rangée ; on repart alors pour un tour neuf.",
+      "Une carte annonce la fin : dès qu'elle sort de la pioche, on termine la manche en cours et l'on s'arrête.",
+      "Décompte, par couleur : 1, 3, 6, 10, 15 puis 21 points selon le nombre de cartes accumulées.",
+      "Seules les trois couleurs les plus rentables comptent en positif ; toutes les autres se retranchent, à la même échelle.",
+      "Le joker prend la couleur qui arrange, chaque « +2 » ajoute 2 points secs, et le meilleur total l'emporte."
     ],
     "image": "https://www.espritjeu.com/upload/image/coloretto-p-image-87155-grande.jpg"
   },
@@ -9538,11 +9849,15 @@
     "scoreVictoire": "max",
     "scoreMode": "compteur",
     "regles": [
-      "On pose ses tuiles triangulaires bord à bord, en faisant correspondre les chiffres des côtés adjacents.",
-      "Chaque tuile posée rapporte la somme de ses chiffres ; ponts et boucles offrent des primes.",
-      "Ne pas pouvoir jouer oblige à piocher, et coûte des points.",
-      "Le premier à vider sa main clôt la manche et empoche la valeur des tuiles restées chez les autres.",
-      "On joue jusqu'à un seuil convenu ; le plus haut score gagne."
+      "Mise en place : les tuiles triangulaires portent un chiffre à chaque sommet ; chacun en pioche sept à neuf selon le nombre de joueurs, face cachée.",
+      "Celui qui possède le plus fort triple ouvre la partie et empoche une prime ; à défaut de triple, c'est la tuile de plus forte valeur qui ouvre, sans prime.",
+      "À son tour, on accole une tuile à une tuile déjà posée : le côté commun doit présenter exactement les deux mêmes chiffres, dans le même ordre.",
+      "Poser rapporte la somme des trois chiffres de la tuile posée.",
+      "Fermer un espace en accolant la tuile à deux tuiles voisines rapporte une prime de vingt points ; refermer un hexagone complet en rapporte cinquante.",
+      "Sans pose possible, on pioche en payant cinq points ; après trois pioches infructueuses, on passe son tour contre dix points de pénalité.",
+      "La géométrie triangulaire alterne les tuiles pointe en haut et pointe en bas : anticiper cette alternance est la vraie difficulté du jeu.",
+      "Vider sa main termine la manche : celui qui y parvient encaisse une prime de vingt-cinq points, augmentée de la valeur des tuiles restées chez les autres.",
+      "Si plus personne ne peut jouer, la manche s'arrête aussi et chacun retranche simplement la valeur de ses tuiles ; on joue en général jusqu'à quatre cents points."
     ],
     "image": "https://www.espritjeu.com/upload/image/triominos---6-joueurs-p-image-97200-grande.jpg"
   },
