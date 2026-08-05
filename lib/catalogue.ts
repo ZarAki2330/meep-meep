@@ -16,6 +16,10 @@ const CATALOGUE_URL =
   "https://raw.githubusercontent.com/ZarAki2330/meep-meep/main/catalogue.json";
 
 const CLE_CACHE = "catalogue_distant";
+// Signature de la version en cache, renvoyée par l'hébergeur (en-tête ETag).
+// La repasser en `If-None-Match` évite de retélécharger 497 ko quand rien n'a
+// bougé : le serveur répond alors « 304 Non modifié », sans corps.
+const CLE_SIGNATURE = "catalogue_signature";
 
 /**
  * Fusionne la bibliothèque livrée et le catalogue distant : le distant prime
@@ -45,10 +49,25 @@ export async function catalogueEnCache(): Promise<Jeu[]> {
  * Télécharge le catalogue distant et le met en cache. Silencieux en cas d'échec
  * (hors-ligne, serveur indisponible, JSON invalide) : on conserve le dernier
  * cache connu. Renvoie true si un nouveau catalogue a été enregistré.
+ *
+ * Le téléchargement est conditionnel : si l'on détient déjà une version et sa
+ * signature, on la présente au serveur, qui répond « 304 Non modifié » et rien
+ * d'autre quand le catalogue n'a pas changé. Le cas courant ne coûte donc plus
+ * que quelques octets au lieu de 497 ko — appréciable en 4G limitée.
  */
 export async function rafraichirCatalogue(): Promise<boolean> {
   try {
-    const res = await fetch(CATALOGUE_URL, { headers: { Accept: "application/json" } });
+    const entetes: Record<string, string> = { Accept: "application/json" };
+    // La signature ne vaut que si le cache qu'elle décrit est encore là :
+    // sinon le serveur répondrait 304 et on resterait sans catalogue.
+    const signature = await lireMeta(CLE_SIGNATURE).catch(() => null);
+    if (signature && (await lireMeta(CLE_CACHE).catch(() => null))) {
+      entetes["If-None-Match"] = signature;
+    }
+
+    const res = await fetch(CATALOGUE_URL, { headers: entetes });
+    // 304 : le cache local est à jour, il n'y a rien à réécrire.
+    if (res.status === 304) return false;
     if (!res.ok) return false;
     const donnees: unknown = await res.json();
     if (!Array.isArray(donnees)) return false;
@@ -61,6 +80,13 @@ export async function rafraichirCatalogue(): Promise<boolean> {
         typeof (j as Partial<Jeu>).nom === "string",
     );
     await ecrireMeta(CLE_CACHE, JSON.stringify(valides));
+
+    // La signature est écrite après le cache, et seulement s'il y en a une :
+    // dans cet ordre, une écriture interrompue laisse au pire une signature
+    // absente — donc un téléchargement complet de trop, jamais un 304 sur un
+    // cache qui n'existe pas.
+    const etag = res.headers.get("ETag");
+    await ecrireMeta(CLE_SIGNATURE, etag ?? "");
     return true;
   } catch {
     return false;

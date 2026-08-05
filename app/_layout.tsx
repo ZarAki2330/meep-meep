@@ -1,5 +1,9 @@
-import { Fredoka_600SemiBold, useFonts } from "@expo-google-fonts/fredoka";
+// Import direct de la seule graisse utilisée. L'import barillet
+// (`from "@expo-google-fonts/fredoka"`) embarquait les cinq graisses du
+// paquet — ~200 ko de polices inutiles à l'export, mesurés.
+import { Fredoka_600SemiBold } from "@expo-google-fonts/fredoka/600SemiBold";
 import { DarkTheme, DefaultTheme, ThemeProvider } from "@react-navigation/native";
+import { useFonts } from "expo-font";
 import * as NavigationBar from "expo-navigation-bar";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";

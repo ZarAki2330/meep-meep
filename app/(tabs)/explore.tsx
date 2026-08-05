@@ -7,6 +7,7 @@ import {
   Modal,
   Platform,
   ScrollView,
+  Share,
   StyleSheet,
   Text,
   TextInput,
@@ -31,6 +32,7 @@ import {
   participantsDe,
   vainqueursDe,
 } from "@/lib/lignes-partie";
+import { partieVersTexte } from "@/lib/partie-partage";
 import {
   listerParties,
   modifierPartie,
@@ -840,6 +842,30 @@ function DetailPartie({
         </View>
       ) : (
         <View style={styles.actionsDetail}>
+          {/* Partage du compte-rendu par la feuille de partage du téléphone :
+              c'est l'utilisateur qui choisit le destinataire, rien ne part
+              tout seul et aucun compte n'est nécessaire. Bouton à icône, mais
+              annoncé en toutes lettres au lecteur d'écran. */}
+          <TouchableOpacity
+            style={styles.partagerDetail}
+            accessibilityRole="button"
+            accessibilityLabel="Partager le compte-rendu de cette partie"
+            onPress={() =>
+              Share.share({
+                title: partie.jeu_nom,
+                message: partieVersTexte(partie, {
+                  objectif: jeu?.scoreMode === "objectif",
+                  sens,
+                }),
+              }).catch(() => {})
+            }
+          >
+            <IconSymbol
+              name="square.and.arrow.up"
+              size={20}
+              color={styles.annulerDetailTexte.color}
+            />
+          </TouchableOpacity>
           <TouchableOpacity style={styles.annulerDetail} onPress={onFermer}>
             <Text style={styles.annulerDetailTexte}>Fermer</Text>
           </TouchableOpacity>
@@ -1148,6 +1174,17 @@ function makeStyles(c: AppColors) {
       borderWidth: 1,
       borderColor: c.borderStrong,
       alignItems: "center",
+    },
+    // Bouton carré : même hauteur que ses voisins, largeur fixe assez grande
+    // pour rester touchable confortablement (cible d'au moins 48 dp).
+    partagerDetail: {
+      width: 52,
+      paddingVertical: 13,
+      borderRadius: 12,
+      borderWidth: 1,
+      borderColor: c.borderStrong,
+      alignItems: "center",
+      justifyContent: "center",
     },
     annulerDetailTexte: { fontSize: 15, fontWeight: "600", color: c.textSecondary },
     validerDetail: {
