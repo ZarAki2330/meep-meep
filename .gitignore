@@ -48,5 +48,7 @@ CLAUDE.md
 AGENTS.md
 .claude/
 
-# Fichiers écartés en attendant suppression manuelle
-_to_delete/
+# Études et notes de travail : gardées en local et dans l'espace projet,
+# mais pas publiées (elles chiffrent des coûts, décrivent des pistes non
+# tranchées et n'intéressent pas quelqu'un qui découvre le dépôt).
+docs/

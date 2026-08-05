@@ -22,12 +22,13 @@
 ## Fonctionnalités
 
 - **Catalogue de 428 jeux** avec description, catégorie, éditeur et **règles résumées en français**.
-- **5 modes de score** : compteur de points, objectif (sans points), manches, feuille de score (type *Yams*) et coopératif.
+- **5 modes de score** : compteur de points, objectif (sans points), manches, feuille de score (type *Yams*) et coopératif — avec **plusieurs vainqueurs possibles** là où la victoire se joue en camp (L'Imposteur, Bang!, Villainous).
 - **Extensions & éditions** rattachées à chaque jeu de base (Villainous, Loup-Garou, Cyclades…).
 - **Personnages / rôles jouables** avec un avatar chacun (photo, logo ou pastille colorée) — pratique pour Villainous, L'Imposteur ou le Loup-Garou.
 - **Historique des parties** et **statistiques** par jeu et par joueur.
 - **Favoris**, **recherche**, **filtres** (catégorie, nombre de joueurs, durée) et **tris**.
 - **Ajout de tes propres jeux** via un formulaire complet, ou import d'un **jeu partagé**.
+- **Partage** par la feuille de partage du téléphone : un jeu (réimportable tel quel par le destinataire) ou le **compte-rendu d'une partie** — classement, équipes, durée, note. Sans compte et sans serveur : c'est toi qui choisis le destinataire.
 - **Liens vers les règles officielles** des éditeurs, directement sur la fiche.
 - **Thème clair/sombre** et **couleur d'accent** au choix.
 - Pensée pour l'**accessibilité** (contrastes vérifiés, lecteurs d'écran).
@@ -43,8 +44,8 @@
 | `lib/` | La logique métier (score, catalogue, regroupement, parsing…) |
 | `hooks/` · `context/` | État partagé et hooks |
 | `constants/` | Thème, couleurs, police |
+| `__tests__/` | Les tests unitaires de la logique métier |
 | `catalogue.json` | Le **catalogue des jeux**, servi à distance et mis en cache |
-| `docs/` | Les études du projet (API, monétisation, propriété…) |
 
 ## Lancer le projet
 
@@ -54,15 +55,19 @@
 
 > Certains éléments natifs (icône de l'app, écran de démarrage, barre de navigation) ne s'affichent qu'en **build EAS**, pas dans Expo Go — c'est normal.
 
+Les tests unitaires de la logique métier (scores, vainqueurs, tris, partage…) se lancent avec `npm test`.
+
 ## Le catalogue
 
 Le fichier `catalogue.json` est **servi depuis GitHub** et mis en cache par l'app : on peut ajouter ou corriger des jeux sans republier l'application. Chaque jeu porte sa catégorie, son éditeur, ses règles, un visuel et son mode de score.
+
+Le téléchargement est **conditionnel** : l'app présente au serveur la signature de la version qu'elle détient (`If-None-Match`), et ne retélécharge rien tant que le catalogue n'a pas changé. Sans réseau, elle se contente du dernier cache connu — rien n'est jamais bloquant.
 
 > Toutes les règles du catalogue sont des **résumés originaux rédigés à la main**, jamais le texte officiel des livrets.
 
 ## Stack
 
-*Expo SDK 54* · *React Native* · *TypeScript* · *expo-router* · *expo-sqlite* · *expo-image* · police *Fredoka*. Aucune donnée ne quitte l'appareil : tout est stocké en local.
+*Expo SDK 54* · *React Native* · *TypeScript* · *expo-router* · *expo-sqlite* · *expo-image* · police *Fredoka*. Tout est stocké en local : aucune donnée ne quitte l'appareil, sauf ce que tu envoies toi-même par le partage.
 
 ## Licence
 
