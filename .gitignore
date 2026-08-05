@@ -52,3 +52,11 @@ AGENTS.md
 # mais pas publiées (elles chiffrent des coûts, décrivent des pistes non
 # tranchées et n'intéressent pas quelqu'un qui découvre le dépôt).
 docs/
+
+# Fichiers écartés en attendant leur suppression à la main (l'accès distant
+# ne peut pas effacer sur le disque, il déplace ici).
+_to_delete/
+
+# Clé du compte de service Google Play (utilisée par `eas submit`).
+# C'est un secret : elle donne le droit de publier sur la fiche Play Store.
+google-play-service-account.json

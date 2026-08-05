@@ -16,10 +16,12 @@
       "package": "com.zaraki.meepmeep",
       "adaptiveIcon": {
         "backgroundColor": "#7a5195",
-        "foregroundImage": "./assets/images/android-icon-foreground.png"
+        "foregroundImage": "./assets/images/android-icon-foreground.png",
+        "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "blockedPermissions": ["android.permission.CAMERA"]
     },
     "androidNavigationBar": {
       "enforceContrast": false
@@ -43,7 +45,15 @@
         }
       ],
       "expo-sqlite",
-      "expo-font"
+      "expo-font",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Meep Meep accède à tes photos pour illustrer un jeu ou un personnage que tu ajoutes. L'image reste sur ton téléphone.",
+          "cameraPermission": false,
+          "microphonePermission": false
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,
