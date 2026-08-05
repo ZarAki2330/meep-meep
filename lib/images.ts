@@ -7,8 +7,8 @@
 // portraits de joueurs de l'autre. Chacun se balaie séparément, en confrontant
 // les fichiers présents aux images que la base réclame encore.
 //
-// Une image peut aussi être une simple URL (BoardGameGeek, web) : elle ne nous
-// appartient pas, on n'y touche jamais. D'où « locale » un peu partout ici.
+// Une image peut aussi être une simple URL distante : elle ne nous appartient
+// pas, on n'y touche jamais. D'où « locale » un peu partout ici.
 
 import * as FileSystemLegacy from "expo-file-system/legacy";
 import * as ImagePicker from "expo-image-picker";

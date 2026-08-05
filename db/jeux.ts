@@ -1,6 +1,6 @@
 // db/jeux.ts
 // Les jeux du catalogue. Tous vivent ici, qu'ils viennent de la bibliothèque,
-// de BoardGameGeek, d'un jeu collé ou du formulaire.
+// d'un jeu collé ou du formulaire.
 
 import { BIBLIOTHEQUE, IDS_AMORCAGE } from "@/data/bibliotheque";
 import { type BonusGrille, type CategorieScore, type Jeu, type RoleJeu } from "@/data/jeux";
