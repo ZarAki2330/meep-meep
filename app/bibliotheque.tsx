@@ -331,7 +331,32 @@ export default function Bibliotheque() {
                   : "Tous les jeux de la bibliothèque sont déjà dans ton catalogue."}
               </Text>
             }
-            ListEmptyComponent={<Text style={styles.vide}>Aucun jeu ne porte ce nom.</Text>}
+            ListEmptyComponent={
+              // Une recherche sans résultat est le seul moment où créer un jeu à
+              // la main a vraiment du sens : on sait alors qu'il n'existe pas
+              // dans le catalogue, donc qu'on ne fabrique pas un doublon.
+              <View style={styles.videZone}>
+                <Text style={styles.vide}>Aucun jeu ne porte ce nom.</Text>
+                {recherche.trim().length > 0 && (
+                  <TouchableOpacity
+                    style={styles.creerBouton}
+                    activeOpacity={0.85}
+                    accessibilityRole="button"
+                    accessibilityLabel={`Créer moi-même le jeu ${recherche.trim()}`}
+                    onPress={() =>
+                      router.push({
+                        pathname: "/import",
+                        params: { nom: recherche.trim() },
+                      })
+                    }
+                  >
+                    <Text style={styles.creerBoutonTexte} numberOfLines={2}>
+                      Créer « {recherche.trim()} » moi-même
+                    </Text>
+                  </TouchableOpacity>
+                )}
+              </View>
+            }
             renderItem={renderItem}
             // Permet d'appuyer sur « Ajouter » sans devoir d'abord fermer le clavier
             // ouvert par la recherche : le premier tap agit directement.
@@ -523,6 +548,20 @@ function makeStyles(c: AppColors) {
     },
     intro: { fontSize: 13, color: c.textMuted, lineHeight: 18, marginBottom: 6 },
     vide: { fontSize: 14, color: c.textMuted, textAlign: "center", marginTop: 24 },
+    videZone: { alignItems: "center", paddingHorizontal: 16 },
+    creerBouton: {
+      marginTop: 16,
+      paddingHorizontal: 18,
+      paddingVertical: 12,
+      borderRadius: 12,
+      backgroundColor: c.accent,
+    },
+    creerBoutonTexte: {
+      fontSize: 15,
+      fontWeight: "600",
+      color: c.onAccent,
+      textAlign: "center",
+    },
     chargement: { flex: 1, alignItems: "center", justifyContent: "center", gap: 12 },
     chargementTexte: { fontSize: 14, color: c.textMuted },
     carte: {

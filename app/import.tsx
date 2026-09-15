@@ -49,9 +49,15 @@ export default function AjouterJeu() {
   const { jeux, rafraichir } = useJeux();
 
   // Si un id est passé, on modifie ce jeu au lieu d'en créer un nouveau.
-  const { id } = useLocalSearchParams<{ id?: string }>();
+  // Un `nom` est passé quand on arrive depuis une recherche infructueuse du
+  // catalogue : le jeu cherché n'existe pas, on propose de le créer, et le champ
+  // est déjà rempli avec ce qui a été tapé.
+  const { id, nom: nomCherche } = useLocalSearchParams<{ id?: string; nom?: string }>();
   const jeuExistant = id ? jeux.find((j) => j.id === id) : undefined;
   const modeEdition = !!jeuExistant;
+  // Venir d'une recherche signifie qu'on a déjà vu le catalogue : le raccourci
+  // qui y renvoie n'aurait plus de sens, il ferait tourner en rond.
+  const depuisCatalogue = !!nomCherche;
 
   // Catégories déjà utilisées dans le catalogue, pour les proposer en un clic.
   // Mémoïsé : ne dépend que du catalogue, pas des frappes dans le formulaire.
@@ -69,7 +75,7 @@ export default function AjouterJeu() {
     [jeux],
   );
 
-  const [nom, setNom] = useState("");
+  const [nom, setNom] = useState(nomCherche ?? "");
   const [categorie, setCategorie] = useState("");
   const [editeur, setEditeur] = useState("");
   const [jMin, setJMin] = useState("2");
@@ -285,7 +291,7 @@ export default function AjouterJeu() {
     >
       <Entete titre={modeEdition ? "Modifier le jeu" : "Ajouter un jeu"} />
       <ScrollView style={styles.page} contentContainerStyle={styles.contenu}>
-        {!modeEdition && (
+        {!modeEdition && !depuisCatalogue && (
           <>
             <TouchableOpacity
               style={styles.raccourciPrincipal}

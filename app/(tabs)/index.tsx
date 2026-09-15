@@ -168,8 +168,8 @@ export default function Catalogue() {
             style={styles.themeBouton}
             activeOpacity={0.7}
             accessibilityRole="button"
-            accessibilityLabel="Ajouter un jeu"
-            onPress={() => router.push("/import")}
+            accessibilityLabel="Ajouter un jeu en piochant dans le catalogue"
+            onPress={() => router.push("/bibliotheque")}
           >
             <IconSymbol name="plus" size={22} color={colors.accentText} />
           </TouchableOpacity>
@@ -365,11 +365,11 @@ export default function Catalogue() {
                 style={styles.videBouton}
                 activeOpacity={0.85}
                 accessibilityRole="button"
-                accessibilityLabel="Ajouter un jeu"
-                onPress={() => router.push("/import")}
+                accessibilityLabel="Choisir un premier jeu dans le catalogue"
+                onPress={() => router.push("/bibliotheque")}
               >
                 <IconSymbol name="plus" size={18} color={colors.onAccent} />
-                <Text style={styles.videBoutonTexte}>Ajouter un jeu</Text>
+                <Text style={styles.videBoutonTexte}>Choisir un jeu</Text>
               </TouchableOpacity>
             </View>
           ) : (
