@@ -24,6 +24,7 @@ import { IconSymbol } from "@/components/ui/icon-symbol";
 import { type AppColors } from "@/constants/theme-colors";
 import { useJeux } from "@/context/jeux";
 import { useTheme } from "@/context/theme";
+import { useOrientationLibre } from "@/hooks/use-orientation-libre";
 import { prefixeJoueur, usePartie } from "@/hooks/use-partie";
 import { formatChrono } from "@/lib/duree";
 import {
@@ -48,6 +49,10 @@ export default function PartieManches() {
   const insets = useSafeAreaInsets();
   const styles = makeStyles(colors);
   const jeu = jeux.find((j) => j.id === jeuId);
+
+  // Le tableau gagne beaucoup à être lu en paysage dès qu'il y a plusieurs
+  // joueurs : on lève ici le verrou portrait de l'application.
+  useOrientationLibre();
 
   const sens = jeu?.scoreVictoire ?? "max";
   const seuilFin = jeu?.seuilFin;
@@ -81,6 +86,7 @@ export default function PartieManches() {
     definirMembres,
     terminerPartie,
     continuerEdition,
+    reinitialiser,
   } = usePartie({
     jeuId: jeuId ?? "",
     jeu,
@@ -156,8 +162,17 @@ export default function PartieManches() {
     ? Math.max(LARGEUR_COL, (width - 24 - LARGEUR_LABEL) / joueurs.length)
     : LARGEUR_COL;
 
+  // Relancer une partie avec la même table : la feuille repart vide et le nombre
+  // de manches revient à sa valeur de départ, mais les joueurs restent en place.
+  function rejouer() {
+    setExtra((e) => ({ ...e, scores: {}, nbManches: MANCHES_DEPART }));
+    reinitialiser();
+  }
+
+  // En paysage, l'encoche et les coins arrondis mordent sur les bords latéraux :
+  // on réserve la marge de sécurité, nulle en portrait.
   return (
-    <View style={styles.page}>
+    <View style={[styles.page, { paddingLeft: insets.left, paddingRight: insets.right }]}>
       <Entete
         titre={jeu ? jeu.nom : "Manches"}
         droite={
@@ -337,9 +352,24 @@ export default function PartieManches() {
             </TouchableOpacity>
           </>
         ) : (
-          <TouchableOpacity style={styles.actionPrincipale} onPress={continuerEdition}>
-            <Text style={styles.actionPrincipaleTexte}>Continuer à modifier</Text>
-          </TouchableOpacity>
+          <>
+            <TouchableOpacity
+              style={styles.actionSecondaire}
+              accessibilityRole="button"
+              accessibilityLabel="Continuer à modifier les scores de cette partie"
+              onPress={continuerEdition}
+            >
+              <Text style={styles.actionSecondaireTexte}>Modifier</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.actionPrincipale}
+              accessibilityRole="button"
+              accessibilityLabel="Lancer une nouvelle partie avec les mêmes joueurs"
+              onPress={rejouer}
+            >
+              <Text style={styles.actionPrincipaleTexte}>Nouvelle partie</Text>
+            </TouchableOpacity>
+          </>
         )}
       </View>
 
