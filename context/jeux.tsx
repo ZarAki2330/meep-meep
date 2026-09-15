@@ -78,14 +78,13 @@ export function JeuxProvider({ children }: { children: ReactNode }) {
         const n = await synchroniserDepuisCatalogue(cache).catch(() => 0);
         if (n > 0 && vivant) rafraichir();
       }
-      // 2) Puis une mise à jour distante, et on resynchronise si elle apporte du neuf.
-      const maj = await rafraichirCatalogue().catch(() => false);
-      if (maj) {
-        const frais = await catalogueEnCache().catch(() => [] as Jeu[]);
-        if (frais.length) {
-          const n = await synchroniserDepuisCatalogue(frais).catch(() => 0);
-          if (n > 0 && vivant) rafraichir();
-        }
+      // 2) Puis une mise à jour distante, et on resynchronise si elle apporte du
+      // neuf. La fonction renvoie directement le catalogue frais : inutile de
+      // relire et de réanalyser ce qu'elle vient d'écrire.
+      const frais = await rafraichirCatalogue().catch(() => null);
+      if (frais?.length) {
+        const n = await synchroniserDepuisCatalogue(frais).catch(() => 0);
+        if (n > 0 && vivant) rafraichir();
       }
     }
 
